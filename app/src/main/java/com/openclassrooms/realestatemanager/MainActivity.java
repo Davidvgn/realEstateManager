@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewMain;
