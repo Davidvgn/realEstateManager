@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Real Estate Manager</string>
+
+    <string name="real_estate_imageView_contentDescription">Photos du bien immobilier</string>
+
+    <!-- Bottom navigation-->
+    <string name="map">Carte</string>
+    <string name="list">Liste</string>
+
+
+
+
+</resources>

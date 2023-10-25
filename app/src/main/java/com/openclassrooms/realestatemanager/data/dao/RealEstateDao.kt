@@ -7,6 +7,6 @@ import com.openclassrooms.realestatemanager.domain.RealEstateEntity
 @Dao
 interface RealEstateDao {
 
-//    @Insert
-//    suspend fun insert(realEstateEntity: RealEstateEntity)
+    @Insert
+    suspend fun insert(realEstateEntity: RealEstateEntity)
 }
