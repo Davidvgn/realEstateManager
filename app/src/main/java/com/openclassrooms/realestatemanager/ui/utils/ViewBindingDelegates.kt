@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.openclassrooms.realestatemanager.data.utils
+package com.openclassrooms.realestatemanager.ui.utils
 
 import android.view.LayoutInflater
 import android.view.View

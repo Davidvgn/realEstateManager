@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "type": "Flat",
+      "city": "Lyon",
+      "price": "210 000"
+    },
+    {
+      "type": "House",
+      "city": "Toulouse",
+      "price": "650 000"
+    },
+    {
+      "type": "Duplex",
+      "city": "Manhattan",
+      "price": "1 210 000"
+    }
+  ]
+}
