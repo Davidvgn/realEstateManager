@@ -9,11 +9,11 @@ import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MapFragment: SupportMapFragment() {
+class MapFragment : SupportMapFragment() {
 
-   companion object{
-       fun newInstance() = MapFragment()
-   }
+    companion object {
+        fun newInstance() = MapFragment()
+    }
 
     private val viewModel by viewModels<MapViewModel>()
 
@@ -21,12 +21,13 @@ class MapFragment: SupportMapFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            getMapAsync { googleMap ->
+        getMapAsync { googleMap ->
+            viewModel.viewStateLiveData.observe(viewLifecycleOwner) {
                 googleMap.addMarker(
                     MarkerOptions()
-                        .position(LatLng(48.8566,2.3522))
+                        .position(LatLng(it.latitude, it.longitude))
                 )
             }
-
+        }
     }
 }

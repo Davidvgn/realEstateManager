@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.openclassrooms.realestatemanager"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -55,8 +55,9 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("com.google.android.gms:play-services-awareness:19.0.1")
 
+    // FusedProviderClient
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
     // GOOGLE MAPS SDK
     implementation("com.google.android.gms:play-services-maps:18.1.0")
@@ -70,19 +71,17 @@ dependencies {
 
     // GLIDE
     implementation("com.github.bumptech.glide:glide:4.15.1")
-    kapt("com.github.bumptech.glide:compiler:4.15.1")
 
     // CarouselRecyclerView
     implementation("com.github.sparrow007:carouselrecyclerview:1.2.6")
 
     // HILT
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-compiler:2.46.1")
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-compiler:2.47")
 
     // ROOM
-    implementation("androidx.room:room-runtime:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
 
     // RETROFIT
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -102,60 +101,4 @@ dependencies {
 
     // TEST
     testImplementation("junit:junit:4.13.2")
-
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
-
-//// open JaCoCo report after generation
-//def openReport(htmlOutDir) {
-//    final reportPath = "$htmlOutDir\\index.html"
-//
-//    println "HTML Report: $reportPath"
-//
-//    def os = org.gradle.internal.os.OperatingSystem.current()
-//    if (os.isWindows()) {
-//        exec { commandLine 'cmd', '/c', "start $reportPath" }
-//    } else if (os.isLinux()) {
-//        try {
-//            exec { commandLine 'xdg-open', "$reportPath" }
-//        } catch (Exception ignored) {
-//            if (localProperties.containsKey("linux-html-cmd")) {
-//                exec { commandLine properties.get("linux-html-cmd"), "$reportPath" }
-//            } else {
-//                println "'linux-html-cmd' property could not be found in 'local.properties'"
-//            }
-//        }
-//    }
-//}
-//
-//// JaCoCo stuff
-//android.applicationVariants.all { variant ->
-//    def variantName = variant.name.capitalize()
-//    def filesToAnalyze = [
-//            '**/*ViewModel.class',
-//            '**/*Repository.class'
-//    ]
-//
-//    task("jacoco${variantName}Report", type: JacocoReport, dependsOn: "test${variantName}UnitTest") {
-//        group 'Reporting'
-//        description "Generate ${variantName} Jacoco coverage reports."
-//
-//        def htmlOutDir = layout.buildDirectory.dir("reports/jacoco/$name/html").get().asFile
-//
-//        doLast {
-//            openReport htmlOutDir
-//        }
-//
-//        reports {
-////            xml.enabled = true
-//            html {
-//                destination htmlOutDir
-//            }
-//        }
-//
-//        getSourceDirectories().setFrom(files(android.sourceSets.main.java.srcDirs))
-//        getExecutionData().setFrom(files("${buildDir}/jacoco/test${variantName}UnitTest.exec"))
-//        getClassDirectories().setFrom(fileTree(dir: variant.javaCompiler.destinationDir, includes: filesToAnalyze))
-//    }
-//}

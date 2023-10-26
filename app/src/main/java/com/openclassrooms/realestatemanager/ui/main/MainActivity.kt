@@ -7,7 +7,7 @@ import androidx.fragment.app.commitNow
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
-import com.openclassrooms.realestatemanager.ui.realEstates.RealEstatesFragment
+import com.openclassrooms.realestatemanager.ui.real_estates.RealEstatesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
