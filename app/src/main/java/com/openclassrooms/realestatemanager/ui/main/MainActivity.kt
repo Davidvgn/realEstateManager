@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         if (savedInstanceState == null) {
             supportFragmentManager.commitNow {
                 replace(binding.mainFrameLayoutFragmentContainer.id, MapFragment.newInstance())
