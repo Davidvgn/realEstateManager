@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationListener {
 
     private val binding by viewBinding { MainActivityBinding.inflate(it) }
+    private val viewModel by viewModels<MainViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
