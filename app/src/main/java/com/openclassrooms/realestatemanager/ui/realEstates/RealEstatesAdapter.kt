@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.real_estates
+package com.openclassrooms.realestatemanager.ui.realEstates
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.databinding.RealEstateItemBinding
 
 class RealEstatesAdapter :
-    ListAdapter<RealEstatesViewSateItem, RealEstatesAdapter.RealEstatesViewHolder>(EstatesDiffUtilCallback) {
+    ListAdapter<RealEstatesViewSateItem, RealEstatesAdapter.RealEstatesViewHolder>(RealEstatesDiffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RealEstatesViewHolder = RealEstatesViewHolder(
         RealEstateItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -17,13 +17,13 @@ class RealEstatesAdapter :
     }
     class RealEstatesViewHolder(private val binding: RealEstateItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(estate: RealEstatesViewSateItem){
-                binding.realEstateItemTextViewType.text = estate.type
-                binding.realEstateItemTextViewCity.text = estate.city
+            fun bind(realEstate: RealEstatesViewSateItem){
+                binding.realEstateItemTextViewType.text = realEstate.type
+                binding.realEstateItemTextViewCity.text = realEstate.city
             }
 
     }
-    object EstatesDiffUtilCallback : DiffUtil.ItemCallback<RealEstatesViewSateItem>() {
+    object RealEstatesDiffUtilCallback : DiffUtil.ItemCallback<RealEstatesViewSateItem>() {
         override fun areItemsTheSame(
             oldItem: RealEstatesViewSateItem,
             newItem: RealEstatesViewSateItem

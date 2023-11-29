@@ -7,5 +7,25 @@
     <string name="map">Map View</string>
     <string name="list">List View</string>
 
+    <!-- Dropdown type de biens immobilier-->
+    <string name="house">House</string>
+    <string name="flat">Flat</string>
+    <string name="loft">Loft</string>
+    <string name="duplex">Duplex</string>
+    <string name="land">Land</string>
+    <string name="other">Other</string>
 
+    <!--Add RealEstate Fragment xml -->
+    <string name="add_new">Add new</string>
+    <string name="type">Type</string>
+    <string name="price">Price</string>
+    <string name="surface">Surface</string>
+    <string name="number_of_rooms">Number of Rooms</string>
+    <string name="description">Description</string>
+    <string name="address">Address</string>
+    <string name="poi">POI</string>
+    <string name="Status">Status</string>
+    <string name="date_of_sale">Date of sale</string>
+    <string name="sold_date">Sold Date</string>
+    <string name="Agent">Agent</string>
 </resources>

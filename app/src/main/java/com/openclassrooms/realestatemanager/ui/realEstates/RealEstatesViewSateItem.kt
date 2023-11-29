@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.real_estates
+package com.openclassrooms.realestatemanager.ui.realEstates
 
 data class RealEstatesViewSateItem(
     val id: Int,
