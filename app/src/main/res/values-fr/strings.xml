@@ -31,6 +31,9 @@
     <string name="sold_date">Date de vente</string>
     <string name="Agent">Vendeur</string>
 
-
+    <!--Operations menu -->
+    <string name="add_realestate">Ajouter un bien</string>
+    <string name="edit_realestate">Modifier un bien</string>
+    <string name="search">Rechercher un bien</string>
 
 </resources>

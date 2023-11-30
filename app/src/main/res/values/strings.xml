@@ -28,4 +28,10 @@
     <string name="date_of_sale">Date of sale</string>
     <string name="sold_date">Sold Date</string>
     <string name="Agent">Agent</string>
+
+    <!--Operations menu -->
+    <string name="add_realestate">Add Real Estate</string>
+    <string name="edit_realestate">Edit Real Estate</string>
+    <string name="search">Find A Real Estate</string>
+
 </resources>

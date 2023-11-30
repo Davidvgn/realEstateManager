@@ -20,14 +20,5 @@
         tools:layout_editor_absoluteY="-281dp"
         tools:listitem="@layout/real_estate_item" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/real_estate_FloatingActionButton_add_task"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add_56"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

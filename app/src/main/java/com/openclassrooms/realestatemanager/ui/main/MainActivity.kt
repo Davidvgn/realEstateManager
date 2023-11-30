@@ -1,9 +1,9 @@
 package com.openclassrooms.realestatemanager.ui.main
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
@@ -11,7 +11,6 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.NavigationListener
 import com.openclassrooms.realestatemanager.ui.add_realEstate.AddRealEstateDialogFragment
-import com.openclassrooms.realestatemanager.ui.add_realEstate.AddRealEstateFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.realEstates.RealEstatesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
@@ -61,8 +60,8 @@ class MainActivity : AppCompatActivity(), NavigationListener {
 
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {
-         displayFragment(AddRealEstateFragment.newInstance())
-             true
+            AddRealEstateDialogFragment.newInstance().show(supportFragmentManager, null)
+            true
         }
 
         return super.onCreateOptionsMenu(menu)
