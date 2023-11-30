@@ -1,32 +1,32 @@
 package com.openclassrooms.realestatemanager.ui.map
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.domain.location.GetGpsLocationUseCase
-import com.openclassrooms.realestatemanager.ui.utils.SingleLiveEvent
+import com.openclassrooms.realestatemanager.domain.permission.GetGrantedPermissionsUseCase
+import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val getGpsLocationUseCase: GetGpsLocationUseCase,
-    ) : ViewModel() {
+    private val getGrantedPermissionsUseCase: GetGrantedPermissionsUseCase,
+) : ViewModel() {
 
+    private var hasUserScrolledMap = false
 
-    val cameraUpdate: LiveData<LatLng> =
-        liveData {//todo david obserser si on a la permission (créer permissionRepo et déplacer celui qui est dans la vue dedans
-            getGpsLocationUseCase.invoke().collectLatest {
-                emit(LatLng(it.lat, it.long))
+    val viewActionLiveData: LiveData<Event<MapViewAction>> = liveData {
+        getGpsLocationFlow().collectLatest {
+            if (!hasUserScrolledMap) {
+                emit(Event(MapViewAction.ZoomTo(it.lat, it.long)))
             }
         }
+    }
 
 
     val viewStateLiveData: LiveData<MapPoiViewState> = liveData {
@@ -37,7 +37,7 @@ class MapViewModel @Inject constructor(
             )
         )
 
-        getGpsLocationUseCase.invoke().collect {
+        getGpsLocationFlow().collect {
             emit(
                 MapPoiViewState(
                     it.lat,
@@ -45,5 +45,18 @@ class MapViewModel @Inject constructor(
                 )
             )
         }
+    }
+
+    fun onUserScrolledMap() {
+        hasUserScrolledMap = true
+    }
+
+    private fun getGpsLocationFlow() = getGrantedPermissionsUseCase.invoke().filter { permission ->
+        permission.any {
+            it.permission == "android.permission.ACCESS_FINE_LOCATION"
+                || it.permission == "android.permission.ACCESS_COARSE_LOCATION"
+        }
+    }.flatMapLatest {
+        getGpsLocationUseCase.invoke()
     }
 }

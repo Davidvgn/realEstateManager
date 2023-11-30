@@ -40,7 +40,7 @@ class MapFragment : SupportMapFragment() {
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                viewModel.cameraUpdate.observe(viewLifecycleOwner) {
+                viewModel.viewActionLiveData.observe(viewLifecycleOwner) {
                     googleMap.animateCamera(
                         CameraUpdateFactory.newLatLngZoom(
                             LatLng(
