@@ -91,11 +91,3 @@ inline fun <T : ViewBinding> Fragment.viewBinding(
         viewLifecycleOwnerLiveData.removeObserver(viewLifecycleOwnerLiveDataObserver)
     }
 }
-
-/** Binding delegate for DialogFragments implementing onCreateDiaLogger. (like Activities, they don't
- *  have a separate view lifecycle), may be used since onCreateDialog up to onDestroy (inclusive) */
-//inline fun <T : ViewBinding> DialogFragment.viewBinding(//todo david chercher pourquoi lorsque décommenté le dialogfragment marque une error
-//    crossinline factory: (LayoutInflater) -> T,
-//) = lazy(LazyThreadSafetyMode.NONE) {
-//    factory(layoutInflater)
-//}

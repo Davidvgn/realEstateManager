@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.realEstates
+package com.openclassrooms.realestatemanager.ui.real_estates
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

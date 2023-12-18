@@ -1,15 +1,19 @@
 package com.openclassrooms.realestatemanager.ui.map
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.domain.location.GetGpsLocationUseCase
 import com.openclassrooms.realestatemanager.domain.permission.GetGrantedPermissionsUseCase
 import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,35 +32,13 @@ class MapViewModel @Inject constructor(
         }
     }
 
-
-    val viewStateLiveData: LiveData<MapPoiViewState> = liveData {
-        emit(
-            MapPoiViewState(
-                48.8566,
-                2.3522
-            )
-        )
-
-        getGpsLocationFlow().collect {
-            emit(
-                MapPoiViewState(
-                    it.lat,
-                    it.long,
-                )
-            )
-        }
-    }
-
     fun onUserScrolledMap() {
         hasUserScrolledMap = true
     }
 
-    private fun getGpsLocationFlow() = getGrantedPermissionsUseCase.invoke().filter { permission ->
-        permission.any {
-            it.permission == "android.permission.ACCESS_FINE_LOCATION"
-                || it.permission == "android.permission.ACCESS_COARSE_LOCATION"
+    private fun getGpsLocationFlow() = getGrantedPermissionsUseCase.invoke()
+        .flatMapLatest {
+            getGpsLocationUseCase.invoke()
         }
-    }.flatMapLatest {
-        getGpsLocationUseCase.invoke()
-    }
 }
+

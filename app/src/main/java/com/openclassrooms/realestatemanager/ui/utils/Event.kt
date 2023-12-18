@@ -8,7 +8,7 @@ data class Event<out T>(private val content: T) {
     private var handled = false
 
     // Keep this function private to force the use of the observeEvent extension
-    private fun getContentIfNotHandled(): T? = if (handled) {
+    fun getContentIfNotHandled(): T? = if (handled) {
         null
     } else {
         handled = true

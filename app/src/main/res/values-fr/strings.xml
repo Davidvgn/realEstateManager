@@ -18,8 +18,10 @@
     <string name="other">Autre</string>
 
     <!--Add RealEstate Fragment xml -->
-    <string name="add_new">Ajouter un nouveau bien</string>
-    <string name="type">Type de bien</string>
+    <string name="add_new">Ajouter</string>
+    <string name="cancel">Annuler </string>
+
+    <string name="type">Type de bien :</string>
     <string name="price">Prix du bien</string>
     <string name="surface">Surface en m2</string>
     <string name="number_of_rooms">Nombres de pièces</string>
