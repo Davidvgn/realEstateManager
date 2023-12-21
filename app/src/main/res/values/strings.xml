@@ -35,4 +35,14 @@
     <string name="search">Find A Real Estate</string>
     <string name="cancel">Cancel</string>
 
+    <!--add form menu -->
+    <string name="save_button">save</string>
+
+    <!--Confirmation Dialog -->
+    <string name="confirmation_message">Unsaved changes will be lost. Continue ?</string>
+
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+
+
 </resources>

@@ -1,9 +1,16 @@
 package com.openclassrooms.realestatemanager.ui.add_real_estate
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commitNow
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddRealEstateActivityBinding
+import com.openclassrooms.realestatemanager.ui.addform.AddFormFragment
+import com.openclassrooms.realestatemanager.ui.addform.AddFormConfirmationDialog
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,5 +33,23 @@ class AddRealEstateActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.add_format_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.add_form_save_button) {
+
+        } else {
+            AddFormConfirmationDialog.newInstance().show(supportFragmentManager, null)
+//Todo David if yes :
+        // return super.onOptionsItemSelected(item)
+
+        }
+        return true
+
     }
 }

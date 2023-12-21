@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.mainToolbar)
 
         if (savedInstanceState == null) {
-          displayFragment(MapFragment.newInstance())
-            }
+            displayFragment(MapFragment.newInstance())
+        }
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {
             val intent = Intent(this, AddRealEstateActivity::class.java)
-                startActivity(intent)
+            startActivity(intent)
             true
         }
 

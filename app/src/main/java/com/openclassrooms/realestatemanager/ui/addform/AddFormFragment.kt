@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.add_real_estate
+package com.openclassrooms.realestatemanager.ui.addform
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -18,6 +18,7 @@ import java.util.Calendar
 class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
+
 
     companion object {
         fun newInstance() = AddFormFragment()

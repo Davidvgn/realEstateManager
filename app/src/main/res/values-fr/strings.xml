@@ -38,4 +38,12 @@
     <string name="edit_realestate">Modifier un bien</string>
     <string name="search">Rechercher un bien</string>
 
+    <!--add form menu -->
+    <string name="save_button">sauvegarder</string>
+
+    <!--Confirmation Dialog -->
+    <string name="confirmation_message">Les modifications non enregistrées seront perdues. Continuer ?</string>
+
+    <string name="yes">oui</string>
+    <string name="no">non</string>
 </resources>
