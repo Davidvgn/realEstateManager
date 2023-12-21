@@ -1,25 +1,23 @@
 package com.openclassrooms.realestatemanager.ui.map
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.domain.location.GetGpsLocationUseCase
-import com.openclassrooms.realestatemanager.domain.permission.GetGrantedPermissionsUseCase
+import com.openclassrooms.realestatemanager.domain.permission.IsLocationPermissionsGrantedUseCase
+import com.openclassrooms.realestatemanager.domain.permission.RefreshPermissionsUseCase
 import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val getGpsLocationUseCase: GetGpsLocationUseCase,
-    private val getGrantedPermissionsUseCase: GetGrantedPermissionsUseCase,
+    private val isLocationPermissionsGrantedUseCase: IsLocationPermissionsGrantedUseCase,
+    private val refreshPermissionsUseCase: RefreshPermissionsUseCase,
 ) : ViewModel() {
 
     private var hasUserScrolledMap = false
@@ -36,9 +34,16 @@ class MapViewModel @Inject constructor(
         hasUserScrolledMap = true
     }
 
-    private fun getGpsLocationFlow() = getGrantedPermissionsUseCase.invoke()
-        .flatMapLatest {
+    private fun getGpsLocationFlow() = isLocationPermissionsGrantedUseCase.invoke().flatMapLatest { isLocationPermissionsGranted ->
+        if (isLocationPermissionsGranted) {
             getGpsLocationUseCase.invoke()
+        } else {
+            emptyFlow()
         }
+    }
+
+    fun onPermissionUpdated() {
+        refreshPermissionsUseCase.invoke()
+    }
 }
 

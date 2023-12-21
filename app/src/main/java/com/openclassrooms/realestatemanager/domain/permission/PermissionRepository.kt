@@ -4,4 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PermissionRepository {
     fun getPermissionsFlow() : Flow<List<PermissionEntity>>
+    fun refreshPermissions()
 }

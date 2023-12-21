@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="32dp"
-        tools:context=".ui.add_real_estate.AddRealEstateActivity">
+        tools:context=".ui.add_real_estate.AddRealEstateActivity"
+        >
 
         <TextView
             android:id="@+id/add_form_type_title"
@@ -18,321 +21,22 @@
             android:text="@string/type"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
-        <GridLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/add_form_grid"
             android:layout_width="0dp"
-            android:layout_height="220dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:columnCount="3"
-            android:rowCount="2"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_type_title">
-
-            <!-- First card-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/add_form_cardView_one"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/egg_shell"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground">
-
-                    <TextView
-                        android:id="@+id/add_form_textView_first_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/house"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="14dp"
-                        app:layout_constraintBottom_toBottomOf="@id/add_form_textView_first_card"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/add_form_textView_first_card">
-
-                        <ImageView
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/house" />
-
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-            <!-- First card-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card2"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/egg_shell"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground">
-
-                    <TextView
-                        android:id="@+id/textView_card2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/flat"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="14dp"
-                        app:layout_constraintBottom_toBottomOf="@id/textView_card2"
-                        app:layout_constraintStart_toEndOf="@id/textView_card2"
-                        app:layout_constraintTop_toTopOf="@id/textView_card2">
-
-                        <ImageView
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/house" />
-                    </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-            <!-- First card-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card3"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/egg_shell"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground">
-
-                    <TextView
-                        android:id="@+id/textView_card3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/loft"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="14dp"
-                        app:layout_constraintBottom_toBottomOf="@id/textView_card3"
-                        app:layout_constraintStart_toEndOf="@id/textView_card3"
-                        app:layout_constraintTop_toTopOf="@id/textView_card3">
-
-                        <ImageView
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/house" />
-                    </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-            <!-- First card-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card4"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/egg_shell"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground">
-
-                    <TextView
-                        android:id="@+id/textView_card4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/duplex"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="14dp"
-                        app:layout_constraintBottom_toBottomOf="@id/textView_card4"
-                        app:layout_constraintStart_toEndOf="@id/textView_card4"
-                        app:layout_constraintTop_toTopOf="@id/textView_card4">
-
-                        <ImageView
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/house" />
-                    </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-            <!-- First card-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card5"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/egg_shell"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground">
-
-                    <TextView
-                        android:id="@+id/textView_card5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/land"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="14dp"
-                        app:layout_constraintBottom_toBottomOf="@id/textView_card5"
-                        app:layout_constraintStart_toEndOf="@id/textView_card5"
-                        app:layout_constraintTop_toTopOf="@id/textView_card5">
-
-                        <ImageView
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/house" />
-                    </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-            <!-- First card-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card6"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/egg_shell"
-                app:cardCornerRadius="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground">
-
-                    <TextView
-                        android:id="@+id/textView_card6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/other"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="14dp"
-                        app:layout_constraintBottom_toBottomOf="@id/textView_card6"
-                        app:layout_constraintStart_toEndOf="@id/textView_card6"
-                        app:layout_constraintTop_toTopOf="@id/textView_card6">
-
-                        <ImageView
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/house" />
-                    </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-        </GridLayout>
+            app:layout_constraintTop_toBottomOf="@id/add_form_type_title"
+            app:spanCount="@integer/add_form_type_count_columns"
+            tools:itemCount="6"
+            tools:listitem="@layout/add_form_item_type"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_realEstate_TextInputLayout_price"
@@ -343,14 +47,16 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_grid">
+            app:layout_constraintTop_toBottomOf="@id/add_form_grid"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_realEstate_TextInputEditText_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/price"
-                android:inputType="textAutoComplete" />
+                android:inputType="textAutoComplete"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -362,14 +68,16 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_price">
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_price"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_realEstate_TextInputEditText_surface"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/surface"
-                android:inputType="textAutoComplete" />
+                android:inputType="textAutoComplete"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -383,14 +91,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_surface"
-            tools:endIconMode="dropdown_menu">
+            tools:endIconMode="dropdown_menu"
+            >
 
             <AutoCompleteTextView
                 android:id="@+id/add_realEstate_AutoCompleteTextView_number_of_rooms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/number_of_rooms"
-                android:inputType="none" />
+                android:inputType="none"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -402,7 +112,8 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_number_of_rooms">
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_number_of_rooms"
+            >
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -410,7 +121,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/description"
-                android:inputType="textAutoComplete" />
+                android:inputType="textAutoComplete"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -422,14 +134,16 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_description">
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_description"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_task_TextInputEditText_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address"
-                android:inputType="textAutoComplete" />
+                android:inputType="textAutoComplete"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -442,14 +156,16 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_address">
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_address"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_realEstate_TextInputEditText_POI"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/poi"
-                android:inputType="none" />
+                android:inputType="none"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -462,14 +178,16 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_POI">
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_POI"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_realEstate_TextInputEditText_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Status"
-                android:inputType="none" />
+                android:inputType="none"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputEditText
@@ -484,7 +202,8 @@
             android:inputType="textAutoComplete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_status" />
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_status"
+            />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_task_TextInputEditText_closing_date"
@@ -498,7 +217,8 @@
             android:inputType="textAutoComplete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_listing_date" />
+            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_listing_date"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_realEstate_TextInputLayout_real_estate_agent"
@@ -506,18 +226,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:bottom="8dp"
             android:layout_marginEnd="16dp"
+            android:bottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_closing_date">
+            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_closing_date"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_task_TextInputEditText_real_estate_agent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/Agent"
-                android:inputType="textAutoComplete" />
+                android:inputType="textAutoComplete"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
