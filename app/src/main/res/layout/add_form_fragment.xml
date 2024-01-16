@@ -1,129 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="32dp"
-        tools:context=".ui.add_real_estate.AddRealEstateActivity"
-        >
+        tools:context=".ui.add_real_estate.AddRealEstateActivity">
 
         <TextView
             android:id="@+id/add_form_type_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:text="@string/type"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/add_form_grid"
-            android:layout_width="0dp"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:chipSpacingHorizontal="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_type_title"
-            app:spanCount="@integer/add_form_type_count_columns"
-            tools:itemCount="6"
-            tools:listitem="@layout/add_form_item_type"
-            />
+            app:layout_constraintTop_toBottomOf="@id/add_form_type_title">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_grid"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_price"
-                android:layout_width="match_parent"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_house"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/price"
-                android:inputType="textAutoComplete"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="@string/house" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_surface"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_flat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flat" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_loft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loft" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_duplex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/duplex" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_land"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/land" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/other" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/add_realEstate_TextView_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/Status"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_price"
-            >
+            app:layout_constraintTop_toBottomOf="@id/chipGroup" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_surface"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/surface"
-                android:inputType="textAutoComplete"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_number_of_rooms"
-            style="@style/Widget.RealEstatesManager.Spinner"
+        <RadioGroup
+            android:id="@+id/radioGroup_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radio_button_1"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_status">
+
+            <RadioButton
+                android:id="@+id/radio_button_to_sale"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="En vente" />
+
+            <RadioButton
+                android:id="@+id/radio_button_sold"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Vendu" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/add_realEstate_TextView_number_of_rooms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/number_of_rooms"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_surface"
-            tools:endIconMode="dropdown_menu"
-            >
+            app:layout_constraintTop_toBottomOf="@id/radioGroup_status" />
 
-            <AutoCompleteTextView
-                android:id="@+id/add_realEstate_AutoCompleteTextView_number_of_rooms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/number_of_rooms"
-                android:inputType="none"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_description"
-            android:layout_width="0dp"
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:checkedButton="@+id/radio_button_1"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_number_of_rooms"
-            >
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_number_of_rooms">
 
+            <RadioButton
+                android:id="@+id/radio_button_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/description"
-                android:inputType="textAutoComplete"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+            <RadioButton
+                android:id="@+id/radio_button_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/radio_button_3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="3" />
+
+            <RadioButton
+                android:id="@+id/radio_button_4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="4" />
+
+            <RadioButton
+                android:id="@+id/radio_button_5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="5+" />
+        </RadioGroup>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_realEstate_TextInputLayout_address"
@@ -134,61 +172,88 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_description"
-            >
+            app:layout_constraintTop_toBottomOf="@id/radioGroup">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_task_TextInputEditText_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address"
-                android:inputType="textAutoComplete"
-                />
+                android:inputType="textAutoComplete" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_POI"
+        <TextView
+            android:id="@+id/add_realEstate_TextView_POI"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/poi"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_address"
-            >
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_address" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_POI"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/poi"
-                android:inputType="none"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+        <CheckBox
+            android:id="@+id/add_realEstate_CheckBox_school"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/school"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI" />
+
+        <CheckBox
+            android:id="@+id/add_realEstate_CheckBox_transportation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/transportation"
+            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_school"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI" />
+
+        <CheckBox
+            android:id="@+id/add_realEstate_CheckBox_restaurant"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/restaurant"
+            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_transportation"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_status"
+        <CheckBox
+            android:id="@+id/add_realEstate_CheckBox_hospitals"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/hospitals"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+
+        <CheckBox
+            android:id="@+id/add_realEstate_CheckBox_pharmacie"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/pharmacie"
+            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_hospitals"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+
+        <CheckBox
+            android:id="@+id/add_realEstate_CheckBox_shops"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/shops"
+            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_pharmacie"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+
+        <Button
+            android:id="@+id/button_photo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="64dp"
+            android:text="add pictures"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_POI"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/Status"
-                android:inputType="none"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_shops"
+            />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_task_TextInputEditText_listing_date"
@@ -202,8 +267,7 @@
             android:inputType="textAutoComplete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_status"
-            />
+            app:layout_constraintTop_toBottomOf="@id/button_photo" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_task_TextInputEditText_closing_date"
@@ -217,8 +281,47 @@
             android:inputType="textAutoComplete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_listing_date"
-            />
+            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_listing_date" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_realEstate_TextInputLayout_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_closing_date">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_realEstate_TextInputEditText_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/price"
+                android:inputType="textAutoComplete" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_realEstate_TextInputLayout_surface"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_price">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_realEstate_TextInputEditText_surface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/surface"
+                android:inputType="textAutoComplete" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_realEstate_TextInputLayout_real_estate_agent"
@@ -230,17 +333,36 @@
             android:bottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_closing_date"
-            >
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_surface">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/create_task_TextInputEditText_real_estate_agent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/Agent"
-                android:inputType="textAutoComplete"
-                />
+                android:inputType="textAutoComplete" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_realEstate_TextInputLayout_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_real_estate_agent">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_realEstate_TextInputEditText_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/description"
+                android:inputType="textAutoComplete" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

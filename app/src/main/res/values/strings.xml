@@ -20,10 +20,10 @@
     <string name="type">Type :</string>
     <string name="price">Price</string>
     <string name="surface">Surface</string>
-    <string name="number_of_rooms">Number of Rooms</string>
+    <string name="number_of_rooms">Number of Rooms :</string>
     <string name="description">Description</string>
     <string name="address">Address</string>
-    <string name="poi">POI</string>
+    <string name="poi">Point of Interest :</string>
     <string name="Status">Status</string>
     <string name="date_of_sale">Date of sale</string>
     <string name="sold_date">Sold Date</string>
@@ -44,5 +44,15 @@
     <string name="yes">yes</string>
     <string name="no">no</string>
 
+    <!-- Point of interest -->
+    <string name="school">School</string>
+    <string name="transportation">Transportation</string>
+    <string name="shops">Shops</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="restaurant">Restaurants</string>
+    <string name="pharmacie">Pharmacie</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 
 </resources>

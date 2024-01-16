@@ -24,10 +24,10 @@
     <string name="type">Type de bien :</string>
     <string name="price">Prix du bien</string>
     <string name="surface">Surface en m2</string>
-    <string name="number_of_rooms">Nombres de pièces</string>
+    <string name="number_of_rooms">Nombres de pièces :</string>
     <string name="description">Description</string>
     <string name="address">Adresse</string>
-    <string name="poi">Point d\'intérêts</string>
+    <string name="poi">Point d\'intérêts :</string>
     <string name="Status">Statut</string>
     <string name="date_of_sale">Date de mise en vente</string>
     <string name="sold_date">Date de vente</string>
@@ -46,4 +46,16 @@
 
     <string name="yes">oui</string>
     <string name="no">non</string>
+
+    <!-- Point of interest -->
+    <string name="school">École</string>
+    <string name="transportation">Transport en commun</string>
+    <string name="shops">Magasins</string>
+    <string name="hospitals">Hopital</string>
+    <string name="restaurant">Restaurants</string>
+    <string name="pharmacie">Pharmacie</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
 </resources>

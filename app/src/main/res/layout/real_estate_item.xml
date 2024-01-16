@@ -16,9 +16,9 @@
         >
 
         <ImageView
-            android:id="@+id/estate_item_ImageView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/real_estate_item_ImageView"
+            android:layout_width="95dp"
+            android:layout_height="80dp"
             android:contentDescription="@string/real_estate_imageView_contentDescription"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +32,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/estate_item_ImageView"
-            app:layout_constraintTop_toTopOf="@id/estate_item_ImageView"
+            app:layout_constraintStart_toEndOf="@+id/real_estate_item_ImageView"
+            app:layout_constraintTop_toTopOf="@id/real_estate_item_ImageView"
             tools:text="@sample/realEstate.json/data/type"
             />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/estate_item_ImageView"
+            app:layout_constraintStart_toEndOf="@+id/real_estate_item_ImageView"
             app:layout_constraintTop_toBottomOf="@id/real_estate_item_TextView_type"
             tools:text="@sample/realEstate.json/data/city"
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/estate_item_ImageView"
+            app:layout_constraintStart_toEndOf="@+id/real_estate_item_ImageView"
             app:layout_constraintTop_toBottomOf="@id/real_estate_item_TextView_city"
             tools:text="@sample/realEstate.json/data/price"
 

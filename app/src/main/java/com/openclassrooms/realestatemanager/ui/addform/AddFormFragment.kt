@@ -27,13 +27,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        binding.card?.setOnClickListener {
-            Toast.makeText(activity, "Clicked", Toast.LENGTH_LONG).show()
-
-        }
-
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextListingDate
 
         saleDate.setInputType(InputType.TYPE_NULL)

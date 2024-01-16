@@ -30,13 +30,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.mainToolbar)
 
         if (savedInstanceState == null) {
-            displayFragment(MapFragment.newInstance())
+            displayFragment(RealEstatesFragment.newInstance())
         }
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bottom_nav_map -> displayFragment(MapFragment.newInstance())
                 R.id.bottom_nav_list -> displayFragment(RealEstatesFragment.newInstance())
+                R.id.bottom_nav_map -> displayFragment(MapFragment.newInstance())
             }
             true
         }
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.operations_menu, menu)
+        menuInflater.inflate(R.menu.navigation_menu, menu)
 
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {

@@ -4,16 +4,7 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/first"
-        android:title="first"
+        android:id="@+id/settings"
+        android:title="settings"
         />
-
-    <item
-        android:id="@+id/second"
-        android:title="second" />
-
-    <item
-        android:id="@+id/third"
-        android:title="third" />
-
 </menu>

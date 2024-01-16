@@ -7,16 +7,32 @@
     android:layout_height="match_parent">
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/real_estate_RecyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:padding="4dp"
+        app:layout_constraintStart_toStartOf="parent"
         android:paddingTop="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/real_estate_item" />
+
+
+    <TextView
+        android:id="@+id/real_estate_RecyclerView_bis"
+        android:layout_width="0dp"
+        android:text="OK ça marche"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="4dp"
+        app:layout_constraintStart_toEndOf="@id/real_estate_RecyclerView"
+        android:paddingTop="?attr/actionBarSize"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
