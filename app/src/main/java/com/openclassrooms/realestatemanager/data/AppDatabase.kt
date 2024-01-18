@@ -30,6 +30,4 @@ abstract class AppDatabase: RoomDatabase() {
             return builder.build()
         }
     }
-
-
 }

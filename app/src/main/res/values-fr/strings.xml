@@ -31,7 +31,7 @@
     <string name="Status">Statut</string>
     <string name="date_of_sale">Date de mise en vente</string>
     <string name="sold_date">Date de vente</string>
-    <string name="Agent">Vendeur</string>
+    <string name="Agent">Nom du Vendeur</string>
 
     <!--Operations menu -->
     <string name="add_realestate">Ajouter un bien</string>
@@ -57,5 +57,9 @@
 
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+
+    <string name="picture">Photo(s)</string>
+    <string name="unspecified">Non spécifié</string>
+
 
 </resources>

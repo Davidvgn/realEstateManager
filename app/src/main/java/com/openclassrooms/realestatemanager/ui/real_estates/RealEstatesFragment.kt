@@ -30,16 +30,16 @@ class RealEstatesFragment : Fragment(R.layout.real_estates_fragment) {
 
         val testRealEstatesList: List<RealEstatesViewSateItem> = listOf(
             RealEstatesViewSateItem(0,
-                "test1",
+                "Appartement",
                 "Lyon", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
             RealEstatesViewSateItem(0,
-                "test2",
+                "Maison",
                 "New-York", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
             RealEstatesViewSateItem(0,
-                "test3",
+                "Loft",
                 "Berlin", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
             RealEstatesViewSateItem(0,
-                "test4",
+                "Duplex",
                 "Barcelone", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
         )
         adapter.submitList(testRealEstatesList)
