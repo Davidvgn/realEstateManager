@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.data
 import android.app.Application
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.openclassrooms.realestatemanager.data.dao.PicturesDao
 import com.openclassrooms.realestatemanager.data.dao.RealEstateDao
 import com.openclassrooms.realestatemanager.data.dao.UserDao
 import dagger.Module
@@ -29,6 +30,11 @@ class DataModule {
     @Provides
     fun provideRealEstateDao(appDatabase: AppDatabase): RealEstateDao =
         appDatabase.getRealEstateDao()
+
+    @Singleton
+    @Provides
+    fun providePicturesDao(appDatabase: AppDatabase): PicturesDao =
+        appDatabase.getPicturesDao()
 
     @Singleton
     @Provides

@@ -1,13 +1,12 @@
 package com.openclassrooms.realestatemanager.ui.real_estates
 
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.RealEstatesFragmentBinding
-import com.openclassrooms.realestatemanager.domain.RealEstateEntity
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,21 +27,9 @@ class RealEstatesFragment : Fragment(R.layout.real_estates_fragment) {
         binding.realEstateRecyclerView.adapter = adapter
         val resourceId: Int = R.drawable.sample_image
 
-        val testRealEstatesList: List<RealEstatesViewSateItem> = listOf(
-            RealEstatesViewSateItem(0,
-                "Appartement",
-                "Lyon", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
-            RealEstatesViewSateItem(0,
-                "Maison",
-                "New-York", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
-            RealEstatesViewSateItem(0,
-                "Loft",
-                "Berlin", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
-            RealEstatesViewSateItem(0,
-                "Duplex",
-                "Barcelone", 10_000 , Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId"), ""),
-        )
-        adapter.submitList(testRealEstatesList)
-
+        viewModel.viewStateLiveData.observe(viewLifecycleOwner){
+            Log.d("DavidVGN", "onViewCreated: ${it.size}")
+            adapter.submitList(it)
+        }
     }
 }

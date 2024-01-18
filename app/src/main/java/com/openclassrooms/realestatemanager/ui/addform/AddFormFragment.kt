@@ -7,9 +7,11 @@ import android.widget.DatePicker
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
+import com.openclassrooms.realestatemanager.ui.pictures.PicturesAdapter
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
@@ -18,6 +20,7 @@ import java.util.Calendar
 class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
+    private val viewModel by viewModels<AddFormViewModel>()
 
     companion object {
         fun newInstance() = AddFormFragment()
@@ -25,9 +28,16 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val adapter = PicturesAdapter()
+
+        binding.addFormRvPictures.adapter = adapter
 
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
+
+        viewModel.viewStateLiveData.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
 
         saleDate.setOnClickListener(View.OnClickListener { v: View? ->
             val c = Calendar.getInstance()

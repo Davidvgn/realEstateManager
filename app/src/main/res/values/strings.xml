@@ -58,5 +58,6 @@
 
     <string name="picture">Picture(s)</string>
     <string name="unspecified">unspecified</string>
+    <string name="add_pictures">add pictures</string>
 
 </resources>
