@@ -35,8 +35,12 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
 
-        viewModel.viewStateLiveData.observe(viewLifecycleOwner){
+        viewModel.pictureViewStateLiveData.observe(viewLifecycleOwner){
             adapter.submitList(it)
+        }
+
+
+        viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner){
         }
 
         saleDate.setOnClickListener(View.OnClickListener { v: View? ->

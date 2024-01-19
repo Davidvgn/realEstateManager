@@ -4,11 +4,10 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.work.WorkManager
-import com.openclassrooms.realestatemanager.data.dao.PicturesDao
-import com.openclassrooms.realestatemanager.data.dao.RealEstateDao
+import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
+import com.openclassrooms.realestatemanager.data.realEstates.RealEstateDao
 import com.openclassrooms.realestatemanager.data.dao.UserDao
-import com.openclassrooms.realestatemanager.domain.RealEstateEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import com.openclassrooms.realestatemanager.domain.UserEntity
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 

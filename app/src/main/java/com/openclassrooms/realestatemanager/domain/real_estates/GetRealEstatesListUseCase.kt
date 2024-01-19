@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.domain.real_estates
 
-import com.openclassrooms.realestatemanager.domain.RealEstateEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

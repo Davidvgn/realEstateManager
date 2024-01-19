@@ -3,8 +3,8 @@ package com.openclassrooms.realestatemanager.data
 import android.app.Application
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.openclassrooms.realestatemanager.data.dao.PicturesDao
-import com.openclassrooms.realestatemanager.data.dao.RealEstateDao
+import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
+import com.openclassrooms.realestatemanager.data.realEstates.RealEstateDao
 import com.openclassrooms.realestatemanager.data.dao.UserDao
 import dagger.Module
 import dagger.Provides

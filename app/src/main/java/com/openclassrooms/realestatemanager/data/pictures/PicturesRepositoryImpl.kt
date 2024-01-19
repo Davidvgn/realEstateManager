@@ -1,6 +1,5 @@
-package com.openclassrooms.realestatemanager.data
+package com.openclassrooms.realestatemanager.data.pictures
 
-import com.openclassrooms.realestatemanager.data.dao.PicturesDao
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesRespository
 import kotlinx.coroutines.Dispatchers

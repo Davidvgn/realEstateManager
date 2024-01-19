@@ -1,9 +1,9 @@
-package com.openclassrooms.realestatemanager.data.dao
+package com.openclassrooms.realestatemanager.data.realEstates
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.openclassrooms.realestatemanager.domain.RealEstateEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

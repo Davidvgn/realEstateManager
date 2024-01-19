@@ -1,8 +1,5 @@
 package com.openclassrooms.realestatemanager.ui.real_estates
 
-import android.net.Uri
-
-
 sealed class RealEstatesViewSateItem(
     val type: Type,
 ) {
@@ -12,11 +9,11 @@ sealed class RealEstatesViewSateItem(
     }
 
     data class RealEstates(
-        val id: Int,
+        val id: Long,
         val realEstatesType: String?,
         val city: String?,
         val salePrice: Int?,
-        val photoUri: Uri?,
+        val photoUri: String?,
         val status: String?,
     ) : RealEstatesViewSateItem(Type.REAL_ESTATE)
 

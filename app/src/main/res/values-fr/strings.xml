@@ -61,5 +61,7 @@
     <string name="picture">Photo(s)</string>
     <string name="unspecified">Non spécifié</string>
 
+    <string name="add_pictures">Ajouter une photo</string>
+    <string name="no_realestate">Aucun Biens immobiliers</string>
 
 </resources>

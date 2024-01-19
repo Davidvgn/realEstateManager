@@ -3,8 +3,7 @@ package com.openclassrooms.realestatemanager.domain.pictures
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.openclassrooms.realestatemanager.domain.RealEstateEntity
-import com.openclassrooms.realestatemanager.domain.UserEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 
 @Entity(tableName = "pictures",
     foreignKeys = [ForeignKey(
