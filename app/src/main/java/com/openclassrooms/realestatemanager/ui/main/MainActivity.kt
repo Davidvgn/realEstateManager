@@ -11,7 +11,6 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
-import com.openclassrooms.realestatemanager.ui.real_estates.RealEstatesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,12 +29,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.mainToolbar)
 
         if (savedInstanceState == null) {
-            displayFragment(RealEstatesFragment.newInstance())
+            displayFragment(RealEstateHomeFragment.newInstance())
         }
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bottom_nav_list -> displayFragment(RealEstatesFragment.newInstance())
+                R.id.bottom_nav_list -> displayFragment(RealEstateHomeFragment.newInstance())
                 R.id.bottom_nav_map -> displayFragment(MapFragment.newInstance())
             }
             true

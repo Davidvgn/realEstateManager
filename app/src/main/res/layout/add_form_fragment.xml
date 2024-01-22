@@ -336,7 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/price"
-                android:inputType="textAutoComplete" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -394,9 +394,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_realEstate_TextInputEditText_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
+                android:gravity="top"
                 android:hint="@string/description"
-                android:inputType="textAutoComplete" />
+                android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

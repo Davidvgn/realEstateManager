@@ -3,12 +3,9 @@ package com.openclassrooms.realestatemanager.ui.real_estates
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
 import com.openclassrooms.realestatemanager.domain.real_estates.GetRealEstatesListUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

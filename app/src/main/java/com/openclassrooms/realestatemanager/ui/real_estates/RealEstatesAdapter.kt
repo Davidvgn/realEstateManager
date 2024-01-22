@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.ui.real_estates
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +15,9 @@ class RealEstatesAdapter : ListAdapter<RealEstatesViewSateItem, RealEstatesAdapt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RealEstatesViewHolder =
         when (RealEstatesViewSateItem.Type.values()[viewType]) {
             RealEstatesViewSateItem.Type.EMPTY_STATE -> {
-                Log.d("DavidVGN", "Creating EmptyState ViewHolder")
                 RealEstatesViewHolder.EmptyState.create(parent)
             }
             RealEstatesViewSateItem.Type.REAL_ESTATE ->{
-                Log.d("DavidVGN", "Creating REAL_ESTATE ViewHolder")
                 RealEstatesViewHolder.RealEstate.create(parent)}
         }
 

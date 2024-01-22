@@ -28,7 +28,6 @@ class RealEstatesFragment : Fragment(R.layout.real_estates_fragment) {
         val resourceId: Int = R.drawable.sample_image
 
         viewModel.viewStateLiveData.observe(viewLifecycleOwner){
-            Log.d("DavidVGN", "onViewCreated: ${it.size}")
             adapter.submitList(it)
         }
     }
