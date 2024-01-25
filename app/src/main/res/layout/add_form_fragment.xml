@@ -355,7 +355,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/surface"
-                android:inputType="textAutoComplete" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -386,6 +386,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_real_estate_agent">
@@ -395,11 +396,25 @@
                 android:id="@+id/add_realEstate_TextInputEditText_description"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:gravity="top"
+                android:gravity="start|top"
                 android:hint="@string/description"
-                android:inputType="textMultiLine" />
+                android:paddingTop="16dp"
+            android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <Button
+            android:id="@+id/addbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="add Estate"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

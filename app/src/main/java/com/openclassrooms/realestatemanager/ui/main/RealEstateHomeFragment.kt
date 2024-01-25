@@ -22,10 +22,7 @@ class RealEstateHomeFragment : Fragment(R.layout.real_estate_home_fragment) {
             ?.replace(R.id.estate_list_fragment_container, RealEstatesFragment.newInstance())
             ?.commit()
 
-
-
-        // Vérifiez si l'orientation est paysage avant d'ajouter le deuxième fragment
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && resources.getBoolean(R.bool.isTablet)) {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.details_fragment_container, RealEstateDetailsFragment.newInstance())
                 ?.commit()

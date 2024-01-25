@@ -17,6 +17,8 @@ class AddFormViewModel @Inject constructor(
     getPicturesUseCase: GetPicturesUseCase
 ) : ViewModel() {
 
+    private var description: String? = null
+
     val pictureViewStateLiveData: LiveData<List<PicturesViewStateItem>> = liveData {
         getPicturesUseCase.invoke().collect { pictureEntityList ->
 
@@ -35,10 +37,10 @@ class AddFormViewModel @Inject constructor(
         addRealEstateUseCase.invoke(
             realEstate = RealEstateEntity(
                 type = "TEST1",
-                salePrice = 10000,
+                salePrice = 40000,
                 floorArea = 12,
                 numberOfRooms = 4,
-                description = "TEST",
+                description = description,
                 photo = "",
                 address = "",
                 status = "",
@@ -57,5 +59,9 @@ class AddFormViewModel @Inject constructor(
 
     private fun mapItemList(picturesEntities: List<PicturesEntity>): List<PicturesViewStateItem.Pictures> {
         return picturesEntities.map { mapItem(it) }
+    }
+
+    fun onTextDescriptionChanged(description: String?) {
+        this.description = description
     }
 }
