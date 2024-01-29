@@ -12,7 +12,7 @@ sealed class RealEstatesViewSateItem(
         val id: Long,
         val realEstatesType: String?,
         val city: String?,
-        val salePrice: Int?,
+        val salePrice: String?,
         val photoUri: String?,
         val status: String?,
     ) : RealEstatesViewSateItem(Type.REAL_ESTATE)

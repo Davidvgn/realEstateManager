@@ -1,12 +1,9 @@
 package com.openclassrooms.realestatemanager.ui.add_real_estate
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commitNow
-import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddRealEstateActivityBinding
 import com.openclassrooms.realestatemanager.ui.addform.AddFormFragment
 import com.openclassrooms.realestatemanager.ui.addform.AddFormConfirmationDialog
@@ -28,14 +25,14 @@ class AddRealEstateActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.commitNow {
                 replace(binding.addRealEstateFrameLayoutFragmentContainer.id,
-                    AddFormFragment.newInstance()
+                        AddFormFragment.newInstance()
                 )
             }
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            AddFormConfirmationDialog.newInstance().show(supportFragmentManager, null)
+        AddFormConfirmationDialog.newInstance().show(supportFragmentManager, null)
 //Todo David if yes :
         // return super.onOptionsItemSelected(item)
         return true

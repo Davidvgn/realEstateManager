@@ -17,8 +17,8 @@ data class RealEstateEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val type: String?,
-    val salePrice: Int?,
-    val floorArea: Int?,
+    val salePrice: String?,
+    val floorArea: String?,
     val numberOfRooms: Int?,
     val description: String?,
     val photo: String?,

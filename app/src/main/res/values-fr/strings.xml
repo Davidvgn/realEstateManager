@@ -23,7 +23,7 @@
 
     <string name="type">Type de bien :</string>
     <string name="price">Prix du bien</string>
-    <string name="surface">Surface en m2</string>
+    <string name="floorArea">Surface en m2</string>
     <string name="number_of_rooms">Nombres de pièces :</string>
     <string name="description">Description</string>
     <string name="address">Adresse</string>
@@ -63,5 +63,11 @@
 
     <string name="add_pictures">Ajouter une photo</string>
     <string name="no_realestate">Aucun Biens immobiliers</string>
+
+    <string name="Sold">Vendu</string>
+    <string name="forSale">En vente</string>
+
+    <string name="date">%1$s/%2$s/%3$s</string>
+
 
 </resources>

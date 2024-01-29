@@ -13,10 +13,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddFormViewModel @Inject constructor(
-    private val addRealEstateUseCase: AddRealEstateUseCase,
-    getPicturesUseCase: GetPicturesUseCase
+        private val addRealEstateUseCase: AddRealEstateUseCase,
+        getPicturesUseCase: GetPicturesUseCase
 ) : ViewModel() {
 
+    private var chip: String? = null
+    private var saleDate: String? = null
+    private var soldDate: String? = null
+    private var price: String? = null
+    private var flourArea: String? = null
     private var description: String? = null
 
     val pictureViewStateLiveData: LiveData<List<PicturesViewStateItem>> = liveData {
@@ -33,35 +38,57 @@ class AddFormViewModel @Inject constructor(
         }
     }
 
+    //todo david texte en dur
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
         addRealEstateUseCase.invoke(
-            realEstate = RealEstateEntity(
-                type = "TEST1",
-                salePrice = 40000,
-                floorArea = 12,
-                numberOfRooms = 4,
-                description = description,
-                photo = "",
-                address = "",
-                status = "",
-                upForSaleDate = "",
-                dateOfSale = "",
-                realEstateAgent = null,
-            )
+                realEstate = RealEstateEntity(
+                        type = chip ?: "non communiqué",
+                        salePrice = price ?: "non communiqué",
+                        floorArea = flourArea ?: "non communiqué",
+                        numberOfRooms = 4,
+                        description = description ?: "non communiqué",
+                        photo = "",
+                        address = "Lyon",
+                        status = "",
+                        upForSaleDate = saleDate,
+                        dateOfSale = soldDate,
+                        realEstateAgent = null,
+                )
         )
     }
 
     private fun mapItem(picture: PicturesEntity) = PicturesViewStateItem.Pictures(
-        id = picture.id,
-        image = picture.image,
-        description = picture.description
+            id = picture.id,
+            image = picture.image,
+            description = picture.description
     )
 
     private fun mapItemList(picturesEntities: List<PicturesEntity>): List<PicturesViewStateItem.Pictures> {
         return picturesEntities.map { mapItem(it) }
     }
 
+    fun onTextPriceChanged(price: String?) {
+        this.price = price
+    }
+
+    fun onTextFloorAreaChanged(floorArea: String?) {
+        this.flourArea = floorArea
+    }
+
     fun onTextDescriptionChanged(description: String?) {
         this.description = description
     }
+
+    fun onTypeChanged(chip: String) {
+        this.chip = chip
+    }
+
+    fun onDateChanged(day: String, month: String, year: String) {
+        this.saleDate = ("$day/${month}/$year")
+    }
+
+    fun onSoldDateChanged(day: String, month: String, year: String) {
+        this.soldDate = ("$day/${month}/$year")
+    }
+
 }
