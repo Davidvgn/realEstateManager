@@ -4,17 +4,19 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.work.WorkManager
-import com.openclassrooms.realestatemanager.data.dao.RealEstateDao
+import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
+import com.openclassrooms.realestatemanager.data.realEstates.RealEstateDao
 import com.openclassrooms.realestatemanager.data.dao.UserDao
-import com.openclassrooms.realestatemanager.domain.RealEstateEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import com.openclassrooms.realestatemanager.domain.UserEntity
+import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 
-@Database(entities = [UserEntity::class, RealEstateEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserEntity::class, RealEstateEntity::class, PicturesEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
     abstract fun getRealEstateDao(): RealEstateDao
+    abstract fun getPicturesDao(): PicturesDao
 
     companion object{
         private const val DATABASE_NAME = "RealEstate_database"
@@ -30,6 +32,4 @@ abstract class AppDatabase: RoomDatabase() {
             return builder.build()
         }
     }
-
-
 }

@@ -1,8 +1,9 @@
-package com.openclassrooms.realestatemanager.domain
+package com.openclassrooms.realestatemanager.domain.real_estates
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.openclassrooms.realestatemanager.domain.UserEntity
 
 @Entity(
     tableName = "realEstate",
@@ -14,13 +15,13 @@ import androidx.room.PrimaryKey
 )
 data class RealEstateEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Long = 0,
     val type: String?,
-    val salePrice: Int?,
-    val floorArea: Int?,
+    val salePrice: String?,
+    val floorArea: String?,
     val numberOfRooms: Int?,
     val description: String?,
-//    val Photo: todo David,
+    val photo: String?,
     val address: String?,
     val status: String?,
     val upForSaleDate: String?,

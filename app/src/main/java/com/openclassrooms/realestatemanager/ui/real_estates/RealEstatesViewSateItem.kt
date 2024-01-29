@@ -1,10 +1,21 @@
 package com.openclassrooms.realestatemanager.ui.real_estates
 
-data class RealEstatesViewSateItem(
-    val id: Int,
-    val type: String?,
-    val city: String?,
-    val salePrice: Int?,
-//    val Photo: todo David,
-    val status: String?,
-)
+sealed class RealEstatesViewSateItem(
+    val type: Type,
+) {
+    enum class Type {
+        REAL_ESTATE,
+        EMPTY_STATE,
+    }
+
+    data class RealEstates(
+        val id: Long,
+        val realEstatesType: String?,
+        val city: String?,
+        val salePrice: String?,
+        val photoUri: String?,
+        val status: String?,
+    ) : RealEstatesViewSateItem(Type.REAL_ESTATE)
+
+    object EmptyState : RealEstatesViewSateItem(Type.EMPTY_STATE)
+}

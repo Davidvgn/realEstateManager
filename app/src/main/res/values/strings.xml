@@ -7,5 +7,64 @@
     <string name="map">Map View</string>
     <string name="list">List View</string>
 
+    <!-- Dropdown type de biens immobilier-->
+    <string name="house">House</string>
+    <string name="flat">Flat</string>
+    <string name="loft">Loft</string>
+    <string name="duplex">Duplex</string>
+    <string name="land">Land</string>
+    <string name="other">Other</string>
+
+    <!--Add RealEstate Fragment xml -->
+    <string name="add_new">Add new</string>
+    <string name="type">Type :</string>
+    <string name="price">Price</string>
+    <string name="floorArea">Floor Area</string>
+    <string name="number_of_rooms">Number of Rooms :</string>
+    <string name="description">Description</string>
+    <string name="address">Address</string>
+    <string name="poi">Point of Interest :</string>
+    <string name="Status">Status</string>
+    <string name="date_of_sale">Date of sale</string>
+    <string name="sold_date">Sold Date</string>
+    <string name="Agent">Agent</string>
+
+    <!--Operations menu -->
+    <string name="add_realestate">Add Real Estate</string>
+    <string name="edit_realestate">Edit Real Estate</string>
+    <string name="search">Find A Real Estate</string>
+    <string name="cancel">Cancel</string>
+
+    <!--add form menu -->
+    <string name="save_button">save</string>
+
+    <!--Confirmation Dialog -->
+    <string name="confirmation_message">Unsaved changes will be lost. Continue ?</string>
+
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+
+    <!-- Point of interest -->
+    <string name="school">School</string>
+    <string name="transportation">Transportation</string>
+    <string name="shops">Shops</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="restaurant">Restaurants</string>
+    <string name="pharmacie">Pharmacie</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
+    <string name="picture">Picture(s)</string>
+    <string name="unspecified">unspecified</string>
+
+    <string name="add_pictures">add pictures</string>
+    <string name="no_realestate">No RealEstate</string>
+
+    <string name="Sold">Sold</string>
+    <string name="forSale">For Sale</string>
+
+
+    <string name="date">%1$s/%2$s/%3$s</string>
 
 </resources>

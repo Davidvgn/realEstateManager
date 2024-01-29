@@ -4,29 +4,46 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.openclassrooms.realestatemanager.domain.location.GetGpsLocationUseCase
+import com.openclassrooms.realestatemanager.domain.permission.IsLocationPermissionsGrantedUseCase
+import com.openclassrooms.realestatemanager.domain.permission.RefreshPermissionsUseCase
+import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val getGpsLocationUseCase: GetGpsLocationUseCase,
+    private val isLocationPermissionsGrantedUseCase: IsLocationPermissionsGrantedUseCase,
+    private val refreshPermissionsUseCase: RefreshPermissionsUseCase,
 ) : ViewModel() {
 
-    val viewStateLiveData: LiveData<MapPoiViewState> = liveData {
-        emit(
-            MapPoiViewState(
-                48.8566,
-                2.3522
-            )
-        )
+    private var hasUserScrolledMap = false
 
-        getGpsLocationUseCase.invoke().collect {
-            emit(
-                MapPoiViewState(
-                    it.lat,
-                    it.long,
-                )
-            )
+    val viewActionLiveData: LiveData<Event<MapViewAction>> = liveData {
+        getGpsLocationFlow().collectLatest {
+            if (!hasUserScrolledMap) {
+                emit(Event(MapViewAction.ZoomTo(it.lat, it.long)))
+            }
         }
     }
+
+    fun onUserScrolledMap() {
+        hasUserScrolledMap = true
+    }
+
+    private fun getGpsLocationFlow() = isLocationPermissionsGrantedUseCase.invoke().flatMapLatest { isLocationPermissionsGranted ->
+        if (isLocationPermissionsGranted) {
+            getGpsLocationUseCase.invoke()
+        } else {
+            emptyFlow()
+        }
+    }
+
+    fun onPermissionUpdated() {
+        refreshPermissionsUseCase.invoke()
+    }
 }
+
