@@ -13,7 +13,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
-import com.openclassrooms.realestatemanager.ui.pictures.PicturesAdapter
+import com.openclassrooms.realestatemanager.ui.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
@@ -31,16 +31,13 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PicturesAdapter()
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
+                ?.commit()
+
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
-
-        binding.addFormRvPictures.adapter = adapter
-
-        viewModel.pictureViewStateLiveData.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
             getSelectedText(chipGroup, i)
