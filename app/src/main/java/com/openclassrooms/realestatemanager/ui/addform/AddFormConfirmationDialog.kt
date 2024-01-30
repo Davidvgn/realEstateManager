@@ -2,9 +2,7 @@ package com.openclassrooms.realestatemanager.ui.addform
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.ConfirmationDialogFragmentBinding
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
@@ -23,8 +21,7 @@ class AddFormConfirmationDialog : DialogFragment(R.layout.confirmation_dialog_fr
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmationDialogButtonYes.setOnClickListener {
-            Toast.makeText(activity, "À IMPLEMENTER", Toast.LENGTH_SHORT).show()
-
+            activity?.finish()
         }
 
         binding.confirmationDialogButtonNo.setOnClickListener {

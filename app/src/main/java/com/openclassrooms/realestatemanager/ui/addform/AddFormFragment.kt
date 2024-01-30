@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.addform
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
@@ -14,7 +13,6 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
-import com.openclassrooms.realestatemanager.ui.main.MainActivity
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesAdapter
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,8 +61,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         binding.addbutton.setOnClickListener {
             viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner) {
             }
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
+            activity?.finish()
         }
 
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
