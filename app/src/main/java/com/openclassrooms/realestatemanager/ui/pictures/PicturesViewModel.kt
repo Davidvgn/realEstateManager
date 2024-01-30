@@ -1,11 +1,10 @@
-package com.openclassrooms.realestatemanager.ui
+package com.openclassrooms.realestatemanager.ui.pictures
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
-import com.openclassrooms.realestatemanager.ui.pictures.PicturesViewStateItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -28,7 +27,6 @@ class PicturesViewModel @Inject constructor(
         }
     }
 }
-
 private fun mapItem(picture: PicturesEntity) = PicturesViewStateItem.Pictures(
         id = picture.id,
         image = picture.image,

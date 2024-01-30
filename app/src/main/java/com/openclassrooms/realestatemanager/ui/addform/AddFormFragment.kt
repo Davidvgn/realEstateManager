@@ -13,7 +13,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
-import com.openclassrooms.realestatemanager.ui.PicturesFragment
+import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar

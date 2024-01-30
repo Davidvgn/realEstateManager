@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui
+package com.openclassrooms.realestatemanager.ui.pictures
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.PicturesFragmentBinding
-import com.openclassrooms.realestatemanager.ui.pictures.PicturesAdapter
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
