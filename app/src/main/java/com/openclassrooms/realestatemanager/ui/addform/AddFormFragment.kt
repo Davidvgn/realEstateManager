@@ -87,7 +87,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             )
         }
 
-        saleDate.setOnClickListener(View.OnClickListener { v: View? ->
+        saleDate.setOnClickListener(View.OnClickListener {
             val c = Calendar.getInstance()
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
@@ -109,7 +109,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             datePickerDialog?.show()
         })
 
-        closingSaleDate.setOnClickListener(View.OnClickListener { v: View? ->
+        closingSaleDate.setOnClickListener(View.OnClickListener {
             val c = Calendar.getInstance()
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
@@ -147,9 +147,9 @@ private fun getSelectedText(chipGroup: ChipGroup, id: Int): String {
 
 private fun formatDayOfMonth(dayOfMonth: Int) =
         if (dayOfMonth < 10) {
-            "0${dayOfMonth}"
+            "0$dayOfMonth"
         } else {
-            "${dayOfMonth}"
+            "$dayOfMonth"
         }
 
 private fun formatMonth(month: Int) =
