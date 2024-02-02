@@ -38,37 +38,13 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
-
-        binding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
-            getSelectedText(chipGroup, i)
-            viewModel.onTypeChanged(getSelectedText(chipGroup, i))
-        }
-
-        binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
-            viewModel.onTextPriceChanged(it?.toString())
-        }
-        binding.addRealEstateTextInputEditTextDescription.doAfterTextChanged {
-            viewModel.onTextFloorAreaChanged(it?.toString())
-        }
-
-        binding.addRealEstateTextInputEditTextDescription.doAfterTextChanged {
-            viewModel.onTextDescriptionChanged(it?.toString())
-        }
-
-        binding.addbutton.setOnClickListener {
-            viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner) {
-            }
-            activity?.finish()
-        }
+        val addPictureFromLibrary =
+                registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+                }
 
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            val day = formatDayOfMonth(dayOfMonth)
-            val month = formatMonth(monthOfYear)
+            viewModel.onDateChanged(dayOfMonth, monthOfYear, year)
 
-            saleDate.setText(getString(R.string.date, day, month, year.toString()))
-            viewModel.onDateChanged(
-                    day, month, year.toString()
-            )
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, monthOfYear)
@@ -78,16 +54,48 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         }
 
         val soldDateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            val day = formatDayOfMonth(dayOfMonth)
-            val month = formatMonth(monthOfYear)
+            viewModel.onSoldDateChanged(dayOfMonth, monthOfYear, year)
+        }
 
-            closingSaleDate.setText(getString(R.string.date, day, month, year.toString()))
-            viewModel.onSoldDateChanged(
-                    day, month, year.toString()
+        binding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
+            getSelectedText(chipGroup, i)
+            viewModel.onTypeChanged(getSelectedText(chipGroup, i))
+        }
+
+        binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
+            viewModel.onTextPriceChanged(it?.toString())
+        }
+        binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
+            viewModel.onTextFloorAreaChanged(it?.toString())
+        }
+
+        binding.addRealEstateTextInputEditTextDescription.doAfterTextChanged {
+            viewModel.onTextDescriptionChanged(it?.toString())
+        }
+
+        binding.buttonPhoto.setOnClickListener {
+            addPictureFromLibrary.launch(
+                    PickVisualMediaRequest(
+                            ActivityResultContracts.PickVisualMedia.ImageOnly
+                    )
             )
         }
 
-        saleDate.setOnClickListener(View.OnClickListener {
+        binding.addbutton.setOnClickListener {
+            viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner) {
+            }
+            activity?.finish()
+        }
+
+        viewModel.onSaleDateChangeLiveData.observe(viewLifecycleOwner) {
+            saleDate.setText(it)
+        }
+
+        viewModel.onSolDateChangeLiveData.observe(viewLifecycleOwner) {
+            closingSaleDate.setText(it)
+        }
+
+        saleDate.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
@@ -103,13 +111,13 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
             datePickerDialog?.datePicker?.minDate = c.timeInMillis
             //todo david amélioration : Si la date de vente a été sélectionnée (par mégarde) avant la date de mise en vente,
-            // la date de vente n'est pas MAJ, elle devrait revenir à null
-            // gérer ça dans le VM
-            // De plus, il faudrait créer un bouton pour érase la date de vente, car si sélectionnée par erreur on ne peut plus l'enlever
-            datePickerDialog?.show()
-        })
+            // est quelle est set avant la date de mise en vente il faudrait un warning
 
-        closingSaleDate.setOnClickListener(View.OnClickListener {
+            // todo david possibilité de erase la date défini
+            datePickerDialog?.show()
+        }
+
+        closingSaleDate.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
@@ -124,18 +132,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             }
             datePickerDialog?.datePicker?.minDate = minSoldDate
             datePickerDialog?.show()
-        })
-
-        val addPictureFromLibrary =
-                registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
-                }
-
-        binding.buttonPhoto.setOnClickListener {
-            addPictureFromLibrary.launch(
-                    PickVisualMediaRequest(
-                            ActivityResultContracts.PickVisualMedia.ImageOnly
-                    )
-            )
         }
     }
 }
@@ -145,16 +141,3 @@ private fun getSelectedText(chipGroup: ChipGroup, id: Int): String {
     return mySelection?.text?.toString() ?: ""
 }
 
-private fun formatDayOfMonth(dayOfMonth: Int) =
-        if (dayOfMonth < 10) {
-            "0$dayOfMonth"
-        } else {
-            "$dayOfMonth"
-        }
-
-private fun formatMonth(month: Int) =
-        if ((month + 1) < 10) {
-            "0${month + 1}"
-        } else {
-            "${month + 1}"
-        }

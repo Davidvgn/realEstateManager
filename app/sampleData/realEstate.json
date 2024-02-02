@@ -4,20 +4,26 @@
       "type": "Flat",
       "city": "Lyon",
       "price": "210 000",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula."
+      "surface": "210",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula.",
+      "location": "56 rue NoName 75010 Paris."
     },
     {
       "type": "House",
       "city": "Toulouse",
       "price": "650 000",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula."
+      "surface": "21",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula.",
+      "location": "22 rue Antonin Lacour 89678  New-York."
 
     },
     {
       "type": "Duplex",
       "city": "Manhattan",
       "price": "1 210 000",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris ut nunc vel mi ornare porta nec ac erat. Mauris augue tellus, mollis vitae diam quis, tincidunt sagittis urna. Aenean malesuada vestibulum quam vitae maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque finibus odio quis diam commodo, vitae pharetra eros feugiat. Vivamus vestibulum vel leo quis porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae"
+      "surface": "120",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius purus eu odio consequat, quis dictum felis vehicula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris ut nunc vel mi ornare porta nec ac erat. Mauris augue tellus, mollis vitae diam quis, tincidunt sagittis urna. Aenean malesuada vestibulum quam vitae maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque finibus odio quis diam commodo, vitae pharetra eros feugiat. Vivamus vestibulum vel leo quis porta. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae",
+      "location": "22 rue Antonin Lacour 89678  New-York."
 
     }
   ]
