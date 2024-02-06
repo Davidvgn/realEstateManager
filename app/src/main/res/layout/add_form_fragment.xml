@@ -166,9 +166,9 @@
                 android:text="5+" />
         </RadioGroup>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_realEstate_CardView"
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -178,13 +178,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/radioGroup">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_address"
+            <androidx.fragment.app.FragmentContainerView android:id="@+id/add_realEstate_autocomplete_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/address"
-                android:inputType="textAutoComplete" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                />
+
+        </androidx.cardview.widget.CardView>
 
 
         <TextView
@@ -196,7 +196,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_address" />
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CardView" />
 
         <CheckBox
             android:id="@+id/add_realEstate_CheckBox_school"
