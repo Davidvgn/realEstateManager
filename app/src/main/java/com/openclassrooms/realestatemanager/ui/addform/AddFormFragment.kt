@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.addform
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
@@ -14,8 +13,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
-import com.openclassrooms.realestatemanager.ui.main.MainActivity
-import com.openclassrooms.realestatemanager.ui.pictures.PicturesAdapter
+import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
@@ -33,15 +31,30 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PicturesAdapter()
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
+                ?.commit()
+
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
+        val addPictureFromLibrary =
+                registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+                }
 
-        binding.addFormRvPictures.adapter = adapter
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            viewModel.onDateChanged(dayOfMonth, monthOfYear, year)
 
-        viewModel.pictureViewStateLiveData.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, monthOfYear)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            minSoldDate = calendar.timeInMillis
+        }
+
+        val soldDateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            viewModel.onSoldDateChanged(dayOfMonth, monthOfYear, year)
         }
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
@@ -52,7 +65,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
             viewModel.onTextPriceChanged(it?.toString())
         }
-        binding.addRealEstateTextInputEditTextDescription.doAfterTextChanged {
+        binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
             viewModel.onTextFloorAreaChanged(it?.toString())
         }
 
@@ -60,40 +73,29 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             viewModel.onTextDescriptionChanged(it?.toString())
         }
 
+        binding.buttonPhoto.setOnClickListener {
+            addPictureFromLibrary.launch(
+                    PickVisualMediaRequest(
+                            ActivityResultContracts.PickVisualMedia.ImageOnly
+                    )
+            )
+        }
+
         binding.addbutton.setOnClickListener {
             viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner) {
             }
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
+            activity?.finish()
         }
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            val day = formatDayOfMonth(dayOfMonth)
-            val month = formatMonth(monthOfYear)
-
-            saleDate.setText(getString(R.string.date, day, month, year.toString()))
-            viewModel.onDateChanged(
-                    day, month, year.toString()
-            )
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, monthOfYear)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            minSoldDate = calendar.timeInMillis
+        viewModel.onSaleDateChangeLiveData.observe(viewLifecycleOwner) {
+            saleDate.setText(it)
         }
 
-        val soldDateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            val day = formatDayOfMonth(dayOfMonth)
-            val month = formatMonth(monthOfYear)
-
-            closingSaleDate.setText(getString(R.string.date, day, month, year.toString()))
-            viewModel.onSoldDateChanged(
-                    day, month, year.toString()
-            )
+        viewModel.onSolDateChangeLiveData.observe(viewLifecycleOwner) {
+            closingSaleDate.setText(it)
         }
 
-        saleDate.setOnClickListener(View.OnClickListener { v: View? ->
+        saleDate.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
@@ -109,13 +111,13 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
             datePickerDialog?.datePicker?.minDate = c.timeInMillis
             //todo david amélioration : Si la date de vente a été sélectionnée (par mégarde) avant la date de mise en vente,
-            // la date de vente n'est pas MAJ, elle devrait revenir à null
-            // gérer ça dans le VM
-            // De plus, il faudrait créer un bouton pour érase la date de vente, car si sélectionnée par erreur on ne peut plus l'enlever
-            datePickerDialog?.show()
-        })
+            // est quelle est set avant la date de mise en vente il faudrait un warning
 
-        closingSaleDate.setOnClickListener(View.OnClickListener { v: View? ->
+            // todo david possibilité de erase la date défini
+            datePickerDialog?.show()
+        }
+
+        closingSaleDate.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
@@ -130,18 +132,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             }
             datePickerDialog?.datePicker?.minDate = minSoldDate
             datePickerDialog?.show()
-        })
-
-        val addPictureFromLibrary =
-                registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
-                }
-
-        binding.buttonPhoto.setOnClickListener {
-            addPictureFromLibrary.launch(
-                    PickVisualMediaRequest(
-                            ActivityResultContracts.PickVisualMedia.ImageOnly
-                    )
-            )
         }
     }
 }
@@ -151,16 +141,3 @@ private fun getSelectedText(chipGroup: ChipGroup, id: Int): String {
     return mySelection?.text?.toString() ?: ""
 }
 
-private fun formatDayOfMonth(dayOfMonth: Int) =
-        if (dayOfMonth < 10) {
-            "0${dayOfMonth}"
-        } else {
-            "${dayOfMonth}"
-        }
-
-private fun formatMonth(month: Int) =
-        if ((month + 1) < 10) {
-            "0${month + 1}"
-        } else {
-            "${month + 1}"
-        }

@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui
+package com.openclassrooms.realestatemanager.ui.details
 
 import android.os.Bundle
 import android.view.View
@@ -7,10 +7,12 @@ import com.openclassrooms.realestatemanager.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RealEstateDetailsFragment: Fragment(R.layout.real_estate_details_fragment) {
+class EmptyDetailsFragment: Fragment(R.layout.details_empty_fragment) {
+
     companion object {
-        fun newInstance() = RealEstateDetailsFragment()
+        fun newInstance() = EmptyDetailsFragment()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

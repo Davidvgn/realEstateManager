@@ -1,10 +1,8 @@
 package com.openclassrooms.realestatemanager.data.utils
 
 import android.content.Context
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.util.Calendar
 import java.util.Locale
 import kotlin.math.roundToInt
 
@@ -39,23 +37,26 @@ class Utils {
          *
          * @return
          */
-        fun getTodayDate(): String { //todo david
-//        val dateFormat = SimpleDateFormat.getDateInstance("dd/MM/yyyy")
-            val dateFormat = SimpleDateFormat.getDateInstance()
-            return dateFormat.format("dd/MM/yyyy")
-        }
+        fun getTodayDate(): String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
 
-        /**
-         * Vérification de la connexion réseau
-         * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-         *
-         * @param context
-         * @return
-         */
-        fun isInternetAvailable( context : Context) : Boolean {
-            return true //todo david
-        }
+    /**
+     * Vérification de la connexion réseau
+     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
+     *
+     * @param context
+     * @return
+     */
+    fun isInternetAvailable(context: Context): Boolean {
+        return true //todo david
     }
 
-
+    fun formatDate(dayOfMonth: Int, monthOfYear: Int, year: Int): String =
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(
+                    Calendar.getInstance().apply {
+                        set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        set(Calendar.MONTH, monthOfYear)
+                        set(Calendar.YEAR, year)
+                    }.time
+            )
+}
 }

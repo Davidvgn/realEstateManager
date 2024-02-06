@@ -55,7 +55,7 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
 
-    <string name="picture">Picture(s)</string>
+    <string name="picture">Picture(s) :</string>
     <string name="unspecified">unspecified</string>
 
     <string name="add_pictures">add pictures</string>
@@ -66,5 +66,6 @@
 
 
     <string name="date">%1$s/%2$s/%3$s</string>
+    <string name="location">Location</string>
 
 </resources>

@@ -10,12 +10,12 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.RealEstateEmptyStateItemBinding
 import com.openclassrooms.realestatemanager.databinding.RealEstateItemBinding
 
-class RealEstatesAdapter : ListAdapter<RealEstatesViewSateItem, RealEstatesAdapter.RealEstatesViewHolder>(RealEstatesDiffUtilCallback) {
+class RealEstatesAdapter(private val onItemClick: () -> Unit) : ListAdapter<RealEstatesViewSateItem, RealEstatesAdapter.RealEstatesViewHolder>(RealEstatesDiffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RealEstatesViewHolder =
         when (RealEstatesViewSateItem.Type.values()[viewType]) {
             RealEstatesViewSateItem.Type.EMPTY_STATE -> {
-                RealEstatesViewHolder.EmptyState.create(parent)
+                RealEstatesViewHolder.EmptyState.create(parent, onItemClick)
             }
             RealEstatesViewSateItem.Type.REAL_ESTATE ->{
                 RealEstatesViewHolder.RealEstate.create(parent)}
@@ -31,13 +31,21 @@ class RealEstatesAdapter : ListAdapter<RealEstatesViewSateItem, RealEstatesAdapt
     override fun getItemViewType(position: Int): Int = getItem(position).type.ordinal
 
     sealed class RealEstatesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        class EmptyState(private val binding: RealEstateEmptyStateItemBinding) :
-            RealEstatesViewHolder(binding.root) {
+        class EmptyState(private val binding: RealEstateEmptyStateItemBinding, onItemClick: () -> Unit) :
+                RealEstatesViewHolder(binding.root) {
+
+            init {
+                binding.realEstateEmptyStateButton?.setOnClickListener {
+                    onItemClick.invoke()
+                }
+            }
+
             companion object {
-                fun create(parent: ViewGroup) = EmptyState(
-                    binding = RealEstateEmptyStateItemBinding.inflate(
-                        LayoutInflater.from(parent.context), parent, false
-                    )
+                fun create(parent: ViewGroup, onItemClick: () -> Unit) = EmptyState(
+                        binding = RealEstateEmptyStateItemBinding.inflate(
+                                LayoutInflater.from(parent.context), parent, false
+                        ),
+                        onItemClick = onItemClick
                 )
             }
         }
