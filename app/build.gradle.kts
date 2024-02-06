@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -23,12 +22,17 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        debug {
+            isDebuggable = true
         }
     }
     compileOptions {

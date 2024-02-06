@@ -16,6 +16,7 @@ class AddFormViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var chip: String? = null
+    private var address: String? = null
     private var price: String? = null
     private var flourArea: String? = null
     private var description: String? = null
@@ -35,13 +36,18 @@ class AddFormViewModel @Inject constructor(
                         numberOfRooms = 4,
                         description = description ?: "non communiqué",
                         photo = "",
-                        address = "",
+                        address = address ?: "non communiqué",
                         status = "",
                         upForSaleDate = onSaleDateChangeLiveData.toString(),
                         dateOfSale = onSolDateChangeLiveData.toString(),
                         realEstateAgent = null,
                 )
         )
+    }
+
+
+    fun onAddressChanged(address: String?) {
+        this.address = address
     }
 
     fun onTextPriceChanged(price: String?) {

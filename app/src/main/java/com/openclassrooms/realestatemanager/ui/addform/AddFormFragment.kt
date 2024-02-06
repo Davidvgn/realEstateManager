@@ -8,6 +8,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.openclassrooms.realestatemanager.BuildConfig
+import com.google.android.gms.common.api.Status
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
@@ -30,32 +36,55 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!Places.isInitialized()) {
+            context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
+        }
 
         activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
-                ?.commit()
+            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
+            ?.commit()
+
+
+
 
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
         val addPictureFromLibrary =
-                registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
-                }
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+            }
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            viewModel.onDateChanged(dayOfMonth, monthOfYear, year)
+        val autocompleteFragment =
+            childFragmentManager.findFragmentById(R.id.add_realEstate_autocomplete_fragment)
+                    as AutocompleteSupportFragment
 
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, monthOfYear)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS))
 
-            minSoldDate = calendar.timeInMillis
-        }
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+               viewModel.onAddressChanged(place.address)
+            }
 
-        val soldDateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            viewModel.onSoldDateChanged(dayOfMonth, monthOfYear, year)
-        }
+            override fun onError(status: Status) {
+            }
+        })
+
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                viewModel.onDateChanged(dayOfMonth, monthOfYear, year)
+
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, monthOfYear)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                minSoldDate = calendar.timeInMillis
+            }
+
+        val soldDateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                viewModel.onSoldDateChanged(dayOfMonth, monthOfYear, year)
+            }
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
             getSelectedText(chipGroup, i)
@@ -75,9 +104,9 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
         binding.buttonPhoto.setOnClickListener {
             addPictureFromLibrary.launch(
-                    PickVisualMediaRequest(
-                            ActivityResultContracts.PickVisualMedia.ImageOnly
-                    )
+                PickVisualMediaRequest(
+                    ActivityResultContracts.PickVisualMedia.ImageOnly
+                )
             )
         }
 
@@ -102,10 +131,10 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             val day = c[Calendar.DAY_OF_MONTH] // current day
             val datePickerDialog = context?.let {
                 DatePickerDialog(
-                        it, dateSetListener,
-                        year,
-                        month,
-                        day
+                    it, dateSetListener,
+                    year,
+                    month,
+                    day
                 )
             }
 
@@ -124,10 +153,10 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             val day = c[Calendar.DAY_OF_MONTH] // current day
             val datePickerDialog = context?.let {
                 DatePickerDialog(
-                        it, soldDateSetListener,
-                        year,
-                        month,
-                        day
+                    it, soldDateSetListener,
+                    year,
+                    month,
+                    day
                 )
             }
             datePickerDialog?.datePicker?.minDate = minSoldDate
