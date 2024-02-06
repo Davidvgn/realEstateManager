@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui
+package com.openclassrooms.realestatemanager.ui.details
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RealEstateDetailsFragment: Fragment(R.layout.real_estate_details_fragment) {
+class RealEstateDetailsFragment: Fragment(R.layout.details_real_estate_fragment) {
 
     companion object {
         fun newInstance() = RealEstateDetailsFragment()

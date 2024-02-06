@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RealEstatesViewModel @Inject constructor(
-    getRealEstatesListUseCase: GetRealEstatesListUseCase
+    getRealEstatesListUseCase: GetRealEstatesListUseCase,
 ) : ViewModel() {
 
     val list: List<RealEstatesViewSateItem> = emptyList()

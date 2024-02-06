@@ -5,6 +5,7 @@ import com.openclassrooms.realestatemanager.domain.real_estates.RealEstatesRepos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,5 +23,8 @@ class RealEstateRepositoryRoom @Inject constructor(
 
     override fun getRealEstatesAsFlow(): Flow<List<RealEstateEntity>> =
         realEstateDao.getRealEstatesAsFlow().flowOn(Dispatchers.IO)
+
+    override fun isListEmptyAsFlow(): Flow<Boolean> =
+        realEstateDao.getRealEstatesAsFlow().map { list -> list.isEmpty() }
 
 }

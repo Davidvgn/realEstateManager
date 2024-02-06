@@ -6,4 +6,6 @@ interface RealEstatesRepository {
 
     suspend fun add(realEstateEntity: RealEstateEntity)
     fun getRealEstatesAsFlow(): Flow<List<RealEstateEntity>>
+
+    fun isListEmptyAsFlow(): Flow<Boolean>
 }
