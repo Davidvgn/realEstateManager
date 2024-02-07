@@ -34,6 +34,8 @@ class RealEstatesFragment : Fragment(R.layout.real_estates_fragment) {
         }
     }
 
+
+
     private fun navigateToAddRealEstateActivity() {
         val intent = Intent(activity, AddRealEstateActivity::class.java)
         startActivity(intent)
