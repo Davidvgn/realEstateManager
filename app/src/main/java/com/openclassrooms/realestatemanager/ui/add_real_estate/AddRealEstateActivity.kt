@@ -5,8 +5,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commitNow
 import com.openclassrooms.realestatemanager.databinding.AddRealEstateActivityBinding
-import com.openclassrooms.realestatemanager.ui.addform.AddFormFragment
-import com.openclassrooms.realestatemanager.ui.addform.AddFormConfirmationDialog
+import com.openclassrooms.realestatemanager.ui.add_form.AddFormFragment
+import com.openclassrooms.realestatemanager.ui.add_form.AddFormConfirmationDialog
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 

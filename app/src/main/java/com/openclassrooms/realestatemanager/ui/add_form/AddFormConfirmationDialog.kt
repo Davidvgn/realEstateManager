@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.addform
+package com.openclassrooms.realestatemanager.ui.add_form
 
 import android.os.Bundle
 import android.view.View

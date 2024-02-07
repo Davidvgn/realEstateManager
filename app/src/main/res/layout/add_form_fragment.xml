@@ -139,31 +139,31 @@
                 android:id="@+id/radio_button_1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="1" />
+                android:text="@string/one" />
 
             <RadioButton
                 android:id="@+id/radio_button_2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="2" />
+                android:text="@string/two" />
 
             <RadioButton
                 android:id="@+id/radio_button_3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="3" />
+                android:text="@string/three" />
 
             <RadioButton
                 android:id="@+id/radio_button_4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="4" />
+                android:text="@string/four" />
 
             <RadioButton
                 android:id="@+id/radio_button_5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="5+" />
+                android:text="@string/five_and_more" />
         </RadioGroup>
 
         <androidx.cardview.widget.CardView
@@ -178,11 +178,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/radioGroup">
 
-            <androidx.fragment.app.FragmentContainerView android:id="@+id/add_realEstate_autocomplete_fragment"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/add_realEstate_autocomplete_fragment"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                />
+                tools:layout="@layout/support_simple_spinner_dropdown_item" />
 
         </androidx.cardview.widget.CardView>
 

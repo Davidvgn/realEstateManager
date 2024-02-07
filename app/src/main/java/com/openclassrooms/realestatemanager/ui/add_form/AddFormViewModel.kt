@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.addform
+package com.openclassrooms.realestatemanager.ui.add_form
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.addform
+package com.openclassrooms.realestatemanager.ui.add_form
 
 data class AddRealEstateViewState(
     val type: String?,

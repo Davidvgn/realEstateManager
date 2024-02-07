@@ -70,6 +70,12 @@
     <string name="date">%1$s/%2$s/%3$s</string>
     <string name="location">Adresse</string>
 
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five_and_more">5+</string>
+
 
 
 </resources>

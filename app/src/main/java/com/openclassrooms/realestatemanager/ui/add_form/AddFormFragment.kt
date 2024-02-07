@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.addform
+package com.openclassrooms.realestatemanager.ui.add_form
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -43,9 +43,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
-
-
-
 
         val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
