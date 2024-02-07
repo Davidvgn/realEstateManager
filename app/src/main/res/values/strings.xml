@@ -74,5 +74,7 @@
     <string name="five_and_more">5+</string>
     <string name="adress">Address</string>
     <string name="app_icon">Application Icon</string>
+    <string name="no_picture">No Picture</string>
+    <string name="no_picture_icon">No Picture Icon</string>
 
 </resources>

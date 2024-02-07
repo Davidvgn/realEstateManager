@@ -9,9 +9,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:paddingBottom="32dp"
+        android:paddingTop="4dp"
         tools:context=".ui.add_real_estate.AddRealEstateActivity">
-
 
         <TextView
             android:id="@+id/add_form_textView_type_title"
@@ -98,8 +99,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="@string/Status"
             android:textColor="@color/title"
+            android:hint="@string/Status"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
