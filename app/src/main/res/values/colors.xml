@@ -3,4 +3,6 @@
     <color name="colorPrimary">@color/green</color>
     <color name="colorPrimaryDark">@color/dark_green</color>
     <color name="colorAccent">@color/white</color>
+    <color name="background_color">@color/egg_shell</color>
+    <color name="title">@color/black</color>
 </resources>

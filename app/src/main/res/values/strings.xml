@@ -17,13 +17,13 @@
 
     <!--Add RealEstate Fragment xml -->
     <string name="add_new">Add new</string>
-    <string name="type">Type :</string>
+    <string name="type">Type</string>
     <string name="price">Price</string>
     <string name="floorArea">Floor Area</string>
-    <string name="number_of_rooms">Number of Rooms :</string>
+    <string name="number_of_rooms">Number of Rooms</string>
     <string name="description">Description</string>
     <string name="address">Address</string>
-    <string name="poi">Point of Interest :</string>
+    <string name="poi">Point of Interest</string>
     <string name="Status">Status</string>
     <string name="date_of_sale">Date of sale</string>
     <string name="sold_date">Sold Date</string>
@@ -72,5 +72,6 @@
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five_and_more">5+</string>
+    <string name="adress">Address</string>
 
 </resources>

@@ -83,7 +83,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
                 viewModel.onSoldDateChanged(dayOfMonth, monthOfYear, year)
             }
 
-        binding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
+        binding.addFormChipGroupType.setOnCheckedChangeListener { chipGroup, i ->
             getSelectedText(chipGroup, i)
             viewModel.onTypeChanged(getSelectedText(chipGroup, i))
         }

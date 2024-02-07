@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/egg_shell">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,172 +12,223 @@
         android:paddingBottom="32dp"
         tools:context=".ui.add_real_estate.AddRealEstateActivity">
 
+
         <TextView
-            android:id="@+id/add_form_type_title"
+            android:id="@+id/add_form_textView_type_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:text="@string/type"
+            android:textColor="@color/title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_form_cardView_type"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            app:chipSpacingHorizontal="24dp"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_type_title"
-            app:singleSelection="true">
+            app:layout_constraintTop_toBottomOf="@id/add_form_textView_type_title">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_house"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/add_form_chipGroup_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/house" />
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                app:chipSpacingHorizontal="24dp"
+                app:singleSelection="true">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_flat"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/flat" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/add_form_chip_house"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/house" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_loft"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/loft" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/add_form_chip_flat"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/flat" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_duplex"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/duplex" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/add_form_chip_loft"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loft" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_land"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/land" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/add_form_chip_duplex"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/duplex" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_other"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/other" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/add_form_chip_land"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/land" />
 
-        </com.google.android.material.chip.ChipGroup>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/add_form_chip_other"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/other" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/add_realEstate_TextView_status"
+            android:id="@+id/add_realEstate_TextView_title_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:hint="@string/Status"
+            android:textColor="@color/title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chipGroup" />
+            app:layout_constraintTop_toBottomOf="@id/add_form_cardView_type" />
 
-
-        <RadioGroup
-            android:id="@+id/radioGroup_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checkedButton="@+id/radio_button_1"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_status">
-
-            <RadioButton
-                android:id="@+id/radio_button_to_sale"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:text="@string/forSale" />
-
-            <RadioButton
-                android:id="@+id/radio_button_sold"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/Sold" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/add_realEstate_TextView_number_of_rooms"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="@string/number_of_rooms"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup_status" />
-
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checkedButton="@+id/radio_button_1"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_number_of_rooms">
-
-            <RadioButton
-                android:id="@+id/radio_button_1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/one" />
-
-            <RadioButton
-                android:id="@+id/radio_button_2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/two" />
-
-            <RadioButton
-                android:id="@+id/radio_button_3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/three" />
-
-            <RadioButton
-                android:id="@+id/radio_button_4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/four" />
-
-            <RadioButton
-                android:id="@+id/radio_button_5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/five_and_more" />
-        </RadioGroup>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/add_realEstate_CardView"
-
+            android:id="@+id/add_form_cardView_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup">
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_status">
+
+            <RadioGroup
+                android:id="@+id/radioGroup_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/radio_button_1"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_status">
+
+                <RadioButton
+                    android:id="@+id/radio_button_to_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:checked="true"
+                    android:text="@string/forSale" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_sold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/Sold" />
+            </RadioGroup>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/add_realEstate_TextView_title_number_of_rooms"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/number_of_rooms"
+            android:textColor="@color/title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_form_cardView_status" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_form_cardView_number_of_rooms"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_number_of_rooms">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/radio_button_1"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_number_of_rooms">
+
+                <RadioButton
+                    android:id="@+id/radio_button_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/one" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/two" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/three" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/four" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/five_and_more" />
+            </RadioGroup>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/add_realEstate_TextView_title_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/adress"
+            android:textColor="@color/title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_form_cardView_number_of_rooms" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_realEstate_CardView_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_address">
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/add_realEstate_autocomplete_fragment"
@@ -187,66 +239,84 @@
 
         </androidx.cardview.widget.CardView>
 
-
         <TextView
-            android:id="@+id/add_realEstate_TextView_POI"
+            android:id="@+id/add_realEstate_TextView_POI_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:text="@string/poi"
+            android:textColor="@color/title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CardView" />
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CardView_address" />
 
-        <CheckBox
-            android:id="@+id/add_realEstate_CheckBox_school"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_form_cardView_POI"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/school"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI" />
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI_title">
 
-        <CheckBox
-            android:id="@+id/add_realEstate_CheckBox_transportation"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/transportation"
-            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_school"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-        <CheckBox
-            android:id="@+id/add_realEstate_CheckBox_restaurant"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/restaurant"
-            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_transportation"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI" />
+                <CheckBox
+                    android:id="@+id/add_realEstate_CheckBox_school"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/school"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/add_realEstate_CheckBox_transportation"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/transportation"
+                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_school"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/add_realEstate_CheckBox_restaurant"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/restaurant"
+                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_transportation"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        <CheckBox
-            android:id="@+id/add_realEstate_CheckBox_hospitals"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/hospitals"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+                <CheckBox
+                    android:id="@+id/add_realEstate_CheckBox_hospitals"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/hospitals"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
 
-        <CheckBox
-            android:id="@+id/add_realEstate_CheckBox_pharmacie"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/pharmacie"
-            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_hospitals"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+                <CheckBox
+                    android:id="@+id/add_realEstate_CheckBox_pharmacie"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/pharmacie"
+                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_hospitals"
+                    app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
 
-        <CheckBox
-            android:id="@+id/add_realEstate_CheckBox_shops"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/shops"
-            app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_pharmacie"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+                <CheckBox
+                    android:id="@+id/add_realEstate_CheckBox_shops"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/shops"
+                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_pharmacie"
+                    app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
         <FrameLayout
             android:id="@+id/photo_list_fragment_container"
@@ -254,7 +324,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_realEstate_CheckBox_shops" />
+            app:layout_constraintTop_toBottomOf="@+id/add_form_cardView_POI" />
 
         <Button
             android:id="@+id/button_photo"
@@ -270,11 +340,12 @@
             app:layout_constraintTop_toBottomOf="@id/photo_list_fragment_container" />
 
         <TextView
-            android:id="@+id/add_realEstate_TextView_dateOfSale"
+            android:id="@+id/add_realEstate_TextView_date_of_sale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:text="@string/date_of_sale"
+            android:textColor="@color/title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -285,21 +356,22 @@
             android:id="@+id/create_task_TextInputEditText_dateOfSale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="16dp"
             android:focusableInTouchMode="false"
             android:hint="@string/unspecified"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_dateOfSale" />
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_date_of_sale" />
 
 
         <TextView
-            android:id="@+id/add_realEstate_TextView_closingDate"
+            android:id="@+id/add_realEstate_TextView_title_closingDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
             android:text="@string/sold_date"
+            android:textColor="@color/title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -310,13 +382,12 @@
             android:id="@+id/create_task_TextInputEditText_closing_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="16dp"
             android:focusableInTouchMode="false"
             android:hint="@string/unspecified"
+            android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_closingDate" />
+            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_closingDate" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -324,7 +395,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -334,6 +405,7 @@
                 android:id="@+id/add_realEstate_TextInputEditText_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:hint="@string/price"
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -345,6 +417,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_price">
@@ -353,6 +426,7 @@
                 android:id="@+id/add_realEstate_TextInputEditText_surface"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:hint="@string/floorArea"
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -374,6 +448,7 @@
                 android:id="@+id/create_task_TextInputEditText_real_estate_agent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/white"
                 android:hint="@string/Agent"
                 android:inputType="textAutoComplete" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -394,6 +469,7 @@
                 android:id="@+id/add_realEstate_TextInputEditText_description"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:background="@color/white"
                 android:gravity="start|top"
                 android:hint="@string/description"
                 android:inputType="textMultiLine"
