@@ -6,4 +6,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="egg_shell">#ede5e7</color>
     <color name="black">#000000</color>
+    <color name="house_background">#FDFCFD</color>
+
+
 </resources>
