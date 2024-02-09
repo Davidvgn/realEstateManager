@@ -5,8 +5,8 @@
     <item
         android:id="@+id/operations_menu_add"
         android:icon="@drawable/ic_baseline_add_24"
-        android:title="@string/add_realestate"
-        app:showAsAction="ifRoom|collapseActionView"
+        android:title="@string/add_real_estate"
+        app:showAsAction="ifRoom"
 
         />
 
@@ -14,16 +14,29 @@
     <item
         android:id="@+id/operations_menu_edit"
         android:icon="@drawable/ic_baseline_mode_edit_24"
-        android:title="@string/edit_realestate"
+        android:title="@string/edit_real_estate"
         android:visible="false"
-        app:showAsAction="ifRoom|collapseActionView"
+        app:showAsAction="ifRoom"
         />
 
     <item
-        android:id="@+id/operations_menu_search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/search"
-        app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"
+        android:id="@+id/operations_menu_filter"
+        android:icon="@drawable/baseline_filter_list_24"
+        android:title="@string/filter"
+        app:showAsAction="ifRoom"
         />
+
+    <!-- todo david : rendre visible que quand filtre a été activé-->
+    <item
+        android:id="@+id/operations_menu_filter_off"
+        android:icon="@drawable/baseline_filter_list_off_24"
+        android:title="@string/filter_off"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/baseline_app_settings_alt_24"
+        app:showAsAction="ifRoom" />
 </menu>

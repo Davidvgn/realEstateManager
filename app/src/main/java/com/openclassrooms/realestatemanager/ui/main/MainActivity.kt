@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.operations_menu, menu)
-        menuInflater.inflate(R.menu.navigation_menu, menu)
 
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         viewModel.onPermissionUpdated()
     }
 }
