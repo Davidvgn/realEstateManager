@@ -18,23 +18,12 @@ class MapFragment : SupportMapFragment() {
         fun newInstance() = MapFragment()
     }
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        viewModel.onPermissionUpdated()
-    }
-
     private val viewModel by viewModels<MapViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getMapAsync { googleMap ->
-            requestPermissionLauncher.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            )
-
             viewModel.viewActionLiveData.observeEvent(viewLifecycleOwner) {
                 when (it) {
                     is MapViewAction.ZoomTo -> {
@@ -49,65 +38,4 @@ class MapFragment : SupportMapFragment() {
             }
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-
-        viewModel.onPermissionUpdated()
-    }
 }
-
-//    companion object {
-//        fun newInstance() = MapFragment()
-//    }
-//
-//    private val viewModel by viewModels<MapViewModel>()
-//
-//    @SuppressLint("MissingPermission")
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//
-//
-//
-//
-//        ActivityCompat.requestPermissions(
-//            requireActivity(),
-//            arrayOf(
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ), 0
-//        )
-//
-//        getMapAsync { googleMap ->
-//
-//            viewModel.viewActionLiveData.observeEvent(viewLifecycleOwner) {
-//                when (it) {
-//                    is MapViewAction.ZoomTo -> {
-//                        val latLng = LatLng(it.lat, it.long)
-//                        googleMap.animateCamera(
-//                            CameraUpdateFactory.newLatLngZoom(
-//                                latLng, 15F
-//                            )
-//                        )
-//                    }
-//                }
-//            }
-
-//            viewModel.viewActionLiveData.observe(viewLifecycleOwner) { event ->
-//                event.getContentIfNotHandled()?.let { mapViewAction ->
-//                    when (mapViewAction) {
-//                        is MapViewAction.ZoomTo -> {
-//                            val latLng = LatLng(mapViewAction.lat, mapViewAction.long)
-//                            googleMap.animateCamera(
-//                                CameraUpdateFactory.newLatLngZoom(
-//                                    latLng, 15F
-//                                )
-//                            )
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}

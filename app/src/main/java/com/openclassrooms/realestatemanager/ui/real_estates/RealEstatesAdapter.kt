@@ -35,7 +35,7 @@ class RealEstatesAdapter(private val onItemClick: () -> Unit) : ListAdapter<Real
                 RealEstatesViewHolder(binding.root) {
 
             init {
-                binding.realEstateEmptyStateButton?.setOnClickListener {
+                binding.realEstateEmptyStateButton.setOnClickListener {
                     onItemClick.invoke()
                 }
             }

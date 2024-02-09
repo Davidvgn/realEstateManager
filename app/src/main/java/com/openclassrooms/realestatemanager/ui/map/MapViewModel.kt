@@ -17,7 +17,6 @@ import javax.inject.Inject
 class MapViewModel @Inject constructor(
     private val getGpsLocationUseCase: GetGpsLocationUseCase,
     private val isLocationPermissionsGrantedUseCase: IsLocationPermissionsGrantedUseCase,
-    private val refreshPermissionsUseCase: RefreshPermissionsUseCase,
 ) : ViewModel() {
 
     private var hasUserScrolledMap = false
@@ -42,8 +41,5 @@ class MapViewModel @Inject constructor(
         }
     }
 
-    fun onPermissionUpdated() {
-        refreshPermissionsUseCase.invoke()
-    }
 }
 

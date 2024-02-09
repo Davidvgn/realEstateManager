@@ -62,7 +62,7 @@
     <string name="unspecified">Non spécifié</string>
 
     <string name="add_pictures">Ajouter une photo</string>
-    <string name="no_realestate">Aucun Biens immobiliers</string>
+    <string name="no_realestate">Aucun Biens \n immobiliers</string>
 
     <string name="Sold">Vendu</string>
     <string name="forSale">En vente</string>
@@ -76,8 +76,8 @@
     <string name="four">4</string>
     <string name="five_and_more">5+</string>
     <string name="adress">Adresse</string>
-
-
-
+    <string name="app_icon">Icône de l\'application</string>
+    <string name="no_picture">Aucune Photo</string>
+    <string name="no_picture_icon">No Picture Icon</string>
 
 </resources>

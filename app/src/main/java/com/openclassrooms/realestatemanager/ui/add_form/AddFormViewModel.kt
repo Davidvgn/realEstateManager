@@ -30,13 +30,13 @@ class AddFormViewModel @Inject constructor(
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
         addRealEstateUseCase.invoke(
                 realEstate = RealEstateEntity(
-                        type = chip ?: "non communiqué",
-                        salePrice = price ?: "non communiqué",
-                        floorArea = flourArea ?: "non communiqué",
+                        type = chip ?: "Préciser le type",
+                        salePrice = price ?: "Préciser le prix",
+                        floorArea = flourArea ?: "Préciser la surface",
                         numberOfRooms = 4,
-                        description = description ?: "non communiqué",
+                        description = description ?: "Ajouter une description",
                         photo = "",
-                        address = address ?: "non communiqué",
+                        address = address ?: "Précisez l'adresse",
                         status = "",
                         upForSaleDate = onSaleDateChangeLiveData.toString(),
                         dateOfSale = onSolDateChangeLiveData.toString(),
