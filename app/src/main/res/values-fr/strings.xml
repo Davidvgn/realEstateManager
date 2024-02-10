@@ -82,5 +82,9 @@
     <string name="no_picture">Aucune Photo</string>
     <string name="no_picture_icon">No Picture Icon</string>
 
+    <string name="currency">Devise</string>
+    <string name="euros">Euros</string>
+    <string name="dollars">Dollars</string>
+
 
 </resources>

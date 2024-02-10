@@ -14,6 +14,7 @@ import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
+import com.openclassrooms.realestatemanager.ui.settings.SettingsActivity
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,6 +68,13 @@ class MainActivity : AppCompatActivity() {
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {
             val intent = Intent(this, AddRealEstateActivity::class.java)
+            startActivity(intent)
+            true
+        }
+
+        val settingsItem: MenuItem = menu.findItem(R.id.settings)
+        settingsItem.setOnMenuItemClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
             true
         }

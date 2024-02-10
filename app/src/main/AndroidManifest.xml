@@ -21,7 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealEstateManager.NoActionBar"
         >
-
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.openclassrooms.realestatemanager.androidx-startup"
@@ -42,7 +41,10 @@
         <activity
             android:name="com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity"
             android:parentActivityName=".ui.main.MainActivity"
-
+            />
+        <activity
+            android:name="com.openclassrooms.realestatemanager.ui.settings.SettingsActivity"
+            android:parentActivityName=".ui.main.MainActivity"
             />
     </application>
 </manifest>
