@@ -34,9 +34,11 @@
     <string name="Agent">Nom du Vendeur</string>
 
     <!--Operations menu -->
-    <string name="add_realestate">Ajouter un bien</string>
-    <string name="edit_realestate">Modifier un bien</string>
-    <string name="search">Rechercher un bien</string>
+    <string name="add_real_estate">Ajouter un bien</string>
+    <string name="edit_real_estate">Modifier un bien</string>
+    <string name="filter_off">Retirer le filtre</string>
+    <string name="settings">Paramêtres</string>
+    <string name="filter">Filtrer</string>
 
     <!--add form menu -->
     <string name="save_button">sauvegarder</string>
@@ -53,7 +55,7 @@
     <string name="shops">Magasins</string>
     <string name="hospitals">Hopital</string>
     <string name="restaurant">Restaurants</string>
-    <string name="pharmacie">Pharmacie</string>
+    <string name="pharmacy">Pharmacie</string>
 
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
@@ -79,5 +81,10 @@
     <string name="app_icon">Icône de l\'application</string>
     <string name="no_picture">Aucune Photo</string>
     <string name="no_picture_icon">No Picture Icon</string>
+
+    <string name="currency">Devise</string>
+    <string name="euros">Euros</string>
+    <string name="dollars">Dollars</string>
+
 
 </resources>

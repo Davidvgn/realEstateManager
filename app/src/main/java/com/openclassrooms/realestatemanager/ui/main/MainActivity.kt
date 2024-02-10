@@ -14,6 +14,7 @@ import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
+import com.openclassrooms.realestatemanager.ui.settings.SettingsActivity
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,11 +64,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.operations_menu, menu)
-        menuInflater.inflate(R.menu.navigation_menu, menu)
 
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {
             val intent = Intent(this, AddRealEstateActivity::class.java)
+            startActivity(intent)
+            true
+        }
+
+        val settingsItem: MenuItem = menu.findItem(R.id.settings)
+        settingsItem.setOnMenuItemClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
             true
         }
@@ -77,7 +84,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         viewModel.onPermissionUpdated()
     }
 }

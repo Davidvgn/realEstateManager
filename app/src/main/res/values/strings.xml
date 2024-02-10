@@ -30,10 +30,12 @@
     <string name="Agent">Agent</string>
 
     <!--Operations menu -->
-    <string name="add_realestate">Add Real Estate</string>
-    <string name="edit_realestate">Edit Real Estate</string>
-    <string name="search">Find A Real Estate</string>
+    <string name="add_real_estate">Add Real Estate</string>
+    <string name="edit_real_estate">Edit Real Estate</string>
+    <string name="filter_off">Filter off</string>
     <string name="cancel">Cancel</string>
+    <string name="settings">settings</string>
+    <string name="filter">filter</string>
 
     <!--add form menu -->
     <string name="save_button">save</string>
@@ -50,7 +52,7 @@
     <string name="shops">Shops</string>
     <string name="hospitals">Hospitals</string>
     <string name="restaurant">Restaurants</string>
-    <string name="pharmacie">Pharmacie</string>
+    <string name="pharmacy">Pharmacy</string>
 
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
@@ -76,5 +78,10 @@
     <string name="app_icon">Application Icon</string>
     <string name="no_picture">No Picture</string>
     <string name="no_picture_icon">No Picture Icon</string>
+
+    <string name="currency">Currency</string>
+    <string name="euros">Euros</string>
+    <string name="dollars">Dollars</string>
+
 
 </resources>

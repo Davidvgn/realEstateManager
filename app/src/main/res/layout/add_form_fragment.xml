@@ -305,7 +305,7 @@
                     android:id="@+id/add_realEstate_CheckBox_pharmacie"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="@string/pharmacie"
+                    android:text="@string/pharmacy"
                     app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_hospitals"
                     app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
 
@@ -484,7 +484,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/add_realestate"
+            android:hint="@string/add_real_estate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
