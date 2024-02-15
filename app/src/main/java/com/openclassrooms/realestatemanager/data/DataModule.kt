@@ -4,7 +4,7 @@ import android.app.Application
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
-import com.openclassrooms.realestatemanager.data.realEstates.RealEstateDao
+import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
 import com.openclassrooms.realestatemanager.data.dao.UserDao
 import dagger.Module
 import dagger.Provides
