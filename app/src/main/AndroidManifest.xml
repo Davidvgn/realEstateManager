@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:name=".MainApplication"
@@ -46,5 +48,15 @@
             android:name="com.openclassrooms.realestatemanager.ui.settings.SettingsActivity"
             android:parentActivityName=".ui.main.MainActivity"
             />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.openclassrooms.realestatemanager.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider" />
+        </provider>
+
     </application>
 </manifest>
