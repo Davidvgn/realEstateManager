@@ -12,7 +12,7 @@
         android:layout_margin="8dp"
         android:paddingBottom="32dp"
         android:paddingTop="4dp"
-        tools:context=".ui.filter.FilterActivity">
+        tools:context=".ui.filter.FilterFragment">
 
         <TextView
             android:id="@+id/filter_form_textView_type_title"

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
+import com.openclassrooms.realestatemanager.ui.filter.FilterFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
 import com.openclassrooms.realestatemanager.ui.settings.SettingsActivity
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
     }
 
     private fun displayFragment(fragment: Fragment) {
@@ -69,6 +71,12 @@ class MainActivity : AppCompatActivity() {
         addItem.setOnMenuItemClickListener {
             val intent = Intent(this, AddRealEstateActivity::class.java)
             startActivity(intent)
+            true
+        }
+
+        val filterItem: MenuItem = menu.findItem(R.id.operations_menu_filter)
+        filterItem.setOnMenuItemClickListener {
+            displayFragment(FilterFragment.newInstance())
             true
         }
 
