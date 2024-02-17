@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.data.pictures
 
+import android.database.Cursor
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -13,4 +14,7 @@ interface PicturesDao {
 
     @Query("SELECT * FROM pictures")//todo david selectionner des photos en fonction de l'annonce
     fun getPicturesAsFlow(): Flow<List<PicturesEntity>>
+
+    @Query("SELECT * FROM pictures")
+    fun getAllPicturesWithCursor(): Cursor
 }
