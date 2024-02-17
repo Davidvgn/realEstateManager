@@ -354,7 +354,7 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_task_TextInputEditText_dateOfSale"
+            android:id="@+id/add_form_TextInputEditText_dateOfSale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -376,11 +376,11 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_dateOfSale" />
+            app:layout_constraintTop_toBottomOf="@id/add_form_TextInputEditText_dateOfSale" />
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_task_TextInputEditText_closing_date"
+            android:id="@+id/add_form_TextInputEditText_closing_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -400,7 +400,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_task_TextInputEditText_closing_date">
+            app:layout_constraintTop_toBottomOf="@id/add_form_TextInputEditText_closing_date">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_realEstate_TextInputEditText_price"
@@ -446,7 +446,7 @@
             app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_surface">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/create_task_TextInputEditText_real_estate_agent"
+                android:id="@+id/add_form_TextInputEditText_real_estate_agent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
