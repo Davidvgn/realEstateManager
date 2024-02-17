@@ -24,7 +24,7 @@ class AddFormViewModel @Inject constructor(
     private val onSaleDateChangeMutableLiveData = MutableLiveData<String>()
     val onSaleDateChangeLiveData: LiveData<String> = onSaleDateChangeMutableLiveData
     private val onSoldDateChangeMutableLiveData = MutableLiveData<String>()
-    val onSolDateChangeLiveData: LiveData<String> = onSoldDateChangeMutableLiveData
+    val onSoldDateChangeLiveData: LiveData<String> = onSoldDateChangeMutableLiveData
 
     //todo david texte en dur
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
@@ -39,7 +39,7 @@ class AddFormViewModel @Inject constructor(
                         address = address ?: "Précisez l'adresse",
                         status = "",
                         upForSaleDate = onSaleDateChangeLiveData.toString(),
-                        dateOfSale = onSolDateChangeLiveData.toString(),
+                        dateOfSale = onSoldDateChangeLiveData.toString(),
                         realEstateAgent = null,
                 )
         )
