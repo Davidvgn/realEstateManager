@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
-import com.openclassrooms.realestatemanager.data.realEstates.RealEstateDao
+import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
 import com.openclassrooms.realestatemanager.data.dao.UserDao
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import com.openclassrooms.realestatemanager.domain.UserEntity
