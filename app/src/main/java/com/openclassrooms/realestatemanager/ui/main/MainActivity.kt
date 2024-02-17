@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
+import com.openclassrooms.realestatemanager.ui.filter.FilterFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
 import com.openclassrooms.realestatemanager.ui.settings.SettingsActivity
@@ -49,8 +50,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bottom_nav_list -> displayFragment(RealEstateHomeFragment.newInstance())
-                R.id.bottom_nav_map -> displayFragment(MapFragment.newInstance())
+                R.id.bottom_nav_list -> {displayFragment(RealEstateHomeFragment.newInstance())
+                    binding.mainToolbar.setTitle(R.string.RealEstate)
+                }
+                R.id.bottom_nav_map -> {
+                    displayFragment(MapFragment.newInstance())
+                    binding.mainToolbar.setTitle(R.string.Map)
+
+                }
             }
             true
         }
@@ -69,6 +76,13 @@ class MainActivity : AppCompatActivity() {
         addItem.setOnMenuItemClickListener {
             val intent = Intent(this, AddRealEstateActivity::class.java)
             startActivity(intent)
+            true
+        }
+
+        val filterItem: MenuItem = menu.findItem(R.id.operations_menu_filter)
+        filterItem.setOnMenuItemClickListener {
+            displayFragment(FilterFragment.newInstance())
+            binding.mainToolbar.setTitle(R.string.filterTitle)
             true
         }
 

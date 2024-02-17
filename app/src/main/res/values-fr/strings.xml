@@ -85,6 +85,11 @@
     <string name="currency">Devise</string>
     <string name="euros">Euros</string>
     <string name="dollars">Dollars</string>
+    <string name="Apply">Appliquer</string>
+    <string name="filterTitle">Filtre</string>
+    <string name="RealEstate">Real Estate Manager</string>
+    <string name="Map">Plan</string>
+
 
 
 </resources>

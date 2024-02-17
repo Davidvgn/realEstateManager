@@ -12,10 +12,10 @@
         android:layout_margin="8dp"
         android:paddingBottom="32dp"
         android:paddingTop="4dp"
-        tools:context=".ui.add_real_estate.AddRealEstateActivity">
+        tools:context=".ui.filter.FilterFragment">
 
         <TextView
-            android:id="@+id/add_form_textView_type_title"
+            android:id="@+id/filter_form_textView_type_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/add_form_cardView_type"
+            android:id="@+id/filter_form_cardView_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -35,56 +35,55 @@
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_textView_type_title">
+            app:layout_constraintTop_toBottomOf="@id/filter_form_textView_type_title">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/add_form_chipGroup_type"
+                android:id="@+id/filter_form_chipGroup_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
-                app:chipSpacingHorizontal="24dp"
-                app:singleSelection="true">
+                app:chipSpacingHorizontal="24dp">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/add_form_chip_house"
+                    android:id="@+id/filter_form_chip_house"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/house" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/add_form_chip_flat"
+                    android:id="@+id/filter_form_chip_flat"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/flat" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/add_form_chip_loft"
+                    android:id="@+id/filter_form_chip_loft"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/loft" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/add_form_chip_duplex"
+                    android:id="@+id/filter_form_chip_duplex"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/duplex" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/add_form_chip_land"
+                    android:id="@+id/filter_form_chip_land"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/land" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/add_form_chip_other"
+                    android:id="@+id/filter_form_chip_other"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,7 +94,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/add_realEstate_TextView_title_status"
+            android:id="@+id/filter_realEstate_TextView_title_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -104,11 +103,11 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_cardView_type" />
+            app:layout_constraintTop_toBottomOf="@id/filter_form_cardView_type" />
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/add_form_cardView_status"
+            android:id="@+id/filter_form_cardView_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -116,7 +115,7 @@
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_status">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextView_title_status">
 
             <RadioGroup
                 android:id="@+id/radioGroup_status"
@@ -125,7 +124,7 @@
                 android:checkedButton="@+id/radio_button_1"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_status">
+                app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextView_title_status">
 
                 <RadioButton
                     android:id="@+id/radio_button_to_sale"
@@ -144,7 +143,7 @@
 
 
         <TextView
-            android:id="@+id/add_realEstate_TextView_title_number_of_rooms"
+            android:id="@+id/filter_realEstate_TextView_title_number_of_rooms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -153,10 +152,10 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_cardView_status" />
+            app:layout_constraintTop_toBottomOf="@id/filter_form_cardView_status" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/add_form_cardView_number_of_rooms"
+            android:id="@+id/filter_form_cardView_number_of_rooms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -164,7 +163,7 @@
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_number_of_rooms">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextView_title_number_of_rooms">
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -209,39 +208,7 @@
 
 
         <TextView
-            android:id="@+id/add_realEstate_TextView_title_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/adress"
-            android:textColor="@color/title"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_cardView_number_of_rooms" />
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/add_realEstate_CardView_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_address">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/add_realEstate_autocomplete_fragment"
-                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/support_simple_spinner_dropdown_item" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/add_realEstate_TextView_POI_title"
+            android:id="@+id/filter_realEstate_TextView_POI_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -250,11 +217,11 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_CardView_address" />
+            app:layout_constraintTop_toBottomOf="@id/filter_form_cardView_number_of_rooms" />
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/add_form_cardView_POI"
+            android:id="@+id/filter_form_cardView_POI"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -262,14 +229,14 @@
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_POI_title">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextView_POI_title">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <CheckBox
-                    android:id="@+id/add_realEstate_CheckBox_school"
+                    android:id="@+id/filter_realEstate_CheckBox_school"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/school"
@@ -277,122 +244,50 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <CheckBox
-                    android:id="@+id/add_realEstate_CheckBox_transportation"
+                    android:id="@+id/filter_realEstate_CheckBox_transportation"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/transportation"
-                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_school"
+                    app:layout_constraintStart_toEndOf="@id/filter_realEstate_CheckBox_school"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <CheckBox
-                    android:id="@+id/add_realEstate_CheckBox_restaurant"
+                    android:id="@+id/filter_realEstate_CheckBox_restaurant"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/restaurant"
-                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_transportation"
+                    app:layout_constraintStart_toEndOf="@id/filter_realEstate_CheckBox_transportation"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
                 <CheckBox
-                    android:id="@+id/add_realEstate_CheckBox_hospitals"
+                    android:id="@+id/filter_realEstate_CheckBox_hospitals"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/hospitals"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+                    app:layout_constraintTop_toBottomOf="@id/filter_realEstate_CheckBox_school" />
 
                 <CheckBox
-                    android:id="@+id/add_realEstate_CheckBox_pharmacie"
+                    android:id="@+id/filter_realEstate_CheckBox_pharmacie"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/pharmacy"
-                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_hospitals"
-                    app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+                    app:layout_constraintStart_toEndOf="@id/filter_realEstate_CheckBox_hospitals"
+                    app:layout_constraintTop_toBottomOf="@id/filter_realEstate_CheckBox_school" />
 
                 <CheckBox
-                    android:id="@+id/add_realEstate_CheckBox_shops"
+                    android:id="@+id/filter_realEstate_CheckBox_shops"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/shops"
-                    app:layout_constraintStart_toEndOf="@id/add_realEstate_CheckBox_pharmacie"
-                    app:layout_constraintTop_toBottomOf="@id/add_realEstate_CheckBox_school" />
+                    app:layout_constraintStart_toEndOf="@id/filter_realEstate_CheckBox_pharmacie"
+                    app:layout_constraintTop_toBottomOf="@id/filter_realEstate_CheckBox_school" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <FrameLayout
-            android:id="@+id/photo_list_fragment_container"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_form_cardView_POI" />
-
-        <Button
-            android:id="@+id/button_photo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="64dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/add_pictures"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photo_list_fragment_container" />
-
-        <TextView
-            android:id="@+id/add_realEstate_TextView_date_of_sale"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/date_of_sale"
-            android:textColor="@color/title"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_photo" />
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/add_form_TextInputEditText_dateOfSale"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:focusableInTouchMode="false"
-            android:hint="@string/unspecified"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_date_of_sale" />
-
-
-        <TextView
-            android:id="@+id/add_realEstate_TextView_title_closingDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/sold_date"
-            android:textColor="@color/title"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_TextInputEditText_dateOfSale" />
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/add_form_TextInputEditText_closing_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:focusableInTouchMode="false"
-            android:hint="@string/unspecified"
-            android:background="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextView_title_closingDate" />
-
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_price"
+            android:id="@+id/filter_realEstate_TextInputLayout_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -400,10 +295,10 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_form_TextInputEditText_closing_date">
+            app:layout_constraintTop_toBottomOf="@id/filter_form_cardView_POI">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_price"
+                android:id="@+id/filter_realEstate_TextInputEditText_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -412,7 +307,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_surface"
+            android:id="@+id/filter_realEstate_TextInputLayout_surface"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -421,10 +316,10 @@
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_price">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_price">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_surface"
+                android:id="@+id/filter_realEstate_TextInputEditText_surface"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -434,7 +329,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_real_estate_agent"
+            android:id="@+id/filter_realEstate_TextInputLayout_real_estate_agent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -443,10 +338,10 @@
             android:bottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_surface">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_surface">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_form_TextInputEditText_real_estate_agent"
+                android:id="@+id/filter_TextInputEditText_real_estate_agent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -454,40 +349,18 @@
                 android:inputType="textAutoComplete" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_realEstate_TextInputLayout_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_real_estate_agent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_realEstate_TextInputEditText_description"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/white"
-                android:gravity="start|top"
-                android:hint="@string/description"
-                android:inputType="textMultiLine"
-                android:paddingTop="16dp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/addbutton"
+            android:id="@+id/filter_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/add_real_estate"
+            android:hint="@string/Apply"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_realEstate_TextInputLayout_description" />
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_real_estate_agent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

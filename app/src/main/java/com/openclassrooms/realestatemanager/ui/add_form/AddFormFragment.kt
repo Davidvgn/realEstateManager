@@ -44,8 +44,8 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
 
-        val saleDate: TextInputEditText = binding.createTaskTextInputEditTextDateOfSale
-        val closingSaleDate: TextInputEditText = binding.createTaskTextInputEditTextClosingDate
+        val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
+        val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
         val addPictureFromLibrary =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
