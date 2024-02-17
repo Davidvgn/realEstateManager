@@ -50,12 +50,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bottom_nav_list -> displayFragment(RealEstateHomeFragment.newInstance())
-                R.id.bottom_nav_map -> displayFragment(MapFragment.newInstance())
+                R.id.bottom_nav_list -> {displayFragment(RealEstateHomeFragment.newInstance())
+                    binding.mainToolbar.setTitle(R.string.RealEstate)
+                }
+                R.id.bottom_nav_map -> {
+                    displayFragment(MapFragment.newInstance())
+                    binding.mainToolbar.setTitle(R.string.Map)
+
+                }
             }
             true
         }
-
     }
 
     private fun displayFragment(fragment: Fragment) {
@@ -77,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         val filterItem: MenuItem = menu.findItem(R.id.operations_menu_filter)
         filterItem.setOnMenuItemClickListener {
             displayFragment(FilterFragment.newInstance())
+            binding.mainToolbar.setTitle(R.string.filterTitle)
             true
         }
 
