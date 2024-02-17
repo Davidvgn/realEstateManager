@@ -117,7 +117,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             saleDate.setText(it)
         }
 
-        viewModel.onSolDateChangeLiveData.observe(viewLifecycleOwner) {
+        viewModel.onSoldDateChangeLiveData.observe(viewLifecycleOwner) {
             closingSaleDate.setText(it)
         }
 
