@@ -36,9 +36,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!Places.isInitialized()) {
-            context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
-        }
 
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
@@ -47,19 +44,39 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
-        val addPictureFromLibrary =
-            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+
+        val imageContract =
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             }
+
+        binding.buttonPhoto.setOnClickListener {
+            imageContract.launch(
+                PickVisualMediaRequest(
+                    ActivityResultContracts.PickVisualMedia.ImageOnly
+                )
+            )
+        }
+
+
+        if (!Places.isInitialized()) {
+            context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
+        }
 
         val autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.add_realEstate_autocomplete_fragment)
                     as AutocompleteSupportFragment
 
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS))
+        autocompleteFragment.setPlaceFields(
+            listOf(
+                Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.ADDRESS
+            )
+        )
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-               viewModel.onAddressChanged(place.address)
+                viewModel.onAddressChanged(place.address)
             }
 
             override fun onError(status: Status) {
@@ -82,44 +99,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 viewModel.onSoldDateChanged(dayOfMonth, monthOfYear, year)
             }
-
-        binding.addFormChipGroupType.setOnCheckedChangeListener { chipGroup, i ->
-            getSelectedText(chipGroup, i)
-            viewModel.onTypeChanged(getSelectedText(chipGroup, i))
-        }
-
-        binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
-            viewModel.onTextPriceChanged(it?.toString())
-        }
-        binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
-            viewModel.onTextFloorAreaChanged(it?.toString())
-        }
-
-        binding.addRealEstateTextInputEditTextDescription.doAfterTextChanged {
-            viewModel.onTextDescriptionChanged(it?.toString())
-        }
-
-        binding.buttonPhoto.setOnClickListener {
-            addPictureFromLibrary.launch(
-                PickVisualMediaRequest(
-                    ActivityResultContracts.PickVisualMedia.ImageOnly
-                )
-            )
-        }
-
-        binding.addbutton.setOnClickListener {
-            viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner) {
-            }
-            activity?.finish()
-        }
-
-        viewModel.onSaleDateChangeLiveData.observe(viewLifecycleOwner) {
-            saleDate.setText(it)
-        }
-
-        viewModel.onSoldDateChangeLiveData.observe(viewLifecycleOwner) {
-            closingSaleDate.setText(it)
-        }
 
         saleDate.setOnClickListener {
             val c = Calendar.getInstance()
@@ -159,6 +138,39 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             datePickerDialog?.datePicker?.minDate = minSoldDate
             datePickerDialog?.show()
         }
+
+        viewModel.onSaleDateChangeLiveData.observe(viewLifecycleOwner) {
+            saleDate.setText(it)
+        }
+
+        viewModel.onSoldDateChangeLiveData.observe(viewLifecycleOwner) {
+            closingSaleDate.setText(it)
+        }
+
+
+        binding.addFormChipGroupType.setOnCheckedChangeListener { chipGroup, i ->
+            getSelectedText(chipGroup, i)
+            viewModel.onTypeChanged(getSelectedText(chipGroup, i))
+        }
+
+        binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
+            viewModel.onTextPriceChanged(it?.toString())
+        }
+        binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
+            viewModel.onTextFloorAreaChanged(it?.toString())
+        }
+
+        binding.addRealEstateTextInputEditTextDescription.doAfterTextChanged {
+            viewModel.onTextDescriptionChanged(it?.toString())
+        }
+
+
+        binding.addbutton.setOnClickListener {
+            viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner) {
+            }
+            activity?.finish()
+        }
+
     }
 }
 
