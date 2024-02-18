@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.openclassrooms.realestatemanager.databinding.PictureEmptyStateBinding
 import com.openclassrooms.realestatemanager.databinding.PictureItemBinding
 
@@ -15,7 +18,7 @@ class PicturesAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PicturesAdapter.PicturesViewHolder =
+    ): PicturesViewHolder =
         when (PicturesViewStateItem.Type.values()[viewType]) {
             PicturesViewStateItem.Type.EMPTY_STATE ->
                 PicturesViewHolder.EmptyState.create(parent)
@@ -23,7 +26,7 @@ class PicturesAdapter :
             PicturesViewStateItem.Type.PICTURES -> PicturesViewHolder.Pictures.create(parent)
         }
 
-    override fun onBindViewHolder(holder: PicturesAdapter.PicturesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PicturesViewHolder, position: Int) {
         when (holder){
             is PicturesViewHolder.EmptyState -> Unit
             is PicturesViewHolder.Pictures -> holder.bind(picture = getItem(position) as PicturesViewStateItem.Pictures)
@@ -57,7 +60,11 @@ class PicturesAdapter :
             }
 
             fun bind(picture: PicturesViewStateItem.Pictures) {
-
+                Glide
+                    .with(itemView.context)
+                    .load(picture.image)
+                    .transform(CenterCrop(), RoundedCorners(16))
+                    .into(binding.pictureImageView)
             }
         }
     }
