@@ -8,6 +8,8 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteException
 import android.net.Uri
 import android.util.Log
+import androidx.room.Room
+import com.openclassrooms.realestatemanager.data.AppDatabase
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
 import dagger.hilt.EntryPoint
@@ -23,37 +25,27 @@ class ContentProvider : ContentProvider() {
         addURI(AUTHORITY, "realEstate", REAL_ESTATES)
         addURI(AUTHORITY, "pictures", PICTURES)
     }
+    private lateinit var appDatabase: AppDatabase
+    private lateinit var realEstateDao: RealEstateDao
+    private lateinit var picturesDao: PicturesDao
+
 
     companion object {
         private const val AUTHORITY =
             "com.openclassrooms.realestatemanager.data.content_provider.ContentProvider"
         private const val TABLE_NAME = "RealEstate_database"
+        private const val MIME_TYPE_PREFIX = "vnd.android.cursor.dir/vnd."
 
         private const val REAL_ESTATES = 1
         private const val PICTURES = 2
     }
 
-
-    @Inject
-    lateinit var entryPoint: ContentProviderEntryPoint
-    lateinit var realEstateDao: RealEstateDao
-    lateinit var picturesDao: PicturesDao
-
     override fun onCreate(): Boolean {
-        val appContext = context?.applicationContext
-        val hiltEntryPoint =
-            appContext?.let {
-                EntryPointAccessors.fromApplication(
-                    it,
-                    ContentProviderEntryPoint::class.java
-                )
-            }
-        if (hiltEntryPoint != null) {
-            realEstateDao = hiltEntryPoint.getRealEstateDao()
-        }
-        if (hiltEntryPoint != null) {
-            picturesDao = hiltEntryPoint.getPicturesDao()
-        }
+        val appContext = context?.applicationContext ?: throw IllegalStateException("Context is null")
+
+        appDatabase = Room.databaseBuilder(appContext, AppDatabase::class.java, TABLE_NAME).build()
+        realEstateDao = appDatabase.getRealEstateDao()
+        picturesDao = appDatabase.getPicturesDao()
         return true
     }
 
@@ -87,9 +79,13 @@ class ContentProvider : ContentProvider() {
         }
     }
 
-    override fun getType(uri: Uri): String? {
-        TODO("Not yet implemented")
-    }
+    override fun getType(uri: Uri): String {
+
+        return when (uriMatcher.match(uri)) {
+            REAL_ESTATES -> "$MIME_TYPE_PREFIX$AUTHORITY.$TABLE_NAME"
+            PICTURES -> "$MIME_TYPE_PREFIX$AUTHORITY.$TABLE_NAME"
+            else -> throw IllegalArgumentException("Unknown URI: $uri")
+        }    }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         TODO("Not yet implemented")
@@ -109,13 +105,5 @@ class ContentProvider : ContentProvider() {
 
 
     }
-
-    @EntryPoint  // runtime dependency graph
-    @InstallIn(SingletonComponent::class)
-    interface ContentProviderEntryPoint {
-        fun getRealEstateDao(): RealEstateDao
-        fun getPicturesDao(): PicturesDao
-    }
-
 
 }
