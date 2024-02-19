@@ -1,9 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.map
 
-import android.Manifest
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.openclassrooms.realestatemanager.domain.location.GetGpsLocationUseCase
 import com.openclassrooms.realestatemanager.domain.permission.IsLocationPermissionsGrantedUseCase
-import com.openclassrooms.realestatemanager.domain.permission.RefreshPermissionsUseCase
 import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest

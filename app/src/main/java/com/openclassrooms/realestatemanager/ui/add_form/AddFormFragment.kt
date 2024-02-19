@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.add_form
 
 import android.app.DatePickerDialog
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,12 +44,28 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
 
-        val imageContract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        }
-        binding.buttonPhoto.setOnClickListener {
-            imageContract.launch("image/*")
+
+//Pictures
+//        val imageContract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+//        }
+//        binding.buttonPhoto.setOnClickListener {
+//            imageContract.launch("image/*")
+//        }
+//
+
+
+         val imageContract = registerForActivityResult(ActivityResultContracts.GetContent()){
+            binding.image.setImageURI(it)
         }
 
+            binding.buttonPhoto.setOnClickListener {
+                imageContract.launch("image/*")
+            }
+
+
+
+
+        //Pictures
 
         if (!Places.isInitialized()) {
             context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
