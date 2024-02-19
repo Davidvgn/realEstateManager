@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PicturesViewModel @Inject constructor(
-        getPicturesUseCase: GetPicturesUseCase
+       private val getPicturesUseCase: GetPicturesUseCase
 ) : ViewModel() {
 
     val pictureViewStateLiveData: LiveData<List<PicturesViewStateItem>> = liveData {
@@ -22,7 +22,6 @@ class PicturesViewModel @Inject constructor(
                 emit(listOf(PicturesViewStateItem.EmptyState))
             } else {
                 emit(mappedPicture)
-
             }
         }
     }

@@ -1,9 +1,9 @@
 package com.openclassrooms.realestatemanager.ui.add_form
 
 import android.app.DatePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -45,16 +45,10 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
 
-        val imageContract =
-            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            }
-
+        val imageContract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        }
         binding.buttonPhoto.setOnClickListener {
-            imageContract.launch(
-                PickVisualMediaRequest(
-                    ActivityResultContracts.PickVisualMedia.ImageOnly
-                )
-            )
+            imageContract.launch("image/*")
         }
 
 
