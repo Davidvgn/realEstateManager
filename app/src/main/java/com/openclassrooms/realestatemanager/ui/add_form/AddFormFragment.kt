@@ -2,7 +2,10 @@ package com.openclassrooms.realestatemanager.ui.add_form
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -44,28 +47,25 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
 
+        val imageContract =
+            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
 
-//Pictures
-//        val imageContract = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-//        }
-//        binding.buttonPhoto.setOnClickListener {
-//            imageContract.launch("image/*")
-//        }
-//
+                if (uris.isNotEmpty()) {
+                     for (uri in uris) {
+                         val imageView = ImageView(context)
+                         imageView.setImageURI(uri)
+                         binding.photoListFragmentContainer.addView(imageView)
+                     }
 
-
-         val imageContract = registerForActivityResult(ActivityResultContracts.GetContent()){
-            binding.image.setImageURI(it)
-        }
-
-            binding.buttonPhoto.setOnClickListener {
-                imageContract.launch("image/*")
+                } else {
+                    Log.d("PhotoPicker", "No media selected")
+                }
             }
 
 
-
-
-        //Pictures
+        binding.buttonPhoto.setOnClickListener {
+            imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
 
         if (!Places.isInitialized()) {
             context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
