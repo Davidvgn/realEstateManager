@@ -2,6 +2,6 @@ package com.openclassrooms.realestatemanager.domain.pictures
 
 import kotlinx.coroutines.flow.Flow
 
-interface PicturesRespository {
+interface PicturesRepository {
     fun getPicturesAsFlow(): Flow<List<PicturesEntity>>
 }

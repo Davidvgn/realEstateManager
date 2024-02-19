@@ -6,7 +6,7 @@ import com.openclassrooms.realestatemanager.data.pictures.PicturesRepositoryImpl
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateRepositoryRoom
 import com.openclassrooms.realestatemanager.domain.location.LocationRepository
 import com.openclassrooms.realestatemanager.domain.permission.PermissionRepository
-import com.openclassrooms.realestatemanager.domain.pictures.PicturesRespository
+import com.openclassrooms.realestatemanager.domain.pictures.PicturesRepository
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstatesRepository
 import dagger.Binds
 import dagger.Module
@@ -32,5 +32,5 @@ abstract class DataBindingModule {
 
     @Binds
     @Singleton
-    abstract fun bindPicturesRepository(impl: PicturesRepositoryImpl): PicturesRespository
+    abstract fun bindPicturesRepository(impl: PicturesRepositoryImpl): PicturesRepository
 }
