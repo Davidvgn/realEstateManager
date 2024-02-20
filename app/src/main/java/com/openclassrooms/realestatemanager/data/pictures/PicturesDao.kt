@@ -10,16 +10,14 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PicturesDao {
-    @Insert
-    suspend fun insert( picturesEntity: PicturesEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(pictures: List<PicturesEntity>)
-
+    suspend fun insert( picturesEntity: PicturesEntity)
 
     @Query("SELECT * FROM pictures")//todo david selectionner des photos en fonction de l'annonce
     fun getPicturesAsFlow(): Flow<List<PicturesEntity>>
 
     @Query("SELECT * FROM pictures")
     fun getAllPicturesWithCursor(): Cursor
+
 }

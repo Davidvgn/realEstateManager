@@ -1,18 +1,24 @@
 package com.openclassrooms.realestatemanager.ui.add_form
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
+import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
+import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import com.openclassrooms.realestatemanager.domain.real_estates.AddRealEstateUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddFormViewModel @Inject constructor(
-        private val addRealEstateUseCase: AddRealEstateUseCase,
+    private val addRealEstateUseCase: AddRealEstateUseCase,
+    private val addPicturesUseCase: AddPicturesUseCase
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -29,19 +35,19 @@ class AddFormViewModel @Inject constructor(
     //todo david texte en dur
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
         addRealEstateUseCase.invoke(
-                realEstate = RealEstateEntity(
-                        type = chip ?: "Préciser le type",
-                        salePrice = price ?: "Préciser le prix",
-                        floorArea = flourArea ?: "Préciser la surface",
-                        numberOfRooms = 4,
-                        description = description ?: "Ajouter une description",
-                        photo = "",
-                        address = address ?: "Précisez l'adresse",
-                        status = "",
-                        upForSaleDate = onSaleDateChangeLiveData.toString(),
-                        dateOfSale = onSoldDateChangeLiveData.toString(),
-                        realEstateAgent = null,
-                )
+            realEstate = RealEstateEntity(
+                type = chip ?: "Préciser le type",
+                salePrice = price ?: "Préciser le prix",
+                floorArea = flourArea ?: "Préciser la surface",
+                numberOfRooms = 4,
+                description = description ?: "Ajouter une description",
+                photo = "",
+                address = address ?: "Précisez l'adresse",
+                status = "",
+                upForSaleDate = onSaleDateChangeLiveData.toString(),
+                dateOfSale = onSoldDateChangeLiveData.toString(),
+                realEstateAgent = null,
+            )
         )
     }
 
@@ -72,6 +78,18 @@ class AddFormViewModel @Inject constructor(
 
     fun onSoldDateChanged(dayOfMonth: Int, monthOfYear: Int, year: Int) {
         onSoldDateChangeMutableLiveData.value = formatDate(dayOfMonth, monthOfYear, year)
+    }
+
+    fun addPictureFromGallery(imageUri: Uri) {
+        val pictureEntity = PicturesEntity(
+            id = 0,
+            realEstateId = null,
+            uri = imageUri.toString(),
+            description = this.description
+        )
+        viewModelScope.launch {
+            addPicturesUseCase.invoke(pictureEntity)
+        }
     }
 
 }
