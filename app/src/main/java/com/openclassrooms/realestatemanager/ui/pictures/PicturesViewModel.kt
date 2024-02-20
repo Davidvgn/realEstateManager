@@ -29,7 +29,6 @@ class PicturesViewModel @Inject constructor(
 private fun mapItem(picture: PicturesEntity) = PicturesViewStateItem.Pictures(
         id = picture.id,
         uri = picture.uri,
-        description = picture.description
 )
 
 private fun mapItemList(picturesEntities: List<PicturesEntity>): List<PicturesViewStateItem.Pictures> {

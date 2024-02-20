@@ -16,5 +16,4 @@ data class PicturesEntity(
     val id: Int,
     val realEstateId: Int?,
     val uri: String,
-    val description: String?
 )
