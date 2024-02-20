@@ -41,11 +41,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
-
-        val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
-        val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
-        var minSoldDate: Long = Calendar.getInstance().timeInMillis
-
         val imageContract =
             registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
 
@@ -58,10 +53,23 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
                 }
             }
 
-
-        binding.buttonPhoto.setOnClickListener {
-            imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        viewModel.viewStateRealEstateLiveData.observe(viewLifecycleOwner) {
         }
+
+        viewModel.newRealEstateId.observe(viewLifecycleOwner) {
+            id.let {
+
+
+                binding.buttonPhoto.setOnClickListener {
+                    imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                }
+            }
+        }
+
+
+        val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
+        val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
+        var minSoldDate: Long = Calendar.getInstance().timeInMillis
 
         if (!Places.isInitialized()) {
             context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }

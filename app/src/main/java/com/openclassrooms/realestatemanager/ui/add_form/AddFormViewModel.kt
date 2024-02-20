@@ -27,15 +27,43 @@ class AddFormViewModel @Inject constructor(
     private var flourArea: String? = null
     private var description: String? = null
 
+    private val _newRealEstateId = MutableLiveData<Long>()
+    val newRealEstateId: LiveData<Long> = _newRealEstateId
+
     private val onSaleDateChangeMutableLiveData = MutableLiveData<String>()
     val onSaleDateChangeLiveData: LiveData<String> = onSaleDateChangeMutableLiveData
     private val onSoldDateChangeMutableLiveData = MutableLiveData<String>()
     val onSoldDateChangeLiveData: LiveData<String> = onSoldDateChangeMutableLiveData
 
+
+
+    val viewStateRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
+        val newRealEstate = RealEstateEntity(
+            type = null,
+            salePrice = null,
+            floorArea = null,
+            numberOfRooms = null,
+            description = null,
+            photo = null,
+            address = null,
+            status = null,
+            upForSaleDate = null,
+            dateOfSale = null,
+            realEstateAgent = null
+        )
+        viewModelScope.launch {
+            val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
+            _newRealEstateId.value = id
+        }
+    }
+
     //todo david texte en dur
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
+        val newRealEstateId = _newRealEstateId.value ?: 0L // Valeur par défaut si newRealEstateId est null
+
         addRealEstateUseCase.invoke(
             realEstate = RealEstateEntity(
+                id = newRealEstateId,
                 type = chip ?: "Préciser le type",
                 salePrice = price ?: "Préciser le prix",
                 floorArea = flourArea ?: "Préciser la surface",
@@ -50,8 +78,6 @@ class AddFormViewModel @Inject constructor(
             )
         )
     }
-
-
     fun onAddressChanged(address: String?) {
         this.address = address
     }
@@ -81,13 +107,18 @@ class AddFormViewModel @Inject constructor(
     }
 
     fun addPictureFromGallery(imageUri: Uri) {
-        val pictureEntity = PicturesEntity(
-            id = 0,
-            realEstateId = null,
-            uri = imageUri.toString(),
-        )
-        viewModelScope.launch {
-            addPicturesUseCase.invoke(pictureEntity)
+        val newRealEstateId = _newRealEstateId.value
+        if (newRealEstateId != null) {
+            val pictureEntity = PicturesEntity(
+                id = 0,
+                realEstateId = newRealEstateId,
+                uri = imageUri.toString(),
+            )
+            viewModelScope.launch {
+                addPicturesUseCase.invoke(pictureEntity)
+            }
+        } else {
+            throw IllegalStateException("Real estate ID is null")
         }
     }
 

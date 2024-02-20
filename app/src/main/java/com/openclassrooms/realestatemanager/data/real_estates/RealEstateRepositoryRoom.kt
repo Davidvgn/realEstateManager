@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,11 +14,7 @@ class RealEstateRepositoryRoom @Inject constructor(
     private val realEstateDao: RealEstateDao,
 ) : RealEstatesRepository {
 
-
-    override suspend fun add(realEstateEntity: RealEstateEntity): Unit =
-        withContext(Dispatchers.IO) {
-            realEstateDao.insert(realEstateEntity)
-        }
+    override suspend fun add(realEstate: RealEstateEntity) = realEstateDao.insertRealEstate(realEstate)
 
     override fun getRealEstatesAsFlow(): Flow<List<RealEstateEntity>> =
         realEstateDao.getRealEstatesAsFlow().flowOn(Dispatchers.IO)

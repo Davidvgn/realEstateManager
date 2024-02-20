@@ -6,7 +6,9 @@ class AddRealEstateUseCase @Inject constructor(
     private val realEstatesRepository: RealEstatesRepository
 ) {
 
-    suspend fun invoke(realEstate: RealEstateEntity){
-        realEstatesRepository.add(realEstate)
+    suspend fun invoke(realEstate: RealEstateEntity): Long {
+        return realEstatesRepository.add(realEstate)
     }
+
+
 }
