@@ -33,8 +33,6 @@ class AddRealEstateActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         AddFormConfirmationDialog.newInstance().show(supportFragmentManager, null)
-//Todo David if yes :
-        // return super.onOptionsItemSelected(item)
         return true
 
     }

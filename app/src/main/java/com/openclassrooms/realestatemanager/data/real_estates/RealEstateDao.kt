@@ -23,4 +23,8 @@ interface RealEstateDao {
 
     @Query("SELECT * FROM realEstate")
     fun getAllPropertiesWithCursor(): Cursor
+
+    @Query("DELETE FROM realEstate WHERE id=:realEstateId")
+    suspend fun delete(realEstateId: Long): Int
+
 }
