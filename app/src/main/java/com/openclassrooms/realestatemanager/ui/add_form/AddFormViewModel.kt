@@ -85,7 +85,6 @@ class AddFormViewModel @Inject constructor(
             id = 0,
             realEstateId = null,
             uri = imageUri.toString(),
-            description = this.description
         )
         viewModelScope.launch {
             addPicturesUseCase.invoke(pictureEntity)
