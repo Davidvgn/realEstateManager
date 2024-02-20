@@ -24,7 +24,8 @@
             app:layout_constraintEnd_toStartOf="@id/picture_item_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/sample_image" />
+            tools:src="@drawable/sample_image"
+            android:contentDescription="@string/real_estate_pictures" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/picture_item_textInputLayout_title"
@@ -52,7 +53,8 @@
             android:focusable="true"
             android:src="@drawable/baseline_delete_24"
             app:layout_constraintEnd_toEndOf="@+id/picture_imageView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/delete_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -90,6 +90,9 @@
     <string name="RealEstate">Real Estate Manager</string>
     <string name="Map">Plan</string>
 
+    <string name="real_estate_pictures">Photo du bien</string>
+    <string name="delete_icon">Icone de suppression</string>
+
 
 
 </resources>
