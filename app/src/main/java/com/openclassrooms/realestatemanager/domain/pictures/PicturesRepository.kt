@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.Flow
 interface PicturesRepository {
 
     fun getPicturesAsFlow(): Flow<List<PicturesEntity>>
-    suspend fun addPictures(pictures: List<PicturesEntity>)
 
-
+    suspend fun addPicture(picturesEntity: PicturesEntity)
 }

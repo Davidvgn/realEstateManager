@@ -60,7 +60,7 @@ class PicturesAdapter :
             fun bind(picture: PicturesViewStateItem.Pictures) {
                 Glide
                     .with(itemView.context)
-                    .load(picture.image)
+                    .load(picture.uri)
                     .into(binding.pictureImageView)
             }
         }

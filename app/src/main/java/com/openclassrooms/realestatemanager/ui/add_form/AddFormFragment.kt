@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
@@ -51,12 +50,9 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
 
                 if (uris.isNotEmpty()) {
-                     for (uri in uris) {
-                         val imageView = ImageView(context)
-                         imageView.setImageURI(uri)
-                         binding.photoListFragmentContainer.addView(imageView)
-                     }
-
+                    for (uri in uris) {
+                        viewModel.addPictureFromGallery(uri)
+                    }
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
@@ -65,7 +61,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
         binding.buttonPhoto.setOnClickListener {
             imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-            }
+        }
 
         if (!Places.isInitialized()) {
             context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }

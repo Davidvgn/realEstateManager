@@ -14,7 +14,7 @@ import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 data class PicturesEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val realEstateId: Int,
-    val image: String,
-    val description: String
+    val realEstateId: Int?,
+    val uri: String,
+    val description: String?
 )
