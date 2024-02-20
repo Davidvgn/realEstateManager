@@ -86,6 +86,8 @@
     <string name="filterTitle">Filter</string>
     <string name="RealEstate">Real Estate Manager</string>
     <string name="Map">Map</string>
+    <string name="real_estate_pictures">Real Estate Pictures</string>
+    <string name="delete_icon">Delete icon</string>
 
 
 </resources>

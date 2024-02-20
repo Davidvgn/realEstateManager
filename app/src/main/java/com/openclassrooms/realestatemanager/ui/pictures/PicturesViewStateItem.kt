@@ -13,7 +13,7 @@ sealed class PicturesViewStateItem(
 
     data class Pictures
         (
-        val id: Int,
+        val id: Long,
         val uri: String,
     ): PicturesViewStateItem(Type.PICTURES)
 

@@ -15,11 +15,7 @@ class RealEstateRepositoryRoom @Inject constructor(
     private val realEstateDao: RealEstateDao,
 ) : RealEstatesRepository {
 
-
-    override suspend fun add(realEstateEntity: RealEstateEntity): Unit =
-        withContext(Dispatchers.IO) {
-            realEstateDao.insert(realEstateEntity)
-        }
+    override suspend fun add(realEstate: RealEstateEntity) = realEstateDao.insertRealEstate(realEstate)
 
     override fun getRealEstatesAsFlow(): Flow<List<RealEstateEntity>> =
         realEstateDao.getRealEstatesAsFlow().flowOn(Dispatchers.IO)
@@ -27,4 +23,7 @@ class RealEstateRepositoryRoom @Inject constructor(
     override fun isListEmptyAsFlow(): Flow<Boolean> =
         realEstateDao.getRealEstatesAsFlow().map { list -> list.isEmpty() }
 
+    override suspend fun delete(realEstateId: Long): Boolean = withContext(Dispatchers.IO){
+        realEstateDao.delete(realEstateId) == 1
+    }
 }
