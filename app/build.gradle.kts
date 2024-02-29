@@ -47,6 +47,9 @@ android {
             "-opt-in=kotlinx.coroutines.DelicateCoroutinesApi"
         )
     }
+    packaging {
+        resources.excludes.add("META-INF/*")
+    }
 }
 
 dependencies {
