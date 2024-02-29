@@ -8,16 +8,12 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteException
 import android.net.Uri
 import android.util.Log
-import androidx.room.Room
-import com.openclassrooms.realestatemanager.data.AppDatabase
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Inject
-import kotlin.math.PI
 
 class ContentProvider : ContentProvider() {
 
@@ -25,13 +21,13 @@ class ContentProvider : ContentProvider() {
         addURI(AUTHORITY, "realEstate", REAL_ESTATES)
         addURI(AUTHORITY, "pictures", PICTURES)
     }
-    private lateinit var appDatabase: AppDatabase
-    private lateinit var realEstateDao: RealEstateDao
-    private lateinit var picturesDao: PicturesDao
+
+    lateinit var realEstateDao: RealEstateDao
+    lateinit var picturesDao: PicturesDao
 
 
     companion object {
-        private const val AUTHORITY =
+         const val AUTHORITY =
             "com.openclassrooms.realestatemanager.data.content_provider.ContentProvider"
         private const val TABLE_NAME = "RealEstate_database"
         private const val MIME_TYPE_PREFIX = "vnd.android.cursor.dir/vnd."
@@ -42,10 +38,11 @@ class ContentProvider : ContentProvider() {
 
     override fun onCreate(): Boolean {
         val appContext = context?.applicationContext ?: throw IllegalStateException("Context is null")
+        val hiltEntryPoint = EntryPointAccessors.fromApplication(appContext, ContentProviderEntryPoint::class.java)
 
-        appDatabase = Room.databaseBuilder(appContext, AppDatabase::class.java, TABLE_NAME).build()
-        realEstateDao = appDatabase.getRealEstateDao()
-        picturesDao = appDatabase.getPicturesDao()
+        realEstateDao = hiltEntryPoint.getRealEstateDao()
+        picturesDao = hiltEntryPoint.getPicturesDao()
+
         return true
     }
 
@@ -56,20 +53,14 @@ class ContentProvider : ContentProvider() {
         selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
+        val match = uriMatcher.match(uri)
         return try {
-            when (uriMatcher.match(uri)) {
-                REAL_ESTATES -> {
-                    realEstateDao.getAllPropertiesWithCursor()
-                }
-
-                PICTURES -> {
-                    picturesDao.getAllPicturesWithCursor()
-                }
-
-                else -> {
-                    throw IllegalArgumentException("URI unknown: $uri")
-                }
-
+            when (match) {
+                REAL_ESTATES -> realEstateDao.getAllPropertiesWithCursor()
+                PICTURES -> picturesDao.getAllPicturesWithCursor()
+                else -> throw IllegalArgumentException("Unknown URI: $uri")
+            }.apply {
+                setNotificationUri(context?.contentResolver, uri)
             }
         } catch (e: SQLiteException) {
             Log.e("ContentProvider", "Error querying URI: $uri", e)
@@ -105,5 +96,10 @@ class ContentProvider : ContentProvider() {
 
 
     }
-
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface ContentProviderEntryPoint {
+        fun getRealEstateDao(): RealEstateDao
+        fun getPicturesDao(): PicturesDao
+    }
 }
