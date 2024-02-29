@@ -6,15 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
-import com.openclassrooms.realestatemanager.data.dao.UserDao
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
-import com.openclassrooms.realestatemanager.domain.UserEntity
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 
-@Database(entities = [UserEntity::class, RealEstateEntity::class, PicturesEntity::class], version = 1, exportSchema = false)
+@Database(entities = [RealEstateEntity::class, PicturesEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
-    abstract fun getUserDao(): UserDao
     abstract fun getRealEstateDao(): RealEstateDao
     abstract fun getPicturesDao(): PicturesDao
 

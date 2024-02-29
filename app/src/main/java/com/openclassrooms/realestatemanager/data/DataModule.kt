@@ -5,7 +5,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
-import com.openclassrooms.realestatemanager.data.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,10 +20,6 @@ class DataModule {
     fun provideAppDatabase(
         application: Application
     ): AppDatabase = AppDatabase.create(application)
-
-    @Singleton
-    @Provides
-    fun provideUserDao(appDatabase: AppDatabase): UserDao = appDatabase.getUserDao()
 
     @Singleton
     @Provides

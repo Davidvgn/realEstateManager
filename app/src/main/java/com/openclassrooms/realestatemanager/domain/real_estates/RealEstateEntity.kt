@@ -3,16 +3,8 @@ package com.openclassrooms.realestatemanager.domain.real_estates
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.openclassrooms.realestatemanager.domain.UserEntity
 
-@Entity(
-    tableName = "realEstate",
-    foreignKeys = [ForeignKey(
-        entity = UserEntity::class,
-        parentColumns = ["id"],
-        childColumns = ["realEstateAgent"],
-    )]
-)
+@Entity(tableName = "realEstate")
 data class RealEstateEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
