@@ -37,9 +37,11 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val realEstateId = viewModel.newRealEstateId.value ?: 0L
+
 
         activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
+            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance(realEstateId))
             ?.commit()
         val imageContract =
             registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->

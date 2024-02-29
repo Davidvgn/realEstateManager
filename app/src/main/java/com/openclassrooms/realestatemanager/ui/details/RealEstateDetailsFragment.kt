@@ -19,7 +19,7 @@ class RealEstateDetailsFragment: Fragment(R.layout.details_real_estate_fragment)
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && resources.getBoolean(R.bool.isTablet)) {
             activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.real_estate_details_photo_list_fragment_container, PicturesFragment.newInstance())
+                    ?.replace(R.id.real_estate_details_photo_list_fragment_container, PicturesFragment.newInstance(0L))
                     ?.commit()
         }
     }

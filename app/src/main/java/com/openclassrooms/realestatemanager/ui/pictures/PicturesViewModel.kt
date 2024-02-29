@@ -13,8 +13,10 @@ class PicturesViewModel @Inject constructor(
        private val getPicturesUseCase: GetPicturesUseCase
 ) : ViewModel() {
 
+    var realEstateId = 0L
+
     val pictureViewStateLiveData: LiveData<List<PicturesViewStateItem>> = liveData {
-        getPicturesUseCase.invoke().collect { pictureEntityList ->
+        getPicturesUseCase.invoke(realEstateId).collect { pictureEntityList ->
 
             val mappedPicture = mapItemList(pictureEntityList)
 
@@ -25,6 +27,11 @@ class PicturesViewModel @Inject constructor(
             }
         }
     }
+
+    fun getId(id: Long) {
+        realEstateId = id
+    }
+
 }
 private fun mapItem(picture: PicturesEntity) = PicturesViewStateItem.Pictures(
         id = picture.id,

@@ -14,8 +14,8 @@ interface PicturesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert( picturesEntity: PicturesEntity)
 
-    @Query("SELECT * FROM pictures")//todo david selectionner des photos en fonction de l'annonce
-    fun getPicturesAsFlow(): Flow<List<PicturesEntity>>
+    @Query("SELECT * FROM pictures WHERE realEstateId =:id")
+    fun getPicturesAsFlow(id: Long): Flow<List<PicturesEntity>>
 
     @Query("SELECT * FROM pictures")
     fun getAllPicturesWithCursor(): Cursor

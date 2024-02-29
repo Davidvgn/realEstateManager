@@ -59,7 +59,7 @@ class AddFormViewModel @Inject constructor(
 
     //todo david texte en dur
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
-        val newRealEstateId = _newRealEstateId.value ?: 0L // Valeur par défaut si newRealEstateId est null
+        val newRealEstateId = _newRealEstateId.value ?: 0L
 
         addRealEstateUseCase.invoke(
             realEstate = RealEstateEntity(

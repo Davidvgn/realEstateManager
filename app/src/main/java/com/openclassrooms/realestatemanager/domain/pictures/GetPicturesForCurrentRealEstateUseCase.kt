@@ -7,5 +7,5 @@ import javax.inject.Inject
 class GetPicturesUseCase  @Inject constructor(
     private val pictureRepository: PicturesRepository
 ){
-    fun invoke(): Flow<List<PicturesEntity>> = pictureRepository.getPicturesAsFlow()
+    fun invoke(id: Long): Flow<List<PicturesEntity>> = pictureRepository.getPicturesAsFlow(id)
 }
