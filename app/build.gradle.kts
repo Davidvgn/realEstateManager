@@ -148,11 +148,14 @@ dependencies {
     // GLIDE
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-//    // WORK
-//    implementation("androidx.work:work-runtime-ktx:2.8.1")
-//    implementation("androidx.hilt:hilt-work:1.0.0")
-//    implementation("androidx.hilt:hilt-compiler:1.0.0")
+    // WORK
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("androidx.hilt:hilt-work:1.0.0")
+    implementation("androidx.hilt:hilt-compiler:1.0.0")
+
+    implementation ("androidx.startup:startup-runtime:1.1.0")
+
 
 //    // TEST
-//    testImplementation("junit:junit:4.13.2")
+    testImplementation("junit:junit:4.13.2")
 }
