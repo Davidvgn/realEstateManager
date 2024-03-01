@@ -9,10 +9,10 @@ import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RealEstateDetailsFragment: Fragment(R.layout.details_real_estate_fragment) {
+class DetailsFragment: Fragment(R.layout.details_real_estate_fragment) {
 
     companion object {
-        fun newInstance() = RealEstateDetailsFragment()
+        fun newInstance() = DetailsFragment()
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.ui.details.DetailsEmptyFragment
-import com.openclassrooms.realestatemanager.ui.details.RealEstateDetailsFragment
+import com.openclassrooms.realestatemanager.ui.details.DetailsFragment
 import com.openclassrooms.realestatemanager.ui.real_estates.RealEstatesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +35,7 @@ class RealEstateHomeFragment : Fragment(R.layout.real_estate_home_fragment) {
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(
                         R.id.details_fragment_container,
-                        if (bool) DetailsEmptyFragment.newInstance() else RealEstateDetailsFragment.newInstance()
+                        if (bool) DetailsEmptyFragment.newInstance() else DetailsFragment.newInstance()
                     )
                     ?.commit()
 

@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
+import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
+import com.openclassrooms.realestatemanager.ui.details.DetailsViewModel
 import com.openclassrooms.realestatemanager.ui.filter.FilterFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
@@ -20,7 +22,7 @@ import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
     private val binding by viewBinding { MainActivityBinding.inflate(it) }
     private val viewModel by viewModels<MainViewModel>()
@@ -99,5 +101,14 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.onPermissionUpdated()
+    }
+
+    override fun onRealEstateClicked(realEstateId: Long) {
+        val fragment = DetailsViewModel.navigate(realEstateId)
+        supportFragmentManager.beginTransaction()
+            .replace(binding.mainFrameLayoutFragmentContainer.id, fragment)
+            .addToBackStack(null)
+            .commit()
+
     }
 }
