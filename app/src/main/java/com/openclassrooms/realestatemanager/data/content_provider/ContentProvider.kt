@@ -62,7 +62,7 @@ class ContentProvider : ContentProvider() {
             }.apply {
                 setNotificationUri(context?.contentResolver, uri)
             }
-        } catch (e: SQLiteException) {
+        } catch (e: Exception) {
             Log.e("ContentProvider", "Error querying URI: $uri", e)
             MatrixCursor(arrayOf("error_message")).apply {
                 addRow(arrayOf(e.message ?: "Unknown error!"))

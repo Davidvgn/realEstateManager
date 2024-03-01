@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.data.content_provider
 
 import android.database.Cursor
+import android.database.MatrixCursor
 import android.net.Uri
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
@@ -42,7 +43,7 @@ class ContentProviderTest {
     }
 
     @Test
-    fun query_returns_cursor_based_on_URI() {
+    fun query_returns_cursor_based_on_realestate_URI() {
         // Given
         val fakeCursor: Cursor = mockk()
         justRun {
@@ -61,10 +62,59 @@ class ContentProviderTest {
         // Then
         verify { realEstateDaoMock.getAllPropertiesWithCursor() }
         verify {
-            resultCursor?.setNotificationUri(any(), any())
+            resultCursor?.setNotificationUri(any(), uri)
         }
 
         Assert.assertEquals(fakeCursor, resultCursor)
+
+    }
+
+    @Test
+    fun query_returns_cursor_based_on_pictures_URI() {
+        // Given
+        val fakeCursor: Cursor = mockk()
+        justRun {
+            fakeCursor.setNotificationUri(
+                any(),
+                any()
+            )
+        }
+
+        every { picturesDaoMock.getAllPicturesWithCursor() } returns fakeCursor
+
+        // When
+        val uri = Uri.parse("content://${ContentProvider.AUTHORITY}/pictures")
+        val resultCursor = contentProvider.query(uri, null, null, null, null)
+
+        // Then
+        verify { picturesDaoMock.getAllPicturesWithCursor() }
+        verify {
+            resultCursor?.setNotificationUri(any(), uri)
+        }
+
+        Assert.assertEquals(fakeCursor, resultCursor)
+
+    }
+
+    @Test
+    fun query_returns_exception_if_unknow_URI() {
+        // Given
+        val fakeCursor: Cursor = mockk()
+        justRun {
+            fakeCursor.setNotificationUri(
+                any(),
+                any()
+            )
+        }
+
+        every { realEstateDaoMock.getAllPropertiesWithCursor() } returns fakeCursor
+
+        // When
+        val uri = Uri.parse("content://${ContentProvider.AUTHORITY}/toto")
+        val resultCursor = contentProvider.query(uri, null, null, null, null)
+
+        // Then
+        Assert.assertEquals((resultCursor as MatrixCursor).columnNames[0], "error_message")
 
     }
 }
