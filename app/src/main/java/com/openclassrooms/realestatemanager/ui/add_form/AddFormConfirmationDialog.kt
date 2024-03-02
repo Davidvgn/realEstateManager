@@ -23,7 +23,7 @@ class AddFormConfirmationDialog : DialogFragment(R.layout.confirmation_dialog_fr
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmationDialogButtonYes.setOnClickListener {
-//            viewModel.deleteRealEstate()
+            viewModel.deletePictures()
             activity?.finish()
         }
 
