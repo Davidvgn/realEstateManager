@@ -37,35 +37,24 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val realEstateId = viewModel.newRealEstateId.value ?: 0L
-
 
         activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance(realEstateId))
+            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
         val imageContract =
-            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
-
+            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) {uris ->
                 if (uris.isNotEmpty()) {
                     for (uri in uris) {
-                        viewModel.addPictureFromGallery(uri)
+                        viewModel.addTemporaryPictureFromGallery(uri)
+
                     }
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
             }
 
-        viewModel.viewStateRealEstateLiveData.observe(viewLifecycleOwner) {
-        }
-
-        viewModel.newRealEstateId.observe(viewLifecycleOwner) {
-            id.let {
-
-
                 binding.buttonPhoto.setOnClickListener {
                     imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                }
-            }
         }
 
 

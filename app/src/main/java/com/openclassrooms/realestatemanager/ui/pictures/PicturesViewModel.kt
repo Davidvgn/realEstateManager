@@ -4,19 +4,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
+import com.openclassrooms.realestatemanager.domain.pictures.GetTemporaryPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
 class PicturesViewModel @Inject constructor(
-       private val getPicturesUseCase: GetPicturesUseCase
+    private val getPicturesUseCase: GetPicturesUseCase,
+    private val getTemporaryPicturesUseCase: GetTemporaryPicturesUseCase
 ) : ViewModel() {
 
-    var realEstateId = 0L
-
     val pictureViewStateLiveData: LiveData<List<PicturesViewStateItem>> = liveData {
-        getPicturesUseCase.invoke(realEstateId).collect { pictureEntityList ->
+//        getPicturesUseCase.invoke().collect { pictureEntityList ->
+//
+//            val mappedPicture = mapItemList(pictureEntityList)
+//
+//            if (mappedPicture.isEmpty()) {
+//                emit(listOf(PicturesViewStateItem.EmptyState))
+//            } else {
+//                emit(mappedPicture)
+//            }
+//        }
+
+        getTemporaryPicturesUseCase.invoke().collect { pictureEntityList ->
 
             val mappedPicture = mapItemList(pictureEntityList)
 
@@ -25,17 +37,15 @@ class PicturesViewModel @Inject constructor(
             } else {
                 emit(mappedPicture)
             }
+
         }
     }
 
-    fun getId(id: Long) {
-        realEstateId = id
-    }
-
 }
+
 private fun mapItem(picture: PicturesEntity) = PicturesViewStateItem.Pictures(
-        id = picture.id,
-        uri = picture.uri,
+    id = picture.id,
+    uri = picture.uri,
 )
 
 private fun mapItemList(picturesEntities: List<PicturesEntity>): List<PicturesViewStateItem.Pictures> {

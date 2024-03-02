@@ -19,30 +19,14 @@ class PicturesFragment : Fragment(R.layout.pictures_fragment) {
     private val binding by viewBinding { PicturesFragmentBinding.bind(it) }
     private val viewModel by viewModels<PicturesViewModel>()
 
-    private var realEstateId: Long = 0L
-
     companion object {
-        private const val ARG_REAL_ESTATE_ID = "realEstateId"
-
-
-        fun newInstance(realEstateId: Long): PicturesFragment {
-            val fragment = PicturesFragment()
-            val args = Bundle().apply {
-                putLong(ARG_REAL_ESTATE_ID, realEstateId)
-            }
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance() = PicturesFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = PicturesAdapter()
         binding.addFormRvPictures.adapter = adapter
-
-        realEstateId = requireArguments().getLong(ARG_REAL_ESTATE_ID)
-
-        viewModel.getId(realEstateId)
 
         viewModel.pictureViewStateLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
