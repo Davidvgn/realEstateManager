@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
 import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddTemporaryPictureUseCase
+import com.openclassrooms.realestatemanager.domain.pictures.DeleteTemporaryPicturesListUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import com.openclassrooms.realestatemanager.domain.real_estates.AddRealEstateUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class AddFormViewModel @Inject constructor(
     private val addRealEstateUseCase: AddRealEstateUseCase,
     private val addTemporaryPictureUseCase: AddTemporaryPictureUseCase,
-    private val addPicturesUseCase: AddPicturesUseCase
+    private val addPicturesUseCase: AddPicturesUseCase,
+    private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -53,6 +55,7 @@ class AddFormViewModel @Inject constructor(
         viewModelScope.launch {
             val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
             updateRealEstateIdForTemporaryPictures(id)
+            deleteTemporaryPicturesListUseCase.invoke()
         }
     }
 
