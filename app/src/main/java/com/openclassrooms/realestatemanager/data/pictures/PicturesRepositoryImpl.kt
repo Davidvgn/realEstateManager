@@ -39,6 +39,7 @@ class PicturesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteTemporaryPicturesList() {
-        temporaryPicturesFlow.value = emptyList()
+        temporaryPicturesList.clear()
+        temporaryPicturesFlow.value = temporaryPicturesList.toList()
     }
 }
