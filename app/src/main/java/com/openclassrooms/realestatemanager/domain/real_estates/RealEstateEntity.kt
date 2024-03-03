@@ -13,7 +13,6 @@ data class RealEstateEntity(
     val floorArea: String?,
     val numberOfRooms: Int?,
     val description: String?,
-    val photo: String?,
     val address: String?,
     val status: String?,
     val upForSaleDate: String?,

@@ -6,7 +6,6 @@ data class AddRealEstateViewState(
     val floorArea: Int?,
     val numberOfRooms: Int?,
     val description: String?,
-    val photo: List<String?>,
     val address: String?,
     val status: String?,
     val upForSaleDate: String?,

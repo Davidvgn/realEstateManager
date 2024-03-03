@@ -32,7 +32,6 @@ class RealEstatesViewModel @Inject constructor(
         realEstatesType = realEstateEntity.type,
         city = realEstateEntity.address,
         salePrice = realEstateEntity.salePrice,
-        photoUri = realEstateEntity.photo,
         status = realEstateEntity.status
     )
 

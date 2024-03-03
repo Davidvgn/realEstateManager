@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
+import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddTemporaryPictureUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import com.openclassrooms.realestatemanager.domain.real_estates.AddRealEstateUseCase
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AddFormViewModel @Inject constructor(
     private val addRealEstateUseCase: AddRealEstateUseCase,
-    private val addTemporaryPictureUseCase: AddTemporaryPictureUseCase
+    private val addTemporaryPictureUseCase: AddTemporaryPictureUseCase,
+    private val addPicturesUseCase: AddPicturesUseCase
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -27,7 +29,7 @@ class AddFormViewModel @Inject constructor(
     private var flourArea: String? = null
     private var description: String? = null
 
-    private val _newRealEstateId = MutableLiveData<Long>()
+    private val _temporaryPictures = MutableLiveData<List<PicturesEntity>>()
 
     private val onSaleDateChangeMutableLiveData = MutableLiveData<String>()
     val onSaleDateChangeLiveData: LiveData<String> = onSaleDateChangeMutableLiveData
@@ -42,7 +44,6 @@ class AddFormViewModel @Inject constructor(
             floorArea = flourArea ?: "Préciser la surface",
             numberOfRooms = 4,
             description = description ?: "Ajouter une description",
-            photo = "",
             address = address ?: "Précisez l'adresse",
             status = "",
             upForSaleDate = onSaleDateChangeLiveData.toString(),
@@ -51,7 +52,7 @@ class AddFormViewModel @Inject constructor(
         )
         viewModelScope.launch {
             val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
-            _newRealEstateId.value = id
+            updateRealEstateIdForTemporaryPictures(id)
         }
     }
 
@@ -93,9 +94,26 @@ class AddFormViewModel @Inject constructor(
             realEstateId = null,
             uri = imageUri.toString(),
         )
+
+        val tempList = _temporaryPictures.value?.toMutableList() ?: mutableListOf()
+        tempList.add(pictureEntity)
+        _temporaryPictures.value = tempList.toList()
+
         viewModelScope.launch {
             addTemporaryPictureUseCase.invoke(pictureEntity)
 
+        }
+    }
+
+    private fun updateRealEstateIdForTemporaryPictures(newRealEstateId: Long) {
+        val tempList = _temporaryPictures.value?.toMutableList() ?: return
+        tempList.forEach { it.realEstateId = newRealEstateId}
+        _temporaryPictures.value = tempList.toList()
+        viewModelScope.launch {
+
+            tempList.forEach {
+                addPicturesUseCase.invoke(it)
+            }
         }
     }
 
