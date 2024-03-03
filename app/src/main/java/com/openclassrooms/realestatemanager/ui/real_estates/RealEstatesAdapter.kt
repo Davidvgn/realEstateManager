@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.ui.real_estates
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.RealEstateEmptyStateItemBinding
 import com.openclassrooms.realestatemanager.databinding.RealEstateItemBinding
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
@@ -77,16 +75,14 @@ class RealEstatesAdapter(private val onItemClick: () -> Unit, private val listen
 
             fun bind(realEstate: RealEstatesViewSateItem.RealEstates) {
 
-                val resourceId: Int = R.drawable.baseline_no_photography_black_36
-                val uri: Uri? = null
+                val uri: String? = realEstate.photo
 
                 binding.realEstateItemTextViewType.text = realEstate.realEstatesType
                 binding.realEstateItemTextViewCity.text = realEstate.city
                 binding.realEstateItemTextViewPrice.text = realEstate.salePrice.toString()
 
-
                 Glide.with(binding.realEstateItemImageView.context)
-                    .load(uri ?: "android.resource://com.openclassrooms.realestatemanager/$resourceId")
+                    .load(uri)
                     .into(binding.realEstateItemImageView)
 
                 binding.estateItemConstraintLayoutRoot.setOnClickListener {

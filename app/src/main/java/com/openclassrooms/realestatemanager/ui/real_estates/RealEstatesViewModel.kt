@@ -30,6 +30,7 @@ class RealEstatesViewModel @Inject constructor(
     private fun mapItem(realEstateEntity: RealEstateEntity) = RealEstatesViewSateItem.RealEstates(
         id = realEstateEntity.id,
         realEstatesType = realEstateEntity.type,
+        photo = realEstateEntity.photo,
         city = realEstateEntity.address,
         salePrice = realEstateEntity.salePrice,
         status = realEstateEntity.status

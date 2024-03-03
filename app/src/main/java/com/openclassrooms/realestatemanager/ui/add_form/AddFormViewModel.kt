@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
 import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddTemporaryPictureUseCase
@@ -31,6 +32,9 @@ class AddFormViewModel @Inject constructor(
     private var flourArea: String? = null
     private var description: String? = null
 
+    val resourceId: Int = R.drawable.baseline_no_photography_black_36
+    private var photo: Uri? = null
+
     private val _temporaryPictures = MutableLiveData<List<PicturesEntity>>()
 
     private val onSaleDateChangeMutableLiveData = MutableLiveData<String>()
@@ -43,6 +47,7 @@ class AddFormViewModel @Inject constructor(
         val newRealEstate = RealEstateEntity(
             type = chip ?: "Préciser le type",
             salePrice = price ?: "Préciser le prix",
+            photo= photo.toString(),
             floorArea = flourArea ?: "Préciser la surface",
             numberOfRooms = 4,
             description = description ?: "Ajouter une description",
@@ -101,6 +106,12 @@ class AddFormViewModel @Inject constructor(
         val tempList = _temporaryPictures.value?.toMutableList() ?: mutableListOf()
         tempList.add(pictureEntity)
         _temporaryPictures.value = tempList.toList()
+
+        photo = if (tempList.isNotEmpty()) {
+            Uri.parse(tempList.first().uri)
+        } else {
+            Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
+        }
 
         viewModelScope.launch {
             addTemporaryPictureUseCase.invoke(pictureEntity)

@@ -11,6 +11,7 @@ sealed class RealEstatesViewSateItem(
     data class RealEstates(
         val id: Long,
         val realEstatesType: String?,
+        val photo: String?,
         val city: String?,
         val salePrice: String?,
         val status: String?,
