@@ -32,8 +32,8 @@ class AddFormViewModel @Inject constructor(
     private var flourArea: String? = null
     private var description: String? = null
 
-    val resourceId: Int = R.drawable.baseline_no_photography_black_36
-    private var photo: Uri? = null
+    private val resourceId: Int = R.drawable.baseline_no_photography_black_36
+    private var photo: Uri? = Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
     private val _temporaryPictures = MutableLiveData<List<PicturesEntity>>()
 
@@ -106,12 +106,7 @@ class AddFormViewModel @Inject constructor(
         val tempList = _temporaryPictures.value?.toMutableList() ?: mutableListOf()
         tempList.add(pictureEntity)
         _temporaryPictures.value = tempList.toList()
-
-        photo = if (tempList.isNotEmpty()) {
-            Uri.parse(tempList.first().uri)
-        } else {
-            Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
-        }
+        photo = Uri.parse(tempList.first().uri)
 
         viewModelScope.launch {
             addTemporaryPictureUseCase.invoke(pictureEntity)

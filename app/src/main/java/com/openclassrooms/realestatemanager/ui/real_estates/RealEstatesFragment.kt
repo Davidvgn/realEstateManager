@@ -40,7 +40,6 @@ class RealEstatesFragment : Fragment(R.layout.real_estates_fragment) {
 
 
         binding.realEstateRecyclerView.adapter = adapter
-        val resourceId: Int = R.drawable.sample_image
 
         viewModel.viewStateLiveData.observe(viewLifecycleOwner){
             adapter.submitList(it)
