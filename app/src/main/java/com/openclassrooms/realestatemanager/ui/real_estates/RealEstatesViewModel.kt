@@ -13,8 +13,6 @@ class RealEstatesViewModel @Inject constructor(
     getRealEstatesListUseCase: GetRealEstatesListUseCase,
 ) : ViewModel() {
 
-    val list: List<RealEstatesViewSateItem> = emptyList()
-
     val viewStateLiveData: LiveData<List<RealEstatesViewSateItem>> = liveData {
         getRealEstatesListUseCase.invoke().collect { realEstateEntityList ->
             val mappedList = mapItemList(realEstateEntityList)

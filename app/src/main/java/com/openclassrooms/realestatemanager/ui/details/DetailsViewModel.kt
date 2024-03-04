@@ -1,25 +1,39 @@
 package com.openclassrooms.realestatemanager.ui.details
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor() : ViewModel() {
+class DetailsViewModel @Inject constructor(
+    private val getRealEstateByIdUseCase: GetRealEstateByIdUseCase,
+) : ViewModel() {
 
+    private var realEstateId: Long = -1
 
-    companion object {
-        private val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
-
-        fun navigate(realEstateId: Long): Fragment {
-            val fragment = DetailsFragment.newInstance()
-            val args = Bundle().apply {
-                putLong(KEY_REAL_ESTATE_ID, realEstateId)
-            }
-            fragment.arguments = args
-            return fragment
+    val viewStateLiveData: LiveData<DetailViewState> = liveData {
+        getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
+            val realEstateDetails = DetailViewState(
+                type = realEstate.type,
+                salePrice = realEstate.salePrice,
+                floorArea = realEstate.floorArea,
+                numberOfRooms = realEstate.numberOfRooms,
+                description = realEstate.description,
+                address = realEstate.address,
+                status = realEstate.status,
+                upForSaleDate = realEstate.upForSaleDate,
+                dateOfSale = realEstate.dateOfSale,
+                realEstateAgent = realEstate.realEstateAgent
+            )
+            emit(realEstateDetails)
         }
     }
+
+    fun initRealEstateId(id: Long) {
+        realEstateId = id
+    }
+
 }

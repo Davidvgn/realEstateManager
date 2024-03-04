@@ -21,6 +21,9 @@ interface RealEstateDao {
     @Query("SELECT * FROM realEstate")
     fun getRealEstatesAsFlow(): Flow<List<RealEstateEntity>>
 
+    @Query("SELECT * FROM realEstate WHERE id = :realEstateId")
+    fun getRealEstateByIdAsFlow(realEstateId: Long): Flow<RealEstateEntity>
+
     @Query("SELECT * FROM realEstate")
     fun getAllPropertiesWithCursor(): Cursor
 
