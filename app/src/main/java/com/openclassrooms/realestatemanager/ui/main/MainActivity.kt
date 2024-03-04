@@ -15,7 +15,6 @@ import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
 import com.openclassrooms.realestatemanager.ui.details.DetailsFragment
-import com.openclassrooms.realestatemanager.ui.filter.FilterFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
 import com.openclassrooms.realestatemanager.ui.settings.SettingsActivity
@@ -28,7 +27,8 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
     private val binding by viewBinding { MainActivityBinding.inflate(it) }
     private val viewModel by viewModels<MainViewModel>()
 
-    companion object{
+
+    companion object {
         private const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
     }
 
@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.operations_menu, menu)
+        menuInflater.inflate(R.menu.filter_menu, menu)
 
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {
@@ -88,10 +89,9 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             true
         }
 
-        val filterItem: MenuItem = menu.findItem(R.id.operations_menu_filter)
+        val filterItem: MenuItem = menu.findItem(R.id.filter_menu)
         filterItem.setOnMenuItemClickListener {
-            displayFragment(FilterFragment.newInstance())
-            binding.mainToolbar.setTitle(R.string.filterTitle)
+            binding.mainDrawerLayout.open()
             true
         }
 
@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
         return super.onCreateOptionsMenu(menu)
     }
+
 
     override fun onResume() {
         super.onResume()
