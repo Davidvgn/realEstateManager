@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.ui.main
 
 import android.Manifest
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,7 +14,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
-import com.openclassrooms.realestatemanager.ui.details.DetailsViewModel
+import com.openclassrooms.realestatemanager.ui.details.DetailsFragment
 import com.openclassrooms.realestatemanager.ui.filter.FilterFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
@@ -27,10 +28,14 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
     private val binding by viewBinding { MainActivityBinding.inflate(it) }
     private val viewModel by viewModels<MainViewModel>()
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        viewModel.onPermissionUpdated()
+    companion object{
+        private const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
     }
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            viewModel.onPermissionUpdated()
+        }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,9 +57,11 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bottom_nav_list -> {displayFragment(RealEstateHomeFragment.newInstance())
+                R.id.bottom_nav_list -> {
+                    displayFragment(RealEstateHomeFragment.newInstance())
                     binding.mainToolbar.setTitle(R.string.RealEstate)
                 }
+
                 R.id.bottom_nav_map -> {
                     displayFragment(MapFragment.newInstance())
                     binding.mainToolbar.setTitle(R.string.Map)
@@ -104,11 +111,19 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
     }
 
     override fun onRealEstateClicked(realEstateId: Long) {
-        val fragment = DetailsViewModel.navigate(realEstateId)
-        supportFragmentManager.beginTransaction()
-            .replace(binding.mainFrameLayoutFragmentContainer.id, fragment)
-            .addToBackStack(null)
-            .commit()
+        val fragment = DetailsFragment.newInstance()
+        val args = Bundle().apply {
+            putLong(KEY_REAL_ESTATE_ID, realEstateId)
+        }
+        fragment.arguments = args
 
+        if (!resources.getBoolean(R.bool.isTablet) &&
+            resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+        ) {
+            supportFragmentManager.beginTransaction()
+                .replace(binding.mainFrameLayoutFragmentContainer.id, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }
