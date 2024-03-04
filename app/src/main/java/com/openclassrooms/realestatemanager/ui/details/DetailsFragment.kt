@@ -1,8 +1,11 @@
 package com.openclassrooms.realestatemanager.ui.details
 
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.R
@@ -44,5 +47,17 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment) {
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
         }
 
+//        viewModel.realEstatePictures.observe(viewLifecycleOwner){ uriString ->
+//            val uri = Uri.parse(uriString)
+//            val imageView = ImageView(requireContext())
+//            imageView.setImageURI(uri)
+//
+//            val layoutParams = FrameLayout.LayoutParams(
+//                FrameLayout.LayoutParams.WRAP_CONTENT,
+//                FrameLayout.LayoutParams.WRAP_CONTENT
+//            )
+//
+//            binding.realEstateDetailsPhotoListFragmentContainer.addView(imageView, layoutParams)
+//        }
     }
 }

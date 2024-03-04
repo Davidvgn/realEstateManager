@@ -8,5 +8,5 @@ class GetPicturesUseCase @Inject constructor(
     private val pictureRepository: PicturesRepository
 ){
 //    fun invoke(id: Long): Flow<List<PicturesEntity>> = pictureRepository.getPicturesAsFlow(id)
-    fun invoke(): Flow<List<PicturesEntity>> = pictureRepository.getPicturesAsFlow()
+    fun invoke(realEstateId: Long): Flow<List<PicturesEntity>> = pictureRepository.getPicturesAsFlow(realEstateId)
 }

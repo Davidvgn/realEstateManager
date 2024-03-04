@@ -1,18 +1,25 @@
 package com.openclassrooms.realestatemanager.ui.details
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
+import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val getRealEstateByIdUseCase: GetRealEstateByIdUseCase,
-) : ViewModel() {
+    private val getPicturesUseCase: GetPicturesUseCase,
+    ) : ViewModel() {
 
     private var realEstateId: Long = -1
+    private val resourceId: Int = R.drawable.baseline_no_photography_black_36
+    private var photo: Uri? = Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
+
 
     val viewStateLiveData: LiveData<DetailViewState> = liveData {
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
@@ -29,6 +36,16 @@ class DetailsViewModel @Inject constructor(
                 realEstateAgent = realEstate.realEstateAgent
             )
             emit(realEstateDetails)
+        }
+
+    }
+
+    val realEstatePictures = liveData {
+        getPicturesUseCase.invoke(realEstateId).collect{
+            it.forEach{pictureEntity ->
+                emit(pictureEntity.uri)
+            }
+
         }
     }
 

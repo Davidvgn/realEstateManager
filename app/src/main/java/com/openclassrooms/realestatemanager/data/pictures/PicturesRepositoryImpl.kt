@@ -16,8 +16,8 @@ class PicturesRepositoryImpl @Inject constructor(
     private val temporaryPicturesList = mutableListOf<PicturesEntity>()
     private val temporaryPicturesFlow = MutableStateFlow<List<PicturesEntity>>(emptyList())
 
-    override fun getPicturesAsFlow(): Flow<List<PicturesEntity>> {
-        return picturesDao.getPicturesAsFlow()
+    override fun getPicturesAsFlow(realEstateId: Long): Flow<List<PicturesEntity>> {
+        return picturesDao.getPicturesAsFlow(realEstateId)
     }
 
     override fun getPicturesNoDAO(): Flow<List<PicturesEntity>> {
