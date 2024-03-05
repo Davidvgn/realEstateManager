@@ -6,6 +6,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
     private val binding by viewBinding { MainActivityBinding.inflate(it) }
     private val viewModel by viewModels<MainViewModel>()
+    private var maxWidth = 0
+
 
 
     companion object {
@@ -85,6 +89,32 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
         filterRealEstateBinding.filterButton.setOnClickListener {
             binding.mainDrawerLayout.close()
 
+        }
+
+        // Allows all chips to have the same width based on the widest
+        val allChips = listOf(
+            filterRealEstateBinding.filterFormChipHouse,
+            filterRealEstateBinding.filterFormChipFlat,
+            filterRealEstateBinding.filterFormChipLoft,
+            filterRealEstateBinding.filterFormChipDuplex,
+            filterRealEstateBinding.filterFormChipLand,
+            filterRealEstateBinding.filterFormChipOther,
+        )
+
+        allChips.forEach { chip ->
+            chip.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            val chipWidth = chip.measuredWidth
+
+            if (chipWidth > maxWidth) {
+                maxWidth = chipWidth
+            }
+            chip.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        }
+
+        allChips.forEach { chip ->
+            val params = chip.layoutParams
+            params.width = maxWidth
+            chip.layoutParams = params
         }
     }
 
