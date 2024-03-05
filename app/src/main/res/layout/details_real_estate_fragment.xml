@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +38,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/real_estate_details_textView_type_title" />
 
 
-
             <TextView
                 android:id="@+id/real_estate_details_textView_pictures_title"
                 android:layout_width="0dp"
@@ -48,7 +47,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_type"/>
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_type" />
 
             <FrameLayout
                 android:id="@+id/real_estate_details_photo_list_fragment_container"
@@ -160,6 +159,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location_title"
                 tools:text="@sample/realEstate.json/data/location" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/staticMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="64dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
