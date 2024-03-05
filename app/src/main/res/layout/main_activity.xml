@@ -64,6 +64,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:maxWidth="192dp"
+        app:headerLayout="@layout/filter_real_estate"
         app:menu="@menu/filter_menu"
         >
 

@@ -10,8 +10,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.android.material.navigation.NavigationView
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.databinding.FilterRealEstateBinding
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
@@ -77,6 +77,14 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
                 }
             }
             true
+        }
+
+        val filterRealEstateBinding: FilterRealEstateBinding =
+            FilterRealEstateBinding.bind(binding.mainNavigationView.getHeaderView(0))
+
+        filterRealEstateBinding.filterButton.setOnClickListener {
+            binding.mainDrawerLayout.close()
+
         }
     }
 
