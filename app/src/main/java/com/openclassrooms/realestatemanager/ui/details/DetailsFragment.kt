@@ -42,6 +42,7 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment) {
         }
 
         viewModel.viewStateLiveData.observe(viewLifecycleOwner){
+            binding.realEstateDetailsTextViewType.text = it.type
             binding.realEstateDetailsTextViewDescription.text = it.description
             binding.realEstateDetailsTextViewFloorArea.text = it.floorArea
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
