@@ -59,7 +59,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         binding.addRealEstateTvSelectedAddress.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
 
 
-        binding.buttonPhoto.setOnClickListener {
+        binding.buttonPhotoFromGallery.setOnClickListener {
             imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
