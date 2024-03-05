@@ -366,27 +366,23 @@
             android:id="@+id/button_photo_from_gallery"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="64dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/add_pictures"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/add_pictures_from_gallery"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/photo_list_fragment_container" />
 
-<!--        <Button-->
-<!--            android:id="@+id/button_photo"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="64dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginEnd="64dp"-->
-<!--            android:layout_marginBottom="16dp"-->
-<!--            android:text="@string/add_pictures"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/photo_list_fragment_container" />-->
+        <Button
+            android:id="@+id/button_photo_from_camera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/add_pictures_from_camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/photo_list_fragment_container" />
 
         <TextView
             android:id="@+id/add_realEstate_TextView_date_of_sale"

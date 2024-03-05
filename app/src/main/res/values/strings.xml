@@ -60,7 +60,8 @@
     <string name="picture">Picture(s) :</string>
     <string name="unspecified">unspecified</string>
 
-    <string name="add_pictures">add pictures</string>
+    <string name="add_pictures_from_gallery">Add pictures\nfrom gallery</string>
+    <string name="add_pictures_from_camera">Add pictures\nfrom camera</string>
     <string name="no_realestate">No Real Estate \n added</string>
 
     <string name="Sold">Sold</string>

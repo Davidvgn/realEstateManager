@@ -63,7 +63,9 @@
     <string name="picture">Photo(s)</string>
     <string name="unspecified">Non spécifié</string>
 
-    <string name="add_pictures">Ajouter une photo</string>
+    <string name="add_pictures_from_gallery">Ajouter une photo\ndepuis la gallerie</string>
+    <string name="add_pictures_from_camera">Ajouter une photo\ndepuis la camera</string>
+
     <string name="no_realestate">Aucun Biens \n immobiliers</string>
 
     <string name="Sold">Vendu</string>
