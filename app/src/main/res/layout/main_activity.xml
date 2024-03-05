@@ -60,9 +60,10 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/main_navigation_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:maxWidth="192dp"
         app:menu="@menu/filter_menu"
         >
 

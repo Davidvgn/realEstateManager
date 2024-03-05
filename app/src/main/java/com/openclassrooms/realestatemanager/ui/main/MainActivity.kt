@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
@@ -54,6 +55,13 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
         if (savedInstanceState == null) {
             displayFragment(RealEstateHomeFragment.newInstance())
         }
+
+        //Resolves icon and title unwanted presence in filter view
+        val menu = binding.mainNavigationView.menu
+        val menuItem = menu.findItem(R.id.filter_menu)
+        menuItem.icon = null
+        menuItem.title = null
+
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
