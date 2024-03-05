@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
@@ -30,6 +31,8 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
     private val viewModel by viewModels<AddFormViewModel>()
+    private var maxWidth = 0
+
 
     companion object {
         fun newInstance() = AddFormFragment()
@@ -42,7 +45,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
         val imageContract =
-            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) {uris ->
+            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
                 if (uris.isNotEmpty()) {
                     for (uri in uris) {
                         viewModel.addTemporaryPictureFromGallery(uri)
@@ -53,8 +56,35 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
                 }
             }
 
-                binding.buttonPhoto.setOnClickListener {
-                    imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        binding.buttonPhoto.setOnClickListener {
+            imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+
+        // Allows all chips to have the same width based on the widest
+        val allChips = listOf(
+            binding.addFormChipHouse,
+            binding.addFormChipFlat,
+            binding.addFormChipLoft,
+            binding.addFormChipDuplex,
+            binding.addFormChipLand,
+            binding.addFormChipOther
+        )
+
+        allChips.forEach { chip ->
+            chip.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            val chipWidth = chip.measuredWidth
+
+            if (chipWidth > maxWidth) {
+                maxWidth = chipWidth
+            }
+            chip.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        }
+
+        allChips.forEach { chip ->
+            val params = chip.layoutParams
+            params.width = maxWidth
+            chip.layoutParams = params
         }
 
 
