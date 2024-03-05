@@ -93,6 +93,11 @@
     <string name="real_estate_pictures">Photo du bien</string>
     <string name="delete_icon">Icone de suppression</string>
 
-
+    <string name="filter_by">Filtrer par :</string>
+    <string name="all">Tous</string>
+    <string name="min_price">Prix mini</string>
+    <string name="max_price">Prix max</string>
+    <string name="min_floorArea">Surface min</string>
+    <string name="max_floorAre">Surface max</string>
 
 </resources>

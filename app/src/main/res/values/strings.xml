@@ -88,6 +88,12 @@
     <string name="Map">Map</string>
     <string name="real_estate_pictures">Real Estate Pictures</string>
     <string name="delete_icon">Delete icon</string>
+    <string name="filter_by">Filter by :</string>
+    <string name="all">All</string>
+    <string name="min_price">Min price</string>
+    <string name="max_price">Max price</string>
+    <string name="min_floorArea">Min surface</string>
+    <string name="max_floorAre">Max surface</string>
 
 
 </resources>

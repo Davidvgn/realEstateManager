@@ -10,9 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:paddingBottom="32dp"
         android:paddingTop="4dp"
+        android:paddingBottom="32dp"
         tools:context=".ui.filter.FilterFragment">
+
+        <TextView
+            android:id="@+id/filter_form_textView_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="@string/filter_by"
+            android:textColor="@color/title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/filter_form_textView_type_title"
@@ -24,7 +38,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/filter_form_textView_title" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/filter_form_cardView_type"
@@ -98,8 +112,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textColor="@color/title"
             android:hint="@string/Status"
+            android:textColor="@color/title"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,10 +141,16 @@
                 app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextView_title_status">
 
                 <RadioButton
-                    android:id="@+id/radio_button_to_sale"
+                    android:id="@+id/radio_button_status_all"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:checked="true"
+                    android:text="@string/all" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_to_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="@string/forSale" />
 
                 <RadioButton
@@ -287,7 +307,7 @@
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filter_realEstate_TextInputLayout_price"
+            android:id="@+id/filter_realEstate_TextInputLayout_min_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -298,16 +318,35 @@
             app:layout_constraintTop_toBottomOf="@id/filter_form_cardView_POI">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/filter_realEstate_TextInputEditText_price"
+                android:id="@+id/filter_realEstate_TextInputEditText_min_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:hint="@string/price"
+                android:hint="@string/min_price"
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filter_realEstate_TextInputLayout_surface"
+            android:id="@+id/filter_realEstate_TextInputLayout_max_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_min_price">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/filter_realEstate_TextInputEditText_max_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="@string/max_price"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filter_realEstate_TextInputLayout_min_surface"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -316,14 +355,34 @@
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_price">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_max_price">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/filter_realEstate_TextInputEditText_surface"
+                android:id="@+id/filter_realEstate_TextInputEditText_min_surface"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:hint="@string/floorArea"
+                android:hint="@string/min_floorArea"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filter_realEstate_TextInputLayout_max_surface"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_min_surface">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/filter_realEstate_TextInputEditText_max_surface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="@string/max_floorAre"
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -338,7 +397,7 @@
             android:bottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_surface">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_max_surface">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/filter_TextInputEditText_real_estate_agent"
