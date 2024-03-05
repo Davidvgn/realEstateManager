@@ -74,7 +74,7 @@
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five_and_more">5+</string>
-    <string name="adress">Address</string>
+    <string name="adress">Insert an Address :</string>
     <string name="app_icon">Application Icon</string>
     <string name="no_picture">No Picture</string>
     <string name="no_picture_icon">No Picture Icon</string>
@@ -94,6 +94,8 @@
     <string name="max_price">Max price</string>
     <string name="min_floorArea">Min surface</string>
     <string name="max_floorAre">Max surface</string>
+    <string name="selectedAddress">Selected Address :</string>
+    <string name="no_address_selected">No address selected</string>
 
 
 </resources>

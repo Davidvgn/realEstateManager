@@ -99,5 +99,9 @@
     <string name="max_price">Prix max</string>
     <string name="min_floorArea">Surface min</string>
     <string name="max_floorAre">Surface max</string>
+    <string name="selectedAddress">Addresse choisie :</string>
+    <string name="no_address_selected">Aucune addresse sélectionnée</string>
+
+
 
 </resources>

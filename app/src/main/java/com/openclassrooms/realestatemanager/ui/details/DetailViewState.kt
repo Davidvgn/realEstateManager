@@ -4,7 +4,7 @@ data class DetailViewState(
     val type: String?,
     val salePrice: String?,
     val floorArea: String?,
-    val numberOfRooms: Int?,
+    val numberOfRooms: String?,
     val description: String?,
     val address: String?,
     val status: String?,

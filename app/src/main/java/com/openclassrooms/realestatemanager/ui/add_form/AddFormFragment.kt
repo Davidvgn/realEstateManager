@@ -56,6 +56,9 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
                 }
             }
 
+        binding.addRealEstateTvSelectedAddress.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+
+
         binding.buttonPhoto.setOnClickListener {
             imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
@@ -110,7 +113,11 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                viewModel.onAddressChanged(place.address)
+
+                binding.addRealEstateTvSelectedAddress.text = place.address?.toString()
+
+                viewModel.onAddressChanged(place.address?.toString())
+
             }
 
             override fun onError(status: Status) {
@@ -189,6 +196,10 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
             viewModel.onTextPriceChanged(it?.toString())
+        }
+
+        binding.addRealEstateTextViewTitleNumberOfRooms.doAfterTextChanged {
+            viewModel.onNumberOfRoomsChanged(it?.toString())
         }
         binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
             viewModel.onTextFloorAreaChanged(it?.toString())
