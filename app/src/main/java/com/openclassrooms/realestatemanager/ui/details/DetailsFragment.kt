@@ -58,6 +58,7 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment), OnMapRea
             binding.realEstateDetailsTextViewDescription.text = it.description
             binding.realEstateDetailsTextViewFloorArea.text = it.floorArea
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
+            binding.realEstateDetailsTextViewLocation.text = it.address
         }
 
 //        viewModel.realEstatePictures.observe(viewLifecycleOwner){ uriString ->
@@ -78,5 +79,5 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment), OnMapRea
         map = googleMap
         val location = LatLng(latitude, longitude)
         map.addMarker(MarkerOptions().position(location).title("Marker"))
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))    }
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))    }
 }
