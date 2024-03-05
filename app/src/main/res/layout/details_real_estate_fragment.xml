@@ -7,13 +7,36 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             tools:context=".ui.add_real_estate.AddRealEstateActivity">
+
+            <TextView
+                android:id="@+id/real_estate_details_textView_type_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/type"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/real_estate_details_textView_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/real_estate_details_textView_type_title" />
+
 
             <TextView
                 android:id="@+id/real_estate_details_textView_pictures_title"
@@ -23,8 +46,9 @@
                 android:textColor="@color/title"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_type" />
 
             <FrameLayout
                 android:id="@+id/real_estate_details_photo_list_fragment_container"
@@ -42,6 +66,7 @@
                 android:textColor="@color/title"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_photo_list_fragment_container" />
 
@@ -57,10 +82,11 @@
                 tools:text="@sample/realEstate.json/data/description" />
 
             <TextView
-                android:id="@+id/real_estate_details_textView_surface_title"
+                android:id="@+id/real_estate_details_textView_floorArea_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/floorArea"
                 android:textColor="@color/title"
                 android:textSize="16sp"
@@ -69,10 +95,22 @@
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_description" />
 
             <TextView
+                android:id="@+id/real_estate_details_textView_floorArea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_floorArea_title" />
+
+            <TextView
                 android:id="@+id/real_estate_details_textView_numberOfRoom_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/number_of_rooms"
                 android:textColor="@color/title"
                 android:textSize="16sp"
@@ -81,22 +119,35 @@
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_description" />
 
             <TextView
+                android:id="@+id/real_estate_details_textView_numberOfRoom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_numberOfRoom_title" />
+
+            <TextView
                 android:id="@+id/real_estate_details_textView_poi_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/poi"
                 android:textColor="@color/title"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_numberOfRoom_title" />
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_floorArea" />
 
             <TextView
                 android:id="@+id/real_estate_details_textView_location_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/location"
                 android:textColor="@color/title"
                 android:textSize="16sp"
@@ -114,6 +165,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location_title"
                 tools:text="@sample/realEstate.json/data/location" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/staticMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="64dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

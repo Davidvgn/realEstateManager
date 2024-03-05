@@ -63,7 +63,9 @@
     <string name="picture">Photo(s)</string>
     <string name="unspecified">Non spécifié</string>
 
-    <string name="add_pictures">Ajouter une photo</string>
+    <string name="add_pictures_from_gallery">Ajouter une photo\ndepuis la gallerie</string>
+    <string name="add_pictures_from_camera">Ajouter une photo\ndepuis la camera</string>
+
     <string name="no_realestate">Aucun Biens \n immobiliers</string>
 
     <string name="Sold">Vendu</string>
@@ -92,6 +94,15 @@
 
     <string name="real_estate_pictures">Photo du bien</string>
     <string name="delete_icon">Icone de suppression</string>
+
+    <string name="filter_by">Filtrer par :</string>
+    <string name="all">Tous</string>
+    <string name="min_price">Prix mini</string>
+    <string name="max_price">Prix max</string>
+    <string name="min_floorArea">Surface min</string>
+    <string name="max_floorAre">Surface max</string>
+    <string name="selectedAddress">Addresse choisie :</string>
+    <string name="no_address_selected">Aucune addresse sélectionnée</string>
 
 
 

@@ -31,6 +31,7 @@ class AddFormViewModel @Inject constructor(
     private var price: String? = null
     private var flourArea: String? = null
     private var description: String? = null
+    private var numberOfRooms: String? = null
 
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
     private var photo: Uri? = Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
@@ -49,7 +50,7 @@ class AddFormViewModel @Inject constructor(
             salePrice = price ?: "Préciser le prix",
             photo= photo.toString(),
             floorArea = flourArea ?: "Préciser la surface",
-            numberOfRooms = 4,
+            numberOfRooms = numberOfRooms ?: "Préciser nombre de p!èces" ,
             description = description ?: "Ajouter une description",
             address = address ?: "Précisez l'adresse",
             status = "",
@@ -65,7 +66,9 @@ class AddFormViewModel @Inject constructor(
     }
 
 
-
+    fun onNumberOfRoomsChanged(numberOfRooms: String?) {
+        this.numberOfRooms = numberOfRooms
+    }
 
 
     fun onAddressChanged(address: String?) {

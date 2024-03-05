@@ -60,7 +60,8 @@
     <string name="picture">Picture(s) :</string>
     <string name="unspecified">unspecified</string>
 
-    <string name="add_pictures">add pictures</string>
+    <string name="add_pictures_from_gallery">Add pictures\nfrom gallery</string>
+    <string name="add_pictures_from_camera">Add pictures\nfrom camera</string>
     <string name="no_realestate">No Real Estate \n added</string>
 
     <string name="Sold">Sold</string>
@@ -74,7 +75,7 @@
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five_and_more">5+</string>
-    <string name="adress">Address</string>
+    <string name="adress">Insert an Address :</string>
     <string name="app_icon">Application Icon</string>
     <string name="no_picture">No Picture</string>
     <string name="no_picture_icon">No Picture Icon</string>
@@ -88,6 +89,14 @@
     <string name="Map">Map</string>
     <string name="real_estate_pictures">Real Estate Pictures</string>
     <string name="delete_icon">Delete icon</string>
+    <string name="filter_by">Filter by :</string>
+    <string name="all">All</string>
+    <string name="min_price">Min price</string>
+    <string name="max_price">Max price</string>
+    <string name="min_floorArea">Min surface</string>
+    <string name="max_floorAre">Max surface</string>
+    <string name="selectedAddress">Selected Address :</string>
+    <string name="no_address_selected">No address selected</string>
 
 
 </resources>

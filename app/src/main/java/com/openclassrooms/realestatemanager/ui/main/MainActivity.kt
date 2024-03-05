@@ -6,16 +6,18 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.databinding.FilterRealEstateBinding
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
 import com.openclassrooms.realestatemanager.ui.details.DetailsFragment
-import com.openclassrooms.realestatemanager.ui.filter.FilterFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
 import com.openclassrooms.realestatemanager.ui.settings.SettingsActivity
@@ -27,8 +29,11 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
     private val binding by viewBinding { MainActivityBinding.inflate(it) }
     private val viewModel by viewModels<MainViewModel>()
+    private var maxWidth = 0
 
-    companion object{
+
+
+    companion object {
         private const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
     }
 
@@ -55,6 +60,13 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             displayFragment(RealEstateHomeFragment.newInstance())
         }
 
+        //Resolves icon and title unwanted presence in filter view
+        val menu = binding.mainNavigationView.menu
+        val menuItem = menu.findItem(R.id.filter_menu)
+        menuItem.icon = null
+        menuItem.title = null
+
+
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottom_nav_list -> {
@@ -70,6 +82,40 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             }
             true
         }
+
+        val filterRealEstateBinding: FilterRealEstateBinding =
+            FilterRealEstateBinding.bind(binding.mainNavigationView.getHeaderView(0))
+
+        filterRealEstateBinding.filterButton.setOnClickListener {
+            binding.mainDrawerLayout.close()
+
+        }
+
+        // Allows all chips to have the same width based on the widest
+        val allChips = listOf(
+            filterRealEstateBinding.filterFormChipHouse,
+            filterRealEstateBinding.filterFormChipFlat,
+            filterRealEstateBinding.filterFormChipLoft,
+            filterRealEstateBinding.filterFormChipDuplex,
+            filterRealEstateBinding.filterFormChipLand,
+            filterRealEstateBinding.filterFormChipOther,
+        )
+
+        allChips.forEach { chip ->
+            chip.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            val chipWidth = chip.measuredWidth
+
+            if (chipWidth > maxWidth) {
+                maxWidth = chipWidth
+            }
+            chip.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        }
+
+        allChips.forEach { chip ->
+            val params = chip.layoutParams
+            params.width = maxWidth
+            chip.layoutParams = params
+        }
     }
 
     private fun displayFragment(fragment: Fragment) {
@@ -80,6 +126,7 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.operations_menu, menu)
+        menuInflater.inflate(R.menu.filter_menu, menu)
 
         val addItem: MenuItem = menu.findItem(R.id.operations_menu_add)
         addItem.setOnMenuItemClickListener {
@@ -88,10 +135,9 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             true
         }
 
-        val filterItem: MenuItem = menu.findItem(R.id.operations_menu_filter)
+        val filterItem: MenuItem = menu.findItem(R.id.filter_menu)
         filterItem.setOnMenuItemClickListener {
-            displayFragment(FilterFragment.newInstance())
-            binding.mainToolbar.setTitle(R.string.filterTitle)
+            binding.mainDrawerLayout.open()
             true
         }
 
@@ -104,6 +150,7 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
         return super.onCreateOptionsMenu(menu)
     }
+
 
     override fun onResume() {
         super.onResume()

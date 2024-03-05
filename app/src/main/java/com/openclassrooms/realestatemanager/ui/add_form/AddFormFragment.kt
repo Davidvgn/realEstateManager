@@ -1,11 +1,18 @@
 package com.openclassrooms.realestatemanager.ui.add_form
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,6 +30,7 @@ import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 import java.util.Calendar
 
 @AndroidEntryPoint
@@ -30,9 +38,12 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
     private val viewModel by viewModels<AddFormViewModel>()
+    private var maxWidth = 0
+
 
     companion object {
         fun newInstance() = AddFormFragment()
+        private lateinit var cameraPhotoUri: Uri
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,20 +52,75 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
+
+
         val imageContract =
-            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) {uris ->
+            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
                 if (uris.isNotEmpty()) {
                     for (uri in uris) {
                         viewModel.addTemporaryPictureFromGallery(uri)
-
                     }
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
             }
 
-                binding.buttonPhoto.setOnClickListener {
-                    imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        binding.buttonPhotoFromCamera.setOnClickListener {
+            cameraPhotoUri = FileProvider.getUriForFile(
+                requireContext(),
+                BuildConfig.APPLICATION_ID + ".provider",
+                File.createTempFile(
+                    "JPEG_",
+                    ".jpg",
+                    requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                )
+            )
+
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                .putExtra(MediaStore.EXTRA_OUTPUT, cameraPhotoUri)
+
+            Log.d("DavidVgn", "onActivityResult: $cameraPhotoUri")
+
+            @Suppress("DEPRECATION")
+            startActivityForResult(intent, 0)
+        }
+
+
+
+
+
+        binding.addRealEstateTvSelectedAddress.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+
+
+        binding.buttonPhotoFromGallery.setOnClickListener {
+            imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+
+        // Allows all chips to have the same width based on the widest
+        val allChips = listOf(
+            binding.addFormChipHouse,
+            binding.addFormChipFlat,
+            binding.addFormChipLoft,
+            binding.addFormChipDuplex,
+            binding.addFormChipLand,
+            binding.addFormChipOther
+        )
+
+        allChips.forEach { chip ->
+            chip.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            val chipWidth = chip.measuredWidth
+
+            if (chipWidth > maxWidth) {
+                maxWidth = chipWidth
+            }
+            chip.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        }
+
+        allChips.forEach { chip ->
+            val params = chip.layoutParams
+            params.width = maxWidth
+            chip.layoutParams = params
         }
 
 
@@ -80,7 +146,11 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                viewModel.onAddressChanged(place.address)
+
+                binding.addRealEstateTvSelectedAddress.text = place.address?.toString()
+
+                viewModel.onAddressChanged(place.address?.toString())
+
             }
 
             override fun onError(status: Status) {
@@ -160,6 +230,10 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
             viewModel.onTextPriceChanged(it?.toString())
         }
+
+        binding.addRealEstateTextViewTitleNumberOfRooms.doAfterTextChanged {
+            viewModel.onNumberOfRoomsChanged(it?.toString())
+        }
         binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
             viewModel.onTextFloorAreaChanged(it?.toString())
         }
@@ -176,6 +250,18 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         }
 
     }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("DavidVgn", "requestCode : $requestCode")
+
+        @Suppress("DEPRECATION")
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            viewModel.addTemporaryPictureFromGallery(cameraPhotoUri)
+        }
+    }
+
 }
 
 private fun getSelectedText(chipGroup: ChipGroup, id: Int): String {

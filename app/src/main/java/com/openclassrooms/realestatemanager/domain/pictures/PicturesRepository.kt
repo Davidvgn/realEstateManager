@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface PicturesRepository {
 
-    fun getPicturesAsFlow(): Flow<List<PicturesEntity>>
+//    fun getPicturesAsFlow(): Flow<List<PicturesEntity>>
     fun getPicturesNoDAO(): Flow<List<PicturesEntity>>
-//    fun getPicturesAsFlow(id: Long): Flow<List<PicturesEntity>>
+    fun getPicturesAsFlow(realEstateId: Long): Flow<List<PicturesEntity>>
 
 
     suspend fun addPicture(picturesEntity: PicturesEntity)
