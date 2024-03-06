@@ -1,9 +1,11 @@
 package com.openclassrooms.realestatemanager.data
 
+import com.openclassrooms.realestatemanager.data.agent.AgentRepositoryImpl
 import com.openclassrooms.realestatemanager.data.location.LocationRepositoryFused
 import com.openclassrooms.realestatemanager.data.permissions.PermissionRepositoryImpl
 import com.openclassrooms.realestatemanager.data.pictures.PicturesRepositoryImpl
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateRepositoryRoom
+import com.openclassrooms.realestatemanager.domain.agent.AgentRepository
 import com.openclassrooms.realestatemanager.domain.details.DetailsRepository
 import com.openclassrooms.realestatemanager.domain.location.LocationRepository
 import com.openclassrooms.realestatemanager.domain.permission.PermissionRepository
@@ -38,4 +40,8 @@ abstract class DataBindingModule {
     @Binds
     @Singleton
     abstract fun bindDetailsRepository(impl: DetailsRepositoryImpl): DetailsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindAgentRepository(impl: AgentRepositoryImpl): AgentRepository
 }

@@ -34,7 +34,6 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
     companion object {
         fun newInstance() = DetailsFragment()
         private const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

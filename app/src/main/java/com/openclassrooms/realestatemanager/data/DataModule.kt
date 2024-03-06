@@ -9,6 +9,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 @Module
@@ -18,8 +20,9 @@ class DataModule {
     @Singleton
     @Provides
     fun provideAppDatabase(
-        application: Application
-    ): AppDatabase = AppDatabase.create(application)
+        application: Application,
+        ioExecutor: Executor
+    ): AppDatabase = AppDatabase.getInstance(application, ioExecutor)
 
     @Singleton
     @Provides
@@ -35,4 +38,8 @@ class DataModule {
     @Provides
     fun provideFusedLocationProviderClient(application: Application): FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(application)
+
+    @Singleton
+    @Provides
+    fun provideIoExecutor(): Executor = Executors.newSingleThreadExecutor()
 }

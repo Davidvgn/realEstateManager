@@ -51,6 +51,7 @@ class AddFormViewModel @Inject constructor(
     val onSoldDateChangeLiveData: LiveData<String> = onSoldDateChangeMutableLiveData
 
     //todo david texte en dur
+    //todo david : viewModelScope doit launch le AddRealEstateViewState et non créer un realEstateEntity
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
         val newRealEstate = RealEstateEntity(
             creationDate = Utils.getTodayDate(),

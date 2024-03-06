@@ -12,6 +12,6 @@ data class DetailViewState(
     val poi: List<String?>,
     val upForSaleDate: String?,
     val dateOfSale: String?,
-    val realEstateAgent: Int?
+    val realEstateAgent: String?
 
 )
