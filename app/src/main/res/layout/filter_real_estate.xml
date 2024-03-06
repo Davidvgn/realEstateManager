@@ -389,6 +389,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/filter_realEstate_TextInputLayout_real_estate_agent"
+            style="@style/Widget.RealEstatesManager.Spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -397,15 +398,16 @@
             android:bottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_max_surface">
+            app:layout_constraintTop_toBottomOf="@id/filter_realEstate_TextInputLayout_max_surface"
+            tools:endIconMode="dropdown_menu">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/filter_TextInputEditText_real_estate_agent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:hint="@string/Agent"
-                android:inputType="textAutoComplete" />
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

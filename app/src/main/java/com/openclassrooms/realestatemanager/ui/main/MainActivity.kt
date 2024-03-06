@@ -16,6 +16,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FilterRealEstateBinding
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
+import com.openclassrooms.realestatemanager.ui.add_form.AgentSpinnerAdapter
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
 import com.openclassrooms.realestatemanager.ui.details.DetailsFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
@@ -60,6 +61,27 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             displayFragment(RealEstateHomeFragment.newInstance())
         }
 
+        val filterRealEstateBinding: FilterRealEstateBinding =
+            FilterRealEstateBinding.bind(binding.mainNavigationView.getHeaderView(0))
+
+        filterRealEstateBinding.filterButton.setOnClickListener {
+            binding.mainDrawerLayout.close()
+
+        }
+
+        val adapter = AgentSpinnerAdapter()
+        filterRealEstateBinding.filterTextInputEditTextRealEstateAgent.setOnItemClickListener { _, _, position, _ ->
+            adapter.getItem(position)?.let {
+                viewModel.onAgentSelected(it.id)
+            }
+        }
+        viewModel.fetchAgents()
+
+        viewModel.agentsLiveData.observe(this) { agents ->
+            adapter.setData(agents)
+            filterRealEstateBinding.filterTextInputEditTextRealEstateAgent.setAdapter(adapter)
+        }
+
         //Resolves icon and title unwanted presence in filter view
         val menu = binding.mainNavigationView.menu
         val menuItem = menu.findItem(R.id.filter_menu)
@@ -83,13 +105,7 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             true
         }
 
-        val filterRealEstateBinding: FilterRealEstateBinding =
-            FilterRealEstateBinding.bind(binding.mainNavigationView.getHeaderView(0))
 
-        filterRealEstateBinding.filterButton.setOnClickListener {
-            binding.mainDrawerLayout.close()
-
-        }
 
         // Allows all chips to have the same width based on the widest
         val allChips = listOf(
