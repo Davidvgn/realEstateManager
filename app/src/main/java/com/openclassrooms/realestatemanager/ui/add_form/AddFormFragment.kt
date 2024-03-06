@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.openclassrooms.realestatemanager.BuildConfig
 import com.google.android.gms.common.api.Status
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -104,8 +105,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 .putExtra(MediaStore.EXTRA_OUTPUT, cameraPhotoUri)
 
-            Log.d("DavidVgn", "onActivityResult: $cameraPhotoUri")
-
             @Suppress("DEPRECATION")
             startActivityForResult(intent, 0)
         }
@@ -141,7 +140,8 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             listOf(
                 Place.Field.ID,
                 Place.Field.NAME,
-                Place.Field.ADDRESS
+                Place.Field.ADDRESS,
+                Place.Field.LAT_LNG,
             )
         )
 
@@ -151,6 +151,11 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
                 binding.addRealEstateTvSelectedAddress.text = place.address?.toString()
 
                 viewModel.onAddressChanged(place.address?.toString())
+
+                val placeLatLng : LatLng? = place.latLng
+                if (placeLatLng != null) {
+                    viewModel.addLatLng(placeLatLng.latitude, placeLatLng.longitude)
+                }
 
             }
 
@@ -297,8 +302,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d("DavidVgn", "requestCode : $requestCode")
-
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {

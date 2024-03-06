@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.domain.real_estates
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.android.gms.maps.model.LatLng
 
 @Entity(tableName = "realEstate")
 data class RealEstateEntity(
@@ -19,5 +20,6 @@ data class RealEstateEntity(
     val status: String?,
     val upForSaleDate: String?,
     val dateOfSale: String?,
-    val realEstateAgent: Int?
+    val realEstateAgent: Int?,
+    val latLng: LatLng?,
 )

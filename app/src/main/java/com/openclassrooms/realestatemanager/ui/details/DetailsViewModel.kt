@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
@@ -20,6 +21,12 @@ class DetailsViewModel @Inject constructor(
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
     private var photo: Uri? = Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
+    val realEstateLocation: LiveData<LatLng> = liveData {
+        getRealEstateByIdUseCase.invoke(realEstateId).collect{
+            it.latLng?.let { latLng -> emit(latLng) }
+        }
+    }
+
 
     val viewStateLiveData: LiveData<DetailViewState> = liveData {
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
@@ -35,7 +42,7 @@ class DetailsViewModel @Inject constructor(
                 poi = realEstate.pointOfInterest,
                 upForSaleDate = realEstate.upForSaleDate,
                 dateOfSale = realEstate.dateOfSale,
-                realEstateAgent = realEstate.realEstateAgent
+                realEstateAgent = realEstate.realEstateAgent,
             )
             emit(realEstateDetails)
         }

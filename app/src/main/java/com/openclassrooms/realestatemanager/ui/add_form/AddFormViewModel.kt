@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.data.utils.Utils
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
@@ -33,6 +34,7 @@ class AddFormViewModel @Inject constructor(
     private var flourArea: String? = null
     private var description: String? = null
     private var numberOfRooms: String? = null
+    private var latLng: LatLng? = null
 
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
     private var photo: Uri? =
@@ -64,6 +66,7 @@ class AddFormViewModel @Inject constructor(
             upForSaleDate = onSaleDateChangeLiveData.toString(),
             dateOfSale = onSoldDateChangeLiveData.toString(),
             realEstateAgent = null,
+            latLng = latLng
         )
         viewModelScope.launch {
             val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
@@ -143,6 +146,10 @@ class AddFormViewModel @Inject constructor(
                 addPicturesUseCase.invoke(it)
             }
         }
+    }
+
+    fun addLatLng(lat: Double, lng : Double) {
+        latLng = LatLng(lat,lng)
     }
 
 }

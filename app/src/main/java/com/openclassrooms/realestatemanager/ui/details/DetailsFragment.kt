@@ -21,21 +21,22 @@ import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsFragment: Fragment(R.layout.details_real_estate_fragment), OnMapReadyCallback {
+class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapReadyCallback {
 
     private val viewModel by viewModels<DetailsViewModel>()
     private val binding by viewBinding { DetailsRealEstateFragmentBinding.bind(it) }
     private var realEstateId: Long = -1
 
     private lateinit var map: GoogleMap
-    private val latitude = 45.7577
-    private val longitude = 4.8320
+    private var latitude = 0.0
+    private var longitude = 0.0
 
     companion object {
         fun newInstance() = DetailsFragment()
         private const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,16 +45,23 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment), OnMapRea
         }
         viewModel.initRealEstateId(id = realEstateId)
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.staticMap) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.staticMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && resources.getBoolean(R.bool.isTablet)) {
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && resources.getBoolean(
+                R.bool.isTablet
+            )
+        ) {
             activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.real_estate_details_photo_list_fragment_container, PicturesFragment.newInstance())
-                    ?.commit()
+                ?.replace(
+                    R.id.real_estate_details_photo_list_fragment_container,
+                    PicturesFragment.newInstance()
+                )
+                ?.commit()
         }
 
-        viewModel.viewStateLiveData.observe(viewLifecycleOwner){
+        viewModel.viewStateLiveData.observe(viewLifecycleOwner) {
             binding.realEstateDetailsTextViewCreationDate.text = it.creationDate
             binding.realEstateDetailsTextViewType.text = it.type
             binding.realEstateDetailsTextViewDescription.text = it.description
@@ -61,6 +69,16 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment), OnMapRea
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
             binding.realEstateDetailsTextViewLocation.text = it.address
             binding.realEstateDetailsTextViewPoi.text = it.poi.toString()
+
+        }
+
+        viewModel.realEstateLocation.observe(viewLifecycleOwner) { latLng ->
+            latitude = latLng.latitude
+            longitude = latLng.longitude
+
+            val location = LatLng(latitude, longitude)
+            map.addMarker(MarkerOptions().position(location).title("Marker"))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
         }
 
 //        viewModel.realEstatePictures.observe(viewLifecycleOwner){ uriString ->
@@ -79,7 +97,5 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment), OnMapRea
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        val location = LatLng(latitude, longitude)
-        map.addMarker(MarkerOptions().position(location).title("Marker"))
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))    }
+    }
 }
