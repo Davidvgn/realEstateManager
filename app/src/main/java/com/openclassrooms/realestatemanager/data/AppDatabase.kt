@@ -4,12 +4,15 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
+import com.openclassrooms.realestatemanager.data.utils.Converters
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 
 @Database(entities = [RealEstateEntity::class, PicturesEntity::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun getRealEstateDao(): RealEstateDao

@@ -35,9 +35,13 @@ class AddFormViewModel @Inject constructor(
     private var numberOfRooms: String? = null
 
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
-    private var photo: Uri? = Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
+    private var photo: Uri? =
+        Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
     private val _temporaryPictures = MutableLiveData<List<PicturesEntity>>()
+    private val _poiList = MutableLiveData<List<String>>()
+    val poiList = _poiList.value?.toMutableList() ?: mutableListOf()
+
 
     private val onSaleDateChangeMutableLiveData = MutableLiveData<String>()
     val onSaleDateChangeLiveData: LiveData<String> = onSaleDateChangeMutableLiveData
@@ -50,11 +54,12 @@ class AddFormViewModel @Inject constructor(
             creationDate = Utils.getTodayDate(),
             type = chip ?: "Préciser le type",
             salePrice = price ?: "Préciser le prix",
-            photo= photo.toString(),
+            photo = photo.toString(),
             floorArea = flourArea ?: "Préciser la surface",
-            numberOfRooms = numberOfRooms ?: "Préciser nombre de p!èces" ,
+            numberOfRooms = numberOfRooms ?: "Préciser nombre de p!èces",
             description = description ?: "Ajouter une description",
             address = address ?: "Précisez l'adresse",
+            pointOfInterest = poiList,
             status = "",
             upForSaleDate = onSaleDateChangeLiveData.toString(),
             dateOfSale = onSoldDateChangeLiveData.toString(),
@@ -101,6 +106,15 @@ class AddFormViewModel @Inject constructor(
         onSoldDateChangeMutableLiveData.value = formatDate(dayOfMonth, monthOfYear, year)
     }
 
+    fun addPoi(poi: String, isCheck: Boolean) {
+        if (isCheck) {
+            poiList.add(poi)
+        } else {
+            poiList.remove(poi)
+        }
+        _poiList.value = poiList.toList()
+    }
+
     fun addTemporaryPictureFromGallery(imageUri: Uri) {
         val pictureEntity = PicturesEntity(
             id = 0,
@@ -121,7 +135,7 @@ class AddFormViewModel @Inject constructor(
 
     private fun updateRealEstateIdForTemporaryPictures(newRealEstateId: Long) {
         val tempList = _temporaryPictures.value?.toMutableList() ?: return
-        tempList.forEach { it.realEstateId = newRealEstateId}
+        tempList.forEach { it.realEstateId = newRealEstateId }
         _temporaryPictures.value = tempList.toList()
         viewModelScope.launch {
 

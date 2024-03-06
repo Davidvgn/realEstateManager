@@ -85,10 +85,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             startActivityForResult(intent, 0)
         }
 
-
-
-
-
         binding.addRealEstateTvSelectedAddress.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
 
 
@@ -227,6 +223,31 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             viewModel.onTypeChanged(getSelectedText(chipGroup, i))
         }
 
+      binding.addRealEstateCheckBoxPharmacie.setOnClickListener {
+          viewModel.addPoi(binding.addRealEstateCheckBoxPharmacie.text.toString(), binding.addRealEstateCheckBoxPharmacie.isChecked)
+      }
+
+      binding.addRealEstateCheckBoxHospitals.setOnClickListener {
+          viewModel.addPoi(binding.addRealEstateCheckBoxHospitals.text.toString(), binding.addRealEstateCheckBoxHospitals.isChecked)
+
+      }
+      binding.addRealEstateCheckBoxRestaurant.setOnClickListener {
+          viewModel.addPoi(binding.addRealEstateCheckBoxRestaurant.text.toString(), binding.addRealEstateCheckBoxRestaurant.isChecked)
+
+      }
+      binding.addRealEstateCheckBoxSchool.setOnClickListener {
+          viewModel.addPoi(binding.addRealEstateCheckBoxSchool.text.toString(), binding.addRealEstateCheckBoxSchool.isChecked)
+
+      }
+      binding.addRealEstateCheckBoxShops.setOnClickListener {
+          viewModel.addPoi(binding.addRealEstateCheckBoxShops.text.toString(), binding.addRealEstateCheckBoxShops.isChecked)
+
+      }
+      binding.addRealEstateCheckBoxTransportation.setOnClickListener {
+          viewModel.addPoi(binding.addRealEstateCheckBoxTransportation.text.toString(), binding.addRealEstateCheckBoxTransportation.isChecked)
+
+      }
+
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
             viewModel.onTextPriceChanged(it?.toString())
         }
@@ -261,7 +282,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             viewModel.addTemporaryPictureFromGallery(cameraPhotoUri)
         }
     }
-
 }
 
 private fun getSelectedText(chipGroup: ChipGroup, id: Int): String {
