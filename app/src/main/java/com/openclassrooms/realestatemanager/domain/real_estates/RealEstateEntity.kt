@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class RealEstateEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+    val creationDate: String,
     val type: String?,
     val photo: String?,
     val salePrice: String?,

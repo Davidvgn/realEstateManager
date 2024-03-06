@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.details
 
 data class DetailViewState(
+    val creationDate: String?,
     val type: String?,
     val salePrice: String?,
     val floorArea: String?,

@@ -24,6 +24,7 @@ class DetailsViewModel @Inject constructor(
     val viewStateLiveData: LiveData<DetailViewState> = liveData {
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
             val realEstateDetails = DetailViewState(
+                creationDate = realEstate.creationDate,
                 type = realEstate.type,
                 salePrice = realEstate.salePrice,
                 floorArea = realEstate.floorArea,

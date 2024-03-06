@@ -1,6 +1,7 @@
 {
   "data": [
     {
+      "createdThe": "06/03/2024",
       "type": "Flat",
       "city": "Lyon",
       "price": "210 000",
@@ -9,6 +10,7 @@
       "location": "56 rue NoName 75010 Paris."
     },
     {
+      "createdThe": "06/03/2024",
       "type": "House",
       "city": "Toulouse",
       "price": "650 000",
@@ -18,6 +20,7 @@
 
     },
     {
+      "createdThe": "06/03/2024",
       "type": "Duplex",
       "city": "Manhattan",
       "price": "1 210 000",

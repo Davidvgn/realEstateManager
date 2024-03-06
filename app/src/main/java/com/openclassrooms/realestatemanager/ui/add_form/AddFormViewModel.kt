@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.data.utils.Utils
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
 import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddTemporaryPictureUseCase
@@ -46,6 +47,7 @@ class AddFormViewModel @Inject constructor(
     //todo david texte en dur
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
         val newRealEstate = RealEstateEntity(
+            creationDate = Utils.getTodayDate(),
             type = chip ?: "Préciser le type",
             salePrice = price ?: "Préciser le prix",
             photo= photo.toString(),

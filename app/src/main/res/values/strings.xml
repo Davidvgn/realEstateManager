@@ -97,6 +97,7 @@
     <string name="max_floorAre">Max surface</string>
     <string name="selectedAddress">Selected Address :</string>
     <string name="no_address_selected">No address selected</string>
+    <string name="created_the">Form Created The :</string>
 
 
 </resources>
