@@ -233,7 +233,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             datePickerDialog?.show()
         }
 
-        viewModel.onSaleDateChangeLiveData.observe(viewLifecycleOwner) {
+        viewModel.upForSaleDateChangeLiveData.observe(viewLifecycleOwner) {
             saleDate.setText(it)
         }
 

@@ -8,8 +8,8 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.data.utils.Utils
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.getTodayDate
 import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 import com.openclassrooms.realestatemanager.domain.agent.GetAgentsUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
@@ -43,7 +43,6 @@ class AddFormViewModel @Inject constructor(
     private val _agentsLiveData = MutableLiveData<List<AgentEntity>>()
     val agentsLiveData: LiveData<List<AgentEntity>> = _agentsLiveData
 
-
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
     private var photo: Uri? =
         Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
@@ -52,17 +51,19 @@ class AddFormViewModel @Inject constructor(
     private val _poiList = MutableLiveData<List<String>>()
     val poiList = _poiList.value?.toMutableList() ?: mutableListOf()
 
-
-    private val onSaleDateChangeMutableLiveData = MutableLiveData<String>()
-    val onSaleDateChangeLiveData: LiveData<String> = onSaleDateChangeMutableLiveData
+    private val upForSaleDateChangeMutableLiveData = MutableLiveData<String>()
+    val upForSaleDateChangeLiveData: LiveData<String> = upForSaleDateChangeMutableLiveData
     private val onSoldDateChangeMutableLiveData = MutableLiveData<String>()
     val onSoldDateChangeLiveData: LiveData<String> = onSoldDateChangeMutableLiveData
 
     //todo david texte en dur
     //todo david : viewModelScope doit launch le AddRealEstateViewState et non créer un realEstateEntity
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
+        val upForSaleDate = upForSaleDateChangeMutableLiveData.value
+        val soldDate = onSoldDateChangeLiveData.value
+
         val newRealEstate = RealEstateEntity(
-            creationDate = Utils.getTodayDate(),
+            creationDate = getTodayDate(),
             type = chip ?: "Préciser le type",
             salePrice = price ?: "Préciser le prix",
             photo = photo.toString(),
@@ -72,8 +73,8 @@ class AddFormViewModel @Inject constructor(
             address = address ?: "Précisez l'adresse",
             pointOfInterest = poiList,
             status = "",
-            upForSaleDate = onSaleDateChangeLiveData.toString(),
-            dateOfSale = onSoldDateChangeLiveData.toString(),
+            upForSaleDate = upForSaleDate ?: "Non communiqué",
+            dateOfSale = soldDate ?:"Non communiqué",
             realEstateAgent = agentName.toString(),
             latLng = latLng
         )
@@ -111,7 +112,7 @@ class AddFormViewModel @Inject constructor(
     }
 
     fun onDateChanged(dayOfMonth: Int, monthOfYear: Int, year: Int) {
-        onSaleDateChangeMutableLiveData.value = formatDate(dayOfMonth, monthOfYear, year)
+        upForSaleDateChangeMutableLiveData.value = formatDate(dayOfMonth, monthOfYear, year)
     }
 
     fun onSoldDateChanged(dayOfMonth: Int, monthOfYear: Int, year: Int) {

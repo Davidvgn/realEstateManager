@@ -29,7 +29,7 @@
     <string name="address">Adresse</string>
     <string name="poi">Point d\'intérêts :</string>
     <string name="Status">Statut</string>
-    <string name="date_of_sale">Date de mise en vente</string>
+    <string name="upForSaleDate">Date de mise en vente</string>
     <string name="sold_date">Date de vente</string>
     <string name="Agent">Nom du Vendeur</string>
 

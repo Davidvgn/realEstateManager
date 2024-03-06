@@ -229,6 +229,31 @@
                 tools:text="@sample/realEstate.json/data/location" />
 
             <TextView
+                android:id="@+id/real_estate_details_textView_upForSale_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/upForSaleDate"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location" />
+
+            <TextView
+                android:id="@+id/real_estate_details_textView_upForSale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/real_estate_details_textView_upForSale_title"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location"
+                tools:text="@sample/realEstate.json/data/dateOfSale"
+                />
+
+            <TextView
                 android:id="@+id/real_estate_details_textView_agent_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -239,20 +264,19 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location" />
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_upForSale" />
 
             <TextView
                 android:id="@+id/real_estate_details_textView_agent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/real_estate_details_textView_agent_title"
-                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location"
-                tools:text="@sample/realEstate.json/data/type"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_upForSale"
+                tools:text="@sample/realEstate.json/data/agent"
                 />
-
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/staticMap"
@@ -261,7 +285,7 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="64dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location" />
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_agent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

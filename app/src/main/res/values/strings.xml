@@ -25,7 +25,7 @@
     <string name="address">Address</string>
     <string name="poi">Point of Interest</string>
     <string name="Status">Status</string>
-    <string name="date_of_sale">Date of sale</string>
+    <string name="upForSaleDate">Up for sale date :</string>
     <string name="sold_date">Sold Date</string>
     <string name="Agent">Agent</string>
 
