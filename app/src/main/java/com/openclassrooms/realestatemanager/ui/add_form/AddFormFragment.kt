@@ -39,21 +39,41 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
     private val viewModel by viewModels<AddFormViewModel>()
     private var maxWidth = 0
-
+    private lateinit var cameraPhotoUri: Uri
 
     companion object {
         fun newInstance() = AddFormFragment()
-        private lateinit var cameraPhotoUri: Uri
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
+        val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
+        var minSoldDate: Long = Calendar.getInstance().timeInMillis
+        val allChips = listOf(
+            binding.addFormChipHouse,
+            binding.addFormChipFlat,
+            binding.addFormChipLoft,
+            binding.addFormChipDuplex,
+            binding.addFormChipLand,
+            binding.addFormChipOther
+        )
+
+        val autocompleteFragment =
+            childFragmentManager.findFragmentById(R.id.add_realEstate_autocomplete_fragment)
+                    as AutocompleteSupportFragment
+
+        if (!Places.isInitialized()) {
+            context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
+        }
+
+
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
 
-
+        //Pictures from gallery
         val imageContract =
             registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
                 if (uris.isNotEmpty()) {
@@ -64,7 +84,12 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
                     Log.d("PhotoPicker", "No media selected")
                 }
             }
+        binding.buttonPhotoFromGallery.setOnClickListener {
+            imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
 
+
+        //Pictures from camera
         binding.buttonPhotoFromCamera.setOnClickListener {
             cameraPhotoUri = FileProvider.getUriForFile(
                 requireContext(),
@@ -94,15 +119,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
 
 
         // Allows all chips to have the same width based on the widest
-        val allChips = listOf(
-            binding.addFormChipHouse,
-            binding.addFormChipFlat,
-            binding.addFormChipLoft,
-            binding.addFormChipDuplex,
-            binding.addFormChipLand,
-            binding.addFormChipOther
-        )
-
         allChips.forEach { chip ->
             chip.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
             val chipWidth = chip.measuredWidth
@@ -120,18 +136,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         }
 
 
-        val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
-        val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
-        var minSoldDate: Long = Calendar.getInstance().timeInMillis
-
-        if (!Places.isInitialized()) {
-            context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
-        }
-
-        val autocompleteFragment =
-            childFragmentManager.findFragmentById(R.id.add_realEstate_autocomplete_fragment)
-                    as AutocompleteSupportFragment
-
+        //Autocomplete address field
         autocompleteFragment.setPlaceFields(
             listOf(
                 Place.Field.ID,
@@ -223,30 +228,48 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             viewModel.onTypeChanged(getSelectedText(chipGroup, i))
         }
 
-      binding.addRealEstateCheckBoxPharmacie.setOnClickListener {
-          viewModel.addPoi(binding.addRealEstateCheckBoxPharmacie.text.toString(), binding.addRealEstateCheckBoxPharmacie.isChecked)
-      }
+        binding.addRealEstateCheckBoxPharmacie.setOnClickListener {
+            viewModel.addPoi(
+                binding.addRealEstateCheckBoxPharmacie.text.toString(),
+                binding.addRealEstateCheckBoxPharmacie.isChecked
+            )
+        }
 
-      binding.addRealEstateCheckBoxHospitals.setOnClickListener {
-          viewModel.addPoi(binding.addRealEstateCheckBoxHospitals.text.toString(), binding.addRealEstateCheckBoxHospitals.isChecked)
+        binding.addRealEstateCheckBoxHospitals.setOnClickListener {
+            viewModel.addPoi(
+                binding.addRealEstateCheckBoxHospitals.text.toString(),
+                binding.addRealEstateCheckBoxHospitals.isChecked
+            )
 
-      }
-      binding.addRealEstateCheckBoxRestaurant.setOnClickListener {
-          viewModel.addPoi(binding.addRealEstateCheckBoxRestaurant.text.toString(), binding.addRealEstateCheckBoxRestaurant.isChecked)
+        }
+        binding.addRealEstateCheckBoxRestaurant.setOnClickListener {
+            viewModel.addPoi(
+                binding.addRealEstateCheckBoxRestaurant.text.toString(),
+                binding.addRealEstateCheckBoxRestaurant.isChecked
+            )
 
-      }
-      binding.addRealEstateCheckBoxSchool.setOnClickListener {
-          viewModel.addPoi(binding.addRealEstateCheckBoxSchool.text.toString(), binding.addRealEstateCheckBoxSchool.isChecked)
+        }
+        binding.addRealEstateCheckBoxSchool.setOnClickListener {
+            viewModel.addPoi(
+                binding.addRealEstateCheckBoxSchool.text.toString(),
+                binding.addRealEstateCheckBoxSchool.isChecked
+            )
 
-      }
-      binding.addRealEstateCheckBoxShops.setOnClickListener {
-          viewModel.addPoi(binding.addRealEstateCheckBoxShops.text.toString(), binding.addRealEstateCheckBoxShops.isChecked)
+        }
+        binding.addRealEstateCheckBoxShops.setOnClickListener {
+            viewModel.addPoi(
+                binding.addRealEstateCheckBoxShops.text.toString(),
+                binding.addRealEstateCheckBoxShops.isChecked
+            )
 
-      }
-      binding.addRealEstateCheckBoxTransportation.setOnClickListener {
-          viewModel.addPoi(binding.addRealEstateCheckBoxTransportation.text.toString(), binding.addRealEstateCheckBoxTransportation.isChecked)
+        }
+        binding.addRealEstateCheckBoxTransportation.setOnClickListener {
+            viewModel.addPoi(
+                binding.addRealEstateCheckBoxTransportation.text.toString(),
+                binding.addRealEstateCheckBoxTransportation.isChecked
+            )
 
-      }
+        }
 
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
             viewModel.onTextPriceChanged(it?.toString())
