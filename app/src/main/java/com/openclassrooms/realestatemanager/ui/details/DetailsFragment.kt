@@ -60,6 +60,7 @@ class DetailsFragment: Fragment(R.layout.details_real_estate_fragment), OnMapRea
             binding.realEstateDetailsTextViewFloorArea.text = it.floorArea
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
             binding.realEstateDetailsTextViewLocation.text = it.address
+            binding.realEstateDetailsTextViewPoi.text = it.poi.toString()
         }
 
 //        viewModel.realEstatePictures.observe(viewLifecycleOwner){ uriString ->

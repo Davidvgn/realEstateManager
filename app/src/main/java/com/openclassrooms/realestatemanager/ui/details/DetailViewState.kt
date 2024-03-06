@@ -9,6 +9,7 @@ data class DetailViewState(
     val description: String?,
     val address: String?,
     val status: String?,
+    val poi: List<String?>,
     val upForSaleDate: String?,
     val dateOfSale: String?,
     val realEstateAgent: Int?

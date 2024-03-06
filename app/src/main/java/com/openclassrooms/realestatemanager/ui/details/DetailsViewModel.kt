@@ -32,6 +32,7 @@ class DetailsViewModel @Inject constructor(
                 description = realEstate.description,
                 address = realEstate.address,
                 status = realEstate.status,
+                poi = realEstate.pointOfInterest,
                 upForSaleDate = realEstate.upForSaleDate,
                 dateOfSale = realEstate.dateOfSale,
                 realEstateAgent = realEstate.realEstateAgent
