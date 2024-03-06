@@ -11,4 +11,8 @@ class AgentRepositoryImpl @Inject constructor(
     override suspend fun getAgentById(agentId: Long): AgentEntity? {
         return agentDao.getAgentById(agentId)
     }
+
+    override suspend fun getAllAgent(): List<AgentEntity> {
+        return agentDao.getAllAgent()
+    }
 }

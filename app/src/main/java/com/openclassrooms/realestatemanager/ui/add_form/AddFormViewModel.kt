@@ -10,6 +10,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.data.utils.Utils
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
+import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
+import com.openclassrooms.realestatemanager.domain.agent.GetAgentsUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddTemporaryPictureUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.DeleteTemporaryPicturesListUseCase
@@ -25,7 +27,8 @@ class AddFormViewModel @Inject constructor(
     private val addRealEstateUseCase: AddRealEstateUseCase,
     private val addTemporaryPictureUseCase: AddTemporaryPictureUseCase,
     private val addPicturesUseCase: AddPicturesUseCase,
-    private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase
+    private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase,
+    private val getAgentsUseCase: GetAgentsUseCase
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -35,6 +38,11 @@ class AddFormViewModel @Inject constructor(
     private var description: String? = null
     private var numberOfRooms: String? = null
     private var latLng: LatLng? = null
+    private var agentId: Long? = null
+
+    private val _agentsLiveData = MutableLiveData<List<AgentEntity>>()
+    val agentsLiveData: LiveData<List<AgentEntity>> = _agentsLiveData
+
 
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
     private var photo: Uri? =
@@ -66,7 +74,7 @@ class AddFormViewModel @Inject constructor(
             status = "",
             upForSaleDate = onSaleDateChangeLiveData.toString(),
             dateOfSale = onSoldDateChangeLiveData.toString(),
-            realEstateAgent = null,
+            realEstateAgent = agentId.toString(),
             latLng = latLng
         )
         viewModelScope.launch {
@@ -149,8 +157,21 @@ class AddFormViewModel @Inject constructor(
         }
     }
 
-    fun addLatLng(lat: Double, lng : Double) {
-        latLng = LatLng(lat,lng)
+    fun addLatLng(lat: Double, lng: Double) {
+        latLng = LatLng(lat, lng)
     }
+
+    fun onAgentSelected(id: Long) {
+        this.agentId = id
+
+    }
+
+    fun fetchAgents() {
+        viewModelScope.launch {
+            val agents = getAgentsUseCase()
+            _agentsLiveData.postValue(agents)
+        }
+    }
+
 
 }

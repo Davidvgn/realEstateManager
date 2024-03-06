@@ -49,6 +49,21 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = AgentSpinnerAdapter()
+        binding.addFormTextInputEditTextRealEstateAgent.setAdapter(adapter)
+        binding.addFormTextInputEditTextRealEstateAgent.setOnItemClickListener { _, _, position, _ ->
+            adapter.getItem(position)?.let {
+                viewModel.onAgentSelected(it.id)
+            }
+        }
+
+        viewModel.fetchAgents()
+
+        viewModel.agentsLiveData.observe(viewLifecycleOwner) { agents ->
+            adapter.setData(agents)
+            binding.addFormTextInputEditTextRealEstateAgent.setAdapter(adapter)
+        }
+
         val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
