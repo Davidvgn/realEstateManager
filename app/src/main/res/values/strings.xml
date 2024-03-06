@@ -18,7 +18,7 @@
     <!--Add RealEstate Fragment xml -->
     <string name="add_new">Add new</string>
     <string name="type">Type</string>
-    <string name="price">Price</string>
+    <string name="price">Price :</string>
     <string name="floorArea">Floor Area</string>
     <string name="number_of_rooms">Number of Rooms</string>
     <string name="description">Description</string>
@@ -98,6 +98,7 @@
     <string name="selectedAddress">Selected Address :</string>
     <string name="no_address_selected">No address selected</string>
     <string name="created_the">Form Created The :</string>
+    <string name="Manage">Manage by :</string>
 
 
 </resources>

@@ -80,6 +80,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/real_estate_details_textView_pictures_title" />
 
             <TextView
+                android:id="@+id/real_estate_details_textView_price_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/price"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_photo_list_fragment_container" />
+
+            <TextView
+                android:id="@+id/real_estate_details_textView_price_"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/real_estate_details_photo_list_fragment_container"
+                app:layout_constraintStart_toEndOf="@id/real_estate_details_textView_price_title"
+                tools:text="@sample/realEstate.json/data/price"
+
+                />
+
+
+
+            <TextView
                 android:id="@+id/real_estate_details_textView_description_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -89,7 +117,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/real_estate_details_photo_list_fragment_container" />
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_price_title" />
 
             <TextView
                 android:id="@+id/real_estate_details_textView_description"
@@ -176,7 +204,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_poi_title" />
 
-
             <TextView
                 android:id="@+id/real_estate_details_textView_location_title"
                 android:layout_width="0dp"
@@ -200,6 +227,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location_title"
                 tools:text="@sample/realEstate.json/data/location" />
+
+            <TextView
+                android:id="@+id/real_estate_details_textView_agent_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/Manage"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location" />
+
+            <TextView
+                android:id="@+id/real_estate_details_textView_agent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/real_estate_details_textView_agent_title"
+                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_location"
+                tools:text="@sample/realEstate.json/data/type"
+                />
+
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/staticMap"

@@ -52,7 +52,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val adapter = AgentSpinnerAdapter()
         binding.addFormTextInputEditTextRealEstateAgent.setOnItemClickListener { _, _, position, _ ->
             adapter.getItem(position)?.let {
-                viewModel.onAgentSelected(it.id)
+                viewModel.onAgentSelected(it.name)
             }
         }
 

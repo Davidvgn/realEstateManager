@@ -38,7 +38,7 @@ class AddFormViewModel @Inject constructor(
     private var description: String? = null
     private var numberOfRooms: String? = null
     private var latLng: LatLng? = null
-    private var agentId: Long? = null
+    private var agentName: String? = null
 
     private val _agentsLiveData = MutableLiveData<List<AgentEntity>>()
     val agentsLiveData: LiveData<List<AgentEntity>> = _agentsLiveData
@@ -74,7 +74,7 @@ class AddFormViewModel @Inject constructor(
             status = "",
             upForSaleDate = onSaleDateChangeLiveData.toString(),
             dateOfSale = onSoldDateChangeLiveData.toString(),
-            realEstateAgent = agentId.toString(),
+            realEstateAgent = agentName.toString(),
             latLng = latLng
         )
         viewModelScope.launch {
@@ -161,8 +161,8 @@ class AddFormViewModel @Inject constructor(
         latLng = LatLng(lat, lng)
     }
 
-    fun onAgentSelected(id: Long) {
-        this.agentId = id
+    fun onAgentSelected(name: String) {
+        this.agentName = name
 
     }
 

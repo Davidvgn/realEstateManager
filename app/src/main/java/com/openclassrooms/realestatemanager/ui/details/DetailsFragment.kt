@@ -63,11 +63,13 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
         viewModel.viewStateLiveData.observe(viewLifecycleOwner) {
             binding.realEstateDetailsTextViewCreationDate.text = it.creationDate
             binding.realEstateDetailsTextViewType.text = it.type
+            binding.realEstateDetailsTextViewPrice.text = it.salePrice
             binding.realEstateDetailsTextViewDescription.text = it.description
             binding.realEstateDetailsTextViewFloorArea.text = it.floorArea
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
             binding.realEstateDetailsTextViewLocation.text = it.address
             binding.realEstateDetailsTextViewPoi.text = it.poi.toString()
+            binding.realEstateDetailsTextViewAgent.text = it.realEstateAgent
 
         }
 

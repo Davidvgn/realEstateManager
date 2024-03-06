@@ -22,7 +22,7 @@
     <string name="cancel">Annuler </string>
 
     <string name="type">Type de bien :</string>
-    <string name="price">Prix du bien</string>
+    <string name="price">Prix du bien :</string>
     <string name="floorArea">Surface en m2</string>
     <string name="number_of_rooms">Nombres de pièces :</string>
     <string name="description">Description</string>
@@ -104,6 +104,8 @@
     <string name="selectedAddress">Addresse choisie :</string>
     <string name="no_address_selected">Aucune addresse sélectionnée</string>
     <string name="created_the">Fiche créée le :</string>
+    <string name="Manage">Vendu par :</string>
+
 
 
 </resources>

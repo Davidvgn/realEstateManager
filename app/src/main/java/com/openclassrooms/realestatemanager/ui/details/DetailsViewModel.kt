@@ -42,7 +42,7 @@ class DetailsViewModel @Inject constructor(
                 poi = realEstate.pointOfInterest,
                 upForSaleDate = realEstate.upForSaleDate,
                 dateOfSale = realEstate.dateOfSale,
-                realEstateAgent = null
+                realEstateAgent = realEstate.realEstateAgent
             )
             emit(realEstateDetails)
         }
