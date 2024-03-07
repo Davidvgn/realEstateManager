@@ -19,7 +19,9 @@ import com.openclassrooms.realestatemanager.domain.pictures.AddTemporaryPictureU
 import com.openclassrooms.realestatemanager.domain.pictures.DeleteTemporaryPicturesListUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import com.openclassrooms.realestatemanager.domain.real_estates.AddRealEstateUseCase
+import com.openclassrooms.realestatemanager.domain.real_estates.CheckPropertyExistenceUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
+import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,7 +33,8 @@ class AddFormViewModel @Inject constructor(
     private val addPicturesUseCase: AddPicturesUseCase,
     private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase,
     private val getAgentsUseCase: GetAgentsUseCase,
-    private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase
+    private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase,
+    private val checkPropertyExistenceUseCase: CheckPropertyExistenceUseCase
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -42,6 +45,9 @@ class AddFormViewModel @Inject constructor(
     private var numberOfRooms: String? = null
     private var latLng: LatLng? = null
     private var agentName: String? = null
+
+    private val _showToastSingleLiveEvent = MutableLiveData<Event<String>>()
+    val showToastSingleLiveEvent: LiveData<Event<String>> = _showToastSingleLiveEvent
 
     private val _agentsLiveData = MutableLiveData<List<AgentEntity>>()
     val agentsLiveData: LiveData<List<AgentEntity>> = _agentsLiveData
@@ -91,8 +97,26 @@ class AddFormViewModel @Inject constructor(
             val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
             updateRealEstateIdForTemporaryPictures(id)
             deleteTemporaryPicturesListUseCase.invoke()
+
+        }
+
+        viewModelScope.launch {
+            val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
+
+           val test =  checkPropertyExistenceUseCase.invoke(id)
+
+            if (test){
+                showToast("Bien Ajouté avec succès") //todo david hardcoded text
+
+            }
         }
     }
+
+
+    private fun showToast(message: String) {
+        _showToastSingleLiveEvent.value = Event(message)
+    }
+
 
 
     fun onNumberOfRoomsChanged(numberOfRooms: String?) {
