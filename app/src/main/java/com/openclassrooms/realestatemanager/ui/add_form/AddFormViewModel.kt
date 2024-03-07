@@ -98,23 +98,19 @@ class AddFormViewModel @Inject constructor(
             updateRealEstateIdForTemporaryPictures(id)
             deleteTemporaryPicturesListUseCase.invoke()
 
-        }
 
-        viewModelScope.launch {
-            val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
+           val isRealEstateInDatabase =  checkPropertyExistenceUseCase.invoke(id)
 
-           val test =  checkPropertyExistenceUseCase.invoke(id)
-
-            if (test){
-                showToast("Bien Ajouté avec succès") //todo david hardcoded text
+            if (isRealEstateInDatabase){
+                showToast() //todo david hardcoded text
 
             }
         }
     }
 
 
-    private fun showToast(message: String) {
-        _showToastSingleLiveEvent.value = Event(message)
+    private fun showToast() {
+        _showToastSingleLiveEvent.value = Event("Bien Ajouté avec succès")//todo david hardcoded text
     }
 
 
