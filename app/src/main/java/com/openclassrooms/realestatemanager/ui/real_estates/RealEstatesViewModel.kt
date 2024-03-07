@@ -43,11 +43,14 @@ class RealEstatesViewModel @Inject constructor(
                     }
                 }
             } else {
+
                 realEstateEntityList.forEach {
-                    val priceInt = it.salePrice?.toInt()
+                    if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
+                        val priceInt = it.salePrice?.toInt()
 
 
-                    it.salePrice = priceInt?.let { formatPriceForUI(priceInt) }
+                        it.salePrice = priceInt?.let { formatPriceForUI(priceInt) }
+                    }
                 }
             }
 
