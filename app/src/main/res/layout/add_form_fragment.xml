@@ -520,6 +520,7 @@
                 android:background="@color/white"
                 android:gravity="start|top"
                 android:hint="@string/description"
+                android:imeOptions="actionDone"
                 android:inputType="textMultiLine"
                 android:paddingTop="16dp" />
         </com.google.android.material.textfield.TextInputLayout>

@@ -42,6 +42,7 @@ class AddFormViewModel @Inject constructor(
     private var price: String? = null
     private var flourArea: String? = null
     private var description: String? = null
+    private var pictureDescription: String? = null
     private var numberOfRooms: String? = null
     private var latLng: LatLng? = null
     private var agentName: String? = null
@@ -102,7 +103,7 @@ class AddFormViewModel @Inject constructor(
            val isRealEstateInDatabase =  checkPropertyExistenceUseCase.invoke(id)
 
             if (isRealEstateInDatabase){
-                showToast() //todo david hardcoded text
+                showToast()
 
             }
         }
