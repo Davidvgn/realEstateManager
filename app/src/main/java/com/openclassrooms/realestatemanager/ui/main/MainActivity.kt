@@ -84,6 +84,11 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
         }
 
         viewModel.isNetworkAvailable.observe(this) { isNetworkAvailable ->
+            binding.connectionLostBanner.visibility = if (isNetworkAvailable) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
         }
 
         viewModel.showToastSingleLiveEvent.observe(this) { event ->
