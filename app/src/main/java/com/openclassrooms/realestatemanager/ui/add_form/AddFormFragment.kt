@@ -7,6 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -32,6 +34,8 @@ import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.util.Calendar
 
 @AndroidEntryPoint
@@ -293,6 +297,51 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
             viewModel.onTextPriceChanged(it?.toString())
         }
+
+
+
+
+
+//        binding.addRealEstateTextInputEditTextPrice.addTextChangedListener(object : TextWatcher {
+//            private val decimalFormat: DecimalFormat = NumberFormat.getInstance() as DecimalFormat
+//
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                // No implementation needed
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                // No implementation needed
+//            }
+//
+//            override fun afterTextChanged(editable: Editable?) {
+//                binding.addRealEstateTextInputEditTextPrice.removeTextChangedListener(this)
+//
+//                try {
+//                    val originalString = editable.toString()
+//
+//                    // Remove commas and dots to get a plain number
+//                    val longVal = originalString.replace("[,.]".toRegex(), "").toLong()
+//
+//                    // Format the number with spaces for thousands
+//                    val formattedString = decimalFormat.format(longVal)
+//
+//                    binding.addRealEstateTextInputEditTextPrice.setText(formattedString)
+//                    binding.addRealEstateTextInputEditTextPrice.setSelection(binding.addRealEstateTextInputEditTextPrice.text?.length ?: 0)
+//                } catch (e: NumberFormatException) {
+//                    // Handle the exception as needed
+//                }
+//
+//                binding.addRealEstateTextInputEditTextPrice.addTextChangedListener(this)
+//            }
+//        })
+
+
+
+
+
+
+
+
 
         binding.addRealEstateTextViewTitleNumberOfRooms.doAfterTextChanged {
             viewModel.onNumberOfRoomsChanged(it?.toString())
