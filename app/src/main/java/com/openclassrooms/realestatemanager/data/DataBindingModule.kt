@@ -48,5 +48,5 @@ abstract class DataBindingModule {
 
     @Binds
     @Singleton
-    abstract fun bindCurrencyRepository(impl: CurrencyRepositoryImpl): CurrencyRepository
+    abstract fun bindCurrencyRepository(impl: CurrencyRepositoryDataStore): CurrencyRepository
 }

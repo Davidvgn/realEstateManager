@@ -9,7 +9,7 @@ import androidx.datastore.preferences.core.Preferences
 import javax.inject.Inject
 
 
-class CurrencyRepositoryImpl @Inject constructor(
+class CurrencyRepositoryDataStore @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : CurrencyRepository {
 
