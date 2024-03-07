@@ -52,7 +52,8 @@ class RealEstatesViewModel @Inject constructor(
             }
 
 
-            val mappedList = mapItemList(realEstateEntityList)
+
+            val mappedList = mapItemList(realEstateEntityList, currency)
             if (mappedList.isEmpty()) {
                 emit(listOf(RealEstatesViewSateItem.EmptyState))
             } else {
@@ -62,25 +63,26 @@ class RealEstatesViewModel @Inject constructor(
     }
 
 
-    private fun mapItem(realEstateEntity: RealEstateEntity) = RealEstatesViewSateItem.RealEstates(
+    private fun mapItem(realEstateEntity: RealEstateEntity, currency: String) = RealEstatesViewSateItem.RealEstates(
         id = realEstateEntity.id,
         realEstatesType = realEstateEntity.type,
         photo = realEstateEntity.photo,
         city = realEstateEntity.address,
         salePrice = realEstateEntity.salePrice,
-        status = realEstateEntity.status
+        status = realEstateEntity.status,
+        currency = currency
     )
 
-    private fun mapItemList(realEstateEntities: List<RealEstateEntity>): List<RealEstatesViewSateItem.RealEstates> {
-        return realEstateEntities.map { mapItem(it) }
+    private fun mapItemList(realEstateEntities: List<RealEstateEntity>, currency: String): List<RealEstatesViewSateItem.RealEstates> {
+        return realEstateEntities.map { mapItem(it, currency) }
     }
 
-    fun formatPriceForUI(price: Int): String {
+    private fun formatPriceForUI(price: Int): String {
         val decimalFormat = NumberFormat.getInstance() as DecimalFormat
         return decimalFormat.format(price)
     }
 
-    fun formatPriceWithSpace(price: Int): String {
+    private fun formatPriceWithSpace(price: Int): String {
         val decimalFormatSymbols = DecimalFormatSymbols.getInstance().apply {
             groupingSeparator = ' ' // Utilisation d'un espace comme séparateur de milliers
         }

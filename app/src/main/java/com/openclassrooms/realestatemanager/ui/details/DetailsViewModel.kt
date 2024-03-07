@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.details
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -33,7 +32,9 @@ class DetailsViewModel @Inject constructor(
             it.latLng?.let { latLng -> emit(latLng) }
         }
     }
-
+    val currentCurrency: LiveData<String> = liveData {
+        emit(getCurrentCurrencyUseCase())
+    }
 
     val viewStateLiveData: LiveData<DetailViewState> = liveData {
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
