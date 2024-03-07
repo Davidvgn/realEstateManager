@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -81,6 +82,17 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             adapter.setData(agents)
             filterRealEstateBinding.filterTextInputEditTextRealEstateAgent.setAdapter(adapter)
         }
+
+        viewModel.isNetworkAvailable.observe(this) { isNetworkAvailable ->
+        }
+
+        viewModel.showToastSingleLiveEvent.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
 
         //Resolves icon and title unwanted presence in filter view
         val menu = binding.mainNavigationView.menu

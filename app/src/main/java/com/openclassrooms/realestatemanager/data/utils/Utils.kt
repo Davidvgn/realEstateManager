@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.data.utils
 
 import android.content.Context
+import android.net.ConnectivityManager
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
@@ -47,11 +48,13 @@ class Utils {
          * Vérification de la connexion réseau
          * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
          *
+         * Voir {@link com.openclassrooms.realestatemanager.data.NetworkRepositoryImpl}
+         *
          * @param context
          * @return
          */
         fun isInternetAvailable(context: Context): Boolean {
-            return true //todo david
+            return true
         }
 
         fun formatDate(dayOfMonth: Int, monthOfYear: Int, year: Int): String =

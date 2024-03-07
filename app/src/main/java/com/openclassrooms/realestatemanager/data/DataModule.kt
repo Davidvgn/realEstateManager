@@ -37,6 +37,12 @@ class DataModule {
 
     @Singleton
     @Provides
+    fun provideApplicationContext(application: Application): Context {
+        return application.applicationContext
+    }
+
+    @Singleton
+    @Provides
     fun provideAppDatabase(
         application: Application,
         ioExecutor: Executor
