@@ -8,8 +8,10 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertEuroToDollar
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatDate
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.getTodayDate
+import com.openclassrooms.realestatemanager.domain.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 import com.openclassrooms.realestatemanager.domain.agent.GetAgentsUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
@@ -28,7 +30,8 @@ class AddFormViewModel @Inject constructor(
     private val addTemporaryPictureUseCase: AddTemporaryPictureUseCase,
     private val addPicturesUseCase: AddPicturesUseCase,
     private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase,
-    private val getAgentsUseCase: GetAgentsUseCase
+    private val getAgentsUseCase: GetAgentsUseCase,
+    private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -61,6 +64,12 @@ class AddFormViewModel @Inject constructor(
     val viewStateAddRealEstateLiveData: LiveData<AddRealEstateViewState> = liveData {
         val upForSaleDate = upForSaleDateChangeMutableLiveData.value
         val soldDate = onSoldDateChangeLiveData.value
+        val currency = getCurrentCurrencyUseCase.invoke()
+
+        if (currency == "Euros"){//todo david changer ne pas mettre en dur
+            val priceInt = price?.toInt()?.let { convertEuroToDollar(it) }
+            price = priceInt.toString()
+        }
 
         val newRealEstate = RealEstateEntity(
             creationDate = getTodayDate(),

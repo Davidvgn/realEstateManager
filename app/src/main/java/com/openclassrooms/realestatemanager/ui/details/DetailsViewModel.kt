@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.data.utils.Utils
+import com.openclassrooms.realestatemanager.domain.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +17,8 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val getRealEstateByIdUseCase: GetRealEstateByIdUseCase,
     private val getPicturesUseCase: GetPicturesUseCase,
-    ) : ViewModel() {
+    private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase
+) : ViewModel() {
 
     private var realEstateId: Long = -1
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
@@ -30,6 +33,14 @@ class DetailsViewModel @Inject constructor(
 
     val viewStateLiveData: LiveData<DetailViewState> = liveData {
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
+
+            val currency = getCurrentCurrencyUseCase.invoke()
+            if (currency == "Euros"){//todo david changer ne pas mettre en dur
+
+                val price = realEstate.salePrice
+                realEstate.salePrice = price?.let { it1 -> Utils.convertDollarToEuro(it1.toInt()) }.toString()
+            }
+
             val realEstateDetails = DetailViewState(
                 creationDate = realEstate.creationDate,
                 type = realEstate.type,
