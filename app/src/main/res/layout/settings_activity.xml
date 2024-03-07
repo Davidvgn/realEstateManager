@@ -61,17 +61,20 @@
                 app:layout_constraintTop_toBottomOf="@id/radioGroup_status">
 
                 <RadioButton
-                    android:id="@+id/settings_activity_radio_button_euros"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:checked="true"
-                    android:text="@string/euros" />
-
-                <RadioButton
                     android:id="@+id/settings_activity_radio_button_dollars"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:checked="true"
                     android:text="@string/dollars" />
+
+                <RadioButton
+                    android:id="@+id/settings_activity_radio_button_euros"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/euros" />
+
+
             </RadioGroup>
         </androidx.cardview.widget.CardView>
 

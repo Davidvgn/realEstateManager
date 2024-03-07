@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertDollarToEuro
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceForUI
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
+import com.openclassrooms.realestatemanager.domain.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +19,8 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val getRealEstateByIdUseCase: GetRealEstateByIdUseCase,
     private val getPicturesUseCase: GetPicturesUseCase,
-    ) : ViewModel() {
+    private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase
+) : ViewModel() {
 
     private var realEstateId: Long = -1
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
@@ -26,10 +31,27 @@ class DetailsViewModel @Inject constructor(
             it.latLng?.let { latLng -> emit(latLng) }
         }
     }
-
+    val currentCurrency: LiveData<String> = liveData {
+        emit(getCurrentCurrencyUseCase())
+    }
 
     val viewStateLiveData: LiveData<DetailViewState> = liveData {
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
+
+            val currency = getCurrentCurrencyUseCase.invoke()
+            val priceInt = realEstate.salePrice?.toInt()
+
+            if (currency == "Euros"){//todo david changer ne pas mettre en dur
+
+                val price = realEstate.salePrice
+                realEstate.salePrice = price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
+
+                realEstate.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
+
+            } else {
+                realEstate.salePrice = priceInt?.let { formatPriceForUI(priceInt) }
+            }
+
             val realEstateDetails = DetailViewState(
                 creationDate = realEstate.creationDate,
                 type = realEstate.type,
@@ -57,6 +79,7 @@ class DetailsViewModel @Inject constructor(
 
         }
     }
+
 
     fun initRealEstateId(id: Long) {
         realEstateId = id

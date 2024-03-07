@@ -5,6 +5,8 @@ import com.openclassrooms.realestatemanager.data.location.LocationRepositoryFuse
 import com.openclassrooms.realestatemanager.data.permissions.PermissionRepositoryImpl
 import com.openclassrooms.realestatemanager.data.pictures.PicturesRepositoryImpl
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateRepositoryRoom
+import com.openclassrooms.realestatemanager.domain.CurrencyRepository
+import com.openclassrooms.realestatemanager.domain.NetworkRepository
 import com.openclassrooms.realestatemanager.domain.agent.AgentRepository
 import com.openclassrooms.realestatemanager.domain.details.DetailsRepository
 import com.openclassrooms.realestatemanager.domain.location.LocationRepository
@@ -44,4 +46,12 @@ abstract class DataBindingModule {
     @Binds
     @Singleton
     abstract fun bindAgentRepository(impl: AgentRepositoryImpl): AgentRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCurrencyRepository(impl: CurrencyRepositoryDataStore): CurrencyRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindNetworkRepository(impl: NetworkRepositoryImpl): NetworkRepository
 }

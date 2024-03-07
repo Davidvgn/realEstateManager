@@ -80,6 +80,7 @@ class RealEstatesAdapter(private val onItemClick: () -> Unit, private val listen
                 binding.realEstateItemTextViewType.text = realEstate.realEstatesType
                 binding.realEstateItemTextViewCity.text = realEstate.city
                 binding.realEstateItemTextViewPrice.text = realEstate.salePrice.toString()
+                binding.realEstateItemTextViewCurrency.text = realEstate.currency
 
                 Glide.with(binding.realEstateItemImageView.context)
                     .load(uri)

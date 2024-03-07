@@ -15,6 +15,7 @@ sealed class RealEstatesViewSateItem(
         val city: String?,
         val salePrice: String?,
         val status: String?,
+        val currency: String?,
     ) : RealEstatesViewSateItem(Type.REAL_ESTATE)
 
     object EmptyState : RealEstatesViewSateItem(Type.EMPTY_STATE)

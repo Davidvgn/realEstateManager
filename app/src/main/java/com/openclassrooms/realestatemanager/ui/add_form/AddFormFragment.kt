@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
@@ -311,6 +312,13 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             }
             activity?.finish()
         }
+
+        viewModel.showToastSingleLiveEvent.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
     }
 

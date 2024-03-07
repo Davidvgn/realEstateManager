@@ -99,6 +99,7 @@
     <string name="no_address_selected">No address selected</string>
     <string name="created_the">Form Created The :</string>
     <string name="Manage">Manage by :</string>
+    <string name="not_connected">Not Connected</string>
 
 
 </resources>

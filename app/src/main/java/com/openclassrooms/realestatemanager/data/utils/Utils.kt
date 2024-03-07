@@ -1,6 +1,10 @@
 package com.openclassrooms.realestatemanager.data.utils
 
 import android.content.Context
+import android.net.ConnectivityManager
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -17,7 +21,7 @@ class Utils {
          * @return
          */
         fun convertDollarToEuro(dollars: Int): Int {
-            return (dollars * 0.95).roundToInt()
+            return (dollars / 1.09).roundToInt()
         }
 
         /**
@@ -28,7 +32,7 @@ class Utils {
          * @return
          */
         fun convertEuroToDollar(euros: Int): Int {
-            return (euros / 0.95).roundToInt()
+            return (euros * 1.09).roundToInt()
         }
 
         /**
@@ -44,11 +48,13 @@ class Utils {
          * Vérification de la connexion réseau
          * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
          *
+         * Voir {@link com.openclassrooms.realestatemanager.data.NetworkRepositoryImpl}
+         *
          * @param context
          * @return
          */
         fun isInternetAvailable(context: Context): Boolean {
-            return true //todo david
+            return true
         }
 
         fun formatDate(dayOfMonth: Int, monthOfYear: Int, year: Int): String =
@@ -59,5 +65,18 @@ class Utils {
                     set(Calendar.YEAR, year)
                 }.time
             )
+
+         fun formatPriceForUI(price: Int): String {
+            val decimalFormat = NumberFormat.getInstance() as DecimalFormat
+            return decimalFormat.format(price)
+        }
+
+         fun formatPriceWithSpace(price: Int): String {
+            val decimalFormatSymbols = DecimalFormatSymbols.getInstance().apply {
+                groupingSeparator = ' '
+            }
+            val decimalFormat = DecimalFormat("#,###", decimalFormatSymbols)
+            return decimalFormat.format(price)
+        }
     }
 }

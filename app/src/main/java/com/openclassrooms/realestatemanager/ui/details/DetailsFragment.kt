@@ -74,6 +74,10 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
 
         }
 
+        viewModel.currentCurrency.observe(viewLifecycleOwner) { currency ->
+            binding.realEstateDetailsTextViewCurrency.text = currency
+        }
+
         viewModel.realEstateLocation.observe(viewLifecycleOwner) { latLng ->
             latitude = latLng.latitude
             longitude = latLng.longitude

@@ -34,6 +34,21 @@
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
+            <TextView
+                android:id="@+id/connection_lost_banner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="@string/not_connected"
+                android:textColor="@android:color/black"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:visibility="gone"
+                android:textSize="16sp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <FrameLayout
                 android:id="@+id/main_FrameLayout_fragment_container"
                 android:layout_width="0dp"
@@ -41,7 +56,7 @@
                 app:layout_constraintBottom_toTopOf="@id/main_BottomNavigationView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/connection_lost_banner" />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/main_BottomNavigationView"
