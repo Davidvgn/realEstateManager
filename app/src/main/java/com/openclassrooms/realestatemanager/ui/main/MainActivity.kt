@@ -91,11 +91,11 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             }
         }
 
-        viewModel.showToastSingleLiveEvent.observe(this) { event ->
-            event.getContentIfNotHandled()?.let { message ->
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-            }
-        }
+//        viewModel.showToastSingleLiveEvent.observe(this) { event ->
+//            event.getContentIfNotHandled()?.let { message ->
+//                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
 
 

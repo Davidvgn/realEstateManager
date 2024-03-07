@@ -73,11 +73,11 @@ class MainViewModel @Inject constructor(
 
             if (previousNetworkStatus != currentNetworkStatus) {
                 previousNetworkStatus = currentNetworkStatus
-                if (currentNetworkStatus) {
-                    showToast("Connected") //todo david hardcoded text
-                } else {
-                    showToast("Connection is lost") //todo david hardcoded text
-                }
+//                if (currentNetworkStatus) {
+//                    showToast("Connected") //todo david hardcoded text
+//                } else {
+//                    showToast("Connection is lost") //todo david hardcoded text
+//                }
             }
 
             delay(INTERVAL_CHECK_NETWORK)
@@ -86,8 +86,8 @@ class MainViewModel @Inject constructor(
         }
 
 
-    private fun showToast(message: String) {
-        _showToastSingleLiveEvent.value = Event(message)
-    }
+//    private fun showToast(message: String) {
+//        _showToastSingleLiveEvent.value = Event(message)
+//    }
 
 }
