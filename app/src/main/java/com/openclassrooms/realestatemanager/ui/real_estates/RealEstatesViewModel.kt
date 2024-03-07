@@ -3,14 +3,14 @@ package com.openclassrooms.realestatemanager.ui.real_estates
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.openclassrooms.realestatemanager.data.utils.Utils
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertDollarToEuro
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceForUI
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
 import com.openclassrooms.realestatemanager.domain.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.GetRealEstatesListUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-import java.text.NumberFormat
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,7 +37,7 @@ class RealEstatesViewModel @Inject constructor(
                     if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
                         val price = it.salePrice
                         it.salePrice =
-                            price?.let { it1 -> Utils.convertDollarToEuro(it1.toInt()) }.toString()
+                            price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
 
                         it.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
                     }
@@ -75,19 +75,6 @@ class RealEstatesViewModel @Inject constructor(
 
     private fun mapItemList(realEstateEntities: List<RealEstateEntity>, currency: String): List<RealEstatesViewSateItem.RealEstates> {
         return realEstateEntities.map { mapItem(it, currency) }
-    }
-
-    private fun formatPriceForUI(price: Int): String {
-        val decimalFormat = NumberFormat.getInstance() as DecimalFormat
-        return decimalFormat.format(price)
-    }
-
-    private fun formatPriceWithSpace(price: Int): String {
-        val decimalFormatSymbols = DecimalFormatSymbols.getInstance().apply {
-            groupingSeparator = ' ' // Utilisation d'un espace comme séparateur de milliers
-        }
-        val decimalFormat = DecimalFormat("#,###", decimalFormatSymbols)
-        return decimalFormat.format(price)
     }
 
 }

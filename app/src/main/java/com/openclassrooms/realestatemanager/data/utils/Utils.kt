@@ -1,6 +1,9 @@
 package com.openclassrooms.realestatemanager.data.utils
 
 import android.content.Context
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -59,5 +62,18 @@ class Utils {
                     set(Calendar.YEAR, year)
                 }.time
             )
+
+         fun formatPriceForUI(price: Int): String {
+            val decimalFormat = NumberFormat.getInstance() as DecimalFormat
+            return decimalFormat.format(price)
+        }
+
+         fun formatPriceWithSpace(price: Int): String {
+            val decimalFormatSymbols = DecimalFormatSymbols.getInstance().apply {
+                groupingSeparator = ' '
+            }
+            val decimalFormat = DecimalFormat("#,###", decimalFormatSymbols)
+            return decimalFormat.format(price)
+        }
     }
 }

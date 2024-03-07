@@ -6,14 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.data.utils.Utils
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertDollarToEuro
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceForUI
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
 import com.openclassrooms.realestatemanager.domain.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-import java.text.NumberFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,7 +44,7 @@ class DetailsViewModel @Inject constructor(
             if (currency == "Euros"){//todo david changer ne pas mettre en dur
 
                 val price = realEstate.salePrice
-                realEstate.salePrice = price?.let { it1 -> Utils.convertDollarToEuro(it1.toInt()) }.toString()
+                realEstate.salePrice = price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
 
                 realEstate.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
 
@@ -80,20 +79,6 @@ class DetailsViewModel @Inject constructor(
 
         }
     }
-
-    fun formatPriceForUI(price: Int): String {
-        val decimalFormat = NumberFormat.getInstance() as DecimalFormat
-        return decimalFormat.format(price)
-    }
-
-    fun formatPriceWithSpace(price: Int): String {
-        val decimalFormatSymbols = DecimalFormatSymbols.getInstance().apply {
-            groupingSeparator = ' ' // Utilisation d'un espace comme séparateur de milliers
-        }
-        val decimalFormat = DecimalFormat("#,###", decimalFormatSymbols)
-        return decimalFormat.format(price)
-    }
-
 
 
     fun initRealEstateId(id: Long) {
