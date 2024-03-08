@@ -202,16 +202,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_floorArea" />
 
-            <TextView
-                android:id="@+id/real_estate_details_textView_poi"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                app:singleSelection="false"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:chipSpacingHorizontal="24dp"
                 app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_poi_title" />
+
 
             <TextView
                 android:id="@+id/real_estate_details_textView_location_title"
@@ -224,7 +224,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/real_estate_details_textView_poi" />
+                app:layout_constraintTop_toBottomOf="@id/chipGroup" />
 
             <TextView
                 android:id="@+id/real_estate_details_textView_location"

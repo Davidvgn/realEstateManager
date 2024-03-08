@@ -15,4 +15,6 @@ class DetailsRepositoryImpl @Inject constructor(
     override fun getRealEstatesByIdAsFlow(id: Long): Flow<RealEstateEntity> =
         realEstateDao.getRealEstateByIdAsFlow(id).flowOn(Dispatchers.IO)
 
-}
+    override  fun getPoiListByRealEstateId(realEstateId: Long) : Flow<List<String>> =
+        realEstateDao.getPoiListByRealEstateId(realEstateId).flowOn(Dispatchers.IO)
+    }

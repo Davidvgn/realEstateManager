@@ -10,6 +10,7 @@ import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertDo
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceForUI
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
 import com.openclassrooms.realestatemanager.domain.GetCurrentCurrencyUseCase
+import com.openclassrooms.realestatemanager.domain.GetPoiListUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,13 +20,22 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val getRealEstateByIdUseCase: GetRealEstateByIdUseCase,
     private val getPicturesUseCase: GetPicturesUseCase,
-    private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase
+    private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase,
+    private val getPoiListUseCase: GetPoiListUseCase
 ) : ViewModel() {
 
     private var realEstateId: Long = -1
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
     private var photo: Uri? =
         Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
+
+
+    val poiListLiveData: LiveData<List<String>> = liveData {
+        getPoiListUseCase.invoke(realEstateId).collect{
+        emit(it)
+        }
+    }
+
 
     val realEstateLocation: LiveData<LatLng> = liveData {
         getRealEstateByIdUseCase.invoke(realEstateId).collect {
@@ -54,7 +64,6 @@ class DetailsViewModel @Inject constructor(
                     }
                 }
             }
-
 
             val realEstateDetails = DetailViewState(
                 creationDate = realEstate.creationDate,

@@ -3,22 +3,26 @@ package com.openclassrooms.realestatemanager.ui.details
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.chip.Chip
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.DetailsRealEstateFragmentBinding
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapReadyCallback {
@@ -68,12 +72,11 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             binding.realEstateDetailsTextViewFloorArea.text = it.floorArea
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
             binding.realEstateDetailsTextViewLocation.text = it.address
-            binding.realEstateDetailsTextViewPoi.text = it.poi.toString()
             binding.realEstateDetailsTextViewUpForSale.text = it.upForSaleDate
             binding.realEstateDetailsTextViewAgent.text = it.realEstateAgent
 
             //todo david gérer ça avec le vm pour éviter les conditions dans la vue
-            if (binding.realEstateDetailsTextViewPrice.text == "Préciser le prix"){//todo david gérer hardcoded text
+            if (binding.realEstateDetailsTextViewPrice.text == "Préciser le prix") {//todo david gérer hardcoded text
                 binding.realEstateDetailsTextViewCurrency.visibility = View.GONE
             }
 
@@ -105,8 +108,27 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
 //
 //            binding.realEstateDetailsPhotoListFragmentContainer.addView(imageView, layoutParams)
 //        }
-    }
 
+        viewModel.poiListLiveData.observe(viewLifecycleOwner) { poiList ->
+            binding.chipGroup.removeAllViews()
+            Log.d("DavidVgn", "onViewCreated: $poiList ${poiList.size}")
+
+            poiList.forEach { pois ->
+                val poiItems =
+                    pois.split(",") // Diviser la chaîne de caractères en une liste de chaînes de caractères
+                poiItems.forEach { poi ->
+
+                    val chip = Chip(requireContext())
+                    chip.text = poi.trim()
+                    chip.isClickable = false
+                    binding.chipGroup.addView(chip)
+                }
+            }
+        }
+
+
+
+    }
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
     }
