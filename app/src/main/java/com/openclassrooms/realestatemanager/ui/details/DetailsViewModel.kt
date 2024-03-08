@@ -39,17 +39,22 @@ class DetailsViewModel @Inject constructor(
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
 
             val currency = getCurrentCurrencyUseCase.invoke()
-            val priceInt = realEstate.salePrice?.toInt()
 
-            if (currency == "Euros"){//todo david changer ne pas mettre en dur
+            if (realEstate.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
 
-                val price = realEstate.salePrice
-                realEstate.salePrice = price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
+                val priceInt = realEstate.salePrice?.toInt()
 
-                realEstate.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
+                if (currency == "Euros") {//todo david changer ne pas mettre en dur
 
-            } else {
-                realEstate.salePrice = priceInt?.let { formatPriceForUI(priceInt) }
+                    val price = realEstate.salePrice
+                    realEstate.salePrice =
+                        price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
+
+                    realEstate.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
+
+                } else {
+                    realEstate.salePrice = priceInt?.let { formatPriceForUI(priceInt) }
+                }
             }
 
             val realEstateDetails = DetailViewState(

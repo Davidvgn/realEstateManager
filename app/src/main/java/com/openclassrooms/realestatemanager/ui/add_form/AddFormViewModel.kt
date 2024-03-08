@@ -34,7 +34,7 @@ class AddFormViewModel @Inject constructor(
     private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase,
     private val getAgentsUseCase: GetAgentsUseCase,
     private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase,
-    private val checkPropertyExistenceUseCase: CheckPropertyExistenceUseCase
+    private val checkPropertyExistenceUseCase: CheckPropertyExistenceUseCase,
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -42,6 +42,7 @@ class AddFormViewModel @Inject constructor(
     private var price: String? = null
     private var flourArea: String? = null
     private var description: String? = null
+    private var pictureDescription: String? = null
     private var numberOfRooms: String? = null
     private var latLng: LatLng? = null
     private var agentName: String? = null
@@ -98,23 +99,19 @@ class AddFormViewModel @Inject constructor(
             updateRealEstateIdForTemporaryPictures(id)
             deleteTemporaryPicturesListUseCase.invoke()
 
-        }
 
-        viewModelScope.launch {
-            val id = addRealEstateUseCase.invoke(realEstate = newRealEstate)
+           val isRealEstateInDatabase =  checkPropertyExistenceUseCase.invoke(id)
 
-           val test =  checkPropertyExistenceUseCase.invoke(id)
-
-            if (test){
-                showToast("Bien Ajouté avec succès") //todo david hardcoded text
+            if (isRealEstateInDatabase){
+                showToast()
 
             }
         }
     }
 
 
-    private fun showToast(message: String) {
-        _showToastSingleLiveEvent.value = Event(message)
+    private fun showToast() {
+        _showToastSingleLiveEvent.value = Event("Bien Ajouté avec succès")//todo david hardcoded text
     }
 
 
@@ -161,11 +158,12 @@ class AddFormViewModel @Inject constructor(
         _poiList.value = poiList.toList()
     }
 
-    fun addTemporaryPictureFromGallery(imageUri: Uri) {
+    fun addTemporaryPicture(imageUri: Uri, title: String) {
         val pictureEntity = PicturesEntity(
             id = 0,
             realEstateId = null,
             uri = imageUri.toString(),
+            title
         )
 
         val tempList = _temporaryPictures.value?.toMutableList() ?: mutableListOf()

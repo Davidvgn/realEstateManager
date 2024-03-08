@@ -7,7 +7,6 @@ import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetTemporaryPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,6 +45,7 @@ class PicturesViewModel @Inject constructor(
 private fun mapItem(picture: PicturesEntity) = PicturesViewStateItem.Pictures(
     id = picture.id,
     uri = picture.uri,
+    title = picture.title
 )
 
 private fun mapItemList(picturesEntities: List<PicturesEntity>): List<PicturesViewStateItem.Pictures> {

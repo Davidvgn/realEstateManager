@@ -100,6 +100,9 @@
     <string name="created_the">Form Created The :</string>
     <string name="Manage">Manage by :</string>
     <string name="not_connected">Not Connected</string>
+    <string name="pictures_description">Description</string>
+    <string name="picture_title">Title :</string>
+    <string name="ok">OK</string>
 
 
 </resources>

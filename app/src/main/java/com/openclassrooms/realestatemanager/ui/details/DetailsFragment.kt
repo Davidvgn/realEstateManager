@@ -72,7 +72,13 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             binding.realEstateDetailsTextViewUpForSale.text = it.upForSaleDate
             binding.realEstateDetailsTextViewAgent.text = it.realEstateAgent
 
+            //todo david gérer ça avec le vm pour éviter les conditions dans la vue
+            if (binding.realEstateDetailsTextViewPrice.text == "Préciser le prix"){//todo david gérer hardcoded text
+                binding.realEstateDetailsTextViewCurrency.visibility = View.GONE
+            }
+
         }
+
 
         viewModel.currentCurrency.observe(viewLifecycleOwner) { currency ->
             binding.realEstateDetailsTextViewCurrency.text = currency

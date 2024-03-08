@@ -9,7 +9,6 @@ import com.openclassrooms.realestatemanager.domain.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 import com.openclassrooms.realestatemanager.domain.agent.GetAgentsUseCase
 import com.openclassrooms.realestatemanager.domain.permission.RefreshPermissionsUseCase
-import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,10 +25,6 @@ class MainViewModel @Inject constructor(
 
     private val _isNetworkAvailable = MutableLiveData<Boolean>()
     val isNetworkAvailable: LiveData<Boolean> = _isNetworkAvailable
-    private var previousNetworkStatus: Boolean? = null
-
-    private val _showToastSingleLiveEvent = MutableLiveData<Event<String>>()
-    val showToastSingleLiveEvent: LiveData<Event<String>> = _showToastSingleLiveEvent
 
     private val _currentCurrency = MutableLiveData<String>()
 
@@ -42,14 +37,14 @@ class MainViewModel @Inject constructor(
         private const val INTERVAL_CHECK_NETWORK = 5000L
     }
 
-        init {
-            viewModelScope.launch {
-                getCurrentCurrencyUseCase().let { currency ->
-                    _currentCurrency.value = currency
-                }
-                checkNetworkStatus()
+    init {
+        viewModelScope.launch {
+            getCurrentCurrencyUseCase().let { currency ->
+                _currentCurrency.value = currency
             }
+            checkNetworkStatus()
         }
+    }
 
     fun fetchAgents() {
         viewModelScope.launch {
@@ -66,28 +61,15 @@ class MainViewModel @Inject constructor(
     fun onPermissionUpdated() {
         refreshPermissionsUseCase.invoke()
     }
+
     private fun checkNetworkStatus() {
         viewModelScope.launch {
             val currentNetworkStatus = checkNetworkConnectionUseCase.invoke()
             _isNetworkAvailable.value = currentNetworkStatus
 
-            if (previousNetworkStatus != currentNetworkStatus) {
-                previousNetworkStatus = currentNetworkStatus
-//                if (currentNetworkStatus) {
-//                    showToast("Connected") //todo david hardcoded text
-//                } else {
-//                    showToast("Connection is lost") //todo david hardcoded text
-//                }
-            }
-
             delay(INTERVAL_CHECK_NETWORK)
             checkNetworkStatus()
         }
-        }
-
-
-//    private fun showToast(message: String) {
-//        _showToastSingleLiveEvent.value = Event(message)
-//    }
+    }
 
 }

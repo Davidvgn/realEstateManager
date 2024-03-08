@@ -30,13 +30,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
+import com.openclassrooms.realestatemanager.ui.utils.PictureDescriptionListener
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.Calendar
 
 @AndroidEntryPoint
-class AddFormFragment : Fragment(R.layout.add_form_fragment) {
+class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescriptionListener {
 
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
     private val viewModel by viewModels<AddFormViewModel>()
@@ -89,16 +90,28 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
 
+//todo david version multiple sélection : à conserver le temps de voir comment gérer la description des photos
+//        //Pictures from gallery
+//        val imageContract =
+//            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
+//                if (uris.isNotEmpty()) {
+//                    for (uri in uris) {
+//                        viewModel.addTemporaryPictureFromGallery(uri)
+//                    }
+//                } else {
+//                    Log.d("PhotoPicker", "No media selected")
+//                }
+//            }
+
         //Pictures from gallery
         val imageContract =
-            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
-                if (uris.isNotEmpty()) {
-                    for (uri in uris) {
-                        viewModel.addTemporaryPictureFromGallery(uri)
-                    }
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+                if (uri !=  null) {
+                    AddPictureDescriptionDialog.newInstance(uri, this).show(childFragmentManager, null)
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
+
             }
         binding.buttonPhotoFromGallery.setOnClickListener {
             imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -125,12 +138,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         }
 
         binding.addRealEstateTvSelectedAddress.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-
-
-        binding.buttonPhotoFromGallery.setOnClickListener {
-            imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        }
-
 
         // Allows all chips to have the same width based on the widest
         allChips.forEach { chip ->
@@ -327,8 +334,12 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            viewModel.addTemporaryPictureFromGallery(cameraPhotoUri)
+            AddPictureDescriptionDialog.newInstance(cameraPhotoUri, this).show(childFragmentManager, null)
         }
+    }
+
+    override fun onDescriptionFilled(uri: Uri, title: String) {
+        viewModel.addTemporaryPicture(uri, title)
     }
 }
 

@@ -16,4 +16,5 @@ data class PicturesEntity(
     val id: Long,
     var realEstateId: Long?,
     val uri: String,
+    val title: String,
 )
