@@ -63,7 +63,7 @@ class PicturesAdapter :
                     .load(picture.uri)
                     .into(binding.pictureImageView)
 
-                binding.pictureDescription.setText(picture.title)
+                binding.pictureTitle.text = picture.title
             }
         }
     }
