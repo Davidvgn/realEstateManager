@@ -17,7 +17,7 @@ class CurrencyRepositoryDataStore @Inject constructor(
 
     companion object {
         private val CURRENCY_KEY = stringPreferencesKey("currency_key")
-        private const val DEFAULT_CURRENCY = "Dollars"
+        private const val DEFAULT_CURRENCY = "$"
     }
 
     override suspend fun getCurrentCurrency(): String {

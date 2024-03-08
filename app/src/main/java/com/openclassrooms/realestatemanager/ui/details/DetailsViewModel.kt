@@ -44,7 +44,7 @@ class DetailsViewModel @Inject constructor(
             var convertedPrice = realEstate.salePrice
 
             if (realEstate.salePrice != "Préciser le prix") {                //todo david mieux gérer les placeholders
-                if (currency == "Euros") {                                  //todo david changer ne pas mettre en dur
+                if (currency == "€") {                                  //todo david changer ne pas mettre en dur
                     val price = convertedPrice?.let { convertDollarToEuro(it.toInt()) }
                     convertedPrice = price.toString()
                     convertedPrice = formatPriceWithSpace(convertedPrice.toInt())

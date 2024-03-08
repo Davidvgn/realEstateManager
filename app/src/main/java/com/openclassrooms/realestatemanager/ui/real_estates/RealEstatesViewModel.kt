@@ -28,7 +28,7 @@ class RealEstatesViewModel @Inject constructor(
             val currency = getCurrentCurrencyUseCase.invoke()
 
 
-            if (currency == "Euros") {                                      //todo david changer ne pas mettre en dur
+            if (currency == "€") {                                      //todo david changer ne pas mettre en dur
                 realEstateEntityList.forEach { realEstate ->
                     if (realEstate.salePrice != "Préciser le prix") {               //todo david mieux gérer les placeholders et les répétitions
 
