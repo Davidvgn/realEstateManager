@@ -15,6 +15,7 @@ sealed class PicturesViewStateItem(
         (
         val id: Long,
         val uri: String,
+        val title: String,
     ): PicturesViewStateItem(Type.PICTURES)
 
     object EmptyState: PicturesViewStateItem(Type.EMPTY_STATE)

@@ -62,6 +62,8 @@ class PicturesAdapter :
                     .with(itemView.context)
                     .load(picture.uri)
                     .into(binding.pictureImageView)
+
+                binding.pictureDescription.setText(picture.title)
             }
         }
     }

@@ -30,13 +30,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
+import com.openclassrooms.realestatemanager.ui.utils.PictureDescriptionListener
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.Calendar
 
 @AndroidEntryPoint
-class AddFormFragment : Fragment(R.layout.add_form_fragment) {
+class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescriptionListener {
 
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
     private val viewModel by viewModels<AddFormViewModel>()
@@ -106,12 +107,10 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         val imageContract =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 if (uri !=  null) {
-                        viewModel.addTemporaryPicture(uri)
-
+                    AddPictureDescriptionDialog.newInstance(uri, this).show(childFragmentManager, null)
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
-                AddPictureDescriptionDialog.newInstance().show(childFragmentManager, null)
 
             }
         binding.buttonPhotoFromGallery.setOnClickListener {
@@ -335,8 +334,12 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            viewModel.addTemporaryPicture(cameraPhotoUri)
+            AddPictureDescriptionDialog.newInstance(cameraPhotoUri, this).show(childFragmentManager, null)
         }
+    }
+
+    override fun onDescriptionFilled(uri: Uri, title: String) {
+        viewModel.addTemporaryPicture(uri, title)
     }
 }
 

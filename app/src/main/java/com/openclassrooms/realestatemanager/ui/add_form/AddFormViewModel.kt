@@ -158,11 +158,12 @@ class AddFormViewModel @Inject constructor(
         _poiList.value = poiList.toList()
     }
 
-    fun addTemporaryPicture(imageUri: Uri) {
+    fun addTemporaryPicture(imageUri: Uri, title: String) {
         val pictureEntity = PicturesEntity(
             id = 0,
             realEstateId = null,
             uri = imageUri.toString(),
+            title
         )
 
         val tempList = _temporaryPictures.value?.toMutableList() ?: mutableListOf()
