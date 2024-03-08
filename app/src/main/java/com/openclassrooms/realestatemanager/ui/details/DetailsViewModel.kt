@@ -24,10 +24,11 @@ class DetailsViewModel @Inject constructor(
 
     private var realEstateId: Long = -1
     private val resourceId: Int = R.drawable.baseline_no_photography_black_36
-    private var photo: Uri? = Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
+    private var photo: Uri? =
+        Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
     val realEstateLocation: LiveData<LatLng> = liveData {
-        getRealEstateByIdUseCase.invoke(realEstateId).collect{
+        getRealEstateByIdUseCase.invoke(realEstateId).collect {
             it.latLng?.let { latLng -> emit(latLng) }
         }
     }
@@ -36,31 +37,29 @@ class DetailsViewModel @Inject constructor(
     }
 
     val viewStateLiveData: LiveData<DetailViewState> = liveData {
+
         getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
 
             val currency = getCurrentCurrencyUseCase.invoke()
+            var convertedPrice = realEstate.salePrice
 
-            if (realEstate.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
-
-                val priceInt = realEstate.salePrice?.toInt()
-
-                if (currency == "€") {//todo david changer ne pas mettre en dur
-
-                    val price = realEstate.salePrice
-                    realEstate.salePrice =
-                        price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
-
-                    realEstate.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
-
+            if (realEstate.salePrice != "Préciser le prix") {                //todo david mieux gérer les placeholders
+                if (currency == "Euros") {                                  //todo david changer ne pas mettre en dur
+                    val price = convertedPrice?.let { convertDollarToEuro(it.toInt()) }
+                    convertedPrice = price.toString()
+                    convertedPrice = formatPriceWithSpace(convertedPrice.toInt())
                 } else {
-                    realEstate.salePrice = priceInt?.let { formatPriceForUI(priceInt) }
+                    if (convertedPrice != null) {
+                        convertedPrice = formatPriceForUI(convertedPrice.toInt())
+                    }
                 }
             }
+
 
             val realEstateDetails = DetailViewState(
                 creationDate = realEstate.creationDate,
                 type = realEstate.type,
-                salePrice = realEstate.salePrice,
+                salePrice = convertedPrice,
                 floorArea = realEstate.floorArea,
                 numberOfRooms = realEstate.numberOfRooms,
                 description = realEstate.description,
@@ -77,8 +76,8 @@ class DetailsViewModel @Inject constructor(
     }
 
     val realEstatePictures = liveData {
-        getPicturesUseCase.invoke(realEstateId).collect{
-            it.forEach{pictureEntity ->
+        getPicturesUseCase.invoke(realEstateId).collect {
+            it.forEach { pictureEntity ->
                 emit(pictureEntity.uri)
             }
 

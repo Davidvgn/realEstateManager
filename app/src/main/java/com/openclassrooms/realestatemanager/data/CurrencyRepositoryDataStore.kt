@@ -7,15 +7,17 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.Preferences
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
+@Singleton
 class CurrencyRepositoryDataStore @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : CurrencyRepository {
 
     companion object {
         private val CURRENCY_KEY = stringPreferencesKey("currency_key")
-        private const val DEFAULT_CURRENCY = "$"
+        private const val DEFAULT_CURRENCY = "Dollars"
     }
 
     override suspend fun getCurrentCurrency(): String {

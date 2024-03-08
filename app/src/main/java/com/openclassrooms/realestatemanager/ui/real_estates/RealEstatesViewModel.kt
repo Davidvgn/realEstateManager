@@ -28,32 +28,26 @@ class RealEstatesViewModel @Inject constructor(
             val currency = getCurrentCurrencyUseCase.invoke()
 
 
+            if (currency == "Euros") {                                      //todo david changer ne pas mettre en dur
+                realEstateEntityList.forEach { realEstate ->
+                    if (realEstate.salePrice != "Préciser le prix") {               //todo david mieux gérer les placeholders et les répétitions
 
-            if (currency == "€") {//todo david changer ne pas mettre en dur
-                realEstateEntityList.forEach {
+                        var convertedPrice = realEstate.salePrice
+                        val price = convertedPrice?.let { convertDollarToEuro(it.toInt()) }
+                        convertedPrice = price.toString()
+                        convertedPrice = formatPriceWithSpace(convertedPrice.toInt())
 
-                    if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders et les répétitions
-
-                        val priceInt = it.salePrice?.toInt()
-
-
-
-                        if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
-                            val price = it.salePrice
-                            it.salePrice =
-                                price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
-
-                            it.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
-                        }
+                        realEstate.salePrice = convertedPrice
                     }
                 }
             } else {
-                realEstateEntityList.forEach {
-                    if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
-                        val priceInt = it.salePrice?.toInt()
+                realEstateEntityList.forEach {realEstate ->
+                    if (realEstate.salePrice != "Préciser le prix") {               //todo david mieux gérer les placeholders et les répétitions
 
-
-                        it.salePrice = priceInt?.let { formatPriceForUI(priceInt) }
+                        var convertedPrice = realEstate.salePrice
+                        val price = convertedPrice?.toInt()
+                        convertedPrice = price?.let { formatPriceForUI(it) }
+                        realEstate.salePrice = convertedPrice
                     }
                 }
             }
