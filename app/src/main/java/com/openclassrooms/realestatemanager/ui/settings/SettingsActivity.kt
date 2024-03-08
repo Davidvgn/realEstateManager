@@ -22,19 +22,21 @@ private val viewModel by viewModels<SettingsViewModel>()
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
 
         binding.settingsActivityRadioButtonEuros.setOnClickListener {
-            viewModel.setCurrentCurrency(binding.settingsActivityRadioButtonEuros.text.toString())
+            viewModel.setCurrentCurrency("€")
         }
+
+        binding.settingsActivityRadioButtonDollars.setOnClickListener {
+            viewModel.setCurrentCurrency("$")
+        }
+
 
         // Keeps the radio button visually selected based on the current currency.
         viewModel.currentCurrency.observe(this) { currency ->
-            binding.settingsActivityRadioButtonDollars.isChecked = currency == "Dollars" //todo david texte en dur
-            binding.settingsActivityRadioButtonEuros.isChecked = currency == "Euros" //todo david texte en dur
+            binding.settingsActivityRadioButtonDollars.isChecked = currency == "$" //todo david texte en dur
+            binding.settingsActivityRadioButtonEuros.isChecked = currency == "€" //todo david texte en dur
         }
 
 
-        binding.settingsActivityRadioButtonDollars.setOnClickListener {
-            viewModel.setCurrentCurrency(binding.settingsActivityRadioButtonDollars.text.toString())
-        }
 
     }
 

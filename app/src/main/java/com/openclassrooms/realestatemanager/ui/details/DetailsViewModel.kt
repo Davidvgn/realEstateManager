@@ -44,7 +44,7 @@ class DetailsViewModel @Inject constructor(
 
                 val priceInt = realEstate.salePrice?.toInt()
 
-                if (currency == "Euros") {//todo david changer ne pas mettre en dur
+                if (currency == "€") {//todo david changer ne pas mettre en dur
 
                     val price = realEstate.salePrice
                     realEstate.salePrice =

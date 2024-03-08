@@ -29,7 +29,7 @@ class RealEstatesViewModel @Inject constructor(
 
 
 
-            if (currency == "Euros") {//todo david changer ne pas mettre en dur
+            if (currency == "€") {//todo david changer ne pas mettre en dur
                 realEstateEntityList.forEach {
 
                     if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders et les répétitions
