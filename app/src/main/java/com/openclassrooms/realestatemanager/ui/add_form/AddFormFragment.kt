@@ -30,7 +30,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
-import com.openclassrooms.realestatemanager.ui.utils.PictureDescriptionListener
+import com.openclassrooms.realestatemanager.ui.PictureDescriptionListener
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File

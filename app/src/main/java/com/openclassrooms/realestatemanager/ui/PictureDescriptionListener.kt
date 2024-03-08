@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.utils
+package com.openclassrooms.realestatemanager.ui
 
 import android.net.Uri
 

@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.DialogFragment
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddPictureDescriptionDialogFragmentBinding
-import com.openclassrooms.realestatemanager.ui.utils.PictureDescriptionListener
+import com.openclassrooms.realestatemanager.ui.PictureDescriptionListener
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ class AddPictureDescriptionDialog(
 
 
     companion object{
-    fun newInstance(uri : Uri, onDescriptionListener: PictureDescriptionListener )
+    fun newInstance(uri : Uri, onDescriptionListener: PictureDescriptionListener)
     = AddPictureDescriptionDialog(uri, onDescriptionListener)
 }
 
