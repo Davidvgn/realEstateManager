@@ -106,6 +106,9 @@
     <string name="created_the">Fiche créée le :</string>
     <string name="Manage">Vendu par :</string>
     <string name="not_connected">Non connecté</string>
+    <string name="pictures_description">Description</string>
+    <string name="add_description">Ajouter une description</string>
+    <string name="ok">OK</string>
 
 
 

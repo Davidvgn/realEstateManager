@@ -28,22 +28,26 @@ class RealEstatesViewModel @Inject constructor(
             val currency = getCurrentCurrencyUseCase.invoke()
 
 
+
             if (currency == "Euros") {//todo david changer ne pas mettre en dur
                 realEstateEntityList.forEach {
-                    val priceInt = it.salePrice?.toInt()
+
+                    if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders et les répétitions
+
+                        val priceInt = it.salePrice?.toInt()
 
 
 
-                    if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
-                        val price = it.salePrice
-                        it.salePrice =
-                            price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
+                        if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
+                            val price = it.salePrice
+                            it.salePrice =
+                                price?.let { it1 -> convertDollarToEuro(it1.toInt()) }.toString()
 
-                        it.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
+                            it.salePrice = priceInt?.let { formatPriceWithSpace(priceInt) }
+                        }
                     }
                 }
             } else {
-
                 realEstateEntityList.forEach {
                     if (it.salePrice != "Préciser le prix") { //todo david mieux gérer les placeholders
                         val priceInt = it.salePrice?.toInt()
@@ -53,7 +57,6 @@ class RealEstatesViewModel @Inject constructor(
                     }
                 }
             }
-
 
 
             val mappedList = mapItemList(realEstateEntityList, currency)
@@ -66,17 +69,21 @@ class RealEstatesViewModel @Inject constructor(
     }
 
 
-    private fun mapItem(realEstateEntity: RealEstateEntity, currency: String) = RealEstatesViewSateItem.RealEstates(
-        id = realEstateEntity.id,
-        realEstatesType = realEstateEntity.type,
-        photo = realEstateEntity.photo,
-        city = realEstateEntity.address,
-        salePrice = realEstateEntity.salePrice,
-        status = realEstateEntity.status,
-        currency = currency
-    )
+    private fun mapItem(realEstateEntity: RealEstateEntity, currency: String) =
+        RealEstatesViewSateItem.RealEstates(
+            id = realEstateEntity.id,
+            realEstatesType = realEstateEntity.type,
+            photo = realEstateEntity.photo,
+            city = realEstateEntity.address,
+            salePrice = realEstateEntity.salePrice,
+            status = realEstateEntity.status,
+            currency = currency
+        )
 
-    private fun mapItemList(realEstateEntities: List<RealEstateEntity>, currency: String): List<RealEstatesViewSateItem.RealEstates> {
+    private fun mapItemList(
+        realEstateEntities: List<RealEstateEntity>,
+        currency: String
+    ): List<RealEstatesViewSateItem.RealEstates> {
         return realEstateEntities.map { mapItem(it, currency) }
     }
 

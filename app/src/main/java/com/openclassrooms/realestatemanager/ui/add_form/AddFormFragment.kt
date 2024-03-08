@@ -89,16 +89,30 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
 
+//todo david version multiple sélection : à conserver le temps de voir comment gérer la description des photos
+//        //Pictures from gallery
+//        val imageContract =
+//            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
+//                if (uris.isNotEmpty()) {
+//                    for (uri in uris) {
+//                        viewModel.addTemporaryPictureFromGallery(uri)
+//                    }
+//                } else {
+//                    Log.d("PhotoPicker", "No media selected")
+//                }
+//            }
+
         //Pictures from gallery
         val imageContract =
-            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
-                if (uris.isNotEmpty()) {
-                    for (uri in uris) {
-                        viewModel.addTemporaryPictureFromGallery(uri)
-                    }
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+                if (uri !=  null) {
+                        viewModel.addTemporaryPicture(uri)
+
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
+                AddPictureDescriptionDialog.newInstance().show(childFragmentManager, null)
+
             }
         binding.buttonPhotoFromGallery.setOnClickListener {
             imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -125,12 +139,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         }
 
         binding.addRealEstateTvSelectedAddress.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-
-
-        binding.buttonPhotoFromGallery.setOnClickListener {
-            imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        }
-
 
         // Allows all chips to have the same width based on the widest
         allChips.forEach { chip ->
@@ -327,7 +335,7 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment) {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            viewModel.addTemporaryPictureFromGallery(cameraPhotoUri)
+            viewModel.addTemporaryPicture(cameraPhotoUri)
         }
     }
 }

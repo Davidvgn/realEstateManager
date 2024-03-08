@@ -34,7 +34,7 @@ class AddFormViewModel @Inject constructor(
     private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase,
     private val getAgentsUseCase: GetAgentsUseCase,
     private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase,
-    private val checkPropertyExistenceUseCase: CheckPropertyExistenceUseCase
+    private val checkPropertyExistenceUseCase: CheckPropertyExistenceUseCase,
 ) : ViewModel() {
 
     private var chip: String? = null
@@ -158,7 +158,7 @@ class AddFormViewModel @Inject constructor(
         _poiList.value = poiList.toList()
     }
 
-    fun addTemporaryPictureFromGallery(imageUri: Uri) {
+    fun addTemporaryPicture(imageUri: Uri) {
         val pictureEntity = PicturesEntity(
             id = 0,
             realEstateId = null,

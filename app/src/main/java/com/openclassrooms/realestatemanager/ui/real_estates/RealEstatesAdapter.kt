@@ -82,6 +82,11 @@ class RealEstatesAdapter(private val onItemClick: () -> Unit, private val listen
                 binding.realEstateItemTextViewPrice.text = realEstate.salePrice.toString()
                 binding.realEstateItemTextViewCurrency.text = realEstate.currency
 
+                //todo david gérer ça avec le vm pour éviter les conditions dans la vue
+                if (binding.realEstateItemTextViewPrice.text == "Préciser le prix"){//todo david gérer hardcoded text
+                    binding.realEstateItemTextViewCurrency.visibility = View.GONE
+                }
+
                 Glide.with(binding.realEstateItemImageView.context)
                     .load(uri)
                     .into(binding.realEstateItemImageView)
