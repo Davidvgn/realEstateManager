@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FilterRealEstateBinding
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
+import com.openclassrooms.realestatemanager.ui.LoanSimulatorFragment
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
 import com.openclassrooms.realestatemanager.ui.add_form.AgentSpinnerAdapter
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
@@ -108,6 +109,9 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
                     displayFragment(MapFragment.newInstance())
                     binding.mainToolbar.setTitle(R.string.Map)
 
+
+
+
                 }
             }
             true
@@ -162,6 +166,13 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
         val filterItem: MenuItem = menu.findItem(R.id.filter_menu)
         filterItem.setOnMenuItemClickListener {
             binding.mainDrawerLayout.open()
+            true
+        }
+
+        val loanItem: MenuItem = menu.findItem(R.id.loan_simulator)
+        loanItem.setOnMenuItemClickListener {
+            val loanSimulatorFragment = LoanSimulatorFragment.newInstance()
+            loanSimulatorFragment.show(supportFragmentManager, "LoanSimulatorFragment")
             true
         }
 
