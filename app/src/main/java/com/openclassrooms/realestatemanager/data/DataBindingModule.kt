@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.data
 
 import com.openclassrooms.realestatemanager.data.agent.AgentRepositoryImpl
+import com.openclassrooms.realestatemanager.data.loan_simulator.HumanReadableRepositoryImpl
+import com.openclassrooms.realestatemanager.data.loan_simulator.LoanSimulatorRepositoryImpl
 import com.openclassrooms.realestatemanager.data.location.LocationRepositoryFused
 import com.openclassrooms.realestatemanager.data.permissions.PermissionRepositoryImpl
 import com.openclassrooms.realestatemanager.data.pictures.PicturesRepositoryImpl
@@ -9,6 +11,8 @@ import com.openclassrooms.realestatemanager.domain.CurrencyRepository
 import com.openclassrooms.realestatemanager.domain.NetworkRepository
 import com.openclassrooms.realestatemanager.domain.agent.AgentRepository
 import com.openclassrooms.realestatemanager.domain.details.DetailsRepository
+import com.openclassrooms.realestatemanager.domain.loan_simulator.LoanSimulatorRepository
+import com.openclassrooms.realestatemanager.domain.locale_formatting.HumanReadableRepository
 import com.openclassrooms.realestatemanager.domain.location.LocationRepository
 import com.openclassrooms.realestatemanager.domain.permission.PermissionRepository
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesRepository
@@ -54,4 +58,12 @@ abstract class DataBindingModule {
     @Binds
     @Singleton
     abstract fun bindNetworkRepository(impl: NetworkRepositoryImpl): NetworkRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindLoanSimulatorRepository(impl: LoanSimulatorRepositoryImpl): LoanSimulatorRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindHumanReadableRepository(impl: HumanReadableRepositoryImpl): HumanReadableRepository
 }

@@ -31,4 +31,10 @@
         android:icon="@drawable/baseline_app_settings_alt_24"
         android:title="@string/settings"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/loan_simulator"
+        android:icon="@drawable/baseline_calculate_24"
+        android:title="@string/loan"
+        app:showAsAction="ifRoom" />
 </menu>

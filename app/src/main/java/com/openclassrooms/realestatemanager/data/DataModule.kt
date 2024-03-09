@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.data
 
 import android.app.Application
 import android.content.Context
+import android.os.Build
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.SharedPreferencesMigration
@@ -25,6 +26,7 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import java.util.Locale
 
 import javax.inject.Singleton
 
@@ -39,6 +41,17 @@ class DataModule {
     @Provides
     fun provideApplicationContext(application: Application): Context {
         return application.applicationContext
+    }
+
+    @Suppress("DEPRECATION")
+    @Singleton
+    @Provides
+    fun provideLocale(application: Application): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            application.resources.configuration.locales[0]
+        } else {
+            application.resources.configuration.locale
+        }
     }
 
     @Singleton
