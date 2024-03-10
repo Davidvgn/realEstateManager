@@ -92,19 +92,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
 
-// todo david version multiple sélection : à conserver le temps de voir comment gérer la description des photos
-//        //Pictures from gallery
-//        val imageContract =
-//            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
-//                if (uris.isNotEmpty()) {
-//                    for (uri in uris) {
-//                        viewModel.addTemporaryPictureFromGallery(uri)
-//                    }
-//                } else {
-//                    Log.d("PhotoPicker", "No media selected")
-//                }
-//            }
-
         // Pictures from gallery
         val imageContract =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
