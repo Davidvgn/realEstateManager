@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui
+package com.openclassrooms.realestatemanager.ui.loan_simulator
 
 import android.app.Dialog
 import android.os.Bundle

@@ -15,11 +15,11 @@ import androidx.fragment.app.Fragment
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.FilterRealEstateBinding
 import com.openclassrooms.realestatemanager.databinding.MainActivityBinding
-import com.openclassrooms.realestatemanager.ui.LoanSimulatorFragment
 import com.openclassrooms.realestatemanager.ui.OnRealEstateClickedListener
 import com.openclassrooms.realestatemanager.ui.add_form.AgentSpinnerAdapter
 import com.openclassrooms.realestatemanager.ui.add_real_estate.AddRealEstateActivity
 import com.openclassrooms.realestatemanager.ui.details.DetailsFragment
+import com.openclassrooms.realestatemanager.ui.loan_simulator.LoanSimulatorFragment
 import com.openclassrooms.realestatemanager.ui.map.MapFragment
 import com.openclassrooms.realestatemanager.ui.real_estates_home.RealEstateHomeFragment
 import com.openclassrooms.realestatemanager.ui.settings.SettingsActivity

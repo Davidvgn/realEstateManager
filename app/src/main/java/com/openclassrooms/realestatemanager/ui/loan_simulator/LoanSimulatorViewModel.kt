@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui
+package com.openclassrooms.realestatemanager.ui.loan_simulator
 
 import android.util.Log
 import androidx.lifecycle.LiveData

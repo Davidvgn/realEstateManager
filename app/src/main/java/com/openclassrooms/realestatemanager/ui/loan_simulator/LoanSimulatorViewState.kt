@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui
+package com.openclassrooms.realestatemanager.ui.loan_simulator
 
 import com.openclassrooms.realestatemanager.ui.utils.EquatableCallback
 import com.openclassrooms.realestatemanager.ui.utils.NativeText
