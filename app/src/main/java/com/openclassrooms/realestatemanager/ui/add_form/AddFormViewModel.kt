@@ -18,6 +18,7 @@ import com.openclassrooms.realestatemanager.domain.pictures.AddPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.AddTemporaryPictureUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.DeleteTemporaryPicturesListUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
+import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
 import com.openclassrooms.realestatemanager.domain.real_estates.AddRealEstateUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.CheckPropertyExistenceUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
@@ -49,7 +50,6 @@ class AddFormViewModel
 
         private val showToastSingleLiveEventMutableLiveData = MutableLiveData<Event<String>>()
         val showToastSingleLiveEvent: LiveData<Event<String>> = showToastSingleLiveEventMutableLiveData
-
         private val _agentsLiveData = MutableLiveData<List<AgentEntity>>()
         val agentsLiveData: LiveData<List<AgentEntity>> = _agentsLiveData
 
@@ -57,7 +57,7 @@ class AddFormViewModel
         private var photo: Uri? =
             Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
-        private val temporaryPicturesMutableLiveData = MutableLiveData<List<PicturesEntity>>()
+        private val temporaryPicturesMutableLiveData = MutableLiveData<List<DraftPictureEntity>>()
         private val poiListMutableLiveData = MutableLiveData<List<String>>()
         private val poiList = poiListMutableLiveData.value?.toMutableList() ?: mutableListOf()
 
@@ -170,31 +170,28 @@ class AddFormViewModel
             imageUri: Uri,
             title: String,
         ) {
-            val pictureEntity =
-                PicturesEntity(
-                    id = 0,
-                    realEstateId = null,
+            val draftPictureEntity =
+                DraftPictureEntity(
                     uri = imageUri.toString(),
                     title,
                 )
 
             val tempList = temporaryPicturesMutableLiveData.value?.toMutableList() ?: mutableListOf()
-            tempList.add(pictureEntity)
+            tempList.add(draftPictureEntity)
             temporaryPicturesMutableLiveData.value = tempList.toList()
             photo = Uri.parse(tempList.first().uri)
 
             viewModelScope.launch {
-                addTemporaryPictureUseCase.invoke(pictureEntity)
+                addTemporaryPictureUseCase.invoke(draftPictureEntity)
             }
         }
 
         private fun updateRealEstateIdForTemporaryPictures(newRealEstateId: Long) {
             val tempList = temporaryPicturesMutableLiveData.value?.toMutableList() ?: return
-            tempList.forEach { it.realEstateId = newRealEstateId }
-            temporaryPicturesMutableLiveData.value = tempList.toList()
-            viewModelScope.launch {
-                tempList.forEach {
-                    addPicturesUseCase.invoke(it)
+            tempList.forEach { draftPictureEntity ->
+                val pictureEntity = convertToPicturesEntity(draftPictureEntity, newRealEstateId)
+                viewModelScope.launch {
+                    addPicturesUseCase.invoke(pictureEntity)
                 }
             }
         }
@@ -204,6 +201,18 @@ class AddFormViewModel
             lng: Double,
         ) {
             latLng = LatLng(lat, lng)
+        }
+
+        private fun convertToPicturesEntity(
+            draftPicture: DraftPictureEntity,
+            realEstateId: Long,
+        ): PicturesEntity {
+            return PicturesEntity(
+                id = 0,
+                realEstateId = realEstateId,
+                uri = draftPicture.uri,
+                title = draftPicture.title,
+            )
         }
 
         fun onAgentSelected(name: String) {

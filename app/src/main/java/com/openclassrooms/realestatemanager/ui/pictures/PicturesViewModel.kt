@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetTemporaryPicturesUseCase
-import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
+import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -42,13 +42,13 @@ class PicturesViewModel
             }
     }
 
-private fun mapItem(picture: PicturesEntity) =
+private fun mapItem(draftPictureEntity: DraftPictureEntity) =
     PicturesViewStateItem.Pictures(
-        id = picture.id,
-        uri = picture.uri,
-        title = picture.title,
+        id = 0,
+        uri = draftPictureEntity.uri,
+        title = draftPictureEntity.title,
     )
 
-private fun mapItemList(picturesEntities: List<PicturesEntity>): List<PicturesViewStateItem.Pictures> {
+private fun mapItemList(picturesEntities: List<DraftPictureEntity>): List<PicturesViewStateItem.Pictures> {
     return picturesEntities.map { mapItem(it) }
 }

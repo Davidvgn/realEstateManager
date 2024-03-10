@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.data.pictures
 
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import com.openclassrooms.realestatemanager.domain.pictures.PicturesRepository
+import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -13,14 +14,14 @@ class PicturesRepositoryImpl
     constructor(
         private val picturesDao: PicturesDao,
     ) : PicturesRepository {
-        private val temporaryPicturesList = mutableListOf<PicturesEntity>()
-        private val temporaryPicturesFlow = MutableStateFlow<List<PicturesEntity>>(emptyList())
+        private val temporaryPicturesList = mutableListOf<DraftPictureEntity>()
+        private val temporaryPicturesFlow = MutableStateFlow<List<DraftPictureEntity>>(emptyList())
 
         override fun getPicturesAsFlow(realEstateId: Long): Flow<List<PicturesEntity>> {
             return picturesDao.getPicturesAsFlow(realEstateId)
         }
 
-        override fun getTemporaryPicturesAsFlow(): Flow<List<PicturesEntity>> {
+        override fun getTemporaryPicturesAsFlow(): Flow<List<DraftPictureEntity>> {
             return temporaryPicturesFlow
         }
 
@@ -28,8 +29,8 @@ class PicturesRepositoryImpl
             picturesDao.insert(picturesEntity)
         }
 
-        override suspend fun addTemporaryPicturesList(picturesEntity: PicturesEntity) {
-            temporaryPicturesList.add(picturesEntity)
+        override suspend fun addTemporaryPicturesList(draftPictureEntity: DraftPictureEntity) {
+            temporaryPicturesList.add(draftPictureEntity)
             temporaryPicturesFlow.value = temporaryPicturesList.toList()
         }
 

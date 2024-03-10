@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.domain.pictures
 
+import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
 import javax.inject.Inject
 
 class AddTemporaryPictureUseCase
@@ -7,7 +8,7 @@ class AddTemporaryPictureUseCase
     constructor(
         private val pictureRepository: PicturesRepository,
     ) {
-        suspend fun invoke(picturesEntity: PicturesEntity) {
-            pictureRepository.addTemporaryPicturesList(picturesEntity)
+        suspend fun invoke(draftPictureEntity: DraftPictureEntity) {
+            pictureRepository.addTemporaryPicturesList(draftPictureEntity)
         }
     }

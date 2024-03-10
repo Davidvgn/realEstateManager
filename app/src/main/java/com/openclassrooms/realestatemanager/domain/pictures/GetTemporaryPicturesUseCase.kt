@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.domain.pictures
 
+import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -8,5 +9,5 @@ class GetTemporaryPicturesUseCase
     constructor(
         private val pictureRepository: PicturesRepository,
     ) {
-        fun invoke(): Flow<List<PicturesEntity>> = pictureRepository.getTemporaryPicturesAsFlow()
+        fun invoke(): Flow<List<DraftPictureEntity>> = pictureRepository.getTemporaryPicturesAsFlow()
     }
