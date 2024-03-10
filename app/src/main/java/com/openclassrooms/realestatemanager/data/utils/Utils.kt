@@ -45,7 +45,7 @@ class Utils {
          * Vérification de la connexion réseau
          * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
          *
-         * Voir {@link com.openclassrooms.realestatemanager.data.NetworkRepositoryImpl}
+         * Voir {@link com.openclassrooms.realestatemanager.data.internet_connection.NetworkRepositoryImpl}
          *
          * @param context
          * @return

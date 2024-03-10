@@ -3,7 +3,7 @@ package com.openclassrooms.realestatemanager.data.agent
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
+import com.openclassrooms.realestatemanager.domain.agent.model.AgentEntity
 
 @Dao
 interface AgentDao {

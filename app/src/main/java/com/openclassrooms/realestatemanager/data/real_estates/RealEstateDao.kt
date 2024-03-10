@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.model.RealEstateEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

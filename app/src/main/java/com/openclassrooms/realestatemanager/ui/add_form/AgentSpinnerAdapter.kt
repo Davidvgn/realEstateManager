@@ -9,7 +9,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ListAdapter
 import com.openclassrooms.realestatemanager.databinding.AddAgentSpinnerItemBinding
-import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
+import com.openclassrooms.realestatemanager.domain.agent.model.AgentEntity
 
 class AgentSpinnerAdapter() : ListAdapter, Filterable {
     private val dataSetObservable = DataSetObservable()

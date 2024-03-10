@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.domain.real_estates
+package com.openclassrooms.realestatemanager.domain.real_estates.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

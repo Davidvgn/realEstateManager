@@ -1,6 +1,5 @@
-package com.openclassrooms.realestatemanager.domain
+package com.openclassrooms.realestatemanager.domain.details
 
-import com.openclassrooms.realestatemanager.domain.details.DetailsRepository
 import javax.inject.Inject
 
 class GetPoiListUseCase

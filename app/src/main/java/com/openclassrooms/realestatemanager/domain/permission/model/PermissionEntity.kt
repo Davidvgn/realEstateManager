@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.domain.permission
+package com.openclassrooms.realestatemanager.domain.permission.model
 
 data class PermissionEntity(
     val permission: String,

@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.openclassrooms.realestatemanager.domain.CheckNetworkConnectionUseCase
-import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 import com.openclassrooms.realestatemanager.domain.agent.GetAgentsUseCase
+import com.openclassrooms.realestatemanager.domain.agent.model.AgentEntity
 import com.openclassrooms.realestatemanager.domain.currency.GetCurrentCurrencyUseCase
+import com.openclassrooms.realestatemanager.domain.internet_connection.CheckNetworkConnectionUseCase
 import com.openclassrooms.realestatemanager.domain.permission.RefreshPermissionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

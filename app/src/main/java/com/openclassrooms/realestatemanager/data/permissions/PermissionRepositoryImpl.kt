@@ -4,8 +4,8 @@ import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
-import com.openclassrooms.realestatemanager.domain.permission.PermissionEntity
 import com.openclassrooms.realestatemanager.domain.permission.PermissionRepository
+import com.openclassrooms.realestatemanager.domain.permission.model.PermissionEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject

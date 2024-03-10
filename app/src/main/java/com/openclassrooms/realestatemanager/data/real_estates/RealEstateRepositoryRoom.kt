@@ -1,7 +1,7 @@
 package com.openclassrooms.realestatemanager.data.real_estates
 
-import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstatesRepository
+import com.openclassrooms.realestatemanager.domain.real_estates.model.RealEstateEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn

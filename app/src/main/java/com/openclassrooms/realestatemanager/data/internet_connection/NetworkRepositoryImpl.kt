@@ -1,8 +1,8 @@
-package com.openclassrooms.realestatemanager.data
+package com.openclassrooms.realestatemanager.data.internet_connection
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.openclassrooms.realestatemanager.domain.NetworkRepository
+import com.openclassrooms.realestatemanager.domain.internet_connection.NetworkRepository
 import javax.inject.Inject
 
 class NetworkRepositoryImpl

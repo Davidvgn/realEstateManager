@@ -1,6 +1,6 @@
 package com.openclassrooms.realestatemanager.domain.pictures
 
-import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
+import com.openclassrooms.realestatemanager.domain.pictures.model.DraftPictureEntity
 import javax.inject.Inject
 
 class AddTemporaryPictureUseCase

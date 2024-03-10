@@ -1,9 +1,9 @@
-package com.openclassrooms.realestatemanager.domain.pictures
+package com.openclassrooms.realestatemanager.domain.pictures.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.model.RealEstateEntity
 
 @Entity(
     tableName = "pictures",
@@ -18,7 +18,7 @@ import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 data class PicturesEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long,
-    var realEstateId: Long?,
+    val realEstateId: Long?,
     val uri: String,
     val title: String,
 )

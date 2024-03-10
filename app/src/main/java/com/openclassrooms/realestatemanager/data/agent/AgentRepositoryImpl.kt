@@ -1,7 +1,7 @@
 package com.openclassrooms.realestatemanager.data.agent
 
-import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 import com.openclassrooms.realestatemanager.domain.agent.AgentRepository
+import com.openclassrooms.realestatemanager.domain.agent.model.AgentEntity
 import javax.inject.Inject
 
 class AgentRepositoryImpl

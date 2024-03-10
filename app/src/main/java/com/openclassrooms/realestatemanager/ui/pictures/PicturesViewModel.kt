@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetTemporaryPicturesUseCase
-import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
+import com.openclassrooms.realestatemanager.domain.pictures.model.DraftPictureEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

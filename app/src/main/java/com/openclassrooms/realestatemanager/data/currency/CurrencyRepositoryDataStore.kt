@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.data
+package com.openclassrooms.realestatemanager.data.currency
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

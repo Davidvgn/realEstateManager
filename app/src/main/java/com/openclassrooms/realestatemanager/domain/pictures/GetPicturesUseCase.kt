@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.domain.pictures
 
+import com.openclassrooms.realestatemanager.domain.pictures.model.PicturesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

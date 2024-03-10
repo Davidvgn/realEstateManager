@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.domain.agent
 
+import com.openclassrooms.realestatemanager.domain.agent.model.AgentEntity
 import javax.inject.Inject
 
 class GetAgentsUseCase

@@ -9,8 +9,8 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertDollarToEuro
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceForUI
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
-import com.openclassrooms.realestatemanager.domain.GetPoiListUseCase
 import com.openclassrooms.realestatemanager.domain.currency.GetCurrentCurrencyUseCase
+import com.openclassrooms.realestatemanager.domain.details.GetPoiListUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

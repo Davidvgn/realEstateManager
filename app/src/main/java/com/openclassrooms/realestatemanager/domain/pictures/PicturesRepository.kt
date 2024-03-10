@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.domain.pictures
 
-import com.openclassrooms.realestatemanager.domain.pictures.draft_picture.DraftPictureEntity
+import com.openclassrooms.realestatemanager.domain.pictures.model.DraftPictureEntity
+import com.openclassrooms.realestatemanager.domain.pictures.model.PicturesEntity
 import kotlinx.coroutines.flow.Flow
 
 interface PicturesRepository {

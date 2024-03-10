@@ -8,7 +8,7 @@ import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPri
 import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
 import com.openclassrooms.realestatemanager.domain.currency.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.GetRealEstatesListUseCase
-import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.model.RealEstateEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

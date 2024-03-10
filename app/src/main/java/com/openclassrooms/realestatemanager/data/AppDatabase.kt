@@ -10,9 +10,9 @@ import com.openclassrooms.realestatemanager.data.agent.AgentDao
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateDao
 import com.openclassrooms.realestatemanager.data.utils.Converters
-import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
-import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
-import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
+import com.openclassrooms.realestatemanager.domain.agent.model.AgentEntity
+import com.openclassrooms.realestatemanager.domain.pictures.model.PicturesEntity
+import com.openclassrooms.realestatemanager.domain.real_estates.model.RealEstateEntity
 import java.util.concurrent.Executor
 
 @Database(
