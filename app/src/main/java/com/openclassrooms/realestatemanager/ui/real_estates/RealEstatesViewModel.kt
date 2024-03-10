@@ -26,30 +26,6 @@ class RealEstatesViewModel
 
                     val currency = getCurrentCurrencyUseCase.invoke()
 
-                    if (currency == "€") { // todo david changer ne pas mettre en dur
-                        realEstateEntityList.forEach { realEstate ->
-                            if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders et les répétitions
-
-                                var convertedPrice = realEstate.salePrice
-                                val price = convertedPrice?.let { convertDollarToEuro(it.toInt()) }
-                                convertedPrice = price.toString()
-                                convertedPrice = formatPriceWithSpace(convertedPrice.toInt())
-
-                                realEstate.salePrice = convertedPrice
-                            }
-                        }
-                    } else {
-                        realEstateEntityList.forEach { realEstate ->
-                            if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders et les répétitions
-
-                                var convertedPrice = realEstate.salePrice
-                                val price = convertedPrice?.toInt()
-                                convertedPrice = price?.let { formatPriceForUI(it) }
-                                realEstate.salePrice = convertedPrice
-                            }
-                        }
-                    }
-
                     val mappedList = mapItemList(realEstateEntityList, currency)
                     if (mappedList.isEmpty()) {
                         emit(listOf(RealEstatesViewSateItem.EmptyState))
@@ -62,15 +38,19 @@ class RealEstatesViewModel
         private fun mapItem(
             realEstateEntity: RealEstateEntity,
             currency: String,
-        ) = RealEstatesViewSateItem.RealEstates(
-            id = realEstateEntity.id,
-            realEstatesType = realEstateEntity.type,
-            photo = realEstateEntity.photo,
-            city = realEstateEntity.address,
-            salePrice = realEstateEntity.salePrice,
-            status = realEstateEntity.status,
-            currency = currency,
-        )
+        ): RealEstatesViewSateItem.RealEstates {
+            val convertedRealEstate = convertRealEstateEntity(realEstateEntity, currency)
+
+            return RealEstatesViewSateItem.RealEstates(
+                id = convertedRealEstate.id,
+                realEstatesType = convertedRealEstate.type,
+                photo = convertedRealEstate.photo,
+                city = convertedRealEstate.address,
+                salePrice = convertedRealEstate.salePrice,
+                status = convertedRealEstate.status,
+                currency = currency,
+            )
+        }
 
         private fun mapItemList(
             realEstateEntities: List<RealEstateEntity>,
@@ -79,3 +59,26 @@ class RealEstatesViewModel
             return realEstateEntities.map { mapItem(it, currency) }
         }
     }
+
+private fun convertRealEstateEntity(
+    realEstateEntity: RealEstateEntity,
+    currency: String,
+): RealEstateEntity {
+    if (realEstateEntity.salePrice != "Préciser le prix") {
+        val convertedSalePrice =
+            when {
+                currency == "€" -> {
+                    realEstateEntity.salePrice?.toIntOrNull()?.let { convertDollarToEuro(it) }
+                        ?.toString() ?: ""
+                }
+
+                else -> {
+                    realEstateEntity.salePrice
+                }
+            }?.let { if (currency == "€") formatPriceWithSpace(it.toInt()) else formatPriceForUI(it.toInt()) }
+                ?: ""
+
+        return realEstateEntity.copy(salePrice = convertedSalePrice)
+    }
+    return realEstateEntity
+}
