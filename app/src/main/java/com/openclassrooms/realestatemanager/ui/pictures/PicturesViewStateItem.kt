@@ -1,22 +1,18 @@
 package com.openclassrooms.realestatemanager.ui.pictures
 
 sealed class PicturesViewStateItem(
-    val type: Type
-
+    val type: Type,
 ) {
-
     enum class Type {
         PICTURES,
-        EMPTY_STATE
+        EMPTY_STATE,
     }
 
-
-    data class Pictures
-        (
+    data class Pictures(
         val id: Long,
         val uri: String,
         val title: String,
-    ): PicturesViewStateItem(Type.PICTURES)
+    ) : PicturesViewStateItem(Type.PICTURES)
 
-    object EmptyState: PicturesViewStateItem(Type.EMPTY_STATE)
+    object EmptyState : PicturesViewStateItem(Type.EMPTY_STATE)
 }

@@ -13,32 +13,33 @@ import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 @HiltViewModel
-class MapViewModel @Inject constructor(
-    private val getGpsLocationUseCase: GetGpsLocationUseCase,
-    private val isLocationPermissionsGrantedUseCase: IsLocationPermissionsGrantedUseCase,
-) : ViewModel() {
+class MapViewModel
+    @Inject
+    constructor(
+        private val getGpsLocationUseCase: GetGpsLocationUseCase,
+        private val isLocationPermissionsGrantedUseCase: IsLocationPermissionsGrantedUseCase,
+    ) : ViewModel() {
+        private var hasUserScrolledMap = false
 
-    private var hasUserScrolledMap = false
-
-    val viewActionLiveData: LiveData<Event<MapViewAction>> = liveData {
-        getGpsLocationFlow().collectLatest {
-            if (!hasUserScrolledMap) {
-                emit(Event(MapViewAction.ZoomTo(it.lat, it.long)))
+        val viewActionLiveData: LiveData<Event<MapViewAction>> =
+            liveData {
+                getGpsLocationFlow().collectLatest {
+                    if (!hasUserScrolledMap) {
+                        emit(Event(MapViewAction.ZoomTo(it.lat, it.long)))
+                    }
+                }
             }
+
+        fun onUserScrolledMap() {
+            hasUserScrolledMap = true
         }
+
+        private fun getGpsLocationFlow() =
+            isLocationPermissionsGrantedUseCase.invoke().flatMapLatest { isLocationPermissionsGranted ->
+                if (isLocationPermissionsGranted) {
+                    getGpsLocationUseCase.invoke()
+                } else {
+                    emptyFlow()
+                }
+            }
     }
-
-    fun onUserScrolledMap() {
-        hasUserScrolledMap = true
-    }
-
-    private fun getGpsLocationFlow() = isLocationPermissionsGrantedUseCase.invoke().flatMapLatest { isLocationPermissionsGranted ->
-        if (isLocationPermissionsGranted) {
-            getGpsLocationUseCase.invoke()
-        } else {
-            emptyFlow()
-        }
-    }
-
-}
-

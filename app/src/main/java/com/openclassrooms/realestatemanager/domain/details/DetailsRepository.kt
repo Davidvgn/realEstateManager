@@ -3,9 +3,8 @@ package com.openclassrooms.realestatemanager.domain.details
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import kotlinx.coroutines.flow.Flow
 
-interface DetailsRepository  {
-
+interface DetailsRepository {
     fun getRealEstatesByIdAsFlow(id: Long): Flow<RealEstateEntity>
-    fun getPoiListByRealEstateId(realEstateId: Long) : Flow<List<String>>
 
+    fun getPoiListByRealEstateId(realEstateId: Long): Flow<List<String>>
 }

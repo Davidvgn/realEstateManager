@@ -8,38 +8,33 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PicturesRepositoryImpl @Inject constructor(
-    private val picturesDao: PicturesDao
-) : PicturesRepository {
+class PicturesRepositoryImpl
+    @Inject
+    constructor(
+        private val picturesDao: PicturesDao,
+    ) : PicturesRepository {
+        private val temporaryPicturesList = mutableListOf<PicturesEntity>()
+        private val temporaryPicturesFlow = MutableStateFlow<List<PicturesEntity>>(emptyList())
 
+        override fun getPicturesAsFlow(realEstateId: Long): Flow<List<PicturesEntity>> {
+            return picturesDao.getPicturesAsFlow(realEstateId)
+        }
 
-    private val temporaryPicturesList = mutableListOf<PicturesEntity>()
-    private val temporaryPicturesFlow = MutableStateFlow<List<PicturesEntity>>(emptyList())
+        override fun getTemporaryPicturesAsFlow(): Flow<List<PicturesEntity>> {
+            return temporaryPicturesFlow
+        }
 
-    override fun getPicturesAsFlow(realEstateId: Long): Flow<List<PicturesEntity>> {
-        return picturesDao.getPicturesAsFlow(realEstateId)
+        override suspend fun addPicture(picturesEntity: PicturesEntity) {
+            picturesDao.insert(picturesEntity)
+        }
+
+        override suspend fun addTemporaryPicturesList(picturesEntity: PicturesEntity) {
+            temporaryPicturesList.add(picturesEntity)
+            temporaryPicturesFlow.value = temporaryPicturesList.toList()
+        }
+
+        override suspend fun deleteTemporaryPicturesList() {
+            temporaryPicturesList.clear()
+            temporaryPicturesFlow.value = temporaryPicturesList.toList()
+        }
     }
-
-    override fun getPicturesNoDAO(): Flow<List<PicturesEntity>> {
-        return temporaryPicturesFlow
-    }
-
-//    override fun getPicturesAsFlow(id: Long): Flow<List<PicturesEntity>> {
-//        return picturesDao.getPicturesAsFlow(id)
-//    }
-
-
-    override suspend fun addPicture(picturesEntity: PicturesEntity) {
-        picturesDao.insert(picturesEntity)
-    }
-
-    override suspend fun addTemporaryPicturesList(picturesEntity: PicturesEntity) {
-        temporaryPicturesList.add(picturesEntity)
-        temporaryPicturesFlow.value = temporaryPicturesList.toList()
-    }
-
-    override suspend fun deleteTemporaryPicturesList() {
-        temporaryPicturesList.clear()
-        temporaryPicturesFlow.value = temporaryPicturesList.toList()
-    }
-}

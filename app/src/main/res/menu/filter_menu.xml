@@ -3,6 +3,5 @@
     <item
         android:id="@+id/filter_menu"
         android:icon="@drawable/baseline_filter_list_24"
-        android:title="@string/filter"
-        />
+        android:title="@string/filter" />
 </menu>

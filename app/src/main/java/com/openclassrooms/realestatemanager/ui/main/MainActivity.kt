@@ -28,12 +28,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
-
     private val binding by viewBinding { MainActivityBinding.inflate(it) }
     private val viewModel by viewModels<MainViewModel>()
     private var maxWidth = 0
-
-
 
     companion object {
         private const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
@@ -44,15 +41,14 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
             viewModel.onPermissionUpdated()
         }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         requestPermissionLauncher.launch(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            ),
         )
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -67,7 +63,6 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
         filterRealEstateBinding.filterButton.setOnClickListener {
             binding.mainDrawerLayout.close()
-
         }
 
         val adapter = AgentSpinnerAdapter()
@@ -84,19 +79,19 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
         }
 
         viewModel.isNetworkAvailable.observe(this) { isNetworkAvailable ->
-            binding.connectionLostBanner.visibility = if (isNetworkAvailable) {
-                View.GONE
-            } else {
-                View.VISIBLE
-            }
+            binding.connectionLostBanner.visibility =
+                if (isNetworkAvailable) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
         }
 
-        //Resolves icon and title unwanted presence in filter view
+        // Resolves icon and title unwanted presence in filter view
         val menu = binding.mainNavigationView.menu
         val menuItem = menu.findItem(R.id.filter_menu)
         menuItem.icon = null
         menuItem.title = null
-
 
         binding.mainBottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -108,26 +103,21 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
                 R.id.bottom_nav_map -> {
                     displayFragment(MapFragment.newInstance())
                     binding.mainToolbar.setTitle(R.string.Map)
-
-
-
-
                 }
             }
             true
         }
 
-
-
         // Allows all chips to have the same width based on the widest
-        val allChips = listOf(
-            filterRealEstateBinding.filterFormChipHouse,
-            filterRealEstateBinding.filterFormChipFlat,
-            filterRealEstateBinding.filterFormChipLoft,
-            filterRealEstateBinding.filterFormChipDuplex,
-            filterRealEstateBinding.filterFormChipLand,
-            filterRealEstateBinding.filterFormChipOther,
-        )
+        val allChips =
+            listOf(
+                filterRealEstateBinding.filterFormChipHouse,
+                filterRealEstateBinding.filterFormChipFlat,
+                filterRealEstateBinding.filterFormChipLoft,
+                filterRealEstateBinding.filterFormChipDuplex,
+                filterRealEstateBinding.filterFormChipLand,
+                filterRealEstateBinding.filterFormChipOther,
+            )
 
         allChips.forEach { chip ->
             chip.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
@@ -186,7 +176,6 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
         return super.onCreateOptionsMenu(menu)
     }
 
-
     override fun onResume() {
         super.onResume()
         viewModel.onPermissionUpdated()
@@ -194,9 +183,10 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
 
     override fun onRealEstateClicked(realEstateId: Long) {
         val fragment = DetailsFragment.newInstance()
-        val args = Bundle().apply {
-            putLong(KEY_REAL_ESTATE_ID, realEstateId)
-        }
+        val args =
+            Bundle().apply {
+                putLong(KEY_REAL_ESTATE_ID, realEstateId)
+            }
         fragment.arguments = args
 
         if (!resources.getBoolean(R.bool.isTablet) &&

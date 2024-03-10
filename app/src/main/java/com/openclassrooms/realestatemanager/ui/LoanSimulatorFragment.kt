@@ -20,14 +20,11 @@ import com.openclassrooms.realestatemanager.ui.utils.InputFilterIntMinMax
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_fragment) {
-
     companion object {
         fun newInstance() = LoanSimulatorFragment()
     }
-
 
     private val binding by viewBinding { LoanSimulatorFragmentBinding.bind(it) }
     private val viewModel by viewModels<LoanSimulatorViewModel>()
@@ -44,9 +41,13 @@ class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
-        val standardBottomSheetBehavior = BottomSheetBehavior.from(binding.loanSimulatorConstraintLayout as View)
+        val standardBottomSheetBehavior =
+            BottomSheetBehavior.from(binding.loanSimulatorConstraintLayout as View)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         standardBottomSheetBehavior.peekHeight = ViewGroup.LayoutParams.MATCH_PARENT
         standardBottomSheetBehavior.isDraggable = false
@@ -57,7 +58,6 @@ class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_
             standardBottomSheetBehavior.peekHeight = (dpHeight / 2).toInt()
             standardBottomSheetBehavior.isFitToContents = false
             standardBottomSheetBehavior.halfExpandedRatio = 0.4f
-
         }
 
         binding.exitButtonIv.setOnClickListener {
@@ -85,14 +85,18 @@ class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_
             binding.calculateButton.setOnClickListener {
                 viewState.onCalculateClicked.invoke()
             }
-            binding.monthlyPaymentTv.text = viewState.yearlyAndMonthlyPayment?.toCharSequence(view.context) ?: ""
+            binding.monthlyPaymentTv.text =
+                viewState.yearlyAndMonthlyPayment?.toCharSequence(view.context) ?: ""
         }
 
         viewModel.viewEvent.observeEvent(viewLifecycleOwner) { event ->
             Log.d("LoanSimulatorFragment", "event: $event")
-            binding.amountTextInputLayout.error = event.amountErrorMessage?.toCharSequence(view.context)
-            binding.interestRateTextInputLayout.error = event.interestRateErrorMessage?.toCharSequence(view.context)
-            binding.loanDurationTextInputLayout.error = event.loanDurationErrorMessage?.toCharSequence(view.context)
+            binding.amountTextInputLayout.error =
+                event.amountErrorMessage?.toCharSequence(view.context)
+            binding.interestRateTextInputLayout.error =
+                event.interestRateErrorMessage?.toCharSequence(view.context)
+            binding.loanDurationTextInputLayout.error =
+                event.loanDurationErrorMessage?.toCharSequence(view.context)
         }
 
         binding.amountEditText.doOnTextChanged { text, _, _, _ ->
@@ -102,7 +106,6 @@ class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_
         }
         binding.amountEditText.doAfterTextChanged {
             viewModel.onLoanAmountChanged(it?.toString() ?: "")
-
         }
 
         binding.amountTextInputLayout.setEndIconOnClickListener {
@@ -114,7 +117,6 @@ class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_
 
         binding.interestRateEditText.doAfterTextChanged {
             viewModel.onInterestRateChanged(it?.toString() ?: "")
-
         }
 
         binding.interestRateTextInputLayout.setEndIconOnClickListener {
@@ -130,7 +132,6 @@ class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_
         }
         binding.loanDurationEditText.doAfterTextChanged {
             viewModel.onLoanDurationChanged(it?.toString() ?: "")
-
         }
 
         binding.loanDurationTextInputLayout.setEndIconOnClickListener {

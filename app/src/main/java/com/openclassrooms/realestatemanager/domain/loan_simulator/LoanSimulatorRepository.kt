@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface LoanSimulatorRepository {
     fun setLoanData(loanDataEntity: LoanDataEntity)
+
     fun getLoanDataAsFlow(): Flow<LoanDataEntity>
+
     fun resetLoanData()
 }

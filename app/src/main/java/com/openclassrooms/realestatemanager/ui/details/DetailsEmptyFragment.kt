@@ -10,24 +10,25 @@ import com.openclassrooms.realestatemanager.databinding.DetailsEmptyFragmentBind
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class DetailsEmptyFragment : Fragment(R.layout.details_empty_fragment) {
-
-
     private val binding by viewBinding { DetailsEmptyFragmentBinding.bind(it) }
 
     companion object {
         fun newInstance() = DetailsEmptyFragment()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
-        val animation: Animation = AnimationUtils.loadAnimation(
-            activity,
-            R.anim.scale_animation
-        )
+        val animation: Animation =
+            AnimationUtils.loadAnimation(
+                activity,
+                R.anim.scale_animation,
+            )
         binding.detailsEmptyFragmentImageView.startAnimation(animation)
     }
 }

@@ -17,7 +17,6 @@ import androidx.core.content.FileProvider
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.openclassrooms.realestatemanager.BuildConfig
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
@@ -27,10 +26,11 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
+import com.openclassrooms.realestatemanager.BuildConfig
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddFormFragmentBinding
-import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.PictureDescriptionListener
+import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -38,7 +38,6 @@ import java.util.Calendar
 
 @AndroidEntryPoint
 class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescriptionListener {
-
     private val binding by viewBinding { AddFormFragmentBinding.bind(it) }
     private val viewModel by viewModels<AddFormViewModel>()
     private var maxWidth = 0
@@ -48,7 +47,10 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
         fun newInstance() = AddFormFragment()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = AgentSpinnerAdapter()
@@ -68,29 +70,29 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
         val saleDate: TextInputEditText = binding.addFormTextInputEditTextDateOfSale
         val closingSaleDate: TextInputEditText = binding.addFormTextInputEditTextClosingDate
         var minSoldDate: Long = Calendar.getInstance().timeInMillis
-        val allChips = listOf(
-            binding.addFormChipHouse,
-            binding.addFormChipFlat,
-            binding.addFormChipLoft,
-            binding.addFormChipDuplex,
-            binding.addFormChipLand,
-            binding.addFormChipOther
-        )
+        val allChips =
+            listOf(
+                binding.addFormChipHouse,
+                binding.addFormChipFlat,
+                binding.addFormChipLoft,
+                binding.addFormChipDuplex,
+                binding.addFormChipLand,
+                binding.addFormChipOther,
+            )
 
         val autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.add_realEstate_autocomplete_fragment)
-                    as AutocompleteSupportFragment
+                as AutocompleteSupportFragment
 
         if (!Places.isInitialized()) {
             context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
         }
 
-
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
             ?.commit()
 
-//todo david version multiple sélection : à conserver le temps de voir comment gérer la description des photos
+// todo david version multiple sélection : à conserver le temps de voir comment gérer la description des photos
 //        //Pictures from gallery
 //        val imageContract =
 //            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
@@ -103,35 +105,36 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
 //                }
 //            }
 
-        //Pictures from gallery
+        // Pictures from gallery
         val imageContract =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-                if (uri !=  null) {
-                    AddPictureDescriptionDialog.newInstance(uri, this).show(childFragmentManager, null)
+                if (uri != null) {
+                    AddPictureDescriptionDialog.newInstance(uri, this)
+                        .show(childFragmentManager, null)
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                 }
-
             }
         binding.buttonPhotoFromGallery.setOnClickListener {
             imageContract.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
-
-        //Pictures from camera
+        // Pictures from camera
         binding.buttonPhotoFromCamera.setOnClickListener {
-            cameraPhotoUri = FileProvider.getUriForFile(
-                requireContext(),
-                BuildConfig.APPLICATION_ID + ".provider",
-                File.createTempFile(
-                    "JPEG_",
-                    ".jpg",
-                    requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            cameraPhotoUri =
+                FileProvider.getUriForFile(
+                    requireContext(),
+                    BuildConfig.APPLICATION_ID + ".provider",
+                    File.createTempFile(
+                        "JPEG_",
+                        ".jpg",
+                        requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                    ),
                 )
-            )
 
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                .putExtra(MediaStore.EXTRA_OUTPUT, cameraPhotoUri)
+            val intent =
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    .putExtra(MediaStore.EXTRA_OUTPUT, cameraPhotoUri)
 
             @Suppress("DEPRECATION")
             startActivityForResult(intent, 0)
@@ -156,34 +159,33 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             chip.layoutParams = params
         }
 
-
-        //Autocomplete address field
+        // Autocomplete address field
         autocompleteFragment.setPlaceFields(
             listOf(
                 Place.Field.ID,
                 Place.Field.NAME,
                 Place.Field.ADDRESS,
                 Place.Field.LAT_LNG,
-            )
+            ),
         )
 
-        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
+        autocompleteFragment.setOnPlaceSelectedListener(
+            object : PlaceSelectionListener {
+                override fun onPlaceSelected(place: Place) {
+                    binding.addRealEstateTvSelectedAddress.text = place.address?.toString()
 
-                binding.addRealEstateTvSelectedAddress.text = place.address?.toString()
+                    viewModel.onAddressChanged(place.address?.toString())
 
-                viewModel.onAddressChanged(place.address?.toString())
-
-                val placeLatLng : LatLng? = place.latLng
-                if (placeLatLng != null) {
-                    viewModel.addLatLng(placeLatLng.latitude, placeLatLng.longitude)
+                    val placeLatLng: LatLng? = place.latLng
+                    if (placeLatLng != null) {
+                        viewModel.addLatLng(placeLatLng.latitude, placeLatLng.longitude)
+                    }
                 }
 
-            }
-
-            override fun onError(status: Status) {
-            }
-        })
+                override fun onError(status: Status) {
+                }
+            },
+        )
 
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -207,17 +209,19 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
             val day = c[Calendar.DAY_OF_MONTH] // current day
-            val datePickerDialog = context?.let {
-                DatePickerDialog(
-                    it, dateSetListener,
-                    year,
-                    month,
-                    day
-                )
-            }
+            val datePickerDialog =
+                context?.let {
+                    DatePickerDialog(
+                        it,
+                        dateSetListener,
+                        year,
+                        month,
+                        day,
+                    )
+                }
 
             datePickerDialog?.datePicker?.minDate = c.timeInMillis
-            //todo david amélioration : Si la date de vente a été sélectionnée (par mégarde) avant la date de mise en vente,
+            // todo david amélioration : Si la date de vente a été sélectionnée (par mégarde) avant la date de mise en vente,
             // est quelle est set avant la date de mise en vente il faudrait un warning
 
             // todo david possibilité de erase la date défini
@@ -229,14 +233,16 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             val year = c[Calendar.YEAR] // current year
             val month = c[Calendar.MONTH] // current month
             val day = c[Calendar.DAY_OF_MONTH] // current day
-            val datePickerDialog = context?.let {
-                DatePickerDialog(
-                    it, soldDateSetListener,
-                    year,
-                    month,
-                    day
-                )
-            }
+            val datePickerDialog =
+                context?.let {
+                    DatePickerDialog(
+                        it,
+                        soldDateSetListener,
+                        year,
+                        month,
+                        day,
+                    )
+                }
             datePickerDialog?.datePicker?.minDate = minSoldDate
             datePickerDialog?.show()
         }
@@ -249,7 +255,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             closingSaleDate.setText(it)
         }
 
-
         binding.addFormChipGroupType.setOnCheckedChangeListener { chipGroup, i ->
             getSelectedText(chipGroup, i)
             viewModel.onTypeChanged(getSelectedText(chipGroup, i))
@@ -258,44 +263,39 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
         binding.addRealEstateCheckBoxPharmacie.setOnClickListener {
             viewModel.addPoi(
                 binding.addRealEstateCheckBoxPharmacie.text.toString(),
-                binding.addRealEstateCheckBoxPharmacie.isChecked
+                binding.addRealEstateCheckBoxPharmacie.isChecked,
             )
         }
 
         binding.addRealEstateCheckBoxHospitals.setOnClickListener {
             viewModel.addPoi(
                 binding.addRealEstateCheckBoxHospitals.text.toString(),
-                binding.addRealEstateCheckBoxHospitals.isChecked
+                binding.addRealEstateCheckBoxHospitals.isChecked,
             )
-
         }
         binding.addRealEstateCheckBoxRestaurant.setOnClickListener {
             viewModel.addPoi(
                 binding.addRealEstateCheckBoxRestaurant.text.toString(),
-                binding.addRealEstateCheckBoxRestaurant.isChecked
+                binding.addRealEstateCheckBoxRestaurant.isChecked,
             )
-
         }
         binding.addRealEstateCheckBoxSchool.setOnClickListener {
             viewModel.addPoi(
                 binding.addRealEstateCheckBoxSchool.text.toString(),
-                binding.addRealEstateCheckBoxSchool.isChecked
+                binding.addRealEstateCheckBoxSchool.isChecked,
             )
-
         }
         binding.addRealEstateCheckBoxShops.setOnClickListener {
             viewModel.addPoi(
                 binding.addRealEstateCheckBoxShops.text.toString(),
-                binding.addRealEstateCheckBoxShops.isChecked
+                binding.addRealEstateCheckBoxShops.isChecked,
             )
-
         }
         binding.addRealEstateCheckBoxTransportation.setOnClickListener {
             viewModel.addPoi(
                 binding.addRealEstateCheckBoxTransportation.text.toString(),
-                binding.addRealEstateCheckBoxTransportation.isChecked
+                binding.addRealEstateCheckBoxTransportation.isChecked,
             )
-
         }
 
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
@@ -313,7 +313,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             viewModel.onTextDescriptionChanged(it?.toString())
         }
 
-
         binding.addbutton.setOnClickListener {
             viewModel.viewStateAddRealEstateLiveData.observe(viewLifecycleOwner) {
             }
@@ -325,26 +324,34 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
             }
         }
-
-
     }
 
     @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ) {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            AddPictureDescriptionDialog.newInstance(cameraPhotoUri, this).show(childFragmentManager, null)
+            AddPictureDescriptionDialog.newInstance(cameraPhotoUri, this)
+                .show(childFragmentManager, null)
         }
     }
 
-    override fun onDescriptionFilled(uri: Uri, title: String) {
+    override fun onDescriptionFilled(
+        uri: Uri,
+        title: String,
+    ) {
         viewModel.addTemporaryPicture(uri, title)
     }
 }
 
-private fun getSelectedText(chipGroup: ChipGroup, id: Int): String {
+private fun getSelectedText(
+    chipGroup: ChipGroup,
+    id: Int,
+): String {
     val mySelection = chipGroup.findViewById<Chip>(id)
     return mySelection?.text?.toString() ?: ""
 }
-

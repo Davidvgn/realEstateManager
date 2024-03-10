@@ -28,10 +28,10 @@ class Converters {
                 if (latitude != null && longitude != null) {
                     LatLng(latitude, longitude)
                 } else {
-                    null // Retourne null si l'une des valeurs de latitude ou longitude est null
+                    null
                 }
             } else {
-                null // Retourne null si la chaîne n'est pas au format attendu
+                null
             }
         }
     }

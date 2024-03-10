@@ -8,14 +8,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddFormConfirmationViewModel @Inject constructor(
-    private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase
-) : ViewModel() {
-
-    fun deletePictures() {
-        viewModelScope.launch {
-            deleteTemporaryPicturesListUseCase.invoke()
+class AddFormConfirmationViewModel
+    @Inject
+    constructor(
+        private val deleteTemporaryPicturesListUseCase: DeleteTemporaryPicturesListUseCase,
+    ) : ViewModel() {
+        fun deletePictures() {
+            viewModelScope.launch {
+                deleteTemporaryPicturesListUseCase.invoke()
+            }
         }
     }
-
-}

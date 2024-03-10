@@ -1,21 +1,21 @@
 package com.openclassrooms.realestatemanager.domain.locale_formatting.surface
 
-import com.openclassrooms.realestatemanager.domain.CurrencyRepository
+import com.openclassrooms.realestatemanager.domain.currency.CurrencyRepository
 import com.openclassrooms.realestatemanager.domain.locale_formatting.GetLocaleUseCase
 import com.openclassrooms.realestatemanager.domain.locale_formatting.HumanReadableRepository
-import java.math.BigDecimal
-import java.util.Locale
 import javax.inject.Inject
 
-class ConvertToUsdDependingOnLocaleUseCase @Inject constructor(
-    private val humanReadableRepository: HumanReadableRepository,
-    private val currencyRepository: CurrencyRepository,
-    private val getLocaleUseCase: GetLocaleUseCase,
-) {
-    /**
-     * @return BigDecimal of the price converted to USD depending on locale
-     * (price saved in database is in USD)
-     */
+class ConvertToUsdDependingOnLocaleUseCase
+    @Inject
+    constructor(
+        private val humanReadableRepository: HumanReadableRepository,
+        private val currencyRepository: CurrencyRepository,
+        private val getLocaleUseCase: GetLocaleUseCase,
+    ) {
+        /**
+         * @return BigDecimal of the price converted to USD depending on locale
+         * (price saved in database is in USD)
+         */
 //    suspend fun invoke(price: BigDecimal): BigDecimal {
 //        val locale = getLocaleUseCase.invoke()
 //        if (price == BigDecimal.ZERO) return BigDecimal.ZERO
@@ -40,4 +40,4 @@ class ConvertToUsdDependingOnLocaleUseCase @Inject constructor(
 //            price
 //        }
 //    }
-}
+    }

@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PicturesDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(picturesEntity: PicturesEntity)
 
@@ -19,5 +18,4 @@ interface PicturesDao {
 
     @Query("SELECT * FROM pictures")
     fun getAllPicturesWithCursor(): Cursor
-
 }

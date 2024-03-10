@@ -4,16 +4,16 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 
 data class Event<out T>(private val content: T) {
-
     private var handled = false
 
     // Keep this function private to force the use of the observeEvent extension
-    fun getContentIfNotHandled(): T? = if (handled) {
-        null
-    } else {
-        handled = true
-        content
-    }
+    fun getContentIfNotHandled(): T? =
+        if (handled) {
+            null
+        } else {
+            handled = true
+            content
+        }
 
     companion object {
         /**
@@ -21,7 +21,10 @@ data class Event<out T>(private val content: T) {
          *
          * [onEventUnhandledContent] is *only* called if the [Event]'s contents has not been handled.
          */
-        fun <T> LiveData<Event<T>>.observeEvent(owner: LifecycleOwner, onEventUnhandledContent: (T) -> Unit) {
+        fun <T> LiveData<Event<T>>.observeEvent(
+            owner: LifecycleOwner,
+            onEventUnhandledContent: (T) -> Unit,
+        ) {
             observe(owner) { event ->
                 event.getContentIfNotHandled()?.let {
                     onEventUnhandledContent(it)

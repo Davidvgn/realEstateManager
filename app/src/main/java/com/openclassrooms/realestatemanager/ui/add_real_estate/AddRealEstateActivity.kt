@@ -5,14 +5,13 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commitNow
 import com.openclassrooms.realestatemanager.databinding.AddRealEstateActivityBinding
-import com.openclassrooms.realestatemanager.ui.add_form.AddFormFragment
 import com.openclassrooms.realestatemanager.ui.add_form.AddFormConfirmationDialog
+import com.openclassrooms.realestatemanager.ui.add_form.AddFormFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddRealEstateActivity : AppCompatActivity() {
-
     private val binding by viewBinding { AddRealEstateActivityBinding.inflate(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,12 +19,13 @@ class AddRealEstateActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.addRealEstateToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (savedInstanceState == null) {
             supportFragmentManager.commitNow {
-                replace(binding.addRealEstateFrameLayoutFragmentContainer.id,
-                        AddFormFragment.newInstance()
+                replace(
+                    binding.addRealEstateFrameLayoutFragmentContainer.id,
+                    AddFormFragment.newInstance(),
                 )
             }
         }
@@ -34,6 +34,5 @@ class AddRealEstateActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         AddFormConfirmationDialog.newInstance().show(supportFragmentManager, null)
         return true
-
     }
 }

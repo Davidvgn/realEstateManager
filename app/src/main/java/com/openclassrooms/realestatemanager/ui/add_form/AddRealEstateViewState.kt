@@ -10,5 +10,5 @@ data class AddRealEstateViewState(
     val status: String?,
     val upForSaleDate: String?,
     val dateOfSale: String?,
-    val realEstateAgent: Int?
+    val realEstateAgent: Int?,
 )

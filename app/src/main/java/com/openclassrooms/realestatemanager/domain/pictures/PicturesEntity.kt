@@ -5,12 +5,16 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 
-@Entity(tableName = "pictures",
-    foreignKeys = [ForeignKey(
-        entity = RealEstateEntity::class,
-        parentColumns = ["id"],
-        childColumns = ["realEstateId"],
-    )])
+@Entity(
+    tableName = "pictures",
+    foreignKeys = [
+        ForeignKey(
+            entity = RealEstateEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["realEstateId"],
+        ),
+    ],
+)
 data class PicturesEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long,

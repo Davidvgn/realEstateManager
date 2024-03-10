@@ -23,13 +23,15 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
-
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
         debug {
             isDebuggable = true
@@ -42,10 +44,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
-        freeCompilerArgs = listOf(
-            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "-opt-in=kotlinx.coroutines.DelicateCoroutinesApi"
-        )
+        freeCompilerArgs =
+            listOf(
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlinx.coroutines.DelicateCoroutinesApi",
+            )
     }
     packaging {
         resources.excludes.add("META-INF/*")
@@ -74,7 +77,6 @@ dependencies {
     // FLEXBOX
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 
-
     // SPLASH SCREEN
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 
@@ -96,7 +98,6 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
 
-
     // RETROFIT
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -110,7 +111,10 @@ dependencies {
 
     // Unit tests
     testImplementation("androidx.arch.core:core-testing:2.2.0") {
-        exclude("org.mockito", "mockito-core") // excludes redundant mockito dependency bundled with arch core
+        exclude(
+            "org.mockito",
+            "mockito-core",
+        ) // excludes redundant mockito dependency bundled with arch core
     }
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
@@ -128,7 +132,10 @@ dependencies {
 
     // Android tests
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0") {
-        exclude("org.mockito", "mockito-core") // excludes redundant mockito dependency bundled with arch core
+        exclude(
+            "org.mockito",
+            "mockito-core",
+        ) // excludes redundant mockito dependency bundled with arch core
     }
     androidTestImplementation("androidx.test:core:1.5.0")
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
@@ -137,13 +144,12 @@ dependencies {
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("androidx.test:runner:1.5.2")
 
-
 //    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
 
     // PLACES AUTOCOMPLETE SDK
-    implementation ("com.google.android.libraries.places:places:3.3.0")
+    implementation("com.google.android.libraries.places:places:3.3.0")
 
     // GLIDE
     implementation("com.github.bumptech.glide:glide:4.16.0")
@@ -153,8 +159,7 @@ dependencies {
     implementation("androidx.hilt:hilt-work:1.0.0")
     implementation("androidx.hilt:hilt-compiler:1.0.0")
 
-    implementation ("androidx.startup:startup-runtime:1.1.0")
-
+    implementation("androidx.startup:startup-runtime:1.1.0")
 
 //    // TEST
     testImplementation("junit:junit:4.13.2")

@@ -18,35 +18,46 @@ import javax.inject.Singleton
 import kotlin.time.Duration.Companion.seconds
 
 @Singleton
-class LocationRepositoryFused @Inject constructor(
-    private val fusedLocationClient: FusedLocationProviderClient,
-) : LocationRepository {
-
-    companion object {
-        private val GPS_LOCATION_INTERVAL_DURATION = 10.seconds
-    }
-
-    @SuppressLint("MissingPermission")
-    override fun getLocationAsFlow(): Flow<LocationEntity> = callbackFlow {
-        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, GPS_LOCATION_INTERVAL_DURATION.inWholeMilliseconds)
-            .setMinUpdateDistanceMeters(50F)
-            .build()
-
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                locationResult.lastLocation?.let {
-                    trySend(
-                        LocationEntity(
-                            lat = it.latitude,
-                            long = it.longitude,
-                        )
-                    )
-                }
-            }
+class LocationRepositoryFused
+    @Inject
+    constructor(
+        private val fusedLocationClient: FusedLocationProviderClient,
+    ) : LocationRepository {
+        companion object {
+            private val GPS_LOCATION_INTERVAL_DURATION = 10.seconds
         }
 
-        fusedLocationClient.requestLocationUpdates(locationRequest, Dispatchers.IO.asExecutor(), locationCallback)
+        @SuppressLint("MissingPermission")
+        override fun getLocationAsFlow(): Flow<LocationEntity> =
+            callbackFlow {
+                val locationRequest =
+                    LocationRequest.Builder(
+                        Priority.PRIORITY_HIGH_ACCURACY,
+                        GPS_LOCATION_INTERVAL_DURATION.inWholeMilliseconds,
+                    )
+                        .setMinUpdateDistanceMeters(50F)
+                        .build()
 
-        awaitClose { fusedLocationClient.removeLocationUpdates(locationCallback) }
+                val locationCallback =
+                    object : LocationCallback() {
+                        override fun onLocationResult(locationResult: LocationResult) {
+                            locationResult.lastLocation?.let {
+                                trySend(
+                                    LocationEntity(
+                                        lat = it.latitude,
+                                        long = it.longitude,
+                                    ),
+                                )
+                            }
+                        }
+                    }
+
+                fusedLocationClient.requestLocationUpdates(
+                    locationRequest,
+                    Dispatchers.IO.asExecutor(),
+                    locationCallback,
+                )
+
+                awaitClose { fusedLocationClient.removeLocationUpdates(locationCallback) }
+            }
     }
-}

@@ -8,13 +8,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class DetailsRepositoryImpl @Inject constructor(
-    private val realEstateDao: RealEstateDao
-) : DetailsRepository {
+class DetailsRepositoryImpl
+    @Inject
+    constructor(
+        private val realEstateDao: RealEstateDao,
+    ) : DetailsRepository {
+        override fun getRealEstatesByIdAsFlow(id: Long): Flow<RealEstateEntity> =
+            realEstateDao.getRealEstateByIdAsFlow(id).flowOn(Dispatchers.IO)
 
-    override fun getRealEstatesByIdAsFlow(id: Long): Flow<RealEstateEntity> =
-        realEstateDao.getRealEstateByIdAsFlow(id).flowOn(Dispatchers.IO)
-
-    override  fun getPoiListByRealEstateId(realEstateId: Long) : Flow<List<String>> =
-        realEstateDao.getPoiListByRealEstateId(realEstateId).flowOn(Dispatchers.IO)
+        override fun getPoiListByRealEstateId(realEstateId: Long): Flow<List<String>> =
+            realEstateDao.getPoiListByRealEstateId(realEstateId).flowOn(Dispatchers.IO)
     }

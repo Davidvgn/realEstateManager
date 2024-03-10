@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddFormConfirmationDialog : DialogFragment(R.layout.confirmation_dialog_fragment) {
-
     private val binding by viewBinding { ConfirmationDialogFragmentBinding.bind(it) }
     private val viewModel by viewModels<AddFormConfirmationViewModel>()
 
@@ -19,7 +18,10 @@ class AddFormConfirmationDialog : DialogFragment(R.layout.confirmation_dialog_fr
         fun newInstance() = AddFormConfirmationDialog()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmationDialogButtonYes.setOnClickListener {

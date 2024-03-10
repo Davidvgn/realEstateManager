@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.data.utils
 
 import android.content.Context
-import android.net.ConnectivityManager
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
@@ -11,7 +10,6 @@ import java.util.Locale
 import kotlin.math.roundToInt
 
 class Utils {
-
     companion object {
         /**
          * Conversion d'un prix d'un bien immobilier (Dollars vers Euros)
@@ -41,8 +39,7 @@ class Utils {
          *
          * @return
          */
-        fun getTodayDate(): String =
-            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
+        fun getTodayDate(): String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
 
         /**
          * Vérification de la connexion réseau
@@ -57,24 +54,29 @@ class Utils {
             return true
         }
 
-        fun formatDate(dayOfMonth: Int, monthOfYear: Int, year: Int): String =
+        fun formatDate(
+            dayOfMonth: Int,
+            monthOfYear: Int,
+            year: Int,
+        ): String =
             SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(
                 Calendar.getInstance().apply {
                     set(Calendar.DAY_OF_MONTH, dayOfMonth)
                     set(Calendar.MONTH, monthOfYear)
                     set(Calendar.YEAR, year)
-                }.time
+                }.time,
             )
 
-         fun formatPriceForUI(price: Int): String {
+        fun formatPriceForUI(price: Int): String {
             val decimalFormat = NumberFormat.getInstance() as DecimalFormat
             return decimalFormat.format(price)
         }
 
-         fun formatPriceWithSpace(price: Int): String {
-            val decimalFormatSymbols = DecimalFormatSymbols.getInstance().apply {
-                groupingSeparator = ' '
-            }
+        fun formatPriceWithSpace(price: Int): String {
+            val decimalFormatSymbols =
+                DecimalFormatSymbols.getInstance().apply {
+                    groupingSeparator = ' '
+                }
             val decimalFormat = DecimalFormat("#,###", decimalFormatSymbols)
             return decimalFormat.format(price)
         }

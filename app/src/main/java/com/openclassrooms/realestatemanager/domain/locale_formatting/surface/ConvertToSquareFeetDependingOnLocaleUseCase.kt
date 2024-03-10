@@ -6,17 +6,23 @@ import java.math.BigDecimal
 import java.util.Locale
 import javax.inject.Inject
 
-class ConvertToSquareFeetDependingOnLocaleUseCase @Inject constructor(
-    private val humanReadableRepository: HumanReadableRepository,
-    private val getLocaleUseCase: GetLocaleUseCase,
-) {
-    /**
-     * @return BigDecimal of the surface converted to the unit of measurement depending on locale
-     */
-    fun invoke(surface: BigDecimal): BigDecimal =
-        when (getLocaleUseCase.invoke()) {
-            Locale.US -> surface
-            Locale.FRANCE -> humanReadableRepository.convertSquareFeetToSquareMetersRoundedHalfUp(surface)
-            else -> surface
-        }
-}
+class ConvertToSquareFeetDependingOnLocaleUseCase
+    @Inject
+    constructor(
+        private val humanReadableRepository: HumanReadableRepository,
+        private val getLocaleUseCase: GetLocaleUseCase,
+    ) {
+        /**
+         * @return BigDecimal of the surface converted to the unit of measurement depending on locale
+         */
+        fun invoke(surface: BigDecimal): BigDecimal =
+            when (getLocaleUseCase.invoke()) {
+                Locale.US -> surface
+                Locale.FRANCE ->
+                    humanReadableRepository.convertSquareFeetToSquareMetersRoundedHalfUp(
+                        surface,
+                    )
+
+                else -> surface
+            }
+    }

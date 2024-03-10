@@ -7,7 +7,6 @@ import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 
 @Dao
 interface AgentDao {
-
     @Insert
     fun insert(agentEntity: AgentEntity)
 

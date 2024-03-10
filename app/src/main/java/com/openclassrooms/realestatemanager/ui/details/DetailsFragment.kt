@@ -1,15 +1,11 @@
 package com.openclassrooms.realestatemanager.ui.details
 
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,11 +18,9 @@ import com.openclassrooms.realestatemanager.databinding.DetailsRealEstateFragmen
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapReadyCallback {
-
     private val viewModel by viewModels<DetailsViewModel>()
     private val binding by viewBinding { DetailsRealEstateFragmentBinding.bind(it) }
     private var realEstateId: Long = -1
@@ -37,10 +31,14 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
 
     companion object {
         fun newInstance() = DetailsFragment()
+
         private const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
@@ -52,14 +50,15 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             childFragmentManager.findFragmentById(R.id.staticMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && resources.getBoolean(
-                R.bool.isTablet
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
+            resources.getBoolean(
+                R.bool.isTablet,
             )
         ) {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(
                     R.id.real_estate_details_photo_list_fragment_container,
-                    PicturesFragment.newInstance()
+                    PicturesFragment.newInstance(),
                 )
                 ?.commit()
         }
@@ -75,13 +74,11 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             binding.realEstateDetailsTextViewUpForSale.text = it.upForSaleDate
             binding.realEstateDetailsTextViewAgent.text = it.realEstateAgent
 
-            //todo david gérer ça avec le vm pour éviter les conditions dans la vue
-            if (binding.realEstateDetailsTextViewPrice.text == "Préciser le prix") {//todo david gérer hardcoded text
+            // todo david gérer ça avec le vm pour éviter les conditions dans la vue
+            if (binding.realEstateDetailsTextViewPrice.text == "Préciser le prix") { // todo david gérer hardcoded text
                 binding.realEstateDetailsTextViewCurrency.visibility = View.GONE
             }
-
         }
-
 
         viewModel.currentCurrency.observe(viewLifecycleOwner) { currency ->
             binding.realEstateDetailsTextViewCurrency.text = currency
@@ -125,10 +122,8 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
                 }
             }
         }
-
-
-
     }
+
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
     }

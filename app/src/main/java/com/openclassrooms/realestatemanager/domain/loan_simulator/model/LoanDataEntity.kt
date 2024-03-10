@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.domain.loan_simulator.model
 
-
 import java.math.BigDecimal
 
 data class LoanDataEntity(

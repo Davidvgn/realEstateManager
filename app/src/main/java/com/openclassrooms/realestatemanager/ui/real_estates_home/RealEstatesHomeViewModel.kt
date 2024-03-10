@@ -8,14 +8,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RealEstatesHomeViewModel @Inject constructor(
-    getRealEstatesListUseCase: GetRealEstatesListUseCase
-) : ViewModel(){
-
-
-    val isListEmptyLiveData: LiveData<Boolean> = liveData {
-        getRealEstatesListUseCase.isListEmpty().collect(){
-            emit(it)
-        }
+class RealEstatesHomeViewModel
+    @Inject
+    constructor(
+        getRealEstatesListUseCase: GetRealEstatesListUseCase,
+    ) : ViewModel() {
+        val isListEmptyLiveData: LiveData<Boolean> =
+            liveData {
+                getRealEstatesListUseCase.isListEmpty().collect {
+                    emit(it)
+                }
+            }
     }
-}

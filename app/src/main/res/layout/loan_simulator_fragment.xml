@@ -31,9 +31,9 @@
             android:clickable="true"
             android:contentDescription="Close"
             android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@id/amount_textInputLayout"
             android:padding="12dp"
             android:src="@drawable/baseline_close_24"
+            app:layout_constraintBottom_toTopOf="@id/amount_textInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,11 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            tools:hint="apport"
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/exit_button_iv">
+            app:layout_constraintTop_toBottomOf="@id/exit_button_iv"
+            tools:hint="apport">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/amount_editText"
@@ -61,9 +61,9 @@
             android:id="@+id/interest_rate_textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
             android:layout_marginTop="12dp"
             android:hint="taux"
+            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="@id/amount_textInputLayout"
             app:layout_constraintStart_toStartOf="@id/amount_textInputLayout"
             app:layout_constraintTop_toBottomOf="@id/amount_textInputLayout">

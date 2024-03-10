@@ -15,12 +15,17 @@ import com.openclassrooms.realestatemanager.domain.pictures.PicturesEntity
 import com.openclassrooms.realestatemanager.domain.real_estates.RealEstateEntity
 import java.util.concurrent.Executor
 
-@Database(entities = [RealEstateEntity::class, PicturesEntity::class, AgentEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [RealEstateEntity::class, PicturesEntity::class, AgentEntity::class],
+    version = 1,
+    exportSchema = false,
+)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun getRealEstateDao(): RealEstateDao
+
     abstract fun getPicturesDao(): PicturesDao
+
     abstract fun getAgentDao(): AgentDao
 
     companion object {
@@ -31,7 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(
             application: Application,
-            ioExecutor: Executor
+            ioExecutor: Executor,
         ): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: buildDatabase(application, ioExecutor).also { INSTANCE = it }
@@ -40,27 +45,29 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun buildDatabase(
             application: Application,
-            ioExecutor: Executor
+            ioExecutor: Executor,
         ): AppDatabase {
             return Room.databaseBuilder(
                 application,
                 AppDatabase::class.java,
-                DATABASE_NAME
+                DATABASE_NAME,
             )
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        ioExecutor.execute {
-                            val agentDao = getInstance(application, ioExecutor).getAgentDao()
-                            agentDao.insert(AgentEntity(1L, "Ted Mosby"))
-                            agentDao.insert(AgentEntity(2L, "Robin Scherbatsky"))
-                            agentDao.insert(AgentEntity(3L, "Marshall Eriksen"))
-                            agentDao.insert(AgentEntity(4L, "Lily Aldrin"))
-                            agentDao.insert(AgentEntity(5L, "Barney Stinson"))
-                            agentDao.insert(AgentEntity(6L, "Tracy McConnell"))
+                .addCallback(
+                    object : Callback() {
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            ioExecutor.execute {
+                                val agentDao = getInstance(application, ioExecutor).getAgentDao()
+                                agentDao.insert(AgentEntity(1L, "Ted Mosby"))
+                                agentDao.insert(AgentEntity(2L, "Robin Scherbatsky"))
+                                agentDao.insert(AgentEntity(3L, "Marshall Eriksen"))
+                                agentDao.insert(AgentEntity(4L, "Lily Aldrin"))
+                                agentDao.insert(AgentEntity(5L, "Barney Stinson"))
+                                agentDao.insert(AgentEntity(6L, "Tracy McConnell"))
+                            }
                         }
-                    }
-                })
+                    },
+                )
                 .build()
         }
     }

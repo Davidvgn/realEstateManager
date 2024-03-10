@@ -1,15 +1,15 @@
 package com.openclassrooms.realestatemanager.data
 
 import com.openclassrooms.realestatemanager.data.agent.AgentRepositoryImpl
-import com.openclassrooms.realestatemanager.data.loan_simulator.HumanReadableRepositoryImpl
 import com.openclassrooms.realestatemanager.data.loan_simulator.LoanSimulatorRepositoryImpl
+import com.openclassrooms.realestatemanager.data.locale_formatting.HumanReadableRepositoryImpl
 import com.openclassrooms.realestatemanager.data.location.LocationRepositoryFused
 import com.openclassrooms.realestatemanager.data.permissions.PermissionRepositoryImpl
 import com.openclassrooms.realestatemanager.data.pictures.PicturesRepositoryImpl
 import com.openclassrooms.realestatemanager.data.real_estates.RealEstateRepositoryRoom
-import com.openclassrooms.realestatemanager.domain.CurrencyRepository
 import com.openclassrooms.realestatemanager.domain.NetworkRepository
 import com.openclassrooms.realestatemanager.domain.agent.AgentRepository
+import com.openclassrooms.realestatemanager.domain.currency.CurrencyRepository
 import com.openclassrooms.realestatemanager.domain.details.DetailsRepository
 import com.openclassrooms.realestatemanager.domain.loan_simulator.LoanSimulatorRepository
 import com.openclassrooms.realestatemanager.domain.locale_formatting.HumanReadableRepository
@@ -26,7 +26,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataBindingModule {
-
     @Binds
     @Singleton
     abstract fun bindLocationRepository(impl: LocationRepositoryFused): LocationRepository

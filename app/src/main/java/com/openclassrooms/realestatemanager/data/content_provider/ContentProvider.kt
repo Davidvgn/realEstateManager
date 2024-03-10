@@ -5,7 +5,6 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteException
 import android.net.Uri
 import android.util.Log
 import com.openclassrooms.realestatemanager.data.pictures.PicturesDao
@@ -16,18 +15,17 @@ import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 
 class ContentProvider : ContentProvider() {
-
-    private val uriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
-        addURI(AUTHORITY, "realEstate", REAL_ESTATES)
-        addURI(AUTHORITY, "pictures", PICTURES)
-    }
+    private val uriMatcher =
+        UriMatcher(UriMatcher.NO_MATCH).apply {
+            addURI(AUTHORITY, "realEstate", REAL_ESTATES)
+            addURI(AUTHORITY, "pictures", PICTURES)
+        }
 
     lateinit var realEstateDao: RealEstateDao
     lateinit var picturesDao: PicturesDao
 
-
     companion object {
-         const val AUTHORITY =
+        const val AUTHORITY =
             "com.openclassrooms.realestatemanager.data.content_provider.ContentProvider"
         private const val TABLE_NAME = "RealEstate_database"
         private const val MIME_TYPE_PREFIX = "vnd.android.cursor.dir/vnd."
@@ -37,8 +35,10 @@ class ContentProvider : ContentProvider() {
     }
 
     override fun onCreate(): Boolean {
-        val appContext = context?.applicationContext ?: throw IllegalStateException("Context is null")
-        val hiltEntryPoint = EntryPointAccessors.fromApplication(appContext, ContentProviderEntryPoint::class.java)
+        val appContext =
+            context?.applicationContext ?: throw IllegalStateException("Context is null")
+        val hiltEntryPoint =
+            EntryPointAccessors.fromApplication(appContext, ContentProviderEntryPoint::class.java)
 
         realEstateDao = hiltEntryPoint.getRealEstateDao()
         picturesDao = hiltEntryPoint.getPicturesDao()
@@ -51,7 +51,7 @@ class ContentProvider : ContentProvider() {
         projection: Array<out String>?,
         selection: String?,
         selectionArgs: Array<out String>?,
-        sortOrder: String?
+        sortOrder: String?,
     ): Cursor? {
         val match = uriMatcher.match(uri)
         return try {
@@ -71,18 +71,25 @@ class ContentProvider : ContentProvider() {
     }
 
     override fun getType(uri: Uri): String {
-
         return when (uriMatcher.match(uri)) {
             REAL_ESTATES -> "$MIME_TYPE_PREFIX$AUTHORITY.$TABLE_NAME"
             PICTURES -> "$MIME_TYPE_PREFIX$AUTHORITY.$TABLE_NAME"
             else -> throw IllegalArgumentException("Unknown URI: $uri")
-        }    }
+        }
+    }
 
-    override fun insert(uri: Uri, values: ContentValues?): Uri? {
+    override fun insert(
+        uri: Uri,
+        values: ContentValues?,
+    ): Uri? {
         TODO("Not yet implemented")
     }
 
-    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
+    override fun delete(
+        uri: Uri,
+        selection: String?,
+        selectionArgs: Array<out String>?,
+    ): Int {
         TODO("Not yet implemented")
     }
 
@@ -90,16 +97,16 @@ class ContentProvider : ContentProvider() {
         uri: Uri,
         values: ContentValues?,
         selection: String?,
-        selectionArgs: Array<out String>?
+        selectionArgs: Array<out String>?,
     ): Int {
         TODO("Not yet implemented")
-
-
     }
+
     @EntryPoint
     @InstallIn(SingletonComponent::class)
     interface ContentProviderEntryPoint {
         fun getRealEstateDao(): RealEstateDao
+
         fun getPicturesDao(): PicturesDao
     }
 }

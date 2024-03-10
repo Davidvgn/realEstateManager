@@ -18,19 +18,30 @@ class InputFilterFloatMinMax(min: Float, max: Float) : InputFilter {
         end: Int,
         dest: Spanned,
         dstart: Int,
-        dend: Int
+        dend: Int,
     ): CharSequence? {
         try {
             val input =
-                (dest.subSequence(0, dstart).toString() + source + dest.subSequence(dend, dest.length)).toFloat()
-            if (isInRange(min, max, input))
+                (
+                    dest.subSequence(0, dstart).toString() + source +
+                        dest.subSequence(
+                            dend,
+                            dest.length,
+                        )
+                ).toFloat()
+            if (isInRange(min, max, input)) {
                 return null
+            }
         } catch (_: NumberFormatException) {
         }
         return ""
     }
 
-    private fun isInRange(a: Float, b: Float, c: Float): Boolean {
+    private fun isInRange(
+        a: Float,
+        b: Float,
+        c: Float,
+    ): Boolean {
         return if (b > a) c in a..b else c in b..a
     }
 }

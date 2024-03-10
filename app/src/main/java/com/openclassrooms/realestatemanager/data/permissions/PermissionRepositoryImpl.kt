@@ -10,30 +10,36 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
-class PermissionRepositoryImpl @Inject constructor(
-    private val application: Application,
-) : PermissionRepository {
+class PermissionRepositoryImpl
+    @Inject
+    constructor(
+        private val application: Application,
+    ) : PermissionRepository {
+        companion object {
+            private val availablePermissions =
+                listOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                )
+        }
 
-    companion object {
-        private val availablePermissions = listOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-        )
+        private val permissionsMutableSharedFlow: MutableStateFlow<List<PermissionEntity>> =
+            MutableStateFlow(computePermissions())
+
+        override fun getPermissionsFlow(): Flow<List<PermissionEntity>> = permissionsMutableSharedFlow
+
+        override fun refreshPermissions() {
+            permissionsMutableSharedFlow.value = computePermissions()
+        }
+
+        private fun computePermissions(): List<PermissionEntity> =
+            availablePermissions.map { permission ->
+                PermissionEntity(permission, isPermissionGranted(permission))
+            }
+
+        private fun isPermissionGranted(permission: String): Boolean =
+            ContextCompat.checkSelfPermission(
+                application,
+                permission,
+            ) == PackageManager.PERMISSION_GRANTED
     }
-
-    private val permissionsMutableSharedFlow: MutableStateFlow<List<PermissionEntity>> = MutableStateFlow(computePermissions())
-
-    override fun getPermissionsFlow(): Flow<List<PermissionEntity>> = permissionsMutableSharedFlow
-
-    override fun refreshPermissions() {
-        permissionsMutableSharedFlow.value = computePermissions()
-    }
-
-    private fun computePermissions(): List<PermissionEntity> = availablePermissions.map { permission ->
-        PermissionEntity(permission, isPermissionGranted(permission))
-    }
-
-    private fun isPermissionGranted(permission: String): Boolean =
-        ContextCompat.checkSelfPermission(application, permission) == PackageManager.PERMISSION_GRANTED
-}
-

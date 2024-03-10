@@ -11,14 +11,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MapFragment : SupportMapFragment() {
-
     companion object {
         fun newInstance() = MapFragment()
     }
 
     private val viewModel by viewModels<MapViewModel>()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         getMapAsync { googleMap ->
@@ -28,8 +30,9 @@ class MapFragment : SupportMapFragment() {
                         val latLng = LatLng(it.lat, it.long)
                         googleMap.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(
-                                latLng, 15F
-                            )
+                                latLng,
+                                15F,
+                            ),
                         )
                     }
                 }

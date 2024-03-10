@@ -4,11 +4,13 @@ import com.openclassrooms.realestatemanager.domain.locale_formatting.HumanReadab
 import java.math.BigDecimal
 import javax.inject.Inject
 
-class FormatPriceToHumanReadableUseCase @Inject constructor(
-    private val humanReadableRepository: HumanReadableRepository,
-) {
-    /**
-     * @return String of the price formatted depending on locale with currency symbol (€ or $)
-     */
-    fun invoke(price: BigDecimal): String = humanReadableRepository.formatRoundedPriceToHumanReadable(price)
-}
+class FormatPriceToHumanReadableUseCase
+    @Inject
+    constructor(
+        private val humanReadableRepository: HumanReadableRepository,
+    ) {
+        /**
+         * @return String of the price formatted depending on locale with currency symbol (€ or $)
+         */
+        fun invoke(price: BigDecimal): String = humanReadableRepository.formatRoundedPriceToHumanReadable(price)
+    }

@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class AgentEntity(
     @PrimaryKey
     val id: Long,
-    val name: String
+    val name: String,
 )

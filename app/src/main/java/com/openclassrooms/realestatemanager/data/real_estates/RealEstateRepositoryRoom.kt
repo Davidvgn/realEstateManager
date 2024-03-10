@@ -11,19 +11,19 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RealEstateRepositoryRoom @Inject constructor(
-    private val realEstateDao: RealEstateDao,
-) : RealEstatesRepository {
+class RealEstateRepositoryRoom
+    @Inject
+    constructor(
+        private val realEstateDao: RealEstateDao,
+    ) : RealEstatesRepository {
+        override suspend fun add(realEstate: RealEstateEntity) = realEstateDao.insertRealEstate(realEstate)
 
-    override suspend fun add(realEstate: RealEstateEntity) = realEstateDao.insertRealEstate(realEstate)
+        override fun getRealEstatesAsFlow(): Flow<List<RealEstateEntity>> = realEstateDao.getRealEstatesAsFlow().flowOn(Dispatchers.IO)
 
-    override fun getRealEstatesAsFlow(): Flow<List<RealEstateEntity>> =
-        realEstateDao.getRealEstatesAsFlow().flowOn(Dispatchers.IO)
+        override fun isListEmptyAsFlow(): Flow<Boolean> = realEstateDao.getRealEstatesAsFlow().map { list -> list.isEmpty() }
 
-    override fun isListEmptyAsFlow(): Flow<Boolean> =
-        realEstateDao.getRealEstatesAsFlow().map { list -> list.isEmpty() }
-
-    override suspend fun delete(realEstateId: Long): Boolean = withContext(Dispatchers.IO){
-        realEstateDao.delete(realEstateId) == 1
+        override suspend fun delete(realEstateId: Long): Boolean =
+            withContext(Dispatchers.IO) {
+                realEstateDao.delete(realEstateId) == 1
+            }
     }
-}

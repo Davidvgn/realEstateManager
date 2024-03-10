@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PicturesFragment : Fragment(R.layout.pictures_fragment) {
-
     private val binding by viewBinding { PicturesFragmentBinding.bind(it) }
     private val viewModel by viewModels<PicturesViewModel>()
 
@@ -23,7 +22,10 @@ class PicturesFragment : Fragment(R.layout.pictures_fragment) {
         fun newInstance() = PicturesFragment()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = PicturesAdapter()
         binding.addFormRvPictures.adapter = adapter
@@ -38,6 +40,5 @@ class PicturesFragment : Fragment(R.layout.pictures_fragment) {
             alignItems = AlignItems.CENTER
         }
         binding.addFormRvPictures.layoutManager = flexboxLayoutManager
-
     }
 }

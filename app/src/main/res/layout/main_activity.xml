@@ -39,12 +39,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/colorAccent"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:gravity="center"
                 android:text="@string/not_connected"
                 android:textColor="@android:color/black"
-                android:backgroundTint="@android:color/holo_red_dark"
-                android:visibility="gone"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,8 +80,7 @@
         android:layout_gravity="start"
         android:maxWidth="192dp"
         app:headerLayout="@layout/filter_real_estate"
-        app:menu="@menu/filter_menu"
-        >
+        app:menu="@menu/filter_menu">
 
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ListAdapter
-import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 import com.openclassrooms.realestatemanager.databinding.AddAgentSpinnerItemBinding
+import com.openclassrooms.realestatemanager.domain.agent.AgentEntity
 
 class AgentSpinnerAdapter() : ListAdapter, Filterable {
-
     private val dataSetObservable = DataSetObservable()
     private var items = emptyList<AgentEntity>()
 
@@ -42,25 +41,36 @@ class AgentSpinnerAdapter() : ListAdapter, Filterable {
 
     override fun hasStableIds(): Boolean = true
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val binding = if (convertView != null) {
-            AddAgentSpinnerItemBinding.bind(convertView)
-        } else {
-            AddAgentSpinnerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        }
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
+        val binding =
+            if (convertView != null) {
+                AddAgentSpinnerItemBinding.bind(convertView)
+            } else {
+                AddAgentSpinnerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            }
         getItem(position)?.let {
             binding.addAgentItemTextViewName.text = it.name
         }
         return binding.root
     }
 
-    override fun getFilter() = object : Filter() {
-        override fun performFiltering(constraint: CharSequence) = FilterResults()
-        override fun publishResults(constraint: CharSequence?, results: FilterResults) {}
-        override fun convertResultToString(resultValue: Any): CharSequence {
-            return (resultValue as AgentEntity).name
+    override fun getFilter() =
+        object : Filter() {
+            override fun performFiltering(constraint: CharSequence) = FilterResults()
+
+            override fun publishResults(
+                constraint: CharSequence?,
+                results: FilterResults,
+            ) {}
+
+            override fun convertResultToString(resultValue: Any): CharSequence {
+                return (resultValue as AgentEntity).name
+            }
         }
-    }
 
     fun setData(items: List<AgentEntity>) {
         this.items = items

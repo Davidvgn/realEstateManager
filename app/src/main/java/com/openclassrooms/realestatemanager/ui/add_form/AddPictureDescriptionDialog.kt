@@ -13,24 +13,26 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AddPictureDescriptionDialog(
     private val uri: Uri,
-    private val onDescriptionListener: PictureDescriptionListener
-): DialogFragment(R.layout.add_picture_description_dialog_fragment){
-
+    private val onDescriptionListener: PictureDescriptionListener,
+) : DialogFragment(R.layout.add_picture_description_dialog_fragment) {
     private val binding by viewBinding { AddPictureDescriptionDialogFragmentBinding.bind(it) }
 
+    companion object {
+        fun newInstance(
+            uri: Uri,
+            onDescriptionListener: PictureDescriptionListener,
+        ) = AddPictureDescriptionDialog(uri, onDescriptionListener)
+    }
 
-    companion object{
-    fun newInstance(uri : Uri, onDescriptionListener: PictureDescriptionListener)
-    = AddPictureDescriptionDialog(uri, onDescriptionListener)
-}
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmationDialogButtonOk.setOnClickListener {
             onDescriptionListener.onDescriptionFilled(uri, binding.description.text.toString())
-                dismiss()
+            dismiss()
         }
 
         binding.confirmationDialogButtonCancel.setOnClickListener {
