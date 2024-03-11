@@ -27,14 +27,11 @@ class MapFragment : SupportMapFragment() {
         getMapAsync { googleMap ->
 
             viewModel.realEstateLiveData.observe(viewLifecycleOwner) {
-                it.latLng?.let { it1 ->
+                googleMap.addMarker(
                     MarkerOptions()
-                        .position(it1)
-                }?.let { it2 ->
-                    googleMap.addMarker(
-                        it2,
-                    )
-                }
+                        .position(it.latLng)
+                        .title(it.address),
+                )
             }
 
             viewModel.viewActionLiveData.observeEvent(viewLifecycleOwner) {

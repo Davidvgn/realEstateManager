@@ -35,9 +35,11 @@ class MapViewModel
         val realEstateLiveData: LiveData<MapPoiViewState> =
             liveData {
                 getRealEstatesListUseCase.invoke().collectLatest {
-                    it.forEach {
+                    it.forEach { realEstateEntity ->
 
-                        emit((MapPoiViewState(it.latLng)))
+                        if (realEstateEntity.latLng != null && realEstateEntity.address != null) {
+                            emit((MapPoiViewState(realEstateEntity.latLng, realEstateEntity.address)))
+                        }
                     }
                 }
             }
