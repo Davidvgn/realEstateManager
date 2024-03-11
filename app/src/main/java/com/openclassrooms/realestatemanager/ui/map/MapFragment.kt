@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.openclassrooms.realestatemanager.ui.utils.Event.Companion.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,18 @@ class MapFragment : SupportMapFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getMapAsync { googleMap ->
+
+            viewModel.realEstateLiveData.observe(viewLifecycleOwner) {
+                it.latLng?.let { it1 ->
+                    MarkerOptions()
+                        .position(it1)
+                }?.let { it2 ->
+                    googleMap.addMarker(
+                        it2,
+                    )
+                }
+            }
+
             viewModel.viewActionLiveData.observeEvent(viewLifecycleOwner) {
                 when (it) {
                     is MapViewAction.ZoomTo -> {
