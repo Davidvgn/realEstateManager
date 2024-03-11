@@ -113,6 +113,8 @@
     <string name="loan_simulator_payment_result">%1s per year\\n%2s per month</string>
     <string name="loan_simulator_calculate_button_error_message">Entrer une valeur</string>
     <string name="loan">loan</string>
+    <string name="sold">VENDU</string>
+
 
 
 </resources>

@@ -17,7 +17,7 @@ data class RealEstateEntity(
     val description: String?,
     val pointOfInterest: List<String?>,
     val address: String?,
-    val status: String?,
+    val status: String,
     val upForSaleDate: String?,
     val dateOfSale: String?,
     val realEstateAgent: String?,

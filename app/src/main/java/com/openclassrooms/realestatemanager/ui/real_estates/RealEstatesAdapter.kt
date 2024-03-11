@@ -105,6 +105,10 @@ class RealEstatesAdapter(
                     binding.realEstateItemTextViewCurrency.visibility = View.GONE
                 }
 
+                if (realEstate.status == "SOLD") { // todo david gérer hardcoded text
+                    binding.relEstateSoldBanner.visibility = View.VISIBLE
+                }
+
                 Glide.with(binding.realEstateItemImageView.context)
                     .load(uri)
                     .into(binding.realEstateItemImageView)

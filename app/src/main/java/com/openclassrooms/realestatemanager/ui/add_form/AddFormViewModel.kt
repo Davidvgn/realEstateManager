@@ -47,6 +47,7 @@ class AddFormViewModel
         private var numberOfRooms: String? = null
         private var latLng: LatLng? = null
         private var agentName: String? = null
+        var realEstatestatus: String? = null
 
         private val showToastSingleLiveEventMutableLiveData = MutableLiveData<Event<String>>()
         val showToastSingleLiveEvent: LiveData<Event<String>> = showToastSingleLiveEventMutableLiveData
@@ -90,7 +91,7 @@ class AddFormViewModel
                         description = description ?: "Ajouter une description",
                         address = address ?: "Précisez l'adresse",
                         pointOfInterest = poiList,
-                        status = "",
+                        status = realEstatestatus ?: "forSale",
                         upForSaleDate = upForSaleDate ?: "Non communiqué",
                         dateOfSale = soldDate ?: "Non communiqué",
                         realEstateAgent = agentName.toString(),
@@ -224,5 +225,9 @@ class AddFormViewModel
                 val agents = getAgentsUseCase()
                 _agentsLiveData.postValue(agents)
             }
+        }
+
+        fun onStatusSelected(status: String) {
+            realEstatestatus = status
         }
     }

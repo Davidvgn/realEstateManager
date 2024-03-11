@@ -284,6 +284,16 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
                 binding.addRealEstateCheckBoxTransportation.isChecked,
             )
         }
+        binding.radioButtonSold.setOnClickListener {
+            if (binding.radioButtonSold.isChecked) {
+                viewModel.onStatusSelected(binding.radioButtonSold.text.toString())
+            }
+        }
+        binding.radioButtonToSale.setOnClickListener {
+            if (binding.radioButtonToSale.isChecked) {
+                viewModel.onStatusSelected(binding.radioButtonToSale.text.toString())
+            }
+        }
 
         binding.addRealEstateTextInputEditTextPrice.doAfterTextChanged {
             viewModel.onTextPriceChanged(it?.toString())
