@@ -53,7 +53,7 @@
             android:parentActivityName=".ui.main.MainActivity"
             />
         <activity
-            android:name="com.openclassrooms.realestatemanager.ui.UpdateActivity"
+            android:name="com.openclassrooms.realestatemanager.ui.update.UpdateActivity"
             android:parentActivityName=".ui.main.MainActivity"
             />
         <provider

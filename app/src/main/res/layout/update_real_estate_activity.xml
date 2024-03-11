@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="com.openclassrooms.realestatemanager.ui.UpdateActivity">
+    tools:context="com.openclassrooms.realestatemanager.ui.update.UpdateActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/add_realEstate_toolbar_layout"

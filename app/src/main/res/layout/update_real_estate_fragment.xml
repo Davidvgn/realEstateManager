@@ -12,7 +12,7 @@
         android:layout_margin="8dp"
         android:paddingTop="4dp"
         android:paddingBottom="32dp"
-        tools:context=".ui.UpdateActivity">
+        tools:context=".ui.update.UpdateActivity">
 
         <TextView
             android:id="@+id/update_real_estate_textView_type_title"

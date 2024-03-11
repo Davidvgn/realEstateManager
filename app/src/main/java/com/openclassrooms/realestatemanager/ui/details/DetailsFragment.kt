@@ -16,8 +16,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.chip.Chip
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.DetailsRealEstateFragmentBinding
-import com.openclassrooms.realestatemanager.ui.UpdateActivity
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
+import com.openclassrooms.realestatemanager.ui.update.UpdateActivity
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -97,6 +97,7 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
 
         binding.detailsRealEstateButtonUpdate.setOnClickListener {
             val intent = Intent(requireActivity(), UpdateActivity::class.java)
+            intent.putExtra(KEY_REAL_ESTATE_ID, realEstateId)
             startActivity(intent)
         }
 
