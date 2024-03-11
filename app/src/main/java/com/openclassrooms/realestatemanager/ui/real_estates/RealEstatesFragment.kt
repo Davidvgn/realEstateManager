@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RealEstatesFragment : Fragment(R.layout.real_estates_fragment) {
-
     companion object {
         fun newInstance() = RealEstatesFragment()
     }
@@ -30,23 +29,25 @@ class RealEstatesFragment : Fragment(R.layout.real_estates_fragment) {
             onRealEstateClickedListener = context
         } else {
             throw RuntimeException("$context must implement OnRealEstateClickedListener")
-        }    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val adapter = RealEstatesAdapter({
-            navigateToAddRealEstateActivity()
-        }, onRealEstateClickedListener)
-
-
-        binding.realEstateRecyclerView.adapter = adapter
-
-        viewModel.viewStateLiveData.observe(viewLifecycleOwner){
-            adapter.submitList(it)
         }
     }
 
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+        val adapter =
+            RealEstatesAdapter({
+                navigateToAddRealEstateActivity()
+            }, onRealEstateClickedListener)
 
+        binding.realEstateRecyclerView.adapter = adapter
+
+        viewModel.viewStateLiveData.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+    }
 
     private fun navigateToAddRealEstateActivity() {
         val intent = Intent(activity, AddRealEstateActivity::class.java)

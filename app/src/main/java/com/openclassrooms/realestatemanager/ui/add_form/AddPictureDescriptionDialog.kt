@@ -32,6 +32,9 @@ class AddPictureDescriptionDialog(
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmationDialogButtonOk.setOnClickListener {
+            // todo david normalement la description n'est pas nécessaire sur toutes les photo
+            // Au moins une photo doit en avoir une.
+
             if (binding.description.text.toString() != "") {
                 onDescriptionListener.onDescriptionFilled(uri, binding.description.text.toString())
                 dismiss()

@@ -13,5 +13,7 @@ interface PicturesRepository {
 
     suspend fun addTemporaryPicturesList(draftPictureEntity: DraftPictureEntity)
 
+    suspend fun deleteTemporaryPicture(draftPictureEntity: DraftPictureEntity)
+
     suspend fun deleteTemporaryPicturesList()
 }

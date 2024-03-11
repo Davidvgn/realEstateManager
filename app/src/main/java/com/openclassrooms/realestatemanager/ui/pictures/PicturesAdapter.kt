@@ -3,14 +3,19 @@ package com.openclassrooms.realestatemanager.ui.pictures
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.PictureEmptyStateBinding
 import com.openclassrooms.realestatemanager.ui.ImageTextView
+import com.openclassrooms.realestatemanager.ui.OnPictureClickedListener
 
-class PicturesAdapter :
+class PicturesAdapter(
+    private val listener: OnPictureClickedListener,
+) :
     ListAdapter<PicturesViewStateItem, PicturesAdapter.PicturesViewHolder>(PicturesDiffUtilCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -20,7 +25,11 @@ class PicturesAdapter :
             PicturesViewStateItem.Type.EMPTY_STATE ->
                 PicturesViewHolder.EmptyState.create(parent)
 
-            PicturesViewStateItem.Type.PICTURES -> PicturesViewHolder.Pictures.create(parent)
+            PicturesViewStateItem.Type.PICTURES ->
+                PicturesViewHolder.Pictures.create(
+                    parent,
+                    listener,
+                )
         }
 
     override fun onBindViewHolder(
@@ -29,7 +38,11 @@ class PicturesAdapter :
     ) {
         when (holder) {
             is PicturesViewHolder.EmptyState -> Unit
-            is PicturesViewHolder.Pictures -> holder.bind(picture = getItem(position) as PicturesViewStateItem.Pictures)
+            is PicturesViewHolder.Pictures ->
+                holder.bind(
+                    picture = getItem(position) as PicturesViewStateItem.Pictures,
+                    listener,
+                )
         }
     }
 
@@ -54,15 +67,26 @@ class PicturesAdapter :
         class Pictures(private val imageTextView: ImageTextView) :
             PicturesViewHolder(imageTextView) {
             companion object {
-                fun create(parent: ViewGroup): Pictures {
+                fun create(
+                    parent: ViewGroup,
+                    listener: OnPictureClickedListener,
+                ): Pictures {
                     val imageTextView = ImageTextView(parent.context)
                     return Pictures(imageTextView)
                 }
             }
 
-            fun bind(picture: PicturesViewStateItem.Pictures) {
+            fun bind(
+                picture: PicturesViewStateItem.Pictures,
+                listener: OnPictureClickedListener,
+            ) {
                 imageTextView.setImageResource(picture.uri.toUri())
                 imageTextView.setText(picture.title)
+
+                imageTextView.findViewById<ImageView>(R.id.custom_imageView_image)
+                    .setOnClickListener {
+                        listener.onPictureClickedListener(picture.uri.toUri(), picture.title)
+                    }
             }
         }
     }

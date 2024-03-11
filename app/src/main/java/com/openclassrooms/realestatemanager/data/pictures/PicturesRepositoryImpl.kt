@@ -34,6 +34,11 @@ class PicturesRepositoryImpl
             draftPictureFlow.value = draftPictureMutableList.toList()
         }
 
+        override suspend fun deleteTemporaryPicture(draftPictureEntity: DraftPictureEntity) {
+            draftPictureMutableList.remove(draftPictureEntity)
+            draftPictureFlow.value = draftPictureMutableList.toList()
+        }
+
         override suspend fun deleteTemporaryPicturesList() {
             draftPictureMutableList.clear()
             draftPictureFlow.value = draftPictureMutableList.toList()
