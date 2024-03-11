@@ -3,12 +3,12 @@ package com.openclassrooms.realestatemanager.ui.pictures
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.databinding.PictureEmptyStateBinding
-import com.openclassrooms.realestatemanager.databinding.PictureItemBinding
+import com.openclassrooms.realestatemanager.ui.ImageTextView
 
 class PicturesAdapter :
     ListAdapter<PicturesViewStateItem, PicturesAdapter.PicturesViewHolder>(PicturesDiffUtilCallback) {
@@ -51,26 +51,18 @@ class PicturesAdapter :
             }
         }
 
-        class Pictures(private val binding: PictureItemBinding) : PicturesViewHolder(binding.root) {
+        class Pictures(private val imageTextView: ImageTextView) :
+            PicturesViewHolder(imageTextView) {
             companion object {
-                fun create(parent: ViewGroup) =
-                    Pictures(
-                        binding =
-                            PictureItemBinding.inflate(
-                                LayoutInflater.from(parent.context),
-                                parent,
-                                false,
-                            ),
-                    )
+                fun create(parent: ViewGroup): Pictures {
+                    val imageTextView = ImageTextView(parent.context)
+                    return Pictures(imageTextView)
+                }
             }
 
             fun bind(picture: PicturesViewStateItem.Pictures) {
-                Glide
-                    .with(itemView.context)
-                    .load(picture.uri)
-                    .into(binding.pictureImageView)
-
-                binding.pictureTitle.text = picture.title
+                imageTextView.setImageResource(picture.uri.toUri())
+                imageTextView.setText(picture.title)
             }
         }
     }

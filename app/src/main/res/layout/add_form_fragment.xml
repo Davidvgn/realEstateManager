@@ -353,7 +353,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <FrameLayout
+        <com.openclassrooms.realestatemanager.ui.ImageTextView
             android:id="@+id/photo_list_fragment_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

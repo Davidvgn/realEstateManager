@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/custom_imageView_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/real_estate_imageView_contentDescription"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/sample_image" />
+
+    <TextView
+        android:id="@+id/custom_imageView_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#80FFFFFF"
+        android:gravity="center"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="24sp"
+        tools:text="@sample/realEstate.json/data/type" />
+</merge>
