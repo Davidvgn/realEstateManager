@@ -47,7 +47,7 @@ class AddFormViewModel
         private var numberOfRooms: String? = null
         private var latLng: LatLng? = null
         private var agentName: String? = null
-        var realEstatestatus: String? = null
+        private var realEstatestatus: String? = null
 
         private val showToastSingleLiveEventMutableLiveData = MutableLiveData<Event<String>>()
         val showToastSingleLiveEvent: LiveData<Event<String>> = showToastSingleLiveEventMutableLiveData

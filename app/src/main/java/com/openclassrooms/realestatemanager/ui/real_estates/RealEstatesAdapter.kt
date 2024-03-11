@@ -105,7 +105,7 @@ class RealEstatesAdapter(
                     binding.realEstateItemTextViewCurrency.visibility = View.GONE
                 }
 
-                if (realEstate.status == "SOLD") { // todo david gérer hardcoded text
+                if (realEstate.status == "Sold") { // todo david gérer hardcoded text
                     binding.relEstateSoldBanner.visibility = View.VISIBLE
                 }
 
