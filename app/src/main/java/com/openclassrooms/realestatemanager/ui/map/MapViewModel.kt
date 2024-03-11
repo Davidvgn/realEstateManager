@@ -38,9 +38,35 @@ class MapViewModel
                     it.forEach { realEstateEntity ->
 
                         if (realEstateEntity.latLng != null && realEstateEntity.address != null) {
-                            emit((MapPoiViewState(realEstateEntity.latLng, realEstateEntity.address)))
+                            emit(
+                                MapPoiViewState(
+                                    realEstateEntity.id,
+                                    realEstateEntity.latLng,
+                                    realEstateEntity.address,
+                                ),
+                            )
                         }
                     }
+                }
+            }
+
+        val realEstateLiveDataList: LiveData<List<MapPoiViewState>> =
+            liveData {
+                val realEstateList = mutableListOf<MapPoiViewState>()
+
+                getRealEstatesListUseCase.invoke().collectLatest { realEstateEntities ->
+                    realEstateEntities.forEach { realEstateEntity ->
+                        if (realEstateEntity.latLng != null && realEstateEntity.address != null) {
+                            val mapPoiViewState =
+                                MapPoiViewState(
+                                    realEstateEntity.id,
+                                    realEstateEntity.latLng,
+                                    realEstateEntity.address,
+                                )
+                            realEstateList.add(mapPoiViewState)
+                        }
+                    }
+                    emit(realEstateList.toList())
                 }
             }
 
