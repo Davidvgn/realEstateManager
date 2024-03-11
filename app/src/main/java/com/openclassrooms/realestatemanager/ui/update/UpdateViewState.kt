@@ -1,7 +1,7 @@
 package com.openclassrooms.realestatemanager.ui.update
 
 data class UpdateViewState(
-    val creationDate: String?,
+    val id: Long,
     val type: String?,
     val salePrice: String?,
     val floorArea: String?,

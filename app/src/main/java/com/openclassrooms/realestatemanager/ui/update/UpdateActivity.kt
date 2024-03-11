@@ -1,12 +1,14 @@
 package com.openclassrooms.realestatemanager.ui.update
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.ui.OnPictureClickedListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UpdateActivity : AppCompatActivity() {
+class UpdateActivity : AppCompatActivity(), OnPictureClickedListener {
     companion object {
         const val KEY_REAL_ESTATE_ID = "KEY_REAL_ESTATE_ID"
     }
@@ -25,5 +27,12 @@ class UpdateActivity : AppCompatActivity() {
                 )
                 .commitNow()
         }
+    }
+
+    override fun onPictureClickedListener(
+        uri: Uri,
+        title: String,
+    ) {
+//            viewModel.deleteTemporaryPicture(uri, title)
     }
 }

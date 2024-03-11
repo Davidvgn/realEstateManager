@@ -30,24 +30,6 @@ class DetailsViewModel
         private var photo: Uri? =
             Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
-        val poiListLiveData: LiveData<List<String>> =
-            liveData {
-                getPoiListUseCase.invoke(realEstateId).collect {
-                    emit(it)
-                }
-            }
-
-        val realEstateLocation: LiveData<LatLng> =
-            liveData {
-                getRealEstateByIdUseCase.invoke(realEstateId).collect {
-                    it.latLng?.let { latLng -> emit(latLng) }
-                }
-            }
-        val currentCurrency: LiveData<String> =
-            liveData {
-                emit(getCurrentCurrencyUseCase())
-            }
-
         val viewStateLiveData: LiveData<DetailViewState> =
             liveData {
 
@@ -99,4 +81,22 @@ class DetailsViewModel
         fun initRealEstateId(id: Long) {
             realEstateId = id
         }
+
+        val poiListLiveData: LiveData<List<String>> =
+            liveData {
+                getPoiListUseCase.invoke(realEstateId).collect {
+                    emit(it)
+                }
+            }
+
+        val realEstateLocation: LiveData<LatLng> =
+            liveData {
+                getRealEstateByIdUseCase.invoke(realEstateId).collect {
+                    it.latLng?.let { latLng -> emit(latLng) }
+                }
+            }
+        val currentCurrency: LiveData<String> =
+            liveData {
+                emit(getCurrentCurrencyUseCase())
+            }
     }

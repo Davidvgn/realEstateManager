@@ -11,4 +11,6 @@ interface RealEstatesRepository {
     fun isListEmptyAsFlow(): Flow<Boolean>
 
     suspend fun delete(realEstateId: Long): Boolean
+
+    suspend fun updateRealEstate(realEstate: RealEstateEntity)
 }

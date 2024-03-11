@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.openclassrooms.realestatemanager.domain.real_estates.model.RealEstateEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -30,4 +31,7 @@ interface RealEstateDao {
 
     @Query("DELETE FROM realEstate WHERE id=:realEstateId")
     suspend fun delete(realEstateId: Long): Int
+
+    @Update
+    suspend fun updateRealEstate(realEstate: RealEstateEntity)
 }

@@ -26,4 +26,8 @@ class RealEstateRepositoryRoom
             withContext(Dispatchers.IO) {
                 realEstateDao.delete(realEstateId) == 1
             }
+
+        override suspend fun updateRealEstate(realEstate: RealEstateEntity) {
+            realEstateDao.updateRealEstate(realEstate)
+        }
     }
