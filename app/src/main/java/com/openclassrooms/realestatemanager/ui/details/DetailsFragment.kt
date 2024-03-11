@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.details
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.chip.Chip
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.DetailsRealEstateFragmentBinding
+import com.openclassrooms.realestatemanager.ui.UpdateActivity
 import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -91,6 +93,11 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             val location = LatLng(latitude, longitude)
             map.addMarker(MarkerOptions().position(location).title("Marker"))
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+        }
+
+        binding.detailsRealEstateButtonUpdate.setOnClickListener {
+            val intent = Intent(requireActivity(), UpdateActivity::class.java)
+            startActivity(intent)
         }
 
 //        viewModel.realEstatePictures.observe(viewLifecycleOwner){ uriString ->
