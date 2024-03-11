@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.ui.add_form
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.databinding.AddPictureDescriptionDialogFragmentBinding
@@ -31,8 +32,12 @@ class AddPictureDescriptionDialog(
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmationDialogButtonOk.setOnClickListener {
-            onDescriptionListener.onDescriptionFilled(uri, binding.description.text.toString())
-            dismiss()
+            if (binding.description.text.toString() != "") {
+                onDescriptionListener.onDescriptionFilled(uri, binding.description.text.toString())
+                dismiss()
+            } else {
+                Toast.makeText(activity, "Ajouter un titre", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.confirmationDialogButtonCancel.setOnClickListener {

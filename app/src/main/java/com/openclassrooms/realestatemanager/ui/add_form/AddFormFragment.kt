@@ -331,7 +331,9 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
         uri: Uri,
         title: String,
     ) {
-        viewModel.addTemporaryPicture(uri, title)
+        if (title != "") {
+            viewModel.addTemporaryPicture(uri, title)
+        }
     }
 }
 
