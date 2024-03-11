@@ -108,6 +108,7 @@
     <string name="loan_simulator_calculate_button_error_message">Please enter a value</string>
     <string name="loan">loan</string>
     <string name="sold">SOLD</string>
+    <string name="update">Update</string>
 
 
 </resources>
