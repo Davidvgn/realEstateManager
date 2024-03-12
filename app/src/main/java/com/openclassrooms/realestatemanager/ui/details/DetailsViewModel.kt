@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.ui.details
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.google.android.gms.maps.model.LatLng
@@ -30,6 +31,10 @@ class DetailsViewModel
         private var photo: Uri? =
             Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
+        private val statusMutableLiveData = MutableLiveData<String?>()
+
+        private val statusLiveData: MutableLiveData<String?> = statusMutableLiveData
+
         val viewStateLiveData: LiveData<DetailViewState> =
             liveData {
 
@@ -37,6 +42,8 @@ class DetailsViewModel
 
                     val currency = getCurrentCurrencyUseCase.invoke()
                     var convertedPrice = realEstate.salePrice
+
+                    statusMutableLiveData.value = realEstate.status
 
                     if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders
                         if (currency == "€") { // todo david changer ne pas mettre en dur
@@ -77,6 +84,10 @@ class DetailsViewModel
                     }
                 }
             }
+
+        fun getRealEstateStatus(): String? {
+            return statusLiveData.value
+        }
 
         fun initRealEstateId(id: Long) {
             realEstateId = id

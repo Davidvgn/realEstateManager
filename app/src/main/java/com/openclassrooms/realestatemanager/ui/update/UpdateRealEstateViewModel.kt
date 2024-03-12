@@ -216,6 +216,10 @@ class UpdateRealEstateViewModel
             poiListMutableLiveData.value = poiList.toList()
         }
 
+        fun updateStatus(status: String) {
+            realEstatestatus = status
+        }
+
         fun addTemporaryPicture(
             imageUri: Uri,
             title: String,

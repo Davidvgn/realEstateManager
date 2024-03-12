@@ -79,6 +79,9 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             if (binding.realEstateDetailsTextViewPrice.text == "Préciser le prix") { // todo david gérer hardcoded text
                 binding.realEstateDetailsTextViewCurrency.visibility = View.GONE
             }
+            if (viewModel.getRealEstateStatus() == "Sold") {
+                binding.realEstateDetailsTextViewSoldStatus.visibility = View.VISIBLE
+            }
         }
 
         viewModel.currentCurrency.observe(viewLifecycleOwner) { currency ->

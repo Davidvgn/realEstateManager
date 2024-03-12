@@ -91,7 +91,7 @@ class AddFormViewModel
                         description = description ?: "Ajouter une description",
                         address = address ?: "Précisez l'adresse",
                         pointOfInterest = poiList,
-                        status = realEstatestatus ?: "forSale",
+                        status = realEstatestatus ?: "For Sale",
                         upForSaleDate = upForSaleDate ?: "Non communiqué",
                         dateOfSale = soldDate ?: "Non communiqué",
                         realEstateAgent = agentName.toString(),
