@@ -34,6 +34,7 @@ import com.openclassrooms.realestatemanager.databinding.UpdateRealEstateFragment
 import com.openclassrooms.realestatemanager.ui.PictureDescriptionListener
 import com.openclassrooms.realestatemanager.ui.add_form.AddPictureDescriptionDialog
 import com.openclassrooms.realestatemanager.ui.add_form.AgentSpinnerAdapter
+import com.openclassrooms.realestatemanager.ui.pictures.PicturesFragment
 import com.openclassrooms.realestatemanager.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -97,9 +98,9 @@ class UpdateRealEstateFragment :
                 binding.updateRealEstateChipOther,
             )
 
-//        activity?.supportFragmentManager?.beginTransaction()
-//            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
-//            ?.commit()
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.update_real_estate_photo_list_fragment_container, PicturesFragment.newInstance())
+            ?.commit()
 
         // Pictures from gallery
         val imageContract =
