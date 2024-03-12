@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.ui.details
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -116,8 +115,6 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
 
         viewModel.poiListLiveData.observe(viewLifecycleOwner) { poiList ->
             binding.chipGroup.removeAllViews()
-            Log.d("DavidVgn", "onViewCreated: $poiList ${poiList.size}")
-
             poiList.forEach { pois ->
                 val poiItems =
                     pois.split(",") // Diviser la chaîne de caractères en une liste de chaînes de caractères

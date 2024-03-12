@@ -325,14 +325,42 @@ class UpdateRealEstateFragment :
         }
 
         viewModel.viewStateLiveData.observe(viewLifecycleOwner) { updateViewState ->
+            Log.d("DavidVgn", "onViewCreated: ${(updateViewState.poi.toString())}")
             for (chip in binding.updateRealEstateChipGroupType.children) {
                 if (chip is Chip) {
                     chip.isChecked = (chip.text == updateViewState.type)
                 }
             }
 
-            if (updateViewState.status == "Sold") {
+            if (updateViewState.status == "Sold") { // todo david hardcoded text
                 binding.updateRealEstateRadioButtonSold.isChecked = true
+            }
+// todo david hardcoded text + wrong way to do it
+            for (poi in updateViewState.poi) {
+                if (poi == "School") {
+                    viewModel.addPoi(poi, true)
+                    binding.updateRealEstateCheckBoxSchool.isChecked = true
+                }
+                if (poi == "Transportation") {
+                    viewModel.addPoi(poi, true)
+                    binding.updateRealEstateCheckBoxTransportation.isChecked = true
+                }
+                if (poi == "Restaurants") {
+                    viewModel.addPoi(poi, true)
+                    binding.updateRealEstateCheckBoxRestaurant.isChecked = true
+                }
+                if (poi == "Hospitals") {
+                    viewModel.addPoi(poi, true)
+                    binding.updateRealEstateCheckBoxHospitals.isChecked = true
+                }
+                if (poi == "Pharmacy") {
+                    viewModel.addPoi(poi, true)
+                    binding.updateRealEstateCheckBoxPharmacie.isChecked = true
+                }
+                if (poi == "Shops") {
+                    viewModel.addPoi(poi, true)
+                    binding.updateRealEstateCheckBoxShops.isChecked = true
+                }
             }
 
             binding.updateRealEstateTextInputEditTextPrice.setText(updateViewState.salePrice)
