@@ -67,9 +67,10 @@ class UpdateRealEstateViewModel
         private var photo: Uri? =
             Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
+        var creationDate = ""
+
         val viewStateLiveData: LiveData<UpdateViewState> =
             liveData {
-
                 getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
 
                     val currency = getCurrentCurrencyUseCase.invoke()
@@ -90,6 +91,7 @@ class UpdateRealEstateViewModel
                     val realEstateDetails =
                         UpdateViewState(
                             id = realEstate.id,
+                            creationDate = realEstate.creationDate,
                             type = realEstate.type,
                             salePrice = convertedPrice,
                             floorArea = realEstate.floorArea,
@@ -103,6 +105,7 @@ class UpdateRealEstateViewModel
                             realEstateAgent = realEstate.realEstateAgent,
                         )
                     emit(realEstateDetails)
+                    creationDate = realEstateDetails.creationDate
                 }
             }
 
@@ -115,7 +118,7 @@ class UpdateRealEstateViewModel
                 val updatedRealEstate =
                     RealEstateEntity(
                         id = realEstateId,
-                        creationDate = "", // todo david trouver comment ne pas modifier cette valeur
+                        creationDate = creationDate,
                         type = chip,
                         photo = photo.toString(),
                         salePrice = price,
