@@ -9,6 +9,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -299,9 +300,47 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             viewModel.onTextPriceChanged(it?.toString())
         }
 
-        binding.addRealEstateTextViewTitleNumberOfRooms.doAfterTextChanged {
-            viewModel.onNumberOfRoomsChanged(it?.toString())
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.radio_button_1 -> {
+                    binding.radioButton1.text
+                    viewModel.onNumberOfRoomsChanged(
+                        binding.radioButton1.text.toString(),
+                    )
+                }
+
+                R.id.radio_button_2 -> {
+                    viewModel.onNumberOfRoomsChanged(
+                        binding.radioButton2.text.toString(),
+                    )
+                }
+
+                R.id.radio_button_3 -> {
+                    viewModel.onNumberOfRoomsChanged(
+                        binding.radioButton3.text.toString(),
+                    )
+                }
+
+                R.id.radio_button_4 -> {
+                    viewModel.onNumberOfRoomsChanged(
+                        binding.radioButton4.text.toString(),
+                    )
+                }
+
+                R.id.radio_button_5 -> {
+                    viewModel.onNumberOfRoomsChanged(
+                        binding.radioButton5.text.toString(),
+                    )
+                }
+            }
         }
+
+        val checkedRadioButton =
+            binding.root.findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId)
+        val checkedRadioButtonText = checkedRadioButton.text.toString()
+        viewModel.onNumberOfRoomsChanged(checkedRadioButtonText)
+        Log.d("DavidVgn", "onViewCreated: $checkedRadioButtonText")
+
         binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
             viewModel.onTextFloorAreaChanged(it?.toString())
         }

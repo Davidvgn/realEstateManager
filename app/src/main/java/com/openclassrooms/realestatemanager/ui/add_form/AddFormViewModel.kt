@@ -87,7 +87,7 @@ class AddFormViewModel
                         salePrice = price ?: "Préciser le prix",
                         photo = photo.toString(),
                         floorArea = flourArea ?: "Préciser la surface",
-                        numberOfRooms = numberOfRooms ?: "Préciser nombre de p!èces",
+                        numberOfRooms = numberOfRooms,
                         description = description ?: "Ajouter une description",
                         address = address ?: "Précisez l'adresse",
                         pointOfInterest = poiList,

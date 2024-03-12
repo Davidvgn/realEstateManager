@@ -9,6 +9,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -340,6 +341,17 @@ class UpdateRealEstateFragment :
             if (updateViewState.status == "Sold") { // todo david hardcoded text
                 binding.updateRealEstateRadioButtonSold.isChecked = true
             }
+
+            val valueToCheck = updateViewState.numberOfRooms
+
+            for (i in 0 until binding.updateRealEstateRadioGroup.childCount) {
+                val radioButton = binding.updateRealEstateRadioGroup.getChildAt(i) as RadioButton
+                if (radioButton.text == valueToCheck) {
+                    radioButton.isChecked = true
+                    break
+                }
+            }
+
 // todo david hardcoded text + wrong way to do it
             for (poi in updateViewState.poi) {
                 if (poi == "School") {
