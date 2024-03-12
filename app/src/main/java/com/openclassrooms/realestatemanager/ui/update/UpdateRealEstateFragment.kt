@@ -18,6 +18,12 @@ import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.gms.common.api.Status
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
@@ -90,6 +96,10 @@ class UpdateRealEstateFragment :
                 binding.updateRealEstateChipOther,
             )
 
+//        activity?.supportFragmentManager?.beginTransaction()
+//            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
+//            ?.commit()
+
         // Pictures from gallery
         val imageContract =
             registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -144,44 +154,40 @@ class UpdateRealEstateFragment :
             chip.layoutParams = params
         }
 
-//        val autocompleteFragment =
-//            childFragmentManager.findFragmentById(R.id.update_real_estate_autocomplete_fragment)
-//                as AutocompleteSupportFragment
-//
-//        if (!Places.isInitialized()) {
-//            context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
-//        }
-//        // Autocomplete address field
-//        autocompleteFragment.setPlaceFields(
-//            listOf(
-//                Place.Field.ID,
-//                Place.Field.NAME,
-//                Place.Field.ADDRESS,
-//                Place.Field.LAT_LNG,
-//            ),
-//        )
+        val autocompleteFragment =
+            childFragmentManager.findFragmentById(R.id.update_real_estate_autocomplete_fragment)
+                as AutocompleteSupportFragment
 
-//        activity?.supportFragmentManager?.beginTransaction()
-//            ?.replace(R.id.photo_list_fragment_container, PicturesFragment.newInstance())
-//            ?.commit()
-//
-//        autocompleteFragment.setOnPlaceSelectedListener(
-//            object : PlaceSelectionListener {
-//                override fun onPlaceSelected(place: Place) {
-//                    binding.updateRealEstateTvSelectedAddress.text = place.address?.toString()
-//
-//                    viewModel.onAddressChanged(place.address?.toString())
-//
-//                    val placeLatLng: LatLng? = place.latLng
-//                    if (placeLatLng != null) {
-//                        viewModel.addLatLng(placeLatLng.latitude, placeLatLng.longitude)
-//                    }
-//                }
-//
-//                override fun onError(status: Status) {
-//                }
-//            },
-//        )
+        if (!Places.isInitialized()) {
+            context?.let { Places.initialize(it, BuildConfig.PLACES_API_KEY) }
+        }
+        // Autocomplete address field
+        autocompleteFragment.setPlaceFields(
+            listOf(
+                Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.ADDRESS,
+                Place.Field.LAT_LNG,
+            ),
+        )
+
+        autocompleteFragment.setOnPlaceSelectedListener(
+            object : PlaceSelectionListener {
+                override fun onPlaceSelected(place: Place) {
+                    binding.updateRealEstateTvSelectedAddress.text = place.address?.toString()
+
+                    viewModel.onAddressChanged(place.address?.toString())
+
+                    val placeLatLng: LatLng? = place.latLng
+                    if (placeLatLng != null) {
+                        viewModel.addLatLng(placeLatLng.latitude, placeLatLng.longitude)
+                    }
+                }
+
+                override fun onError(status: Status) {
+                }
+            },
+        )
 
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -325,7 +331,6 @@ class UpdateRealEstateFragment :
         }
 
         viewModel.viewStateLiveData.observe(viewLifecycleOwner) { updateViewState ->
-            Log.d("DavidVgn", "onViewCreated: ${(updateViewState.poi.toString())}")
             for (chip in binding.updateRealEstateChipGroupType.children) {
                 if (chip is Chip) {
                     chip.isChecked = (chip.text == updateViewState.type)
@@ -365,6 +370,7 @@ class UpdateRealEstateFragment :
 
             binding.updateRealEstateTextInputEditTextPrice.setText(updateViewState.salePrice)
             binding.updateRealEstateTextInputEditTextDescription.setText(updateViewState.description)
+            binding.updateRealEstateTvSelectedAddress.text = (updateViewState.address)
         }
 
         binding.updateRealEstateButtonUpdate.setOnClickListener {
@@ -373,6 +379,7 @@ class UpdateRealEstateFragment :
                 binding.updateRealEstateTextInputEditTextPrice.setText(it.salePrice)
                 binding.updateRealEstateTextInputEditTextDateOfSale.setText(it.dateOfSale)
                 binding.updateRealEstateTextInputEditTextSurface.setText(it.floorArea)
+                binding.updateRealEstateTvSelectedAddress.text = (it.address)
             }
             activity?.finish()
         }
