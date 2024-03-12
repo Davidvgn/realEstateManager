@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.data.locale_formatting
 
 import com.openclassrooms.realestatemanager.domain.locale_formatting.HumanReadableRepository
-import com.openclassrooms.realestatemanager.domain.locale_formatting.currency.CurrencyType
 import com.openclassrooms.realestatemanager.domain.locale_formatting.surface.SurfaceUnitType
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -27,16 +26,6 @@ class HumanReadableRepositoryImpl
             squareMeters.multiply(BigDecimal(SQUARE_FEET_TO_SQUARE_METERS))
                 .setScale(0, RoundingMode.HALF_UP)
 
-        override fun convertDollarToEuroRoundedHalfUp(
-            dollar: BigDecimal,
-            currencyRate: BigDecimal,
-        ): BigDecimal = dollar.divide(currencyRate, 0, RoundingMode.HALF_UP)
-
-        override fun convertEuroToDollarRoundedHalfUp(
-            euro: BigDecimal,
-            currencyRate: BigDecimal,
-        ): BigDecimal = euro.multiply(currencyRate).setScale(0, RoundingMode.HALF_UP)
-
         override fun formatRoundedPriceToHumanReadable(price: BigDecimal): String {
             val roundedPrice = price.setScale(0, RoundingMode.HALF_UP)
 
@@ -47,13 +36,6 @@ class HumanReadableRepositoryImpl
             numberFormat.maximumFractionDigits = 0
             return numberFormat.format(roundedPrice)
         }
-
-        override fun getLocaleCurrencyFormatting(): CurrencyType =
-            when (locale) {
-                Locale.FRANCE -> CurrencyType.EURO
-                Locale.US -> CurrencyType.DOLLAR
-                else -> CurrencyType.DOLLAR
-            }
 
         override fun getLocaleSurfaceUnitFormatting(): SurfaceUnitType =
             when (locale) {

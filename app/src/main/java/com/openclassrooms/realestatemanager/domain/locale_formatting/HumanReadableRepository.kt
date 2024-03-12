@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.domain.locale_formatting
 
-import com.openclassrooms.realestatemanager.domain.locale_formatting.currency.CurrencyType
 import com.openclassrooms.realestatemanager.domain.locale_formatting.surface.SurfaceUnitType
 import java.math.BigDecimal
 import java.util.Locale
@@ -14,17 +13,5 @@ interface HumanReadableRepository {
 
     fun getLocaleSurfaceUnitFormatting(): SurfaceUnitType
 
-    fun convertDollarToEuroRoundedHalfUp(
-        dollar: BigDecimal,
-        currencyRate: BigDecimal,
-    ): BigDecimal
-
-    fun convertEuroToDollarRoundedHalfUp(
-        euro: BigDecimal,
-        currencyRate: BigDecimal,
-    ): BigDecimal
-
     fun formatRoundedPriceToHumanReadable(price: BigDecimal): String
-
-    fun getLocaleCurrencyFormatting(): CurrencyType
 }

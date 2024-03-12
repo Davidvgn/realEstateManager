@@ -32,14 +32,14 @@ abstract class AppDatabase : RoomDatabase() {
         private const val DATABASE_NAME = "RealEstate_database"
 
         @Volatile
-        private var INSTANCE: AppDatabase? = null
+        private var instance: AppDatabase? = null
 
         fun getInstance(
             application: Application,
             ioExecutor: Executor,
         ): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(application, ioExecutor).also { INSTANCE = it }
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(application, ioExecutor).also { instance = it }
             }
         }
 
