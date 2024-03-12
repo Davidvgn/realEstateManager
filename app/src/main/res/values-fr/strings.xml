@@ -31,6 +31,7 @@
     <string name="Status">Statut</string>
     <string name="upForSaleDate">Date de mise en vente</string>
     <string name="sold_date">Date de vente</string>
+    <string name="sold_date_title">Date de vente :</string>
     <string name="Agent">Nom du Vendeur</string>
 
     <!--Operations menu -->

@@ -32,8 +32,10 @@ class DetailsViewModel
             Uri.parse("android.resource://com.openclassrooms.realestatemanager/$resourceId")
 
         private val statusMutableLiveData = MutableLiveData<String?>()
-
         private val statusLiveData: MutableLiveData<String?> = statusMutableLiveData
+
+        private val soldDateMutableLiveData = MutableLiveData<String?>()
+        private val soldDateLiveData: MutableLiveData<String?> = soldDateMutableLiveData
 
         val viewStateLiveData: LiveData<DetailViewState> =
             liveData {
@@ -44,6 +46,7 @@ class DetailsViewModel
                     var convertedPrice = realEstate.salePrice
 
                     statusMutableLiveData.value = realEstate.status
+                    soldDateLiveData.value = realEstate.dateOfSale
 
                     if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders
                         if (currency == "€") { // todo david changer ne pas mettre en dur

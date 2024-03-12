@@ -27,6 +27,7 @@
     <string name="Status">Status</string>
     <string name="upForSaleDate">Up for sale date :</string>
     <string name="sold_date">Sold Date</string>
+    <string name="sold_date_title">Sold Date :</string>
     <string name="Agent">Agent</string>
 
     <!--Operations menu -->

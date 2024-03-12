@@ -75,12 +75,15 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             binding.realEstateDetailsTextViewUpForSale.text = it.upForSaleDate
             binding.realEstateDetailsTextViewAgent.text = it.realEstateAgent
 
+            if (viewModel.getRealEstateStatus() == "Sold") { // todo david ok mais si changement à l'update tout reste visible
+                binding.realEstateDetailsTextViewSoldStatus.visibility = View.VISIBLE
+                binding.realEstateDetailsTextViewSoldDateTitle.visibility = View.VISIBLE
+                binding.realEstateDetailsTextViewSoldDate.visibility = View.VISIBLE
+            }
+
             // todo david gérer ça avec le vm pour éviter les conditions dans la vue
             if (binding.realEstateDetailsTextViewPrice.text == "Préciser le prix") { // todo david gérer hardcoded text
                 binding.realEstateDetailsTextViewCurrency.visibility = View.GONE
-            }
-            if (viewModel.getRealEstateStatus() == "Sold") {
-                binding.realEstateDetailsTextViewSoldStatus.visibility = View.VISIBLE
             }
         }
 
