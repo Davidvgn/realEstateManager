@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -80,6 +81,10 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
                 binding.realEstateDetailsTextViewSoldStatus.visibility = View.VISIBLE
                 binding.realEstateDetailsTextViewSoldDateTitle.visibility = View.VISIBLE
                 binding.realEstateDetailsTextViewSoldDate.visibility = View.VISIBLE
+            } else {
+                binding.realEstateDetailsTextViewSoldStatus.visibility = View.GONE
+                binding.realEstateDetailsTextViewSoldDateTitle.visibility = View.GONE
+                binding.realEstateDetailsTextViewSoldDate.visibility = View.GONE
             }
 
             // todo david gérer ça avec le vm pour éviter les conditions dans la vue
@@ -101,10 +106,16 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
         }
 
+        // todo david ok mais si changement à l'update tout reste visible
+
         binding.detailsRealEstateButtonUpdate.setOnClickListener {
-            val intent = Intent(requireActivity(), UpdateActivity::class.java)
-            intent.putExtra(KEY_REAL_ESTATE_ID, realEstateId)
-            startActivity(intent)
+            if (viewModel.getRealEstateStatus() != "Sold") {
+                val intent = Intent(requireActivity(), UpdateActivity::class.java)
+                intent.putExtra(KEY_REAL_ESTATE_ID, realEstateId)
+                startActivity(intent)
+            } else {
+                Toast.makeText(activity, "Bien vendu non modifiable", Toast.LENGTH_SHORT).show()
+            }
         }
 
 //        viewModel.realEstatePictures.observe(viewLifecycleOwner){ uriString ->

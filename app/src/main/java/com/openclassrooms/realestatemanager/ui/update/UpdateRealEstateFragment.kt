@@ -99,7 +99,10 @@ class UpdateRealEstateFragment :
             )
 
         activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.update_real_estate_photo_list_fragment_container, PicturesFragment.newInstance())
+            ?.replace(
+                R.id.update_real_estate_photo_list_fragment_container,
+                PicturesFragment.newInstance(),
+            )
             ?.commit()
 
         // Pictures from gallery
@@ -232,25 +235,6 @@ class UpdateRealEstateFragment :
             datePickerDialog?.show()
         }
 
-        closingSaleDate.setOnClickListener {
-            val c = Calendar.getInstance()
-            val year = c[Calendar.YEAR] // current year
-            val month = c[Calendar.MONTH] // current month
-            val day = c[Calendar.DAY_OF_MONTH] // current day
-            val datePickerDialog =
-                context?.let {
-                    DatePickerDialog(
-                        it,
-                        soldDateSetListener,
-                        year,
-                        month,
-                        day,
-                    )
-                }
-            datePickerDialog?.datePicker?.minDate = minSoldDate
-            datePickerDialog?.show()
-        }
-
         viewModel.upForSaleDateChangeLiveData.observe(viewLifecycleOwner) {
             saleDate.setText(it)
         }
@@ -306,7 +290,24 @@ class UpdateRealEstateFragment :
                 binding.updateRealEstateCheckBoxTransportation.isChecked,
             )
         }
+        // todo david : dialogfragment demande de confirmation si sold is true car on ne pourra pas revenir en arrière
         binding.updateRealEstateRadioButtonSold.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c[Calendar.YEAR] // current year
+            val month = c[Calendar.MONTH] // current month
+            val day = c[Calendar.DAY_OF_MONTH] // current day
+            val datePickerDialog =
+                context?.let {
+                    DatePickerDialog(
+                        it,
+                        soldDateSetListener,
+                        year,
+                        month,
+                        day,
+                    )
+                }
+            datePickerDialog?.datePicker?.minDate = minSoldDate
+            datePickerDialog?.show()
             if (binding.updateRealEstateRadioButtonSold.isChecked) {
                 viewModel.onStatusSelected(binding.updateRealEstateRadioButtonSold.text.toString())
             }
@@ -342,6 +343,9 @@ class UpdateRealEstateFragment :
             if (updateViewState.status == "Sold") { // todo david hardcoded text
                 binding.updateRealEstateRadioButtonSold.isChecked = true
                 viewModel.updateStatus("Sold")
+            } else {
+                binding.updateRealEstateRadioButtonToSale.isChecked = true
+                viewModel.updateStatus("For Sale")
             }
 
             val valueToCheck = updateViewState.numberOfRooms
@@ -385,6 +389,10 @@ class UpdateRealEstateFragment :
             binding.updateRealEstateTextInputEditTextPrice.setText(updateViewState.salePrice)
             binding.updateRealEstateTextInputEditTextDescription.setText(updateViewState.description)
             binding.updateRealEstateTvSelectedAddress.text = (updateViewState.address)
+            binding.updateRealEstateTextInputEditTextSurface.setText(updateViewState.floorArea)
+            binding.updateRealEstateTextInputEditTextRealEstateAgent.setText(updateViewState.realEstateAgent)
+            binding.updateRealEstateTextInputEditTextDateOfSale.setText(updateViewState.upForSaleDate)
+            binding.updateRealEstateTextInputEditTextClosingDate.setText(updateViewState.dateOfSale)
         }
 
         binding.updateRealEstateButtonUpdate.setOnClickListener {

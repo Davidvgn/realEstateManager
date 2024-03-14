@@ -48,13 +48,13 @@ class UpdateRealEstateViewModel
         private var numberOfRooms: String? = null
         private var latLng: LatLng? = null
         private var agentName: String? = null
-        private var realEstatestatus: String = "toSale"
+        private var realEstateStatus: String = "toSale"
         private val poiListMutableLiveData = MutableLiveData<List<String>>()
         private val showToastSingleLiveEventMutableLiveData = MutableLiveData<Event<String>>()
         val showToastSingleLiveEvent: LiveData<Event<String>> = showToastSingleLiveEventMutableLiveData
 
         private val upForSaleDateChangeMutableLiveData = MutableLiveData<String>()
-        val upForSaleDateChangeLiveData: LiveData<String> = upForSaleDateChangeMutableLiveData
+        var upForSaleDateChangeLiveData: LiveData<String> = upForSaleDateChangeMutableLiveData
         private val onSoldDateChangeMutableLiveData = MutableLiveData<String>()
         val onSoldDateChangeLiveData: LiveData<String> = onSoldDateChangeMutableLiveData
         private val temporaryPicturesMutableLiveData = MutableLiveData<List<DraftPictureEntity>>()
@@ -106,6 +106,8 @@ class UpdateRealEstateViewModel
                         )
                     emit(realEstateDetails)
                     creationDate = realEstateDetails.creationDate
+                    upForSaleDateChangeMutableLiveData.value = realEstate.upForSaleDate.toString()
+                    onSoldDateChangeMutableLiveData.value = realEstate.dateOfSale.toString()
                 }
             }
 
@@ -113,7 +115,7 @@ class UpdateRealEstateViewModel
             liveData {
 
                 val upForSaleDate = upForSaleDateChangeMutableLiveData.value
-                val soldDate = onSoldDateChangeLiveData.value
+                val soldDate = onSoldDateChangeMutableLiveData.value
 
                 val updatedRealEstate =
                     RealEstateEntity(
@@ -127,7 +129,7 @@ class UpdateRealEstateViewModel
                         description = description,
                         pointOfInterest = poiList,
                         address = address,
-                        status = realEstatestatus,
+                        status = realEstateStatus,
                         upForSaleDate = upForSaleDate,
                         dateOfSale = soldDate,
                         realEstateAgent = agentName,
@@ -217,7 +219,7 @@ class UpdateRealEstateViewModel
         }
 
         fun updateStatus(status: String) {
-            realEstatestatus = status
+            realEstateStatus = status
         }
 
         fun addTemporaryPicture(
@@ -281,6 +283,6 @@ class UpdateRealEstateViewModel
         }
 
         fun onStatusSelected(status: String) {
-            realEstatestatus = status
+            realEstateStatus = status
         }
     }

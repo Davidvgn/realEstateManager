@@ -216,25 +216,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             datePickerDialog?.show()
         }
 
-        closingSaleDate.setOnClickListener {
-            val c = Calendar.getInstance()
-            val year = c[Calendar.YEAR] // current year
-            val month = c[Calendar.MONTH] // current month
-            val day = c[Calendar.DAY_OF_MONTH] // current day
-            val datePickerDialog =
-                context?.let {
-                    DatePickerDialog(
-                        it,
-                        soldDateSetListener,
-                        year,
-                        month,
-                        day,
-                    )
-                }
-            datePickerDialog?.datePicker?.minDate = minSoldDate
-            datePickerDialog?.show()
-        }
-
         viewModel.upForSaleDateChangeLiveData.observe(viewLifecycleOwner) {
             saleDate.setText(it)
         }
@@ -286,6 +267,22 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             )
         }
         binding.radioButtonSold.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c[Calendar.YEAR] // current year
+            val month = c[Calendar.MONTH] // current month
+            val day = c[Calendar.DAY_OF_MONTH] // current day
+            val datePickerDialog =
+                context?.let {
+                    DatePickerDialog(
+                        it,
+                        soldDateSetListener,
+                        year,
+                        month,
+                        day,
+                    )
+                }
+            datePickerDialog?.datePicker?.minDate = minSoldDate
+            datePickerDialog?.show()
             if (binding.radioButtonSold.isChecked) {
                 viewModel.onStatusSelected(binding.radioButtonSold.text.toString())
             }
@@ -339,7 +336,6 @@ class AddFormFragment : Fragment(R.layout.add_form_fragment), PictureDescription
             binding.root.findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId)
         val checkedRadioButtonText = checkedRadioButton.text.toString()
         viewModel.onNumberOfRoomsChanged(checkedRadioButtonText)
-        Log.d("DavidVgn", "onViewCreated: $checkedRadioButtonText")
 
         binding.addRealEstateTextInputEditTextSurface.doAfterTextChanged {
             viewModel.onTextFloorAreaChanged(it?.toString())
