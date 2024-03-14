@@ -73,6 +73,7 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             binding.realEstateDetailsTextViewNumberOfRoom.text = it.numberOfRooms.toString()
             binding.realEstateDetailsTextViewLocation.text = it.address
             binding.realEstateDetailsTextViewUpForSale.text = it.upForSaleDate
+            binding.realEstateDetailsTextViewSoldDate.text = it.dateOfSale
             binding.realEstateDetailsTextViewAgent.text = it.realEstateAgent
 
             if (viewModel.getRealEstateStatus() == "Sold") { // todo david ok mais si changement à l'update tout reste visible
