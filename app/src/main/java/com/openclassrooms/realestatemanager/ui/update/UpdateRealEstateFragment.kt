@@ -340,12 +340,12 @@ class UpdateRealEstateFragment :
                 }
             }
 
-            if (updateViewState.status == "Sold") { // todo david hardcoded text
+            if (updateViewState.status == resources.getString(R.string.Sold)) {
                 binding.updateRealEstateRadioButtonSold.isChecked = true
-                viewModel.updateStatus("Sold")
+                viewModel.updateStatus(resources.getString(R.string.Sold))
             } else {
                 binding.updateRealEstateRadioButtonToSale.isChecked = true
-                viewModel.updateStatus("For Sale")
+                viewModel.updateStatus(resources.getString(R.string.forSale))
             }
 
             val valueToCheck = updateViewState.numberOfRooms

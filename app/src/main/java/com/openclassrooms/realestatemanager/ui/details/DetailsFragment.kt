@@ -114,7 +114,11 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
                 intent.putExtra(KEY_REAL_ESTATE_ID, realEstateId)
                 startActivity(intent)
             } else {
-                Toast.makeText(activity, "Bien archivé", Toast.LENGTH_SHORT).show()
+                viewModel.showToastSingleLiveEvent.observe(viewLifecycleOwner) { event ->
+                    event.getContentIfNotHandled()?.let { message ->
+                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 

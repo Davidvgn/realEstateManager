@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.update
 
+import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -38,6 +39,7 @@ class UpdateRealEstateViewModel
         private val addTemporaryPictureUseCase: AddTemporaryPictureUseCase,
         private val addPicturesUseCase: AddPicturesUseCase,
         private val getAgentsUseCase: GetAgentsUseCase,
+        private val application: Application,
     ) : ViewModel() {
         private var realEstateId: Long = -1
         private var chip: String? = null
@@ -48,7 +50,7 @@ class UpdateRealEstateViewModel
         private var numberOfRooms: String? = null
         private var latLng: LatLng? = null
         private var agentName: String? = null
-        private var realEstateStatus: String = "toSale"
+        private var realEstateStatus: String = application.getString(R.string.forSale)
         private val poiListMutableLiveData = MutableLiveData<List<String>>()
         private val showToastSingleLiveEventMutableLiveData = MutableLiveData<Event<String>>()
         val showToastSingleLiveEvent: LiveData<Event<String>> = showToastSingleLiveEventMutableLiveData
@@ -143,13 +145,6 @@ class UpdateRealEstateViewModel
         fun initRealEstateId(id: Long) {
             realEstateId = id
         }
-
-        val poiListLiveData: LiveData<List<String>> =
-            liveData {
-                getPoiListUseCase.invoke(realEstateId).collect {
-                    emit(it)
-                }
-            }
 
         val realEstateLocation: LiveData<LatLng> =
             liveData {

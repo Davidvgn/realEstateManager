@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.details
 
+import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,7 @@ import com.openclassrooms.realestatemanager.domain.currency.GetCurrentCurrencyUs
 import com.openclassrooms.realestatemanager.domain.details.GetPoiListUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
 import com.openclassrooms.realestatemanager.domain.pictures.GetPicturesUseCase
+import com.openclassrooms.realestatemanager.ui.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -22,6 +24,7 @@ class DetailsViewModel
         private val getPicturesUseCase: GetPicturesUseCase,
         private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase,
         private val getPoiListUseCase: GetPoiListUseCase,
+        private val application: Application,
     ) : ViewModel() {
         private var realEstateId: Long = -1
         private val resourceId: Int = R.drawable.baseline_no_photography_black_36
@@ -33,6 +36,9 @@ class DetailsViewModel
 
         private val soldDateMutableLiveData = MutableLiveData<String?>()
         private val soldDateLiveData: MutableLiveData<String?> = soldDateMutableLiveData
+
+        private val showToastSingleLiveEventMutableLiveData = MutableLiveData<Event<String>>()
+        val showToastSingleLiveEvent: LiveData<Event<String>> = showToastSingleLiveEventMutableLiveData
 
         val viewStateLiveData: LiveData<DetailViewState> =
             liveData {
@@ -73,6 +79,7 @@ class DetailsViewModel
                             realEstateAgent = realEstate.realEstateAgent,
                         )
                     emit(realEstateDetails)
+                    showToast()
                 }
             }
 
@@ -110,4 +117,9 @@ class DetailsViewModel
             liveData {
                 emit(getCurrentCurrencyUseCase())
             }
+
+        private fun showToast() {
+            showToastSingleLiveEventMutableLiveData.value =
+                Event(application.getString(R.string.archived_property))
+        }
     }

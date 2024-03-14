@@ -110,6 +110,10 @@
     <string name="loan">Loan</string>
     <string name="sold_banner">SOLD</string>
     <string name="update">Update</string>
+    <string name="euros_symbol">€</string>
+    <string name="dollar_symbol">$</string>
+    <string name="archived_property">Archived property</string>
+
 
 
 </resources>

@@ -116,7 +116,8 @@
     <string name="loan">Simulateur</string>
     <string name="sold_banner">VENDU</string>
     <string name="update">Mettre à jour</string>
-
-
+    <string name="euros_symbol">€</string>
+    <string name="dollar_symbol">$</string>
+    <string name="archived_property">Bien archivé</string>
 
 </resources>
