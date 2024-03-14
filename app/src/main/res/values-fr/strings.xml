@@ -110,11 +110,11 @@
     <string name="pictures_description">Description</string>
     <string name="picture_title">Titre :</string>
     <string name="ok">OK</string>
-    <string name="loan_amount_hint">Loan amount in %s</string>
+    <string name="loan_amount_hint">Montant en %s</string>
     <string name="loan_simulator_payment_result">%1s per year\\n%2s per month</string>
     <string name="loan_simulator_calculate_button_error_message">Entrer une valeur</string>
-    <string name="loan">loan</string>
-    <string name="sold">VENDU</string>
+    <string name="loan">Simulateur</string>
+    <string name="sold_banner">VENDU</string>
     <string name="update">Mettre à jour</string>
 
 

@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity(), OnRealEstateClickedListener {
         val loanItem: MenuItem = menu.findItem(R.id.loan_simulator)
         loanItem.setOnMenuItemClickListener {
             val loanSimulatorFragment = LoanSimulatorFragment.newInstance()
-            loanSimulatorFragment.show(supportFragmentManager, "LoanSimulatorFragment")
+            loanSimulatorFragment.show(supportFragmentManager, null)
             true
         }
 

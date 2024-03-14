@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.ui.loan_simulator
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
@@ -90,7 +89,6 @@ class LoanSimulatorFragment : BottomSheetDialogFragment(R.layout.loan_simulator_
         }
 
         viewModel.viewEvent.observeEvent(viewLifecycleOwner) { event ->
-            Log.d("LoanSimulatorFragment", "event: $event")
             binding.amountTextInputLayout.error =
                 event.amountErrorMessage?.toCharSequence(view.context)
             binding.interestRateTextInputLayout.error =

@@ -57,6 +57,7 @@ class RealEstatesViewModel
         }
     }
 
+// todo david gérer le bug
 private fun convertRealEstateEntity(
     realEstateEntity: RealEstateEntity,
     currency: String,

@@ -73,6 +73,7 @@ class UpdateRealEstateViewModel
             liveData {
                 getRealEstateByIdUseCase.invoke(realEstateId).collect { realEstate ->
 
+                    // todo david gérer le bug
                     val currency = getCurrentCurrencyUseCase.invoke()
                     var convertedPrice = realEstate.salePrice
 

@@ -77,7 +77,7 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             binding.realEstateDetailsTextViewSoldDate.text = it.dateOfSale
             binding.realEstateDetailsTextViewAgent.text = it.realEstateAgent
 
-            if (viewModel.getRealEstateStatus() == "Sold") { // todo david ok mais si changement à l'update tout reste visible
+            if (viewModel.getRealEstateStatus() == resources.getString(R.string.Sold)) {
                 binding.realEstateDetailsTextViewSoldStatus.visibility = View.VISIBLE
                 binding.realEstateDetailsTextViewSoldDateTitle.visibility = View.VISIBLE
                 binding.realEstateDetailsTextViewSoldDate.visibility = View.VISIBLE
@@ -106,18 +106,19 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
         }
 
-        // todo david ok mais si changement à l'update tout reste visible
+        // todo david ok mais si changement à l'update number of room + location + mange by sont vides
 
         binding.detailsRealEstateButtonUpdate.setOnClickListener {
-            if (viewModel.getRealEstateStatus() != "Sold") {
+            if (viewModel.getRealEstateStatus() != resources.getString(R.string.Sold)) {
                 val intent = Intent(requireActivity(), UpdateActivity::class.java)
                 intent.putExtra(KEY_REAL_ESTATE_ID, realEstateId)
                 startActivity(intent)
             } else {
-                Toast.makeText(activity, "Bien vendu non modifiable", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Bien archivé", Toast.LENGTH_SHORT).show()
             }
         }
 
+        // todo david gérer le bug
 //        viewModel.realEstatePictures.observe(viewLifecycleOwner){ uriString ->
 //            val uri = Uri.parse(uriString)
 //            val imageView = ImageView(requireContext())
@@ -135,7 +136,7 @@ class DetailsFragment : Fragment(R.layout.details_real_estate_fragment), OnMapRe
             binding.chipGroup.removeAllViews()
             poiList.forEach { pois ->
                 val poiItems =
-                    pois.split(",") // Diviser la chaîne de caractères en une liste de chaînes de caractères
+                    pois.split(",")
                 poiItems.forEach { poi ->
 
                     val chip = Chip(requireContext())
