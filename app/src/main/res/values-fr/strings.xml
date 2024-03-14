@@ -133,5 +133,7 @@
     <string name="unknown_price">Prix incconu</string>
     <string name="unknown_surface">Surface inconnu</string>
 
+    <!--Toast-->
+    <string name="successfully_added">Ajouté avec succès</string>
 
 </resources>

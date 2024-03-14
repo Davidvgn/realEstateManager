@@ -127,6 +127,7 @@
     <string name="unknown_price">Unknown Price</string>
     <string name="unknown_surface">Unknown Surface</string>
 
-
+    <!--Toast-->
+    <string name="successfully_added">Successfully added</string>
 
 </resources>
