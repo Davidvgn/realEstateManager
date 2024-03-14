@@ -76,17 +76,17 @@ class UpdateRealEstateViewModel
                     val currency = getCurrentCurrencyUseCase.invoke()
                     var convertedPrice = realEstate.salePrice
 
-                    if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders
-                        if (currency == "€") { // todo david changer ne pas mettre en dur
-                            val price = convertedPrice?.let { Utils.convertDollarToEuro(it.toInt()) }
-                            convertedPrice = price.toString()
-                            convertedPrice = Utils.formatPriceWithSpace(convertedPrice.toInt())
-                        } else {
-                            if (convertedPrice != null) {
-                                convertedPrice = Utils.formatPriceForUI(convertedPrice.toInt())
-                            }
-                        }
-                    }
+//                    if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders
+//                        if (currency == "€") { // todo david changer ne pas mettre en dur
+//                            val price = convertedPrice?.let { Utils.convertDollarToEuro(it.toInt()) }
+//                            convertedPrice = price.toString()
+//                            convertedPrice = Utils.formatPriceWithSpace(convertedPrice.toInt())
+//                        } else {
+//                            if (convertedPrice != null) {
+//                                convertedPrice = Utils.formatPriceForUI(convertedPrice.toInt())
+//                            }
+//                        }
+//                    }
 
                     val realEstateDetails =
                         UpdateViewState(

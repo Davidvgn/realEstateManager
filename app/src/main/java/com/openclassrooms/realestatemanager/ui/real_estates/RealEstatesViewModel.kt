@@ -3,9 +3,6 @@ package com.openclassrooms.realestatemanager.ui.real_estates
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertDollarToEuro
-import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceForUI
-import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
 import com.openclassrooms.realestatemanager.domain.currency.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.GetRealEstatesListUseCase
 import com.openclassrooms.realestatemanager.domain.real_estates.model.RealEstateEntity
@@ -64,21 +61,21 @@ private fun convertRealEstateEntity(
     realEstateEntity: RealEstateEntity,
     currency: String,
 ): RealEstateEntity {
-    if (realEstateEntity.salePrice != "Préciser le prix") {
-        val convertedSalePrice =
-            when {
-                currency == "€" -> {
-                    realEstateEntity.salePrice?.toIntOrNull()?.let { convertDollarToEuro(it) }
-                        ?.toString() ?: ""
-                }
-
-                else -> {
-                    realEstateEntity.salePrice
-                }
-            }?.let { if (currency == "€") formatPriceWithSpace(it.toInt()) else formatPriceForUI(it.toInt()) }
-                ?: ""
-
-        return realEstateEntity.copy(salePrice = convertedSalePrice)
-    }
+//    if (realEstateEntity.salePrice != "Préciser le prix") {
+//        val convertedSalePrice =
+//            when {
+//                currency == "€" -> {
+//                    realEstateEntity.salePrice?.toIntOrNull()?.let { convertDollarToEuro(it) }
+//                        ?.toString() ?: ""
+//                }
+//
+//                else -> {
+//                    realEstateEntity.salePrice
+//                }
+//            }?.let { if (currency == "€") formatPriceWithSpace(it.toInt()) else formatPriceForUI(it.toInt()) }
+//                ?: ""
+//
+//        return realEstateEntity.copy(salePrice = convertedSalePrice)
+//    }
     return realEstateEntity
 }

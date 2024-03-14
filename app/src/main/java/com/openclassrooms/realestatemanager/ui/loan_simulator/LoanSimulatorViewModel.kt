@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatRoundedPriceToHumanReadable
 import com.openclassrooms.realestatemanager.domain.currency.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.loan_simulator.GetLoanDataAsFlowUseCase
 import com.openclassrooms.realestatemanager.domain.loan_simulator.GetLoanYearlyAndMonthlyPaymentUseCase
 import com.openclassrooms.realestatemanager.domain.loan_simulator.ResetLoanDataUseCase
 import com.openclassrooms.realestatemanager.domain.loan_simulator.SetLoanDataUseCase
 import com.openclassrooms.realestatemanager.domain.loan_simulator.model.LoanParamsEntity
-import com.openclassrooms.realestatemanager.domain.locale_formatting.currency.FormatPriceToHumanReadableUseCase
 import com.openclassrooms.realestatemanager.ui.utils.EquatableCallback
 import com.openclassrooms.realestatemanager.ui.utils.Event
 import com.openclassrooms.realestatemanager.ui.utils.NativeText
@@ -32,7 +32,6 @@ class LoanSimulatorViewModel
         private val getLoanDataAsFlowUseCase: GetLoanDataAsFlowUseCase,
         private val getLoanYearlyAndMonthlyPaymentUseCase: GetLoanYearlyAndMonthlyPaymentUseCase,
         private val getCurrencyTypeUseCase: GetCurrentCurrencyUseCase,
-        private val formatPriceToHumanReadableUseCase: FormatPriceToHumanReadableUseCase,
         private val resetLoanDataUseCase: ResetLoanDataUseCase,
     ) : ViewModel() {
         private val loanParamsEntityMutableStateFlow: MutableStateFlow<LoanParamsEntity> =
@@ -81,8 +80,8 @@ class LoanSimulatorViewModel
                                         NativeText.Arguments(
                                             R.string.loan_simulator_payment_result,
                                             listOf(
-                                                formatPriceToHumanReadableUseCase.invoke(loanParams.yearlyPayment),
-                                                formatPriceToHumanReadableUseCase.invoke(loanParams.monthlyPayment),
+                                                formatRoundedPriceToHumanReadable(loanParams.yearlyPayment),
+                                                formatRoundedPriceToHumanReadable(loanParams.monthlyPayment),
                                             ),
                                         )
                                     },

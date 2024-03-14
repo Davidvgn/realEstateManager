@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.data.utils
 
 import android.content.Context
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
@@ -79,6 +81,10 @@ class Utils {
                 }
             val decimalFormat = DecimalFormat("#,###", decimalFormatSymbols)
             return decimalFormat.format(price)
+        }
+
+        fun formatRoundedPriceToHumanReadable(price: BigDecimal): String {
+            return price.setScale(0, RoundingMode.HALF_UP).toString()
         }
     }
 }

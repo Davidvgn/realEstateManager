@@ -7,9 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.google.android.gms.maps.model.LatLng
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.convertDollarToEuro
-import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceForUI
-import com.openclassrooms.realestatemanager.data.utils.Utils.Companion.formatPriceWithSpace
 import com.openclassrooms.realestatemanager.domain.currency.GetCurrentCurrencyUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetPoiListUseCase
 import com.openclassrooms.realestatemanager.domain.details.GetRealEstateByIdUseCase
@@ -48,17 +45,17 @@ class DetailsViewModel
                     statusMutableLiveData.value = realEstate.status
                     soldDateLiveData.value = realEstate.dateOfSale
 
-                    if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders
-                        if (currency == "€") { // todo david changer ne pas mettre en dur
-                            val price = convertedPrice?.let { convertDollarToEuro(it.toInt()) }
-                            convertedPrice = price.toString()
-                            convertedPrice = formatPriceWithSpace(convertedPrice.toInt())
-                        } else {
-                            if (convertedPrice != null) {
-                                convertedPrice = formatPriceForUI(convertedPrice.toInt())
-                            }
-                        }
-                    }
+//                    if (realEstate.salePrice != "Préciser le prix") { // todo david mieux gérer les placeholders
+//                        if (currency == "€") { // todo david changer ne pas mettre en dur
+//                            val price = convertedPrice?.let { convertDollarToEuro(it.toInt()) }
+//                            convertedPrice = price.toString()
+//                            convertedPrice = formatPriceWithSpace(convertedPrice.toInt())
+//                        } else {
+//                            if (convertedPrice != null) {
+//                                convertedPrice = formatPriceForUI(convertedPrice.toInt())
+//                            }
+//                        }
+//                    }
 
                     val realEstateDetails =
                         DetailViewState(
