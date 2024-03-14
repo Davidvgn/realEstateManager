@@ -58,6 +58,7 @@
     <string name="restaurant">Restaurants</string>
     <string name="pharmacy">Pharmacie</string>
 
+    <!--DrawerLayout -->
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
 
@@ -75,11 +76,13 @@
     <string name="date">%1$s/%2$s/%3$s</string>
     <string name="location">Adresse</string>
 
+    <!--Number of Rooms -->
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>
     <string name="four">4</string>
     <string name="five_and_more">5+</string>
+
     <string name="adress">Adresse</string>
     <string name="app_icon">Icône de l\'application</string>
     <string name="no_picture">Aucune Photo</string>
@@ -110,14 +113,25 @@
     <string name="pictures_description">Description</string>
     <string name="picture_title">Titre :</string>
     <string name="ok">OK</string>
+    <string name="sold_banner">VENDU</string>
+    <string name="update">Mettre à jour</string>
+    <string name="archived_property">Bien archivé</string>
+
+    <!--Currency-->
+    <string name="euros_symbol">€</string>
+    <string name="dollar_symbol">$</string>
+
+    <!--Loan Simulator-->
     <string name="loan_amount_hint">Montant en %s</string>
     <string name="loan_simulator_payment_result">%1s per year\\n%2s per month</string>
     <string name="loan_simulator_calculate_button_error_message">Entrer une valeur</string>
     <string name="loan">Simulateur</string>
-    <string name="sold_banner">VENDU</string>
-    <string name="update">Mettre à jour</string>
-    <string name="euros_symbol">€</string>
-    <string name="dollar_symbol">$</string>
-    <string name="archived_property">Bien archivé</string>
+
+
+    <!--PlaceHolders-->
+    <string name="unknown_type">Type inconnu</string>
+    <string name="unknown_price">Prix incconu</string>
+    <string name="unknown_surface">Surface inconnu</string>
+
 
 </resources>

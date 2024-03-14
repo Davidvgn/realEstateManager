@@ -91,6 +91,8 @@ class UpdateRealEstateViewModel
 //                        }
 //                    }
 
+                    // todo david améliorations : les champs non renseignés sont rempli d'un texte == au placeholder
+
                     val realEstateDetails =
                         UpdateViewState(
                             id = realEstate.id,

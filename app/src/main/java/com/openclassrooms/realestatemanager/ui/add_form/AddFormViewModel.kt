@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.add_form
 
+import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -38,6 +39,7 @@ class AddFormViewModel
         private val getAgentsUseCase: GetAgentsUseCase,
         private val getCurrentCurrencyUseCase: GetCurrentCurrencyUseCase,
         private val checkPropertyExistenceUseCase: CheckPropertyExistenceUseCase,
+        private val application: Application,
     ) : ViewModel() {
         private var chip: String? = null
         private var address: String? = null
@@ -75,7 +77,7 @@ class AddFormViewModel
                 val soldDate = onSoldDateChangeLiveData.value
                 val currency = getCurrentCurrencyUseCase.invoke()
 
-                if (currency == "€") { // todo david changer ne pas mettre en dur
+                if (currency == application.getString(R.string.euros_symbol)) { // todo david changer ne pas mettre en dur
                     val priceInt = price?.toInt()?.let { convertEuroToDollar(it) }
                     price = priceInt.toString()
                 }
@@ -83,12 +85,12 @@ class AddFormViewModel
                 val newRealEstate =
                     RealEstateEntity(
                         creationDate = getTodayDate(),
-                        type = chip ?: "Préciser le type",
-                        salePrice = price ?: "Préciser le prix",
+                        type = chip ?: application.getString(R.string.unknown_type),
+                        salePrice = price ?: application.getString(R.string.unknown_price),
                         photo = photo.toString(),
-                        floorArea = flourArea ?: "Préciser la surface",
+                        floorArea = flourArea ?: application.getString(R.string.unknown_surface),
                         numberOfRooms = numberOfRooms,
-                        description = description ?: "Ajouter une description",
+                        description = description,
                         address = address ?: "Précisez l'adresse",
                         pointOfInterest = poiList,
                         status = realEstatestatus ?: "For Sale",
